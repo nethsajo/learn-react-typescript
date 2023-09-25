@@ -1,5 +1,5 @@
-import React from 'react';
 import { type Menu } from 'shared/constants/menu';
+
 import Pizza from './Pizza';
 
 type Props = {
@@ -12,7 +12,7 @@ export default function Menus({ menus }: Props) {
       <h2 className="border-y-2 border-neutral-800 py-2 text-2xl font-medium uppercase tracking-tight text-neutral-800 sm:text-3xl">
         Our Menu
       </h2>
-      <p className="mx-auto max-w-lg text-center tracking-wide text-neutral-500">
+      <p className="mx-auto max-w-lg text-center tracking-wide text-gray-400">
         Authentic Italian cuisine. 6 creative dishes to choose from. All from our stone oven, all
         organic, all delicious.
       </p>

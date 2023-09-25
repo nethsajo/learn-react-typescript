@@ -1,4 +1,3 @@
-import React from 'react';
 import { type Menu } from 'shared/constants/menu';
 
 type Props = {
@@ -6,10 +5,10 @@ type Props = {
 };
 
 export default function Pizza({ menu }: Props) {
-  const soldout = menu.soldOut ? 'text-gray-500' : 'text-amber-700';
+  const soldout = menu.soldOut ? 'text-gray-500' : 'text-amber-600';
 
   return (
-    <div className="flex gap-8" key={menu.id}>
+    <div className="flex space-x-4" key={menu.id}>
       <img
         src={menu.image}
         alt={menu.name}
@@ -17,9 +16,9 @@ export default function Pizza({ menu }: Props) {
           menu.soldOut ? 'opacity-80 grayscale' : ''
         }`}
       />
-      <div className="flex flex-col gap-2 py-1">
-        <h2 className={`text-xl font-medium ${soldout}`}>{menu.name}</h2>
-        <p className="mb-auto text-sm italic text-gray-500">{menu.ingredients}</p>
+      <div className="flex flex-col space-y-2">
+        <h2 className={`text-xl font-semibold ${soldout}`}>{menu.name}</h2>
+        <p className="mb-auto text-sm tracking-tight text-gray-400">{menu.ingredients}</p>
         <span className={`font-bold ${soldout}`}>
           {menu.soldOut ? 'SOLD OUT' : `$ ${menu.price}`}
         </span>

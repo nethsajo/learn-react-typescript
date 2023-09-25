@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply bg-yellow-50 px-4 pb-14 pt-8 sm:px-8;
+    @apply border-b-8 border-amber-500 bg-yellow-50 px-4 pb-14 pt-8 sm:px-8;
   }
 }

@@ -12,10 +12,11 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react/recommended',
     'airbnb-typescript',
     'airbnb/hooks',
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:react-hooks/recommended',
     'prettier',
@@ -27,19 +28,44 @@ module.exports = {
     },
     ecmaVersion: 2021,
     sourceType: 'module',
-    project: path.join(__dirname, "tsconfig.eslint.json"),
+    project: ['./tsconfig.eslint.json'],
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint', 'import'],
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'import', 'simple-import-sort'],
   rules: {
     'react/prop-types': 'off',
     'react/display-name': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/button-has-type': 'off',
+    'react/react-in-jsx-scope': 'off', // Next.js handles this
+    'react/jsx-props-no-spreading': 'off',
+    'react/no-array-index-key': 'off',
+    'react/no-unstable-nested-components': [
+      'error',
+      {
+        allowAsProps: true,
+      },
+    ],
+    'jsx-a11y/label-has-associated-control': 'off',
+    'prefer-promise-reject-errors': 'off',
+    'no-param-reassign': 'off',
+    'no-void': ['error', { allowAsStatement: true }],
+    'no-undef': 'error',
     'no-console': 'error',
+    'simple-import-sort/imports': 'error',
+    'import/no-self-import': 'off',
+    'import/prefer-default-export': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+      },
+    ],
     '@typescript-eslint/require-await': 'off',
     '@typescript-eslint/no-unsafe-member-access': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-floating-promises': 'warn',
+    '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/consistent-type-imports': [
       'warn',
       {
@@ -57,6 +83,18 @@ module.exports = {
       'error',
       {
         checksVoidReturn: false,
+      },
+    ],
+
+    '@typescript-eslint/naming-convention': [
+      'error',
+      {
+        selector: 'typeLike',
+        format: ['PascalCase'],
+      },
+      {
+        selector: 'enumMember',
+        format: ['UPPER_CASE'],
       },
     ],
   },
