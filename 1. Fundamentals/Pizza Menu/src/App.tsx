@@ -1,13 +1,13 @@
 import Header from 'components/Header';
 import Menu from 'components/Menu';
 import React from 'react';
-import { MENU } from 'shared/constants/menu';
+import { MENUS } from 'shared/constants/menu';
 
 export default function App() {
   return (
-    <div className="mx-auto flex w-full max-w-[50rem] flex-col items-center space-y-12">
+    <div className="mx-auto flex w-full flex-col items-center space-y-12 md:max-w-[50rem]">
       <Header title="Fast React Pizza Co." />
-      <Menu menu={MENU} />
+      <Menu menus={MENUS} />
     </div>
   );
 }
