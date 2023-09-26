@@ -1,5 +1,4 @@
-import { type Menu } from 'shared/constants/menu';
-
+import { type Menu } from './Menus.types';
 import Pizza from './Pizza';
 
 type Props = {

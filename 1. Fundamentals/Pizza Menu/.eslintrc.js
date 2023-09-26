@@ -37,7 +37,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/button-has-type': 'off',
-    'react/react-in-jsx-scope': 'off', // Next.js handles this
+    'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/no-array-index-key': 'off',
     'react/no-unstable-nested-components': [

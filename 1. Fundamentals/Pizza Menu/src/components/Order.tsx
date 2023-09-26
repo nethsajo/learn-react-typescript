@@ -1,8 +1,4 @@
-type Props = {
-  closeHour: number;
-};
-
-export default function Order({ closeHour }: Props) {
+export default function Order({ closeHour }: { closeHour: number }) {
   return (
     <div className="space-y-6">
       <p className="text-gray-700">

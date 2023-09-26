@@ -1,12 +1,3 @@
-export interface Menu {
-  id: number;
-  name: string;
-  ingredients: string;
-  price: number;
-  image: string;
-  soldOut: boolean;
-}
-
 export const MENUS = [
   {
     id: 1,
