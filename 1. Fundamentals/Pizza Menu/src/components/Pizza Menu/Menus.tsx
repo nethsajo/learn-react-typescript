@@ -15,7 +15,7 @@ export default function Menus({ menus }: Props) {
         Authentic Italian cuisine. 6 creative dishes to choose from. All from our stone oven, all
         organic, all delicious.
       </p>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-12 sm:grid-cols-2">
         {menus.map(menu => (
           <Pizza key={menu.id} menu={menu} />
         ))}
