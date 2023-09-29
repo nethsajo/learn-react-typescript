@@ -1,15 +1,20 @@
 type Props = {
   language: string;
-  emoji: string;
+  level: string;
   color: string;
 };
 
-export default function Skill({ language, emoji, color }: Props) {
+export function Skill({ language, level, color }: Props) {
+  const emoji = {
+    beginner: '👶',
+    intermediate: '👍',
+    advanced: '💪',
+  } as const;
+
   return (
     <div className={`rounded-full px-3 py-1 text-sm font-medium text-white ${color}`}>
       <span>{language}</span>
-      <span>{emoji}</span>
-      {/* <span>{emoji[skill.level]}</span> */}
+      <span>{emoji[level as keyof typeof emoji]}</span>
     </div>
   );
 }

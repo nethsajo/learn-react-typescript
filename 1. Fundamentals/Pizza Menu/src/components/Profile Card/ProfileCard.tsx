@@ -1,9 +1,9 @@
 import Header from 'components/Header';
 
-import About from './About';
-import Avatar from './Avatar';
-import Card from './Card';
-import Skills from './Skills';
+import { About } from './About';
+import { Avatar } from './Avatar';
+import { Card } from './Card';
+import { Skills } from './Skills';
 
 export default function ProfileCard() {
   return (

@@ -1,4 +1,4 @@
-export default function About() {
+export function About() {
   return (
     <div className="flex flex-col gap-4 p-4 sm:p-6">
       <h2 className="text-2xl font-bold text-amber-700">Thomas Brown</h2>

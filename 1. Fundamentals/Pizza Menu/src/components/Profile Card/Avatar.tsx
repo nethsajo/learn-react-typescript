@@ -1,4 +1,4 @@
-export default function Avatar() {
+export function Avatar() {
   return (
     <figure className="h-64 w-full ">
       <img
