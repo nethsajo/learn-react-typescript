@@ -1,11 +1,5 @@
-// import PizzaMenu from 'components/Pizza Menu/PizzaMenu';
-import ProfileCard from 'components/Profile Card/ProfileCard';
+import PizzaMenu from 'components/PizzaMenu';
 
 export default function App() {
-  return (
-    <>
-      {/* <PizzaMenu /> */}
-      <ProfileCard />
-    </>
-  );
+  return <PizzaMenu />;
 }
