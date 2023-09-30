@@ -1,8 +1,10 @@
+import type React from 'react';
+
 import { type Skill as TSkill } from './Skills.types';
 
 type Props = Omit<TSkill, 'id'>;
 
-export function Skill({ language, level, color }: Props) {
+export const Skill: React.FC<Props> = ({ language, level, color }) => {
   const emoji = {
     beginner: '👶',
     intermediate: '👍',
@@ -15,4 +17,4 @@ export function Skill({ language, level, color }: Props) {
       <span>{emoji[level]}</span>
     </div>
   );
-}
+};

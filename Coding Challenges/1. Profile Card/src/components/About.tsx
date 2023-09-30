@@ -1,4 +1,6 @@
-export function About() {
+import type React from 'react';
+
+export const About: React.FC = () => {
   return (
     <div className="flex flex-col gap-4 p-4 sm:p-6">
       <h2 className="text-2xl font-bold text-amber-700">Thomas Brown</h2>
@@ -8,4 +10,4 @@ export function About() {
       </p>
     </div>
   );
-}
+};

@@ -1,4 +1,6 @@
-export function Avatar() {
+import type React from 'react';
+
+export const Avatar: React.FC = () => {
   return (
     <figure className="h-64 w-full ">
       <img
@@ -8,4 +10,4 @@ export function Avatar() {
       />
     </figure>
   );
-}
+};
