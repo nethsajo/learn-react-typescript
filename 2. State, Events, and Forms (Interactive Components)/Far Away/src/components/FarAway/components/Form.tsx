@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from 'react';
+import { type ChangeEvent, type FormEvent, useState } from 'react';
 
 export function Form() {
   const [item, setItem] = useState('');
@@ -12,12 +12,18 @@ export function Form() {
     setQuantity(Number(e.target.value));
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // console.log({ item, quantity });
+  };
+
   return (
     <div className="flex flex-col items-center justify-center space-y-4 bg-amber-700 px-4 py-6 md:flex-row md:space-x-6 md:space-y-0">
       <h3 className="text-center text-base text-amber-50 md:text-xl">
         What do you need for your trip?
       </h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-center space-y-4 md:flex-row md:space-x-6 md:space-y-0">
           <select
             name="quantity"
