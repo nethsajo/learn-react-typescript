@@ -1,0 +1,50 @@
+# directories
+node_modules/
+dist/
+build/
+.pnpm-store/
+
+
+# configs
+*.config.ts
+*.config.js
+*.config.json
+*.config.cjs
+*.config.mjs
+*.config.yml
+*.config.yaml
+
+# logs
+*.log
+*-debug.log*
+*-error.log*
+
+# miscellaneous
+.eslintcache
+.DS_Store
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vercel
+*.tsbuildinfo
+
+# secrets
+.env
+.env.*
+.env-*
+.npmrc
+
+# secret examples
+!**.example
+
+# locks
+*-lock.json
+*-lock.yaml
+*.lock
+
+# types
+global.d.ts
+next-env.d.ts
