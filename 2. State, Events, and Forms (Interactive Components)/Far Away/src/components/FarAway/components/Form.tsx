@@ -1,6 +1,12 @@
 import { type ChangeEvent, type FormEvent, useState } from 'react';
 
-export function Form() {
+import { type Item } from './Item.types';
+
+type Props = {
+  onAddItem: (item: Item) => void;
+};
+
+export function Form({ onAddItem }: Props) {
   const [item, setItem] = useState('');
   const [quantity, setQuantity] = useState(1);
 
@@ -15,11 +21,11 @@ export function Form() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // console.log({ item, quantity });
+    onAddItem({ id: Number(new Date()), item, quantity, packed: false });
   };
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 bg-amber-700 px-4 py-6 md:flex-row md:space-x-6 md:space-y-0">
+    <div className="flex flex-col justify-center space-y-4 bg-amber-700 px-4 py-6 lg:flex-row lg:items-center lg:space-x-6 lg:space-y-0">
       <h3 className="text-center text-base text-amber-50 md:text-xl">
         What do you need for your trip?
       </h3>
@@ -29,7 +35,7 @@ export function Form() {
             name="quantity"
             value={quantity}
             onChange={handleQuantity}
-            className="w-full rounded-md bg-amber-50 px-4 py-2 font-medium"
+            className="w-full rounded-md bg-amber-50 px-4 py-2 font-medium outline-none"
           >
             {Array.from({ length: 20 }, (_, index) => {
               return (
@@ -44,7 +50,7 @@ export function Form() {
             name="item"
             value={item}
             onChange={handleItem}
-            className="appearance-none rounded-md bg-amber-50 px-4 py-2 font-medium text-amber-800 placeholder:text-gray-400"
+            className="w-full appearance-none rounded-md bg-amber-50 px-4 py-2 text-amber-800 outline-none placeholder:text-slate-500 focus:ring focus:ring-offset-2 lg:w-60"
             placeholder="Add item..."
           />
           <button
