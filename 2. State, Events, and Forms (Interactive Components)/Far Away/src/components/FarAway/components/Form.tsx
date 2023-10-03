@@ -35,7 +35,7 @@ export function Form({ onAddItem }: Props) {
             name="quantity"
             value={quantity}
             onChange={handleQuantity}
-            className="w-full rounded-md bg-amber-50 px-4 py-2 font-medium outline-none"
+            className="w-full rounded-md border-none bg-amber-50 px-4 py-2 font-medium outline-none"
           >
             {Array.from({ length: 20 }, (_, index) => {
               return (
@@ -50,7 +50,7 @@ export function Form({ onAddItem }: Props) {
             name="item"
             value={item}
             onChange={handleItem}
-            className="w-full appearance-none rounded-md bg-amber-50 px-4 py-2 text-amber-800 outline-none placeholder:text-slate-500 focus:ring focus:ring-offset-2 lg:w-60"
+            className="w-full appearance-none rounded-md border-none bg-amber-50 px-4 py-2 text-amber-800 outline-none placeholder:text-slate-500 lg:w-60"
             placeholder="Add item..."
           />
           <button

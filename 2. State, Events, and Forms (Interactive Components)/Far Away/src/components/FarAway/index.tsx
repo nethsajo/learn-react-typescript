@@ -13,8 +13,8 @@ export default function FarAway() {
   };
 
   return (
-    <div className="flex w-full flex-col">
-      <Header />
+    <div className="grid h-screen w-full grid-rows-[auto_auto_1fr_auto]">
+      <Header title="Far Away" />
       <Form onAddItem={handleAddItem} />
       <Items items={items} />
     </div>
