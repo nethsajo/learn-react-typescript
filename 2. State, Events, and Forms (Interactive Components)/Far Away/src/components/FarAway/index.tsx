@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { Footer } from './components/Footer';
 import { Form } from './components/Form';
 import { Header } from './components/Header';
 import { type Item } from './components/Item.types';
@@ -16,11 +17,16 @@ export default function FarAway() {
     setItems(currentItems => currentItems.filter(item => item.id !== id));
   };
 
+  const handleClearItems = () => {
+    setItems([]);
+  };
+
   return (
     <div className="grid h-screen w-full grid-rows-[auto_auto_1fr_auto]">
       <Header title="Far Away" />
       <Form onAddItem={handleAddItem} />
-      <Items items={items} onDeleteItem={handleDeleteItem} />
+      <Items items={items} onDeleteItem={handleDeleteItem} onClearItems={handleClearItems} />
+      <Footer />
     </div>
   );
 }
