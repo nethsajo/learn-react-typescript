@@ -2,35 +2,50 @@ import { type Item } from './Item.types';
 
 type Props = {
   items: Item[];
+  onDeleteItem: (id: number) => void;
 };
 
-export function Items({ items }: Props) {
+export function Items({ items, onDeleteItem }: Props) {
   return (
     <div className="w-full bg-yellow-900 py-8">
-      <div className="mx-auto max-w-2xl px-4">
-        <div className="flex flex-wrap gap-8 text-amber-50">
+      <div className="max-h-[440px] max-w-2xl overflow-y-auto px-4 sm:mx-auto">
+        <div className="flex flex-col gap-4 text-amber-50">
           {items.map(item => {
             return (
-              <div key={item.id} className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  id={`item__${item.id}`}
-                  value={String(item.packed)}
-                  className="h-5 w-5 rounded-sm border-slate-300 bg-transparent text-amber-600 focus:ring-2 focus:ring-amber-500 focus:ring-offset-transparent"
-                />
-                <label htmlFor={`item__${item.id}`} className="text-base">
-                  <span className="font-semibold">{item.quantity}</span> &mdash; {item.item}
-                </label>
-                <button className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-600 text-amber-200 transition duration-300 hover:bg-amber-700">
+              <div
+                key={item.id}
+                className="flex justify-between rounded-md bg-yellow-800 px-4 py-3"
+              >
+                <div className="grid flex-1 grid-cols-[24px_1fr] items-start justify-center gap-x-4">
+                  <input
+                    type="checkbox"
+                    id={`item__${item.id}`}
+                    value={String(item.packed)}
+                    className="row-span-2 mt-1 h-6 w-6 rounded-sm border-slate-300 bg-transparent text-amber-600 transition duration-150 focus:ring focus:ring-amber-500 focus:ring-offset-1"
+                  />
+                  <label
+                    htmlFor={`item__${item.id}`}
+                    className="col-start-2 row-start-1 mb-1 text-lg leading-none sm:text-xl"
+                  >
+                    {item.item}
+                  </label>
+                  <p className="col-start-2 row-start-2">x {item.quantity}</p>
+                </div>
+                <button
+                  onClick={() => onDeleteItem(item.id)}
+                  className="mt-1 inline-flex self-start whitespace-nowrap rounded-md bg-transparent p-0.5 text-slate-200 transition duration-300 hover:bg-amber-600 active:bg-amber-700"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth="1.5"
                     stroke="currentColor"
-                    className="h-4 w-4 fill-current"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-6 w-6 fill-current"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
                   </svg>
                 </button>
               </div>

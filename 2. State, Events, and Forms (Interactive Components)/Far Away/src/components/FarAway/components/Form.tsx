@@ -21,7 +21,12 @@ export function Form({ onAddItem }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!item) return;
+
     onAddItem({ id: Number(new Date()), item, quantity, packed: false });
+
+    setItem('');
+    setQuantity(1);
   };
 
   return (
@@ -35,7 +40,7 @@ export function Form({ onAddItem }: Props) {
             name="quantity"
             value={quantity}
             onChange={handleQuantity}
-            className="w-full rounded-md border-none bg-amber-50 px-4 py-2 font-medium outline-none"
+            className="w-full rounded-md border-none bg-amber-50 px-4 py-2 font-medium text-slate-600 outline-none transition duration-150 focus:ring-1 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-transparent"
           >
             {Array.from({ length: 20 }, (_, index) => {
               return (
@@ -50,12 +55,12 @@ export function Form({ onAddItem }: Props) {
             name="item"
             value={item}
             onChange={handleItem}
-            className="w-full appearance-none rounded-md border-none bg-amber-50 px-4 py-2 text-amber-800 outline-none placeholder:text-slate-500 lg:w-60"
+            className="w-full appearance-none rounded-md border-none bg-amber-50 px-4 py-2 text-slate-600 outline-none transition duration-150 placeholder:text-slate-500 focus:ring-1 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-transparent lg:w-60"
             placeholder="Add item..."
           />
           <button
             type="submit"
-            className="w-full rounded-md bg-emerald-500 px-6 py-2 font-semibold text-emerald-50"
+            className="w-full rounded-md bg-teal-500 px-6 py-2 font-semibold text-emerald-50"
           >
             Add
           </button>

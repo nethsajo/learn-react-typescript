@@ -12,11 +12,15 @@ export default function FarAway() {
     setItems(currentItems => [...currentItems, item]);
   };
 
+  const handleDeleteItem = (id: number) => {
+    setItems(currentItems => currentItems.filter(item => item.id !== id));
+  };
+
   return (
     <div className="grid h-screen w-full grid-rows-[auto_auto_1fr_auto]">
       <Header title="Far Away" />
       <Form onAddItem={handleAddItem} />
-      <Items items={items} />
+      <Items items={items} onDeleteItem={handleDeleteItem} />
     </div>
   );
 }
