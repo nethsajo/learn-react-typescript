@@ -37,7 +37,7 @@ export function Form({ onAddItem }: Props) {
           What do you need for your trip?
         </h3>
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col items-center space-y-4 md:flex-row md:space-x-6 md:space-y-0">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-[80px_1fr_auto]">
             <select
               name="quantity"
               value={quantity}
