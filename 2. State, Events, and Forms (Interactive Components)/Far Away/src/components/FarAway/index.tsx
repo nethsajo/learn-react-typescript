@@ -17,6 +17,12 @@ export default function FarAway() {
     setItems(currentItems => currentItems.filter(item => item.id !== id));
   };
 
+  const handlePackItem = (id: number) => {
+    setItems(currentItems =>
+      currentItems.map(item => (item.id === id ? { ...item, packed: !item.packed } : item))
+    );
+  };
+
   const handleClearItems = () => {
     setItems([]);
   };
@@ -25,8 +31,13 @@ export default function FarAway() {
     <div className="grid h-screen w-full grid-rows-[auto_auto_1fr_auto]">
       <Header title="Far Away" />
       <Form onAddItem={handleAddItem} />
-      <Items items={items} onDeleteItem={handleDeleteItem} onClearItems={handleClearItems} />
-      <Footer />
+      <Items
+        items={items}
+        onPackItem={handlePackItem}
+        onDeleteItem={handleDeleteItem}
+        onClearItems={handleClearItems}
+      />
+      <Footer items={items} />
     </div>
   );
 }

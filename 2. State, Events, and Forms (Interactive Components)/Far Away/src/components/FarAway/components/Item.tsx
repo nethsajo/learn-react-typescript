@@ -2,10 +2,11 @@ import { type Item as ItemType } from './Item.types';
 
 type Props = {
   item: ItemType;
+  onPackItem: (id: number) => void;
   onDeleteItem: (id: number) => void;
 };
 
-export function Item({ item, onDeleteItem }: Props) {
+export function Item({ item, onPackItem, onDeleteItem }: Props) {
   return (
     <div className="flex justify-between rounded-md bg-yellow-800 px-4 py-3">
       <div className="grid flex-1 grid-cols-[24px_1fr] items-start justify-center gap-x-4">
@@ -13,6 +14,7 @@ export function Item({ item, onDeleteItem }: Props) {
           type="checkbox"
           id={`item__${item.id}`}
           value={String(item.packed)}
+          onChange={() => onPackItem(item.id)}
           className="row-span-2 mt-1 h-6 w-6 rounded-sm border-slate-300 bg-transparent text-amber-600 transition duration-150 focus:ring focus:ring-amber-500 focus:ring-offset-1"
         />
         <label

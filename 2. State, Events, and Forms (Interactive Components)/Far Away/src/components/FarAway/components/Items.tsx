@@ -6,11 +6,12 @@ import { Wrapper } from './Wrapper';
 
 type Props = {
   items: ItemType[];
+  onPackItem: (id: number) => void;
   onDeleteItem: (id: number) => void;
   onClearItems: () => void;
 };
 
-export function Items({ items, onDeleteItem, onClearItems }: Props) {
+export function Items({ items, onPackItem, onDeleteItem, onClearItems }: Props) {
   const [sortBy, setSortBy] = useState('input');
 
   let sortedItems;
@@ -72,7 +73,14 @@ export function Items({ items, onDeleteItem, onClearItems }: Props) {
         <div className="max-h-[440px] overflow-y-auto">
           <div className="flex flex-col space-y-4 text-amber-50">
             {sortedItems.map(item => {
-              return <Item key={item.id} item={item} onDeleteItem={onDeleteItem} />;
+              return (
+                <Item
+                  key={item.id}
+                  item={item}
+                  onPackItem={onPackItem}
+                  onDeleteItem={onDeleteItem}
+                />
+              );
             })}
           </div>
         </div>
