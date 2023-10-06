@@ -1,10 +1,6 @@
 import { type Item } from './Item.types';
 
-type Props = {
-  items: Item[];
-};
-
-export function Footer({ items }: Props) {
+export function Footer({ items }: { items: Item[] }) {
   const itemsCount = items.length;
   const itemsPacked = items.filter(item => item.packed).length;
 

@@ -10,7 +10,18 @@ export default function FarAway() {
   const [items, setItems] = useState<Item[]>([]);
 
   const handleAddItem = (item: Item) => {
-    setItems(currentItems => [...currentItems, item]);
+    setItems(currentItems => {
+      const exist = currentItems.find(i => i.item.toLowerCase() === item.item.toLowerCase());
+
+      if (exist) {
+        return currentItems.map(i => {
+          if (i.id === exist.id) return { ...i, quantity: i.quantity + item.quantity };
+          return i;
+        });
+      }
+
+      return [...currentItems, item];
+    });
   };
 
   const handleDeleteItem = (id: number) => {
