@@ -19,11 +19,11 @@ export function Item({ item, onPackItem, onDeleteItem }: Props) {
         />
         <label
           htmlFor={`item__${item.id}`}
-          className="col-start-2 row-start-1 mb-1 text-lg leading-none sm:text-xl"
+          className="col-start-2 row-start-1 mb-1 font-medium leading-none sm:text-xl"
         >
           {item.item}
         </label>
-        <p className="col-start-2 row-start-2">x {item.quantity}</p>
+        <p className="col-start-2 row-start-2 text-sm">x {item.quantity}</p>
       </div>
       <button
         onClick={() => onDeleteItem(item.id)}
