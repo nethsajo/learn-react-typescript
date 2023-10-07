@@ -1,5 +1,5 @@
 import type React from 'react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { type FAQ } from './types';
 
@@ -22,6 +22,20 @@ export function Accordion({ faq }: Props) {
       return h;
     });
   };
+
+  useEffect(() => {
+    const handleHidden = setTimeout(() => {
+      if (content.current) {
+        if (isOpen) {
+          content.current.removeAttribute('hidden');
+        } else {
+          content.current.setAttribute('hidden', 'true');
+        }
+      }
+    }, 500);
+
+    return () => clearTimeout(handleHidden);
+  }, [isOpen]);
 
   const state = isOpen ? 'open' : 'closed';
 
@@ -52,16 +66,16 @@ export function Accordion({ faq }: Props) {
           </svg>
         </button>
         <div
+          hidden
           ref={content}
           data-state={state}
           className="overflow-hidden text-gray-400 transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
           style={
             {
               '--accordion-content-height': 'var(--accordion-collapsible-content-height)',
-              ...(isOpen && { '--accordion-collapsible-content-height': `${height}px` }),
+              '--accordion-collapsible-content-height': `${height}px`,
             } as React.CSSProperties
           }
-          hidden={!isOpen}
         >
           {isOpen && <div className="pb-4 pt-0 text-sm">{faq.description}</div>}
         </div>
