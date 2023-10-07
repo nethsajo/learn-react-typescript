@@ -1,5 +1,6 @@
-import Accordion from 'components/Accordion';
+import Accordions from 'components/Accordion';
+import { FAQS } from 'shared/constants/faqs';
 
 export default function App() {
-  return <Accordion />;
+  return <Accordions faqs={FAQS} />;
 }
