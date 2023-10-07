@@ -1,0 +1,8 @@
+I. State
+	- The most important concept in React
+	- Data that a component can hold over time, necessart for information that it needs to remember throughout the app's lifecycle
+	- We can think of state as being the memory of a component
+        - A Component State is a single local component variable ("piece of state", "state variable")
+	  - "State variable" / "piece of state" - A single variable in a component (component state)
+	  - Basically, the general term state is all the pieces of state together.
+        - Updating component state triggers React to re-render the component
