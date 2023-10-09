@@ -10,31 +10,30 @@ type Props = {
 export function Accordion({ faq }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState(0);
+
   const content = useRef<HTMLDivElement | null>(null);
 
-  const handleOpenAccordion = () => {
+  const handleToggleAccordion = () => {
     setIsOpen(open => !open);
-    setHeight(h => {
-      if (isOpen && content.current) {
-        return content.current.clientHeight;
-      }
-
-      return h;
-    });
   };
 
   useEffect(() => {
-    const handleHidden = setTimeout(() => {
-      if (content.current) {
-        if (isOpen) {
-          content.current.removeAttribute('hidden');
-        } else {
-          content.current.setAttribute('hidden', 'true');
-        }
-      }
-    }, 500);
+    if (content.current) {
+      if (isOpen) {
+        content.current.removeAttribute('hidden');
+        setHeight(content.current.scrollHeight);
+      } else {
+        const timeout = setTimeout(() => {
+          if (content.current) {
+            if (!isOpen) {
+              content.current.setAttribute('hidden', '');
+            }
+          }
+        }, 500);
 
-    return () => clearTimeout(handleHidden);
+        return () => clearTimeout(timeout);
+      }
+    }
   }, [isOpen]);
 
   const state = isOpen ? 'open' : 'closed';
@@ -47,7 +46,7 @@ export function Accordion({ faq }: Props) {
       >
         <button
           className="flex flex-1 items-center justify-between py-4 transition-all [&[data-state=closed]>span]:text-slate-500 [&[data-state=open]>span]:text-teal-500 [&[data-state=open]>svg]:rotate-180"
-          onClick={handleOpenAccordion}
+          onClick={handleToggleAccordion}
           data-state={state}
           aria-expanded={isOpen}
         >
