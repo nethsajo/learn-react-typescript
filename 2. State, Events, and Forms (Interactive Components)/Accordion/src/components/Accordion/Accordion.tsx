@@ -59,7 +59,7 @@ export function Accordion({ faq }: Props) {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="h-6 w-6 fill-none stroke-current transition-transform duration-200"
+            className="h-4 w-4 fill-none stroke-current transition-transform duration-200"
           >
             <path d="m6 9 6 6 6-6" />
           </svg>
