@@ -1,13 +1,13 @@
 import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
-import { type FAQ } from './types';
+import { type FAQ } from '../types';
 
 type Props = {
   faq: FAQ;
 };
 
-export function Accordion({ faq }: Props) {
+export function Basic({ faq }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [height, setHeight] = useState(0);
 
