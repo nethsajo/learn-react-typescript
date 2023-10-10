@@ -26,17 +26,17 @@ export function Controlled({ faq, currentOpen, index, onOpen }: Props) {
       if (isOpen) {
         content.current.removeAttribute('hidden');
         setHeight(content.current.scrollHeight);
-      } else {
-        const timeout = setTimeout(() => {
-          if (content.current) {
-            if (!isOpen) {
-              content.current.setAttribute('hidden', '');
-            }
-          }
-        }, 500);
-
-        return () => clearTimeout(timeout);
       }
+
+      const timeout = setTimeout(() => {
+        if (content.current) {
+          if (!isOpen) {
+            content.current.setAttribute('hidden', '');
+          }
+        }
+      }, 500);
+
+      return () => clearTimeout(timeout);
     }
   }, [isOpen]);
 
