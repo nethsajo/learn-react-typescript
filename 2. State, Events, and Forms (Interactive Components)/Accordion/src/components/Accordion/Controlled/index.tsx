@@ -8,7 +8,7 @@ type Props = {
 };
 
 export function AccordionControlled({ faqs }: Props) {
-  const [currentOpen, setCurrentOpen] = useState(null);
+  const [currentOpen, setCurrentOpen] = useState<null | number>(null);
 
   return (
     <div className="flex flex-col space-y-6">
