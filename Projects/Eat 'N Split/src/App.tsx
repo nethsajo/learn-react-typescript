@@ -1,3 +1,5 @@
+import EatNSplit from 'components/EatNSplit';
+
 export default function App() {
-  return <div>Hello, world!</div>;
+  return <EatNSplit />;
 }
