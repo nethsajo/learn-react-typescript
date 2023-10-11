@@ -11,15 +11,15 @@ type Props = {
 };
 
 export function Controlled({ faq, currentOpen, index, onOpen }: Props) {
+  const content = useRef<HTMLDivElement | null>(null);
   const [height, setHeight] = useState(0);
 
   const isOpen = index === currentOpen;
+  const state = isOpen ? 'open' : 'closed';
 
-  const toggleAccordion = () => {
+  const handleToggleAccordion = () => {
     onOpen(isOpen ? null : index);
   };
-
-  const content = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (content.current) {
@@ -40,8 +40,6 @@ export function Controlled({ faq, currentOpen, index, onOpen }: Props) {
     }
   }, [isOpen]);
 
-  const state = isOpen ? 'open' : 'closed';
-
   return (
     <div className="flex-1" data-state={state}>
       <div
@@ -50,7 +48,7 @@ export function Controlled({ faq, currentOpen, index, onOpen }: Props) {
       >
         <button
           className="flex flex-1 items-center justify-between py-4 transition-all [&[data-state=closed]>span]:text-slate-500 [&[data-state=open]>span]:text-teal-500 [&[data-state=open]>svg]:rotate-180"
-          onClick={toggleAccordion}
+          onClick={handleToggleAccordion}
           data-state={state}
           aria-expanded={isOpen}
         >
