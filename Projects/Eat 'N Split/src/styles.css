@@ -1,0 +1,15 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  body {
+    @apply font-inter bg-gray-100 text-slate-600;
+  }
+}
+
+@layer utilities {
+  .word-spacing {
+    word-spacing: 16px;
+  }
+}
