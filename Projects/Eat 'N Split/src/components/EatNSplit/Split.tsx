@@ -1,3 +1,0 @@
-export function List() {
-  return <h2>List</h2>;
-}

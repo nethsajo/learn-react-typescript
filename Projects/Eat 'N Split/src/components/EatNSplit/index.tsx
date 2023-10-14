@@ -1,11 +1,19 @@
 import { useState } from 'react';
 
+import { Form } from './components/Form';
+import { type Friend } from './types';
+
 export default function EatNSplit() {
-  const [toggleForm, setToggleForm] = useState(false);
-  const [friends, setFriends] = useState([]);
+  const [isToggle, setIsToggle] = useState(false);
+  const [friends, setFriends] = useState<Friend[]>([]);
 
   const handleToggleForm = () => {
-    setToggleForm(isToggle => !isToggle);
+    setIsToggle(toggle => !toggle);
+  };
+
+  const onAddFriend = (friend: Friend) => {
+    setFriends(currentFriends => [...currentFriends, friend]);
+    setIsToggle(false);
   };
 
   return (
@@ -36,44 +44,15 @@ export default function EatNSplit() {
           </button>
         </header>
         <div className="p-4">
-          <div className="w-full rounded-sm bg-gray-100 p-4">
-            <form autoComplete="off">
-              <div className="mb-3 space-y-3">
-                <div className="flex flex-col space-y-2">
-                  <label
-                    className="text-xs font-medium tracking-tight text-gray-500"
-                    htmlFor="friend"
-                  >
-                    Your friend&apos;s name
-                  </label>
-                  <input
-                    type="text"
-                    id="friend"
-                    className="rounded-sm border-none px-3 py-1 text-sm text-gray-500 transition duration-300 focus:outline-none focus:outline-offset-2 focus:ring-2"
-                  />
-                </div>
-                <div className="flex flex-col space-y-2">
-                  <label
-                    className="text-xs font-medium tracking-tight text-gray-500"
-                    htmlFor="friend"
-                  >
-                    Image
-                  </label>
-                  <input
-                    type="text"
-                    id="friend"
-                    className="rounded-sm border-none px-3 py-1 text-sm text-gray-500 transition duration-300 focus:outline-none focus:outline-offset-2 focus:ring-2"
-                  />
-                </div>
-              </div>
-              <div className="flex items-center justify-end space-x-4">
-                <button>Cancel</button>
-                <button>Submit</button>
-              </div>
-            </form>
-          </div>
-          {friends.length > 0 && (
-            <span className="block text-center text-sm font-medium tracking-tight text-gray-400">
+          {isToggle && <Form onAddFriend={onAddFriend} />}
+          {friends.length > 0 ? (
+            <div>Test</div>
+          ) : (
+            <span
+              className={`block text-center text-sm font-medium tracking-tight text-gray-400 ${
+                isToggle ? 'mt-4' : ''
+              }`}
+            >
               Start adding your friends and split the bill!
             </span>
           )}
