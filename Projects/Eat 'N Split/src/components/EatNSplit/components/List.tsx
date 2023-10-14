@@ -5,5 +5,35 @@ type Props = {
 };
 
 export function List({ friends }: Props) {
-  return <div></div>;
+  return (
+    <div className="flex flex-col space-y-3">
+      <h3 className="text-sm font-semibold text-slate-400">
+        Your {friends.length > 1 ? 'friends' : 'friend'}
+      </h3>
+      <div className="flex flex-col space-y-4">
+        {friends.map(friend => {
+          return (
+            <div key={friend.id} className="flex items-center justify-between gap-3">
+              <div className="grid grid-cols-[44px_1fr] items-center gap-x-2">
+                <img
+                  src={friend.image}
+                  alt={`Photo of ${friend.name}`}
+                  className="row-span-2 rounded-full"
+                />
+                <p className="col-start-2 row-start-1 font-bold leading-none text-slate-700">
+                  {friend.name}
+                </p>
+                <span className="col-start-2 row-start-2 text-xs text-slate-400">
+                  You and {friend.name} are even
+                </span>
+              </div>
+              <button className="rounded-sm border border-slate-200 bg-transparent px-3 py-1 text-xs font-medium text-slate-400 transition-colors duration-300 hover:border-transparent hover:bg-slate-200 hover:text-slate-500">
+                Select
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }

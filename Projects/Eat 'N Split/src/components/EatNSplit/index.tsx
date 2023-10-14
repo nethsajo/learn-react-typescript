@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Form } from './components/Form';
+import { List } from './components/List';
 import { type Friend } from './types';
 
 export default function EatNSplit() {
@@ -46,13 +47,9 @@ export default function EatNSplit() {
         <div className="p-4">
           {isToggle && <Form onAddFriend={onAddFriend} />}
           {friends.length > 0 ? (
-            <div>Test</div>
+            <List friends={friends} />
           ) : (
-            <span
-              className={`block text-center text-sm font-medium tracking-tight text-gray-400 ${
-                isToggle ? 'mt-4' : ''
-              }`}
-            >
+            <span className="block text-center text-sm font-medium tracking-tight text-gray-400">
               Start adding your friends and split the bill!
             </span>
           )}

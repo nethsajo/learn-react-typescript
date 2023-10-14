@@ -1,4 +1,4 @@
-import { type ChangeEvent, type FormEvent, useState } from 'react';
+import { type ChangeEvent, type FormEvent, useEffect, useRef, useState } from 'react';
 
 import { type Friend } from '../types';
 
@@ -7,11 +7,13 @@ type Props = {
 };
 
 export function Form({ onAddFriend }: Props) {
-  const [friend, setFriend] = useState('');
+  const [name, setName] = useState('');
   const [image, setImage] = useState('https://i.pravatar.cc/48');
 
-  const handleFriend = (e: ChangeEvent<HTMLInputElement>) => {
-    setFriend(e.target.value);
+  const friend = useRef<HTMLInputElement | null>(null);
+
+  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
   };
 
   const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,14 +25,18 @@ export function Form({ onAddFriend }: Props) {
 
     onAddFriend({
       id: crypto.randomUUID(),
-      name: friend,
+      name,
       image,
       balance: 0,
     });
   };
 
+  useEffect(() => {
+    if (friend.current) friend.current.focus();
+  }, []);
+
   return (
-    <div className="w-full rounded-sm bg-gray-100 p-4">
+    <div className="mb-4 w-full rounded-sm bg-gray-100 p-4">
       <form onSubmit={handleSubmit} autoComplete="off">
         <div className="mb-3 space-y-3">
           <div className="flex flex-col space-y-2">
@@ -40,8 +46,9 @@ export function Form({ onAddFriend }: Props) {
             <input
               type="text"
               id="friend"
-              value={friend}
-              onChange={handleFriend}
+              ref={friend}
+              value={name}
+              onChange={handleName}
               className="rounded-sm border-none px-3 py-1 text-sm text-gray-500 transition duration-300 focus:outline-none focus:outline-offset-2 focus:ring-2"
             />
           </div>
