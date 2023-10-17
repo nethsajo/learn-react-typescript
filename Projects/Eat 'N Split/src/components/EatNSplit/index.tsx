@@ -14,6 +14,10 @@ export default function EatNSplit() {
 
   const onAddFriend = (friend: Friend) => {
     setFriends(currentFriends => [...currentFriends, friend]);
+    onCloseForm();
+  };
+
+  const onCloseForm = () => {
     setIsToggle(false);
   };
 
@@ -45,7 +49,7 @@ export default function EatNSplit() {
           </button>
         </header>
         <div className="p-4">
-          {isToggle && <Form onAddFriend={onAddFriend} />}
+          {isToggle && <Form onAddFriend={onAddFriend} onCloseForm={onCloseForm} />}
           {friends.length > 0 ? (
             <List friends={friends} />
           ) : (
