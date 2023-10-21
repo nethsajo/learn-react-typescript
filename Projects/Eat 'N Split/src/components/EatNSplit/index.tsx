@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import AddUserSvg from 'shared/assets/svg/add-user.svg?react';
 import { Button } from 'shared/components/elements/button';
 
 import { Form } from './components/Form';
@@ -29,20 +30,11 @@ export default function EatNSplit() {
           <h1 className="text-base font-bold tracking-tight text-slate-600 sm:text-2xl">
             Eat &apos;N Split
           </h1>
-          <Button size="sm" onClick={handleToggleForm}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-6 w-6 fill-transparent stroke-current stroke-2"
-            >
-              <path d="M14 19a6 6 0 0 0-12 0" />
-              <circle cx="8" cy="9" r="4" />
-              <line x1="19" x2="19" y1="8" y2="14" />
-              <line x1="22" x2="16" y1="11" y2="11" />
-            </svg>
-            <span>Add friend</span>
+          <Button size="sm" color={isToggle ? 'danger' : 'primary'} onClick={handleToggleForm}>
+            {!isToggle && (
+              <AddUserSvg className="h-5 w-5 fill-transparent stroke-current stroke-2" />
+            )}
+            <span>{!isToggle ? 'Add friend' : 'Close'}</span>
           </Button>
         </header>
         <div className="p-4">
