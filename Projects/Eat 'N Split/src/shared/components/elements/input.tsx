@@ -17,7 +17,7 @@ export function Input({ label, value, onChange }: InputProps) {
         id="friend"
         value={value}
         onChange={onChange}
-        className="rounded-sm border-none px-3 py-1 text-sm text-gray-500 transition duration-300 focus:outline-none focus:outline-offset-2 focus:ring-2"
+        className="rounded-sm border-0 px-3 py-1 text-sm text-gray-500 transition duration-300 focus:outline-none focus:outline-offset-2 focus:ring-2"
       />
     </div>
   );

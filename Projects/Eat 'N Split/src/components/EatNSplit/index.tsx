@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from 'shared/components/elements/button';
 
 import { Form } from './components/Form';
 import { List } from './components/List';
@@ -28,25 +29,21 @@ export default function EatNSplit() {
           <h1 className="text-base font-bold tracking-tight text-slate-600 sm:text-2xl">
             Eat &apos;N Split
           </h1>
-          <button
-            onClick={handleToggleForm}
-            className="ml-2 inline-flex items-center gap-1 rounded-sm bg-blue-500 px-4 py-1 text-xs font-semibold tracking-tight text-blue-50 transition-colors duration-300 hover:bg-blue-600"
-          >
+          <Button size="sm" onClick={handleToggleForm}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="h-6 w-6 fill-transparent stroke-current"
+              className="h-6 w-6 fill-transparent stroke-current stroke-2"
             >
               <path d="M14 19a6 6 0 0 0-12 0" />
               <circle cx="8" cy="9" r="4" />
               <line x1="19" x2="19" y1="8" y2="14" />
               <line x1="22" x2="16" y1="11" y2="11" />
             </svg>
-            Add friend
-          </button>
+            <span>Add friend</span>
+          </Button>
         </header>
         <div className="p-4">
           {isToggle && <Form onAddFriend={onAddFriend} onCloseForm={onCloseForm} />}

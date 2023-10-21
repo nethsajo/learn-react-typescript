@@ -3,38 +3,45 @@ import type React from 'react';
 export type ButtonProps = {
   type?: 'button' | 'submit' | 'reset';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  color?: 'primary' | 'secondary' | 'success' | 'danger';
+  color?: 'primary' | 'secondary' | 'success' | 'danger' | 'none';
   variant?: 'text' | 'outlined' | 'contained';
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export function Button({
   type = 'button',
   size = 'md',
-  variant = 'text',
+  variant = 'contained',
   color = 'primary',
   children,
   onClick,
 }: React.PropsWithChildren<ButtonProps>) {
   const sizes = {
-    xs: 'px-2 py-1',
-    sm: 'px-3 py-2',
-    md: 'px-4 py-3',
-    lg: 'px-5 py-4',
-    xl: 'px-6 py-5',
+    xs: 'px-2 py-1 text-xs rounded',
+    sm: 'px-2 py-1 text-sm rounded',
+    md: 'px-2.5 py-1.5 text-sm rounded-md',
+    lg: 'px-3 py-2 text-sm rounded-md',
+    xl: 'px-3.5 py-2.5 text-sm rounded-md',
   };
 
   const colors = {
-    primary: 'bg-blue-500',
-    secondary: 'bg-gray-100',
-    success: 'bg-teal-500',
-    danger: 'bg-red-500',
+    primary: 'bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700',
+    secondary: 'bg-gray-100 text-gray-500 hover:bg-gray-200 active:bg-gray-300',
+    success: 'bg-teal-500 text-white',
+    danger: 'bg-red-500 text-white',
+    none: 'bg-transparent text-gray-400',
   };
 
-  const classes = `${sizes[size]} ${colors[color]}`;
+  const variants = {
+    text: '',
+    contained: 'border-0',
+    outlined: 'bg-transparent border-1 border-primary-500',
+  };
+
+  const classNames = `inline-flex items-center space-x-2 outline-none font-semibold transition-colors duration-300 ${sizes[size]} ${colors[color]} ${variants[variant]}`;
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button type={type} onClick={onClick} className={classNames}>
       {children}
     </button>
   );
