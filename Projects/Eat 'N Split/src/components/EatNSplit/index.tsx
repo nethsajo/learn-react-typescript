@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AddUserSvg from 'shared/assets/svg/add-user.svg?react';
 import { Button } from 'shared/components/elements/button';
 
+import { Dialog } from './components/Dialog';
 import { Form } from './components/Form';
 import { List } from './components/List';
 import { type Friend } from './types';
@@ -9,6 +10,7 @@ import { type Friend } from './types';
 export default function EatNSplit() {
   const [isToggle, setIsToggle] = useState(false);
   const [friends, setFriends] = useState<Friend[]>([]);
+  const [selected, setSelected] = useState<Friend | null>(null);
 
   const handleToggleForm = () => {
     setIsToggle(toggle => !toggle);
@@ -17,6 +19,10 @@ export default function EatNSplit() {
   const onAddFriend = (friend: Friend) => {
     setFriends(currentFriends => [...currentFriends, friend]);
     onCloseForm();
+  };
+
+  const onSelectFriend = (friend: Friend) => {
+    setSelected(current => (current?.id === friend.id ? null : friend));
   };
 
   const onCloseForm = () => {
@@ -40,12 +46,13 @@ export default function EatNSplit() {
         <div className="p-4">
           {isToggle && <Form onAddFriend={onAddFriend} onCloseForm={onCloseForm} />}
           {friends.length > 0 ? (
-            <List friends={friends} />
+            <List friends={friends} onSelectFriend={onSelectFriend} />
           ) : (
             <span className="block text-center text-sm font-medium tracking-tight text-gray-400">
               Start adding your friends and split the bill!
             </span>
           )}
+          {selected && <Dialog friend={selected} />}
         </div>
       </div>
     </div>

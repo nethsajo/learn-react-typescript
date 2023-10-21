@@ -26,6 +26,8 @@ export function Form({ onAddFriend, onCloseForm }: Props) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!name) return;
+
     onAddFriend({
       id: crypto.randomUUID(),
       name,
@@ -42,7 +44,13 @@ export function Form({ onAddFriend, onCloseForm }: Props) {
     <div className="mb-4 w-full rounded-md bg-gray-100 p-4">
       <form onSubmit={handleSubmit} autoComplete="off">
         <div className="mb-3 space-y-3">
-          <Input id="friend" label="Your friend's name" value={name} onChange={handleName} />
+          <Input
+            ref={friend}
+            id="friend"
+            label="Your friend's name"
+            value={name}
+            onChange={handleName}
+          />
           <Input id="image" label="Image" value={image} onChange={handleImage} />
         </div>
         <div className="flex items-center justify-end space-x-4">
