@@ -26,6 +26,10 @@ export default function EatNSplit() {
     setSelected(current => (current?.id === friend.id ? null : friend));
   };
 
+  const onCloseSelectedFriend = () => {
+    setSelected(null);
+  };
+
   const onCloseForm = () => {
     setIsToggle(false);
   };
@@ -47,13 +51,17 @@ export default function EatNSplit() {
         <div className="p-4">
           {isToggle && <Form onAddFriend={onAddFriend} onCloseForm={onCloseForm} />}
           {friends.length > 0 ? (
-            <List friends={friends} onSelectFriend={onSelectFriend} selected={selected} />
+            <List friends={friends} onSelectFriend={onSelectFriend} />
           ) : (
             <span className="block text-center text-sm font-medium tracking-tight text-gray-400">
               Start adding your friends and split the bill!
             </span>
           )}
-          {selected && createPortal(<Dialog friend={selected} />, document.body)}
+          {selected &&
+            createPortal(
+              <Dialog friend={selected} onClose={onCloseSelectedFriend} />,
+              document.body
+            )}
         </div>
       </div>
     </div>

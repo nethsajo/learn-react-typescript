@@ -5,9 +5,10 @@ import { type Friend } from '../types';
 
 type Props = {
   friend: Friend;
+  onClose: () => void;
 };
 
-export function Dialog({ friend }: Props) {
+export function Dialog({ friend, onClose }: Props) {
   const state = friend ? 'open' : 'closed';
 
   const [bill, setBill] = useState(0);
@@ -38,6 +39,7 @@ export function Dialog({ friend }: Props) {
       className="fixed inset-0 z-50 bg-white/80 backdrop-blur-sm"
       data-aria-hidden="true"
       aria-hidden="true"
+      onClick={onClose}
     >
       <div
         role="dialog"
