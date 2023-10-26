@@ -38,7 +38,7 @@ export function Button({
     outlined: 'bg-transparent border-1 border-primary-500',
   };
 
-  const classNames = `inline-flex items-center space-x-2 outline-none font-semibold transition-colors duration-300 ${sizes[size]} ${colors[color]} ${variants[variant]}`;
+  const classNames = `inline-flex items-center justify-center sm:justify-start space-x-2 outline-none font-semibold transition-colors duration-300 ${sizes[size]} ${colors[color]} ${variants[variant]}`;
 
   return (
     <button type={type} onClick={onClick} className={classNames}>

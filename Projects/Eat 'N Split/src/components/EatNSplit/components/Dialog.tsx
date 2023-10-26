@@ -1,4 +1,5 @@
-import { type ChangeEvent, useState } from 'react';
+import { type ChangeEvent, type FormEvent, useState } from 'react';
+import { Button } from 'shared/components/elements/button';
 
 import { type Friend } from '../types';
 
@@ -21,6 +22,16 @@ export function Dialog({ friend }: Props) {
     setExpense(+e.target.value);
   };
 
+  const handlePayee = (e: ChangeEvent<HTMLSelectElement>) => {
+    setPayee(e.target.value);
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  const friendExpense = bill - expense;
+
   return (
     <div
       data-state={state}
@@ -31,46 +42,46 @@ export function Dialog({ friend }: Props) {
       <div
         role="dialog"
         data-state={state}
-        className="fixed left-[50%] top-[50%] grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-6 border bg-white p-6 shadow-lg duration-200 sm:max-w-[535px] sm:rounded-lg"
+        className="fixed left-[50%] top-[50%] grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-6 border bg-white p-6 shadow-lg duration-200 sm:max-w-[525px] sm:rounded-lg"
       >
-        <h1 className="text-lg font-medium uppercase text-slate-600 sm:text-xl">
+        <h1 className="text-lg font-semibold uppercase text-slate-600 sm:text-xl">
           Split a bill with <span className="font-bold text-blue-500">{friend.name}</span>
         </h1>
-        <form className="grid gap-4 py-4">
+        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
           <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
             <label
               htmlFor="bill"
-              className="text-left text-sm font-semibold sm:col-span-2 sm:text-right"
+              className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
             >
               Bill Value
             </label>
             <input
-              type="text"
+              type="number"
               id="bill"
               value={bill}
               onChange={handleBill}
-              className="h-8 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
+              className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
             />
           </div>
           <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
             <label
               htmlFor="bill"
-              className="text-left text-sm font-semibold sm:col-span-2 sm:text-right"
+              className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
             >
               Your expense
             </label>
             <input
-              type="text"
+              type="number"
               id="expense"
               value={expense}
               onChange={handleExpense}
-              className="h-8 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
+              className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
             />
           </div>
           <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
             <label
               htmlFor="bill"
-              className="text-left text-sm font-semibold sm:col-span-2 sm:text-right"
+              className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
             >
               {friend.name}`s expense
             </label>
@@ -78,10 +89,30 @@ export function Dialog({ friend }: Props) {
               disabled
               type="text"
               id="expense"
-              value={expense}
-              onChange={handleExpense}
-              className="h-8 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 disabled:cursor-not-allowed disabled:bg-gray-100 sm:col-span-3"
+              value={friendExpense}
+              className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 disabled:cursor-not-allowed disabled:bg-gray-100 sm:col-span-3"
             />
+          </div>
+          <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
+            <label
+              htmlFor="bill"
+              className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
+            >
+              Who is paying the bill?
+            </label>
+            <select
+              value={payee}
+              onChange={handlePayee}
+              className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
+            >
+              <option value="user">You</option>
+              <option value="friend">Friend</option>
+            </select>
+          </div>
+          <div className="mt-4 flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+            <Button type="submit" color="primary" size="xl">
+              Save changes
+            </Button>
           </div>
         </form>
       </div>
