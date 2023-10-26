@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import AddUserSvg from 'shared/assets/svg/add-user.svg?react';
 import { Button } from 'shared/components/elements/button';
 
@@ -52,7 +53,7 @@ export default function EatNSplit() {
               Start adding your friends and split the bill!
             </span>
           )}
-          {selected && <Dialog friend={selected} />}
+          {selected && createPortal(<Dialog friend={selected} />, document.body)}
         </div>
       </div>
     </div>
