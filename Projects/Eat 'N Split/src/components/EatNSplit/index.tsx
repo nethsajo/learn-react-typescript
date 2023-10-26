@@ -47,7 +47,7 @@ export default function EatNSplit() {
         <div className="p-4">
           {isToggle && <Form onAddFriend={onAddFriend} onCloseForm={onCloseForm} />}
           {friends.length > 0 ? (
-            <List friends={friends} onSelectFriend={onSelectFriend} />
+            <List friends={friends} onSelectFriend={onSelectFriend} selected={selected} />
           ) : (
             <span className="block text-center text-sm font-medium tracking-tight text-gray-400">
               Start adding your friends and split the bill!
