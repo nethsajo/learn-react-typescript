@@ -34,6 +34,14 @@ export default function EatNSplit() {
     setIsToggle(false);
   };
 
+  const onSplitBill = (bill: number) => {
+    setFriends(collections =>
+      collections.map(friend =>
+        friend.id === selected?.id ? { ...friend, balance: friend.balance + bill } : friend
+      )
+    );
+  };
+
   return (
     <div className="w-full px-4 sm:px-6">
       <div className="mx-auto mt-12 max-w-xl rounded-md bg-white shadow-sm">
@@ -59,7 +67,11 @@ export default function EatNSplit() {
           )}
           {selected &&
             createPortal(
-              <Dialog friend={selected} onClose={onCloseSelectedFriend} />,
+              <Dialog
+                friend={selected}
+                onSplitBill={onSplitBill}
+                onClose={onCloseSelectedFriend}
+              />,
               document.body
             )}
         </div>

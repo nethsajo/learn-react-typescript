@@ -5,6 +5,7 @@ import { type Friend } from '../types';
 
 type Props = {
   friend: Friend;
+  onSplitBill: (bill: number) => void;
   onClose: () => void;
 };
 
@@ -39,7 +40,6 @@ export function Dialog({ friend, onClose }: Props) {
       className="fixed inset-0 z-50 bg-white/80 backdrop-blur-sm"
       data-aria-hidden="true"
       aria-hidden="true"
-      onClick={onClose}
     >
       <div
         role="dialog"
@@ -117,6 +117,21 @@ export function Dialog({ friend, onClose }: Props) {
             </Button>
           </div>
         </form>
+        <button
+          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-slate-300 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-transparent focus:ring-offset-2 disabled:pointer-events-none"
+          onClick={onClose}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-4 w-4 fill-none stroke-current stroke-2"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
       </div>
     </div>
   );
