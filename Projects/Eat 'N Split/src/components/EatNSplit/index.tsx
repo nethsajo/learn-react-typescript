@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import AddUserSvg from 'shared/assets/svg/add-user.svg?react';
 import { Button } from 'shared/components/elements/button';
@@ -42,6 +42,11 @@ export default function EatNSplit() {
     );
   };
 
+  const backdrop = useRef<HTMLDivElement>(null);
+  const dialog = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {}, []);
+
   return (
     <div className="w-full px-4 sm:px-6">
       <div className="mx-auto mt-12 max-w-xl rounded-md bg-white shadow-sm">
@@ -68,6 +73,8 @@ export default function EatNSplit() {
           {selected &&
             createPortal(
               <Dialog
+                backdrop={backdrop}
+                dialog={dialog}
                 friend={selected}
                 onSplitBill={onSplitBill}
                 onClose={onCloseSelectedFriend}

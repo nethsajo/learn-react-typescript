@@ -10,9 +10,6 @@ type Props = {
 };
 
 export function Dialog({ friend, onClose }: Props) {
-  const backdrop = useRef<HTMLDivElement>(null);
-  const dialog = useRef<HTMLDivElement>(null);
-
   const state = friend ? 'open' : 'closed';
 
   const [bill, setBill] = useState(0);
