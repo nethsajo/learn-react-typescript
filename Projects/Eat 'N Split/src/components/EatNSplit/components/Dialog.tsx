@@ -1,4 +1,4 @@
-import { type ChangeEvent, type FormEvent, useState } from 'react';
+import { type ChangeEvent, type FormEvent, useRef, useState } from 'react';
 import { Button } from 'shared/components/elements/button';
 
 import { type Friend } from '../types';
@@ -10,6 +10,9 @@ type Props = {
 };
 
 export function Dialog({ friend, onClose }: Props) {
+  const backdrop = useRef<HTMLDivElement>(null);
+  const dialog = useRef<HTMLDivElement>(null);
+
   const state = friend ? 'open' : 'closed';
 
   const [bill, setBill] = useState(0);
@@ -35,16 +38,19 @@ export function Dialog({ friend, onClose }: Props) {
   const friendExpense = bill - expense;
 
   return (
-    <div
-      data-state={state}
-      className="fixed inset-0 z-50 bg-white/80 backdrop-blur-sm"
-      data-aria-hidden="true"
-      aria-hidden="true"
-    >
+    <>
+      <div
+        ref={backdrop}
+        data-state={state}
+        className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-white/80 backdrop-blur-sm"
+        data-aria-hidden="true"
+        aria-hidden="true"
+      ></div>
       <div
         role="dialog"
+        ref={dialog}
         data-state={state}
-        className="fixed left-[50%] top-[50%] grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-6 border bg-white p-6 shadow-lg duration-200 sm:max-w-[525px] sm:rounded-lg"
+        className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-6 border bg-white p-6 shadow-lg duration-200 sm:max-w-[525px] sm:rounded-lg"
       >
         <h1 className="text-lg font-semibold uppercase text-slate-600 sm:text-xl">
           Split a bill with <span className="font-bold text-blue-500">{friend.name}</span>
@@ -133,6 +139,6 @@ export function Dialog({ friend, onClose }: Props) {
           </svg>
         </button>
       </div>
-    </div>
+    </>
   );
 }
