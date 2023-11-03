@@ -27,7 +27,7 @@ export function Button({
   const colors = {
     primary: 'bg-blue-500 text-white hover:bg-blue-600 active:bg-blue-700',
     secondary: 'bg-gray-100 text-gray-500 hover:bg-gray-200 active:bg-gray-300',
-    success: 'bg-teal-500 text-white',
+    success: 'bg-teal-500 hover:bg-teal-600 text-white',
     danger: 'bg-red-500 text-white hover:bg-red-600 active:bg-red-700',
     none: 'text-gray-400 hover:text-gray-500',
   };

@@ -54,10 +54,10 @@ export function Form({ onAddFriend, onCloseForm }: Props) {
           <Input id="image" label="Image" value={image} onChange={handleImage} />
         </div>
         <div className="flex items-center justify-end space-x-4">
-          <Button color="none" variant="text" size="xs" onClick={onCloseForm}>
+          <Button color="none" variant="text" size="sm" onClick={onCloseForm}>
             Cancel
           </Button>
-          <Button type="submit" size="xs">
+          <Button type="submit" size="sm">
             Submit
           </Button>
         </div>

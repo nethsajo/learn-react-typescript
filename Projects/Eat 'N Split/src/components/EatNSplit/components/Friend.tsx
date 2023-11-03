@@ -16,14 +16,26 @@ export function Friend({ friend, onSelectFriend }: Props) {
           alt={`Photo of ${friend.name}`}
           className="row-span-2 rounded-full"
         />
-        <p className="col-start-2 row-start-1 font-bold leading-none text-slate-700">
+        <p className="col-start-2 row-start-1 font-semibold leading-none text-slate-700">
           {friend.name}
         </p>
-        <span className="col-start-2 row-start-2 text-xs text-slate-400">
-          You and {friend.name} are even
-        </span>
+        <div className="col-start-2 row-start-2 text-xs text-slate-400">
+          {friend.balance < 0 && (
+            <span className="text-red-500">
+              You owe {friend.name} ${Math.abs(friend.balance)}
+            </span>
+          )}
+          {friend.balance > 0 && (
+            <span className="text-emerald-500">
+              {friend.name} owes You ${friend.balance}
+            </span>
+          )}
+          {friend.balance === 0 && (
+            <span className="text-gray-500">You and {friend.name} are even</span>
+          )}
+        </div>
       </div>
-      <Button color="secondary" size="xs" onClick={() => onSelectFriend(friend)}>
+      <Button color="success" size="sm" onClick={() => onSelectFriend(friend)}>
         Select
       </Button>
     </div>

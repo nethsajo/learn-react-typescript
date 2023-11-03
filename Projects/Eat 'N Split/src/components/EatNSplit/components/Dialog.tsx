@@ -11,28 +11,31 @@ type Props = {
 };
 
 export const Dialog = React.forwardRef(
-  ({ state, friend, onClose }: Props, ref: Ref<HTMLDivElement>) => {
+  ({ state, friend, onSplitBill, onClose }: Props, ref: Ref<HTMLDivElement>) => {
     const [bill, setBill] = useState(0);
     const [expense, setExpense] = useState(0);
-    const [payee, setPayee] = useState('user');
+    const [payer, setPayer] = useState('user');
+
+    const friendExpense = bill - expense;
+    const paidByFriend = bill ? bill - expense : 0;
 
     const handleBill = (e: ChangeEvent<HTMLInputElement>) => {
       setBill(+e.target.value);
     };
 
     const handleExpense = (e: ChangeEvent<HTMLInputElement>) => {
-      setExpense(+e.target.value);
+      setExpense(Number(e.target.value) > bill ? expense : Number(e.target.value));
     };
 
-    const handlePayee = (e: ChangeEvent<HTMLSelectElement>) => {
-      setPayee(e.target.value);
+    const handlePayer = (e: ChangeEvent<HTMLSelectElement>) => {
+      setPayer(e.target.value);
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-    };
 
-    const friendExpense = bill - expense;
+      onSplitBill(payer === 'user' ? paidByFriend : -expense);
+    };
 
     return (
       <div
@@ -96,8 +99,8 @@ export const Dialog = React.forwardRef(
             </label>
             <select
               id="payee"
-              value={payee}
-              onChange={handlePayee}
+              value={payer}
+              onChange={handlePayer}
               className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
             >
               <option value="user">You</option>

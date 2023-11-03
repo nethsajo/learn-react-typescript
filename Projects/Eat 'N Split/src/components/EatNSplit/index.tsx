@@ -54,9 +54,11 @@ export default function EatNSplit() {
         friend.id === selected?.id ? { ...friend, balance: friend.balance + bill } : friend
       )
     );
+
+    onCloseSelectedFriend();
   };
 
-  const isSelectedFriend = selected ? 'open' : 'closed';
+  const isOpen = selected ? 'open' : 'closed';
 
   return (
     <div className="w-full px-4 sm:px-6">
@@ -83,10 +85,11 @@ export default function EatNSplit() {
           )}
           {selected && (
             <Portal>
-              <Backdrop ref={backdrop} state={isSelectedFriend} />
+              <Backdrop ref={backdrop} state={isOpen} />
               <Dialog
+                key={selected.id}
                 ref={dialog}
-                state={isSelectedFriend}
+                state={isOpen}
                 friend={selected}
                 onSplitBill={onSplitBill}
                 onClose={onCloseSelectedFriend}
