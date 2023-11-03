@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { useRef, useState } from 'react';
 import AddUserSvg from 'shared/assets/svg/add-user.svg?react';
 import { Button } from 'shared/components/elements/button';
 
@@ -7,12 +6,16 @@ import { Backdrop } from './components/Backdrop';
 import { Dialog } from './components/Dialog';
 import { Form } from './components/Form';
 import { List } from './components/List';
+import { Portal } from './components/Portal';
 import { type Friend } from './types';
 
 export default function EatNSplit() {
   const [isToggle, setIsToggle] = useState(false);
   const [friends, setFriends] = useState<Friend[]>([]);
   const [selected, setSelected] = useState<Friend | null>(null);
+
+  const backdrop = useRef<HTMLDivElement>(null);
+  const dialog = useRef<HTMLDivElement>(null);
 
   const handleToggleForm = () => {
     setIsToggle(toggle => !toggle);
@@ -53,9 +56,6 @@ export default function EatNSplit() {
     );
   };
 
-  const backdrop = useRef<HTMLDivElement>(null);
-  const dialog = useRef<HTMLDivElement>(null);
-
   const isSelectedFriend = selected ? 'open' : 'closed';
 
   return (
@@ -81,20 +81,17 @@ export default function EatNSplit() {
               Start adding your friends and split the bill!
             </span>
           )}
-          {createPortal(
-            selected && (
-              <React.Fragment>
-                <Backdrop ref={backdrop} state={isSelectedFriend} />
-                <Dialog
-                  ref={dialog}
-                  state={isSelectedFriend}
-                  friend={selected}
-                  onSplitBill={onSplitBill}
-                  onClose={onCloseSelectedFriend}
-                />
-              </React.Fragment>
-            ),
-            document.body
+          {selected && (
+            <Portal>
+              <Backdrop ref={backdrop} state={isSelectedFriend} />
+              <Dialog
+                ref={dialog}
+                state={isSelectedFriend}
+                friend={selected}
+                onSplitBill={onSplitBill}
+                onClose={onCloseSelectedFriend}
+              />
+            </Portal>
           )}
         </div>
       </div>
