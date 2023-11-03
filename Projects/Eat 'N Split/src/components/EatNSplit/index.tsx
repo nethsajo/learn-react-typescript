@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import AddUserSvg from 'shared/assets/svg/add-user.svg?react';
 import { Button } from 'shared/components/elements/button';
 
+import { Backdrop } from './components/Backdrop';
 import { Dialog } from './components/Dialog';
 import { Form } from './components/Form';
 import { List } from './components/List';
@@ -27,7 +28,17 @@ export default function EatNSplit() {
   };
 
   const onCloseSelectedFriend = () => {
-    setSelected(null);
+    if (backdrop.current) {
+      backdrop.current.dataset.state = 'closed';
+    }
+
+    if (dialog.current) {
+      dialog.current.dataset.state = 'closed';
+    }
+
+    setTimeout(() => {
+      setSelected(null);
+    }, 150);
   };
 
   const onCloseForm = () => {
@@ -45,7 +56,7 @@ export default function EatNSplit() {
   const backdrop = useRef<HTMLDivElement>(null);
   const dialog = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {}, []);
+  const isSelectedFriend = selected ? 'open' : 'closed';
 
   return (
     <div className="w-full px-4 sm:px-6">
@@ -70,17 +81,21 @@ export default function EatNSplit() {
               Start adding your friends and split the bill!
             </span>
           )}
-          {selected &&
-            createPortal(
-              <Dialog
-                backdrop={backdrop}
-                dialog={dialog}
-                friend={selected}
-                onSplitBill={onSplitBill}
-                onClose={onCloseSelectedFriend}
-              />,
-              document.body
-            )}
+          {createPortal(
+            selected && (
+              <React.Fragment>
+                <Backdrop ref={backdrop} state={isSelectedFriend} />
+                <Dialog
+                  ref={dialog}
+                  state={isSelectedFriend}
+                  friend={selected}
+                  onSplitBill={onSplitBill}
+                  onClose={onCloseSelectedFriend}
+                />
+              </React.Fragment>
+            ),
+            document.body
+          )}
         </div>
       </div>
     </div>

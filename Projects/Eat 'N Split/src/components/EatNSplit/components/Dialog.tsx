@@ -1,53 +1,45 @@
-import { type ChangeEvent, type FormEvent, useRef, useState } from 'react';
+import React, { type ChangeEvent, type FormEvent, type Ref, useState } from 'react';
 import { Button } from 'shared/components/elements/button';
 
 import { type Friend } from '../types';
 
 type Props = {
+  state: 'open' | 'closed';
   friend: Friend;
   onSplitBill: (bill: number) => void;
   onClose: () => void;
 };
 
-export function Dialog({ friend, onClose }: Props) {
-  const state = friend ? 'open' : 'closed';
+export const Dialog = React.forwardRef(
+  ({ state, friend, onClose }: Props, ref: Ref<HTMLDivElement>) => {
+    const [bill, setBill] = useState(0);
+    const [expense, setExpense] = useState(0);
+    const [payee, setPayee] = useState('user');
 
-  const [bill, setBill] = useState(0);
-  const [expense, setExpense] = useState(0);
-  const [payee, setPayee] = useState('user');
+    const handleBill = (e: ChangeEvent<HTMLInputElement>) => {
+      setBill(+e.target.value);
+    };
 
-  const handleBill = (e: ChangeEvent<HTMLInputElement>) => {
-    setBill(+e.target.value);
-  };
+    const handleExpense = (e: ChangeEvent<HTMLInputElement>) => {
+      setExpense(+e.target.value);
+    };
 
-  const handleExpense = (e: ChangeEvent<HTMLInputElement>) => {
-    setExpense(+e.target.value);
-  };
+    const handlePayee = (e: ChangeEvent<HTMLSelectElement>) => {
+      setPayee(e.target.value);
+    };
 
-  const handlePayee = (e: ChangeEvent<HTMLSelectElement>) => {
-    setPayee(e.target.value);
-  };
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+    };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
+    const friendExpense = bill - expense;
 
-  const friendExpense = bill - expense;
-
-  return (
-    <>
+    return (
       <div
-        ref={backdrop}
-        data-state={state}
-        className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-white/80 backdrop-blur-sm"
-        data-aria-hidden="true"
-        aria-hidden="true"
-      ></div>
-      <div
+        ref={ref}
         role="dialog"
-        ref={dialog}
         data-state={state}
-        className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-6 border bg-white p-6 shadow-lg duration-200 sm:max-w-[525px] sm:rounded-lg"
+        className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-6 border bg-white p-6 shadow-lg duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:max-w-[525px] sm:rounded-lg"
       >
         <h1 className="text-lg font-semibold uppercase text-slate-600 sm:text-xl">
           Split a bill with <span className="font-bold text-blue-500">{friend.name}</span>
@@ -70,42 +62,40 @@ export function Dialog({ friend, onClose }: Props) {
           </div>
           <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
             <label
-              htmlFor="bill"
+              htmlFor="my-expense"
               className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
             >
               Your expense
             </label>
             <input
               type="number"
-              id="expense"
+              id="my-expense"
               value={expense}
               onChange={handleExpense}
               className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
             />
           </div>
           <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
-            <label
-              htmlFor="bill"
-              className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
-            >
+            <label className="text-left text-sm font-medium sm:col-span-2 sm:text-right">
               {friend.name}`s expense
             </label>
             <input
               disabled
               type="text"
-              id="expense"
+              id="friend-expense"
               value={friendExpense}
               className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 disabled:cursor-not-allowed disabled:bg-gray-100 sm:col-span-3"
             />
           </div>
           <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
             <label
-              htmlFor="bill"
+              htmlFor="payee"
               className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
             >
               Who is paying the bill?
             </label>
             <select
+              id="payee"
               value={payee}
               onChange={handlePayee}
               className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
@@ -136,6 +126,6 @@ export function Dialog({ friend, onClose }: Props) {
           </svg>
         </button>
       </div>
-    </>
-  );
-}
+    );
+  }
+);
