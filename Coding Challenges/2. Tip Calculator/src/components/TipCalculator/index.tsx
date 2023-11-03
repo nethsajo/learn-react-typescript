@@ -5,7 +5,7 @@ import { Select } from 'shared/components/elements/select';
 
 export default function TipCalculator() {
   const [bill, setBill] = useState(0);
-  const [tip, setTip] = useState(0);
+  const [ownTip, setOwnTip] = useState(0);
   const [friendTip, setFriendTip] = useState(0);
 
   const handleBill = (e: ChangeEvent<HTMLInputElement>) => {
@@ -13,7 +13,7 @@ export default function TipCalculator() {
   };
 
   const handleOwnTip = (e: ChangeEvent<HTMLSelectElement>) => {
-    setTip(Number(e.target.value));
+    setOwnTip(Number(e.target.value));
   };
 
   const handleFriendTip = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -22,7 +22,7 @@ export default function TipCalculator() {
 
   const handleReset = () => {
     setBill(0);
-    setTip(0);
+    setOwnTip(0);
     setFriendTip(0);
   };
 
@@ -34,13 +34,15 @@ export default function TipCalculator() {
     }
   }, []);
 
+  const tip = Math.round(bill * (ownTip + friendTip)) / 2;
+
   return (
     <div className="flex h-screen items-center justify-center px-4 sm:px-6">
       <div className="mx-auto w-full max-w-none rounded-md bg-white p-4 shadow-md sm:max-w-xl sm:p-6">
         <h1 className="text-center text-xl font-extrabold text-teal-600 sm:text-2xl">
           Tip Calculator
         </h1>
-        <div className="mt-6 space-y-4">
+        <div className="mt-6 flex flex-col space-y-4">
           <Input
             ref={input}
             id="bill"
@@ -51,7 +53,7 @@ export default function TipCalculator() {
           <Select
             id="tip"
             label="How did you like the service?"
-            value={tip}
+            value={ownTip}
             onChange={handleOwnTip}
           />
           <Select
@@ -60,9 +62,16 @@ export default function TipCalculator() {
             value={friendTip}
             onChange={handleFriendTip}
           />
-          <Button color="success" size="xl" onClick={handleReset}>
-            Reset
-          </Button>
+          {bill > 0 && (
+            <p className="text-center font-medium text-gray-500">
+              You pay ${bill + tip} (${bill} + ${tip} tip)
+            </p>
+          )}
+          <div className="self-end">
+            <Button color="success" size="xl" onClick={handleReset}>
+              Reset
+            </Button>
+          </div>
         </div>
       </div>
     </div>
