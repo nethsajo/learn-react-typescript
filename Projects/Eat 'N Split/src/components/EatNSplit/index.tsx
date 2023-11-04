@@ -41,7 +41,7 @@ export default function EatNSplit() {
 
     setTimeout(() => {
       setSelected(null);
-    }, 150);
+    }, 100);
   };
 
   const onCloseForm = () => {

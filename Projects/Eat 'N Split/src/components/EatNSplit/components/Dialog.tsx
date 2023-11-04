@@ -1,5 +1,14 @@
-import React, { type ChangeEvent, type FormEvent, type Ref, useState } from 'react';
+import React, {
+  type ChangeEvent,
+  type FormEvent,
+  type Ref,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Button } from 'shared/components/elements/button';
+import { Input } from 'shared/components/elements/input';
+import { Select } from 'shared/components/elements/select';
 
 import { type Friend } from '../types';
 
@@ -12,6 +21,8 @@ type Props = {
 
 export const Dialog = React.forwardRef(
   ({ state, friend, onSplitBill, onClose }: Props, ref: Ref<HTMLDivElement>) => {
+    const input = useRef<HTMLInputElement>(null);
+
     const [bill, setBill] = useState(0);
     const [expense, setExpense] = useState(0);
     const [payer, setPayer] = useState('user');
@@ -37,79 +48,40 @@ export const Dialog = React.forwardRef(
       onSplitBill(payer === 'user' ? paidByFriend : -expense);
     };
 
+    useEffect(() => {
+      if (input.current) {
+        input.current.focus();
+      }
+    }, []);
+
     return (
       <div
         ref={ref}
         role="dialog"
         data-state={state}
-        className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-6 border bg-white p-6 shadow-lg duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:max-w-[525px] sm:rounded-lg"
+        className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-6 border bg-white px-4 py-8 shadow-lg duration-150 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:max-w-[525px] sm:rounded-lg sm:px-6"
       >
         <h1 className="text-lg font-semibold uppercase text-slate-600 sm:text-xl">
           Split a bill with <span className="font-bold text-blue-500">{friend.name}</span>
         </h1>
-        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
-          <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
-            <label
-              htmlFor="bill"
-              className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
-            >
-              Bill Value
-            </label>
-            <input
-              type="number"
-              id="bill"
-              value={bill}
-              onChange={handleBill}
-              className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
-            <label
-              htmlFor="my-expense"
-              className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
-            >
-              Your expense
-            </label>
-            <input
-              type="number"
-              id="my-expense"
-              value={expense}
-              onChange={handleExpense}
-              className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
-            <label className="text-left text-sm font-medium sm:col-span-2 sm:text-right">
-              {friend.name}`s expense
-            </label>
-            <input
+        <form onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 gap-4 py-4 sm:grid-cols-2">
+            <Input ref={input} id="bill" label="Bill Value" value={bill} onChange={handleBill} />
+            <Input id="my-expense" label="Your expense" value={expense} onChange={handleExpense} />
+            <Input
               disabled
-              type="text"
               id="friend-expense"
+              label={`${friend.name}'s expense`}
               value={friendExpense}
-              className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 disabled:cursor-not-allowed disabled:bg-gray-100 sm:col-span-3"
             />
-          </div>
-          <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-5">
-            <label
-              htmlFor="payee"
-              className="text-left text-sm font-medium sm:col-span-2 sm:text-right"
-            >
-              Who is paying the bill?
-            </label>
-            <select
-              id="payee"
-              value={payer}
-              onChange={handlePayer}
-              className="h-9 rounded-md border border-gray-300 px-3 py-2 text-sm outline-none transition duration-200 sm:col-span-3"
-            >
+            <Select id="payer" label="Who is paying the bill?" value={payer} onChange={handlePayer}>
               <option value="user">You</option>
               <option value="friend">Friend</option>
-            </select>
+            </Select>
           </div>
           <div className="mt-4 flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
-            <Button type="submit" color="primary" size="xl">
-              Save changes
+            <Button type="submit" color="primary" size="lg">
+              Split
             </Button>
           </div>
         </form>

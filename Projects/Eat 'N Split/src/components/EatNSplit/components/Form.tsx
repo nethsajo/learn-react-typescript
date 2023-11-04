@@ -41,7 +41,7 @@ export function Form({ onAddFriend, onCloseForm }: Props) {
   }, []);
 
   return (
-    <div className="mb-4 w-full rounded-md bg-gray-100 p-4">
+    <div className="mb-4 w-full rounded-md py-4">
       <form onSubmit={handleSubmit} autoComplete="off">
         <div className="mb-3 space-y-3">
           <Input

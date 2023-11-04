@@ -10,7 +10,7 @@ type Props = {
 export function Friend({ friend, onSelectFriend }: Props) {
   return (
     <div className="flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
-      <div className="grid grid-cols-[44px_1fr] items-center gap-x-2">
+      <div className="grid w-full grid-cols-[44px_1fr] items-center gap-x-2">
         <img
           src={friend.image}
           alt={`Photo of ${friend.name}`}
