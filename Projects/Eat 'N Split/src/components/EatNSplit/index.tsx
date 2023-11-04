@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import AddUserSvg from 'shared/assets/svg/add-user.svg?react';
 import { Button } from 'shared/components/elements/button';
 
@@ -38,10 +38,6 @@ export default function EatNSplit() {
     if (dialog.current) {
       dialog.current.dataset.state = 'closed';
     }
-
-    setTimeout(() => {
-      setSelected(null);
-    }, 100);
   };
 
   const onCloseForm = () => {
