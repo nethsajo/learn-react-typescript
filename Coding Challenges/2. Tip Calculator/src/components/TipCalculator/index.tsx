@@ -55,13 +55,23 @@ export default function TipCalculator() {
             label="How did you like the service?"
             value={ownTip}
             onChange={handleOwnTip}
-          />
+          >
+            <option value={0}>Dissatisfied ({0}%)</option>
+            <option value={0.05}>It was okay ({0.05 * 100}%)</option>
+            <option value={0.1}>It was good ({0.1 * 100}%)</option>
+            <option value={0.2}>Absolutely amazing! ({0.2 * 100}%)</option>
+          </Select>
           <Select
             id="friend-tip"
             label="How did your friend like the service?"
             value={friendTip}
             onChange={handleFriendTip}
-          />
+          >
+            <option value={0}>Dissatisfied ({0}%)</option>
+            <option value={0.05}>It was okay ({0.05 * 100}%)</option>
+            <option value={0.1}>It was good ({0.1 * 100}%)</option>
+            <option value={0.2}>Absolutely amazing! ({0.2 * 100}%)</option>
+          </Select>
           {bill > 0 && (
             <p className="text-center font-medium text-gray-500">
               You pay ${bill + tip} (${bill} + ${tip} tip)
