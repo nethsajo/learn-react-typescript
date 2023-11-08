@@ -1,4 +1,4 @@
-import BudgetMate from "components/BudgetMate";
+import BudgetMate from 'components/BudgetMate';
 
 export default function App() {
   return <BudgetMate />;

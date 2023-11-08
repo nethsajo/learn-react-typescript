@@ -8,7 +8,7 @@ type Props = {
 };
 
 export function Budget({ budget, onSetBudget }: Props) {
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
