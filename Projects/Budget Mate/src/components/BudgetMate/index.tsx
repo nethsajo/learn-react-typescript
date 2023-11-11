@@ -40,7 +40,13 @@ export default function BudgetMate() {
         <Spend spend={spend} />
       </div>
       <Dialog>
-        <Dialog.Content>Test</Dialog.Content>
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title>Sample header title</Dialog.Title>
+            <Dialog.Description>A sample description of the dialog component</Dialog.Description>
+          </Dialog.Header>
+          <div className="">Test</div>
+        </Dialog.Content>
       </Dialog>
     </div>
   );

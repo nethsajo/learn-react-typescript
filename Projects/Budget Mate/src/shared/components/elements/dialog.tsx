@@ -34,7 +34,7 @@ function DialogOverlay() {
   );
 }
 
-function DialogContent({ children }: DialogContentProps) {
+const DialogContent = ({ children }: DialogContentProps) => {
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -51,13 +51,13 @@ function DialogContent({ children }: DialogContentProps) {
       </div>
     </DialogPortal>
   );
-}
+};
 
-function DialogHeader({
+const DialogHeader = ({
   children,
   className,
   ...props
-}: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) {
+}: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) => {
   return (
     <header
       {...props}
@@ -66,9 +66,38 @@ function DialogHeader({
       {children}
     </header>
   );
-}
+};
+
+const DialogTitle = ({
+  children,
+  className,
+  ...props
+}: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) => {
+  return (
+    <h2
+      {...props}
+      className={twJoin('text-lg font-semibold leading-none tracking-tight', className)}
+    >
+      {children}
+    </h2>
+  );
+};
+
+const DialogDescription = ({
+  children,
+  className,
+  ...props
+}: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) => {
+  return (
+    <p {...props} className={twJoin('text-sm text-gray-400', className)}>
+      {children}
+    </p>
+  );
+};
 
 Dialog.Content = DialogContent;
 Dialog.Header = DialogHeader;
+Dialog.Title = DialogTitle;
+Dialog.Description = DialogDescription;
 
 export default Dialog;
