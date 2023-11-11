@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Dialog from 'shared/components/elements/dialog';
 
 import { Balance } from './components/Balance';
 import { Budget } from './components/Budget';
@@ -35,9 +36,12 @@ export default function BudgetMate() {
       </h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
         <Budget budget={budget} onSetBudget={onSetBudget} />
-        <Balance />
-        <Spend />
+        <Balance balance={balance} />
+        <Spend spend={spend} />
       </div>
+      <Dialog>
+        <Dialog.Content>Test</Dialog.Content>
+      </Dialog>
     </div>
   );
 }
