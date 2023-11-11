@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import { Button } from 'shared/components/elements/button';
 import Dialog from 'shared/components/elements/dialog';
 import { Input } from 'shared/components/elements/input';
@@ -31,6 +31,10 @@ export default function BudgetMate() {
     setExpenses(items => [...items, item]);
   };
 
+  const handleBudget = (e: ChangeEvent<HTMLInputElement>) => {
+    setBudget(Number(e.target.value));
+  };
+
   return (
     <div className="mx-auto mt-24 max-w-none px-4 sm:px-6 md:max-w-6xl">
       <h1 className="mb-8 text-center text-2xl font-bold tracking-tight text-slate-500 sm:text-4xl">
@@ -51,7 +55,7 @@ export default function BudgetMate() {
             </Dialog.Description>
           </Dialog.Header>
           <div className="py-4">
-            <Input id="budget" label="Enter your budget" value={0} />
+            <Input id="budget" label="Enter your budget" value={budget} onChange={handleBudget} />
           </div>
           <Dialog.Footer>
             <Button color="none">Cancel</Button>
