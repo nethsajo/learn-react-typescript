@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Button } from 'shared/components/elements/button';
 import Dialog from 'shared/components/elements/dialog';
+import { Input } from 'shared/components/elements/input';
 
 import { Balance } from './components/Balance';
 import { Budget } from './components/Budget';
@@ -42,10 +44,20 @@ export default function BudgetMate() {
       <Dialog>
         <Dialog.Content>
           <Dialog.Header>
-            <Dialog.Title>Sample header title</Dialog.Title>
-            <Dialog.Description>A sample description of the dialog component</Dialog.Description>
+            <Dialog.Title>Edit budget</Dialog.Title>
+            <Dialog.Description>
+              Customize your budget effortlessly. Click update to ensure your financial plan is
+              perfectly tailored to your needs
+            </Dialog.Description>
           </Dialog.Header>
-          <div className="">Test</div>
+          <div className="py-4">
+            <Input id="budget" label="Enter your budget" value={0} />
+          </div>
+          <Dialog.Footer>
+            <Button type="submit" size="lg">
+              Update changes
+            </Button>
+          </Dialog.Footer>
         </Dialog.Content>
       </Dialog>
     </div>
