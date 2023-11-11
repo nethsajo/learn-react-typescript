@@ -54,6 +54,7 @@ export default function BudgetMate() {
             <Input id="budget" label="Enter your budget" value={0} />
           </div>
           <Dialog.Footer>
+            <Button color="none">Cancel</Button>
             <Button type="submit" size="lg">
               Update changes
             </Button>

@@ -59,10 +59,7 @@ const DialogHeader = ({
   ...props
 }: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) => {
   return (
-    <header
-      {...props}
-      className={twJoin('flex flex-col space-y-3 text-center sm:text-left', className)}
-    >
+    <header {...props} className={twJoin('flex flex-col space-y-3 text-left', className)}>
       {children}
     </header>
   );
@@ -103,7 +100,10 @@ const DialogFooter = ({
   return (
     <div
       {...props}
-      className={twJoin('flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2', className)}
+      className={twJoin(
+        'flex flex-col space-y-2 sm:flex-row sm:justify-end sm:space-x-2 sm:space-y-0',
+        className
+      )}
     >
       {children}
     </div>
