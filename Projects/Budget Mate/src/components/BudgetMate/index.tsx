@@ -1,7 +1,4 @@
 import { type ChangeEvent, useState } from 'react';
-import { Button } from 'shared/components/elements/button';
-import Dialog from 'shared/components/elements/dialog';
-import { Input } from 'shared/components/elements/input';
 
 import { Balance } from './components/Balance';
 import { Budget } from './components/Budget';
@@ -23,10 +20,6 @@ export default function BudgetMate() {
 
   const balance = Math.abs(budget - spend);
 
-  const onSetBudget = (value: number) => {
-    setBudget(value);
-  };
-
   const onAddExpense = (item: Expense) => {
     setExpenses(items => [...items, item]);
   };
@@ -41,30 +34,10 @@ export default function BudgetMate() {
         Budget Mate
       </h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-        <Budget budget={budget} onSetBudget={onSetBudget} />
+        <Budget budget={budget} onSetBudget={handleBudget} />
         <Balance balance={balance} />
         <Spend spend={spend} />
       </div>
-      <Dialog>
-        <Dialog.Content>
-          <Dialog.Header>
-            <Dialog.Title>Edit budget</Dialog.Title>
-            <Dialog.Description>
-              Customize your budget effortlessly. Click update to ensure your financial plan is
-              perfectly tailored to your needs
-            </Dialog.Description>
-          </Dialog.Header>
-          <div className="py-4">
-            <Input id="budget" label="Enter your budget" value={budget} onChange={handleBudget} />
-          </div>
-          <Dialog.Footer>
-            <Button color="none">Cancel</Button>
-            <Button type="submit" size="lg">
-              Update changes
-            </Button>
-          </Dialog.Footer>
-        </Dialog.Content>
-      </Dialog>
     </div>
   );
 }
