@@ -1,6 +1,7 @@
 import { X } from 'lucide-react';
 import type React from 'react';
 import { createPortal } from 'react-dom';
+import DialogProvider from 'shared/contexts/dialog';
 import { twJoin } from 'tailwind-merge';
 
 type DialogProps = {
@@ -16,7 +17,7 @@ type DialogContentProps = {
 };
 
 function Dialog({ children }: DialogProps) {
-  return <div>{children}</div>;
+  return <DialogProvider>{children}</DialogProvider>;
 }
 
 function DialogPortal({ children }: DialogPortalProps) {
