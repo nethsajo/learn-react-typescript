@@ -1,8 +1,8 @@
 import { X } from 'lucide-react';
-import type React from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import DialogProvider from 'shared/contexts/dialog';
-import { twJoin } from 'tailwind-merge';
+import { twMerge, twJoin } from 'tailwind-merge';
 
 type DialogProps = {
   children: React.ReactNode;
@@ -16,15 +16,19 @@ type DialogContentProps = {
   children: React.ReactNode;
 };
 
-function Dialog({ children }: DialogProps) {
+type DialogTriggerProps = {
+  children: React.ReactNode;
+};
+
+const Dialog = ({ children }: DialogProps) => {
   return <DialogProvider>{children}</DialogProvider>;
-}
+};
 
-function DialogPortal({ children }: DialogPortalProps) {
+const DialogPortal = ({ children }: DialogPortalProps) => {
   return createPortal(children, document.body);
-}
+};
 
-function DialogOverlay() {
+const DialogOverlay = () => {
   return (
     <div
       data-state="closed"
@@ -33,7 +37,7 @@ function DialogOverlay() {
       aria-hidden="true"
     ></div>
   );
-}
+};
 
 const DialogContent = ({ children }: DialogContentProps) => {
   return (
@@ -51,6 +55,41 @@ const DialogContent = ({ children }: DialogContentProps) => {
         </button>
       </div>
     </DialogPortal>
+  );
+};
+
+const DialogTriggerSlot = ({
+  children,
+  ...props
+}: React.HtmlHTMLAttributes<HTMLElement> & { children?: React.ReactNode }) => {
+  if (React.isValidElement(children)) {
+    return React.cloneElement(children, {
+      ...props,
+      ...children.props,
+      style: {
+        ...props.style,
+        ...children.props.style,
+      },
+      className: twMerge(props.className, children.props.className),
+    });
+  }
+
+  if (React.Children.count(children) > 1) {
+    React.Children.only(null);
+  }
+
+  return null;
+};
+
+const DialogTrigger = ({ children }: DialogTriggerProps) => {
+  return (
+    <button
+      type="button"
+      aria-haspopup="dialog"
+      className="inline-flex h-10 w-10 items-center justify-center text-blue-50 outline-none"
+    >
+      {children}
+    </button>
   );
 };
 
@@ -72,10 +111,7 @@ const DialogTitle = ({
   ...props
 }: React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>) => {
   return (
-    <h2
-      {...props}
-      className={twJoin('text-lg font-semibold leading-none tracking-tight', className)}
-    >
+    <h2 {...props} className={twJoin('text-lg font-bold leading-none tracking-tight', className)}>
       {children}
     </h2>
   );
@@ -111,6 +147,7 @@ const DialogFooter = ({
   );
 };
 
+Dialog.Trigger = DialogTrigger;
 Dialog.Content = DialogContent;
 Dialog.Header = DialogHeader;
 Dialog.Title = DialogTitle;

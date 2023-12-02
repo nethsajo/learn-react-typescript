@@ -27,9 +27,9 @@ export function Budget({ budget, onSetBudget }: Props) {
           <span className="text-sm font-medium text-slate-100">Budget</span>
         </div>
         <Dialog>
-          <button className="inline-flex h-10 w-10 items-center justify-center text-blue-50 outline-none">
+          <Dialog.Trigger>
             <Pencil className="h-6 w-6 stroke-current" />
-          </button>
+          </Dialog.Trigger>
           <Dialog.Content>
             <Dialog.Header>
               <Dialog.Title>Edit budget</Dialog.Title>
