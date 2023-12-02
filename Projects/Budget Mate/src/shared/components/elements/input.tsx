@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 
 export type InputProps = {
   id: string;
+  type: string;
   label: string;
   value: string | number;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -11,7 +12,10 @@ export type InputProps = {
 };
 
 export const Input = React.forwardRef(
-  ({ id, label, value, onChange, className, ...rest }: InputProps, ref: Ref<HTMLInputElement>) => {
+  (
+    { type, id, label, value, onChange, className, ...rest }: InputProps,
+    ref: Ref<HTMLInputElement>
+  ) => {
     return (
       <div className="flex flex-col space-y-2">
         <label htmlFor={id} className="text-sm font-medium tracking-tight text-gray-500">
@@ -20,7 +24,7 @@ export const Input = React.forwardRef(
         <input
           {...rest}
           ref={ref}
-          type="text"
+          type={type || 'text'}
           id={id}
           value={value}
           onChange={onChange}

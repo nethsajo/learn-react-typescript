@@ -21,12 +21,16 @@ export default function BudgetMate() {
     setExpenses(items => [...items, item]);
   };
 
+  const onRemoveExpense = (id: string | number) => {
+    setExpenses(items => items.filter(item => item.id !== id));
+  };
+
   const handleBudget = (e: ChangeEvent<HTMLInputElement>) => {
     setBudget(Number(e.target.value));
   };
 
   return (
-    <div className="mx-auto mt-24 max-w-none px-4 sm:px-6 md:max-w-6xl">
+    <div className="mx-auto my-12 max-w-none px-4 sm:px-6 md:max-w-4xl">
       <h1 className="mb-8 text-center text-2xl font-bold tracking-tight text-slate-500 sm:text-4xl">
         Budget Mate
       </h1>
@@ -36,7 +40,7 @@ export default function BudgetMate() {
         <Spend spend={spend} />
       </div>
       <Form onAddExpense={onAddExpense} />
-      <Expenses expenses={expenses} />
+      <Expenses expenses={expenses} onRemoveExpense={onRemoveExpense} />
     </div>
   );
 }
