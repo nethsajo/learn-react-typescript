@@ -1,10 +1,12 @@
 import type React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export type ButtonProps = {
   type?: 'button' | 'submit' | 'reset';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   color?: 'primary' | 'secondary' | 'success' | 'danger' | 'none';
   variant?: 'text' | 'outlined' | 'contained';
+  className?: string;
   onClick?: () => void;
 };
 
@@ -14,6 +16,7 @@ export function Button({
   variant = 'contained',
   color = 'primary',
   children,
+  className = '',
   onClick,
 }: React.PropsWithChildren<ButtonProps>) {
   const sizes = {
@@ -38,7 +41,10 @@ export function Button({
     outlined: 'bg-transparent border-1 border-primary-500',
   };
 
-  const classNames = `inline-flex w-auto items-center justify-center sm:justify-start gap-x-2 outline-none font-semibold transition-colors duration-300 ${sizes[size]} ${colors[color]} ${variants[variant]}`;
+  const classNames = twMerge(
+    `inline-flex w-auto items-center justify-center sm:justify-start gap-x-2 outline-none font-semibold transition-colors duration-300 ${sizes[size]} ${colors[color]} ${variants[variant]}`,
+    className
+  );
 
   return (
     <button type={type} onClick={onClick} className={classNames}>

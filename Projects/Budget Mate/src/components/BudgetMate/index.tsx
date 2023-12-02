@@ -29,7 +29,7 @@ export default function BudgetMate() {
       <h1 className="mb-8 text-center text-2xl font-bold tracking-tight text-slate-500 sm:text-4xl">
         Budget Mate
       </h1>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
         <Budget budget={budget} onSetBudget={handleBudget} />
         <Balance balance={balance} />
         <Spend spend={spend} />
