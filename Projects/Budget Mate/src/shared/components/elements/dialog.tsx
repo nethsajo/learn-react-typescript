@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { createPortal } from 'react-dom';
-import DialogProvider from 'shared/contexts/dialog';
+import DialogProvider from 'shared/contexts/dialog/DialogProvider';
 import { twMerge, twJoin } from 'tailwind-merge';
 
 type DialogProps = {
@@ -56,29 +56,6 @@ const DialogContent = ({ children }: DialogContentProps) => {
       </div>
     </DialogPortal>
   );
-};
-
-const DialogTriggerSlot = ({
-  children,
-  ...props
-}: React.HtmlHTMLAttributes<HTMLElement> & { children?: React.ReactNode }) => {
-  if (React.isValidElement(children)) {
-    return React.cloneElement(children, {
-      ...props,
-      ...children.props,
-      style: {
-        ...props.style,
-        ...children.props.style,
-      },
-      className: twMerge(props.className, children.props.className),
-    });
-  }
-
-  if (React.Children.count(children) > 1) {
-    React.Children.only(null);
-  }
-
-  return null;
 };
 
 const DialogTrigger = ({ children }: DialogTriggerProps) => {
