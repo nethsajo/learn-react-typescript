@@ -5,6 +5,7 @@ import { Budget } from './components/Budget';
 import { Spend } from './components/Spend';
 import { Form } from './components/Form';
 import { Expense } from './components/types';
+import { Expenses } from './components/Expenses';
 
 export default function BudgetMate() {
   const [budget, setBudget] = useState(0);
@@ -35,6 +36,7 @@ export default function BudgetMate() {
         <Spend spend={spend} />
       </div>
       <Form onAddExpense={onAddExpense} />
+      <Expenses expenses={expenses} />
     </div>
   );
 }
