@@ -26,7 +26,7 @@ export function Budget({ budget, onSetBudget }: Props) {
           <h2 className="text-xl font-semibold tracking-tight text-blue-50">&#8369; {budget}</h2>
           <span className="text-sm font-medium text-slate-100">Budget</span>
         </div>
-        <Dialog>
+        {/* <Dialog>
           <Dialog.Trigger>
             <Pencil className="h-6 w-6 stroke-current" />
           </Dialog.Trigger>
@@ -48,7 +48,7 @@ export function Budget({ budget, onSetBudget }: Props) {
               </Button>
             </Dialog.Footer>
           </Dialog.Content>
-        </Dialog>
+        </Dialog> */}
       </div>
     </Card>
   );

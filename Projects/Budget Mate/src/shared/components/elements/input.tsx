@@ -1,4 +1,5 @@
 import React, { type ChangeEvent, type Ref } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export type InputProps = {
   id: string;

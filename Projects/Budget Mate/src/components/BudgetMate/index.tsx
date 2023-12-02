@@ -3,12 +3,8 @@ import { type ChangeEvent, useState } from 'react';
 import { Balance } from './components/Balance';
 import { Budget } from './components/Budget';
 import { Spend } from './components/Spend';
-
-type Expense = {
-  id: number | string;
-  name: string;
-  cost: number;
-};
+import { Form } from './components/Form';
+import { Expense } from './components/types';
 
 export default function BudgetMate() {
   const [budget, setBudget] = useState(0);
@@ -38,6 +34,7 @@ export default function BudgetMate() {
         <Balance balance={balance} />
         <Spend spend={spend} />
       </div>
+      <Form onAddExpense={onAddExpense} />
     </div>
   );
 }
