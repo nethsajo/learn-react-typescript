@@ -1,5 +1,5 @@
 {
-  "name": "eat-n-split",
+  "name": "budget-mate",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
