@@ -1,5 +1,5 @@
 import { CircleDollarSign, Pencil } from 'lucide-react';
-import { type ChangeEvent, type FormEvent } from 'react';
+import { type ChangeEvent, type FormEvent, useState } from 'react';
 import { Button } from 'shared/components/elements/button';
 import Dialog from 'shared/components/elements/dialog';
 import { Input } from 'shared/components/elements/input';
@@ -8,12 +8,22 @@ import { Card } from './Card';
 
 type Props = {
   budget: number;
-  onSetBudget: (e: ChangeEvent<HTMLInputElement>) => void;
+  onSetBudget: (amount: number) => void;
 };
 
 export function Budget({ budget, onSetBudget }: Props) {
+  const [amount, setAmount] = useState(budget);
+
+  const handleAmount = (e: ChangeEvent<HTMLInputElement>) => {
+    setAmount(Number(e.target.value));
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!amount) return;
+
+    onSetBudget(amount);
   };
 
   return (
@@ -45,8 +55,8 @@ export function Budget({ budget, onSetBudget }: Props) {
                 <Input
                   id="budget"
                   label="Enter your budget"
-                  value={budget}
-                  onChange={onSetBudget}
+                  value={amount}
+                  onChange={handleAmount}
                 />
               </div>
               <Dialog.Footer>

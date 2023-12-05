@@ -1,4 +1,4 @@
-import { type ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 
 import { Balance } from './components/Balance';
 import { Budget } from './components/Budget';
@@ -25,8 +25,8 @@ export default function BudgetMate() {
     setExpenses(items => items.filter(item => item.id !== id));
   };
 
-  const handleBudget = (e: ChangeEvent<HTMLInputElement>) => {
-    setBudget(Number(e.target.value));
+  const onSetBudget = (amount: number) => {
+    setBudget(amount);
   };
 
   return (
@@ -35,7 +35,7 @@ export default function BudgetMate() {
         Budget Mate
       </h1>
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
-        <Budget budget={budget} onSetBudget={handleBudget} />
+        <Budget budget={budget} onSetBudget={onSetBudget} />
         <Balance balance={balance} />
         <Spend spend={spend} />
       </div>
