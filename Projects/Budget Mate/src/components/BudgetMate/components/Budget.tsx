@@ -57,6 +57,7 @@ export function Budget({ budget, onSetBudget }: Props) {
                   label="Enter your budget"
                   value={amount}
                   onChange={handleAmount}
+                  className="rounded-md py-2"
                 />
               </div>
               <Dialog.Footer>

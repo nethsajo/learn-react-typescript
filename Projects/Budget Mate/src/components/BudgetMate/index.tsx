@@ -25,21 +25,20 @@ export default function BudgetMate() {
     setExpenses(items => items.filter(item => item.id !== id));
   };
 
-  const onSetBudget = (amount: number) => {
-    setBudget(amount);
-  };
-
+  const onSetBudget = (amount: number) => setBudget(amount);
   return (
-    <div className="mx-auto my-12 max-w-none px-4 sm:px-6 md:max-w-4xl">
-      <h1 className="mb-8 text-center text-2xl font-bold tracking-tight text-slate-500 sm:text-4xl">
-        Budget Mate
-      </h1>
+    <div className="mx-auto my-12 max-w-none px-4 sm:px-6 lg:max-w-4xl 2xl:max-w-5xl">
+      <header className="mb-8 flex flex-col items-start sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-500 sm:text-4xl">
+          Budget Mate
+        </h1>
+        <Form onAddExpense={onAddExpense} />
+      </header>
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
         <Budget budget={budget} onSetBudget={onSetBudget} />
         <Balance balance={balance} />
         <Spend spend={spend} />
       </div>
-      <Form onAddExpense={onAddExpense} />
       <Expenses expenses={expenses} onRemoveExpense={onRemoveExpense} />
     </div>
   );
