@@ -2,10 +2,10 @@ import { type ChangeEvent, useState } from 'react';
 
 import { Balance } from './components/Balance';
 import { Budget } from './components/Budget';
-import { Spend } from './components/Spend';
-import { Form } from './components/Form';
-import { Expense } from './components/types';
 import { Expenses } from './components/Expenses';
+import { Form } from './components/Form';
+import { Spend } from './components/Spend';
+import { type Expense } from './components/types';
 
 export default function BudgetMate() {
   const [budget, setBudget] = useState(0);

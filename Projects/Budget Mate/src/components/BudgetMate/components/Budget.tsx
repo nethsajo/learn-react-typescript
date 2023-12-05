@@ -26,11 +26,17 @@ export function Budget({ budget, onSetBudget }: Props) {
           <h2 className="text-xl font-semibold tracking-tight text-blue-50">&#8369; {budget}</h2>
           <span className="text-sm font-medium text-slate-100">Budget</span>
         </div>
-        {/* <Dialog>
-          <Dialog.Trigger>
-            <Pencil className="h-6 w-6 stroke-current" />
+        <Dialog>
+          <Dialog.Trigger opens="budget-form">
+            <button
+              type="button"
+              aria-haspopup="dialog"
+              className="inline-flex h-10 w-10 items-center justify-center text-blue-50 outline-none"
+            >
+              <Pencil className="h-6 w-6 stroke-current" />
+            </button>
           </Dialog.Trigger>
-          <Dialog.Content>
+          <Dialog.Content name="budget-form">
             <Dialog.Header>
               <Dialog.Title>Edit budget</Dialog.Title>
               <Dialog.Description>
@@ -48,7 +54,7 @@ export function Budget({ budget, onSetBudget }: Props) {
               </Button>
             </Dialog.Footer>
           </Dialog.Content>
-        </Dialog> */}
+        </Dialog>
       </div>
     </Card>
   );
