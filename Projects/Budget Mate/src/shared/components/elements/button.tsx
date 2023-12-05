@@ -18,6 +18,7 @@ export function Button({
   children,
   className = '',
   onClick,
+  ...props
 }: React.PropsWithChildren<ButtonProps>) {
   const sizes = {
     xs: 'px-2 py-1 text-xs rounded',
@@ -32,7 +33,7 @@ export function Button({
     secondary: 'bg-gray-100 text-gray-500 hover:bg-gray-200 active:bg-gray-300',
     success: 'bg-teal-500 hover:bg-teal-600 text-white',
     danger: 'bg-red-500 text-white hover:bg-red-600 active:bg-red-700',
-    none: 'text-gray-400 hover:text-gray-500',
+    none: 'bg-transparent',
   };
 
   const variants = {
@@ -47,7 +48,7 @@ export function Button({
   );
 
   return (
-    <button type={type} onClick={onClick} className={classNames}>
+    <button type={type} onClick={onClick} className={classNames} {...props}>
       {children}
     </button>
   );

@@ -92,7 +92,16 @@ const DialogContent = ({ children, name }: DialogContentProps) => {
 const DialogTrigger = ({ children, opens: opensDialogName }: DialogTriggerProps) => {
   const context = useContext(DialogContext);
 
-  return React.cloneElement(children, { onClick: () => context.onOpen(opensDialogName) });
+  const child = (
+    typeof children === 'function' ? children : React.Children.only(children)
+  ) as React.ReactElement;
+
+  return React.cloneElement(child, {
+    onClick: () => context.onOpen(opensDialogName),
+    'aria-haspopup': 'dialog',
+    'data-state': getState(context.dialogName),
+    'aria-expanded': context.dialogName ? true : false,
+  });
 };
 
 const DialogHeader = ({

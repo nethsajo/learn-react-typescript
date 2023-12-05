@@ -1,5 +1,5 @@
 import { CircleDollarSign, Pencil } from 'lucide-react';
-import { type ChangeEvent } from 'react';
+import { type ChangeEvent, type FormEvent } from 'react';
 import { Button } from 'shared/components/elements/button';
 import Dialog from 'shared/components/elements/dialog';
 import { Input } from 'shared/components/elements/input';
@@ -12,9 +12,9 @@ type Props = {
 };
 
 export function Budget({ budget, onSetBudget }: Props) {
-  // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  // };
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <Card className="bg-blue-500">
@@ -28,31 +28,33 @@ export function Budget({ budget, onSetBudget }: Props) {
         </div>
         <Dialog>
           <Dialog.Trigger opens="budget-form">
-            <button
-              type="button"
-              aria-haspopup="dialog"
-              className="inline-flex h-10 w-10 items-center justify-center text-blue-50 outline-none"
-            >
-              <Pencil className="h-6 w-6 stroke-current" />
-            </button>
+            <Button color="none">
+              <Pencil className="h-6 w-6 stroke-blue-100" />
+            </Button>
           </Dialog.Trigger>
           <Dialog.Content name="budget-form">
-            <Dialog.Header>
-              <Dialog.Title>Edit budget</Dialog.Title>
-              <Dialog.Description>
-                Customize your budget effortlessly. Click update to ensure your financial plan is
-                perfectly tailored to your needs
-              </Dialog.Description>
-            </Dialog.Header>
-            <div className="py-4">
-              <Input id="budget" label="Enter your budget" value={budget} onChange={onSetBudget} />
-            </div>
-            <Dialog.Footer>
-              <Button color="none">Cancel</Button>
-              <Button type="submit" size="lg">
-                Update changes
-              </Button>
-            </Dialog.Footer>
+            <form onSubmit={handleSubmit}>
+              <Dialog.Header>
+                <Dialog.Title>Edit budget</Dialog.Title>
+                <Dialog.Description>
+                  Customize your budget effortlessly. Click update to ensure your financial plan is
+                  perfectly tailored to your needs
+                </Dialog.Description>
+              </Dialog.Header>
+              <div className="py-6">
+                <Input
+                  id="budget"
+                  label="Enter your budget"
+                  value={budget}
+                  onChange={onSetBudget}
+                />
+              </div>
+              <Dialog.Footer>
+                <Button type="submit" size="lg">
+                  Update changes
+                </Button>
+              </Dialog.Footer>
+            </form>
           </Dialog.Content>
         </Dialog>
       </div>
