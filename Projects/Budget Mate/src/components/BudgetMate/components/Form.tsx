@@ -73,7 +73,7 @@ export function Form({ onAddExpense }: Props) {
               information ensures precise financial insights
             </Dialog.Description>
           </Dialog.Header>
-          <div className="pb-4 pt-6">
+          <div className="max-h-[200px] overflow-y-auto pb-4 pt-6">
             {items.map(expense => {
               return (
                 <div
