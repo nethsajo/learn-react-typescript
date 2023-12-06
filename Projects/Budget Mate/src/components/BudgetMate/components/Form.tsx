@@ -2,7 +2,7 @@ import { type ChangeEvent, type FormEvent, useState } from 'react';
 import { Button } from 'shared/components/elements/button';
 import Dialog from 'shared/components/elements/dialog';
 import { Input } from 'shared/components/elements/input';
-
+import { Plus } from 'lucide-react';
 import { type Expense } from './types';
 
 type Props = {
@@ -112,10 +112,11 @@ export function Form({ onAddExpense }: Props) {
               size="sm"
               onClick={handleAddItem}
             >
-              + Add
+              <Plus className="h-4 w-4 stroke-current" />
+              <span>Add</span>
             </Button>
           </div>
-          <Dialog.Footer className="mt-6">
+          <Dialog.Footer className="mt-6 sm:justify-start">
             <Button type="submit" size="xl">
               Submit
             </Button>

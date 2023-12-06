@@ -2,7 +2,7 @@ import { X } from 'lucide-react';
 import React from 'react';
 import { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { twJoin } from 'tailwind-merge';
+import { twJoin, twMerge } from 'tailwind-merge';
 
 type DialogProps = {
   children: React.ReactNode;
@@ -148,7 +148,7 @@ const DialogFooter = ({
   return (
     <div
       {...props}
-      className={twJoin(
+      className={twMerge(
         'flex flex-col space-y-2 sm:flex-row sm:justify-end sm:space-x-2 sm:space-y-0',
         className
       )}
