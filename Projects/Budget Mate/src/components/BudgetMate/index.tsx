@@ -12,7 +12,7 @@ export default function BudgetMate() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
 
   const spend = expenses.reduce(function (accumulator: number, expense: Expense) {
-    return accumulator + expense.cost;
+    return accumulator + Number(expense.cost);
   }, 0);
 
   const balance = Math.abs(budget - spend);
