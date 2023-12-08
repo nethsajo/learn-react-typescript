@@ -6,7 +6,7 @@ import { Plus } from 'lucide-react';
 import { type Expense } from './types';
 
 type Props = {
-  onAddExpense: (item: Expense) => void;
+  onAddExpenses: (items: Expense[]) => void;
 };
 
 type InputProps = {
@@ -15,13 +15,13 @@ type InputProps = {
   value: string;
 };
 
-export function Form({ onAddExpense }: Props) {
+export function Form({ onAddExpenses }: Props) {
   const [items, setItems] = useState<Expense[]>([
     {
       id: crypto.randomUUID(),
       item: '',
       date: new Date().toISOString().slice(0, 10),
-      cost: '',
+      cost: '0',
     },
   ]);
 
@@ -39,6 +39,8 @@ export function Form({ onAddExpense }: Props) {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    onAddExpenses(items);
   };
 
   const handleAddItem = () => {
@@ -75,7 +77,7 @@ export function Form({ onAddExpense }: Props) {
                   key={expense.id}
                   className="mb-4 grid grid-cols-1 gap-3 border-b pb-6 last:mb-0 last:border-b-0 last:pb-0 sm:grid-cols-4 sm:grid-rows-2"
                 >
-                  <div className="col-span-full row-span-1">
+                  <div className="col-span-2 row-span-1 sm:col-span-full">
                     <Input
                       label="Item"
                       id={`item--${expense.id}`}

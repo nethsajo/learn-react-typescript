@@ -6,7 +6,7 @@ export type InputProps = {
   type: string;
   label: string;
   value: string | number;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   [rest: string]: unknown;
 };

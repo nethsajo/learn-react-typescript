@@ -17,8 +17,8 @@ export default function BudgetMate() {
 
   const balance = Math.abs(budget - spend);
 
-  const onAddExpense = (item: Expense) => {
-    setExpenses(items => [...items, item]);
+  const onAddExpense = (items: Expense[]) => {
+    setExpenses(items);
   };
 
   const onRemoveExpense = (id: string | number) => {
@@ -32,7 +32,7 @@ export default function BudgetMate() {
         <h1 className="text-2xl font-bold tracking-tight text-slate-500 sm:text-4xl">
           Budget Mate
         </h1>
-        <Form onAddExpense={onAddExpense} />
+        <Form onAddExpenses={onAddExpense} />
       </header>
       <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
         <Budget budget={budget} onSetBudget={onSetBudget} />
