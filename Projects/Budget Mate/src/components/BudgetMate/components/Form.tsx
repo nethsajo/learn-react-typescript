@@ -59,12 +59,12 @@ export function Form({ onAddExpense }: Props) {
 
   return (
     <Dialog>
-      <Dialog.Trigger opens="add-item-form">
+      <Dialog.Trigger>
         <Button size="lg" color="primary">
           Add
         </Button>
       </Dialog.Trigger>
-      <Dialog.Content name="add-item-form">
+      <Dialog.Content>
         <form onSubmit={handleSubmit}>
           <Dialog.Header>
             <Dialog.Title>Add Items</Dialog.Title>

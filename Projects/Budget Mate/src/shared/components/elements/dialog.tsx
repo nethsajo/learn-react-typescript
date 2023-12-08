@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { twJoin, twMerge } from 'tailwind-merge';
-import { Transition } from 'react-transition-group';
+import { Transition, TransitionStatus } from 'react-transition-group';
 
 type DialogProps = {
   children: React.ReactNode;
@@ -13,36 +13,38 @@ type DialogPortalProps = {
   children: React.ReactNode;
 };
 
+type DialogOverlayProps = {
+  state: TransitionStatus;
+};
+
 type DialogContentProps = {
   children: React.ReactNode;
-  name: string;
 };
 
 type DialogTriggerProps = {
   children: React.ReactNode;
-  opens: string;
 };
 
 type Context = {
-  dialogName: string;
-  onOpen: React.Dispatch<React.SetStateAction<string>>;
+  open: boolean;
+  onOpen: () => void;
   onClose: () => void;
 };
 
 const DialogContext = React.createContext<Context>({
-  dialogName: '',
+  open: false,
   onOpen: () => {},
   onClose: () => {},
 });
 
 const Dialog = ({ children }: DialogProps) => {
-  const [dialogName, setDialogName] = useState('');
+  const [open, setOpen] = useState(false);
 
-  const handleOpen = setDialogName;
+  const handleOpen = () => setOpen(true);
 
-  const handleClose = () => setDialogName('');
+  const handleClose = () => setOpen(false);
 
-  const dialogContext = { dialogName, onOpen: handleOpen, onClose: handleClose };
+  const dialogContext = { open, onOpen: handleOpen, onClose: handleClose };
 
   return <DialogContext.Provider value={dialogContext}>{children}</DialogContext.Provider>;
 };
@@ -51,49 +53,50 @@ const DialogPortal = ({ children }: DialogPortalProps) => {
   return createPortal(children, document.body);
 };
 
-const DialogOverlay = () => {
+const DialogOverlay = ({ state }: DialogOverlayProps) => {
   const context = useContext(DialogContext);
 
   return (
     <div
-      data-state={getState(context.dialogName)}
-      className="fixed inset-0 z-50 bg-white/80 backdrop-blur-sm duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+      data-state={state}
+      className="fixed inset-0 z-50 bg-white/80 backdrop-blur-sm duration-200 data-[state=entering]:animate-in data-[state=exiting]:animate-out data-[state=entering]:fade-in-0 data-[state=exiting]:fade-out-0"
       data-aria-hidden="true"
       aria-hidden="true"
     ></div>
   );
 };
 
-const DialogContent = ({ children, name }: DialogContentProps) => {
+const DialogContent = ({ children }: DialogContentProps) => {
   const context = useContext(DialogContext);
-
-  const nodeRef = useRef(null);
+  const ref = useRef(null);
 
   return (
-    <Transition nodeRef={nodeRef} in={Boolean(context.dialogName)} timeout={100} unmountOnExit>
-      <DialogPortal>
-        <DialogOverlay />
-        <div
-          ref={nodeRef}
-          role="dialog"
-          data-state={getState(context.dialogName)}
-          className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-2xl translate-x-[-50%] translate-y-[-50%] gap-4 border bg-white px-4 py-8 shadow-lg duration-300 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:max-w-[525px] sm:rounded-lg sm:px-6"
-        >
-          {children}
-          <button
-            className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-slate-300 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-transparent focus:ring-offset-2 disabled:pointer-events-none"
-            onClick={context.onClose}
+    <Transition nodeRef={ref} in={context.open} timeout={100} unmountOnExit>
+      {state => (
+        <DialogPortal>
+          <DialogOverlay state={state} />
+          <div
+            ref={ref}
+            role="dialog"
+            data-state={state}
+            className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-2xl translate-x-[-50%] translate-y-[-50%] gap-4 border bg-white px-4 py-8 shadow-lg duration-200 data-[state=entering]:animate-in data-[state=exiting]:animate-out data-[state=entering]:fade-in-0 data-[state=exiting]:fade-out-0 data-[state=entering]:zoom-in-95 data-[state=exiting]:zoom-out-95 data-[state=entering]:slide-in-from-left-1/2 data-[state=entering]:slide-in-from-top-[48%] data-[state=exiting]:slide-out-to-left-1/2 data-[state=exiting]:slide-out-to-top-[48%] sm:max-w-[525px] sm:rounded-lg sm:px-6"
           >
-            <X className="h-4 w-4" />
-            <span className="sr-only">Close</span>
-          </button>
-        </div>
-      </DialogPortal>
+            {children}
+            <button
+              className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-slate-300 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-transparent focus:ring-offset-2 disabled:pointer-events-none"
+              onClick={context.onClose}
+            >
+              <X className="h-4 w-4" />
+              <span className="sr-only">Close</span>
+            </button>
+          </div>
+        </DialogPortal>
+      )}
     </Transition>
   );
 };
 
-const DialogTrigger = ({ children, opens: opensDialogName }: DialogTriggerProps) => {
+const DialogTrigger = ({ children }: DialogTriggerProps) => {
   const context = useContext(DialogContext);
 
   const child = (
@@ -101,10 +104,10 @@ const DialogTrigger = ({ children, opens: opensDialogName }: DialogTriggerProps)
   ) as React.ReactElement;
 
   return React.cloneElement(child, {
-    onClick: () => context.onOpen(opensDialogName),
+    onClick: () => context.onOpen(),
     'aria-haspopup': 'dialog',
-    'data-state': getState(context.dialogName),
-    'aria-expanded': context.dialogName ? true : false,
+    'data-state': getState(context.open),
+    'aria-expanded': context.open,
   });
 };
 
@@ -162,8 +165,8 @@ const DialogFooter = ({
   );
 };
 
-const getState = (dialogName: string) => {
-  return dialogName ? 'open' : 'closed';
+const getState = (open: boolean) => {
+  return open ? 'open' : 'closed';
 };
 
 Dialog.Trigger = DialogTrigger;

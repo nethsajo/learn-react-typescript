@@ -37,12 +37,12 @@ export function Budget({ budget, onSetBudget }: Props) {
           <span className="text-sm font-medium text-slate-100">Budget</span>
         </div>
         <Dialog>
-          <Dialog.Trigger opens="budget-form">
+          <Dialog.Trigger>
             <Button color="none">
               <Pencil className="h-6 w-6 stroke-blue-100" />
             </Button>
           </Dialog.Trigger>
-          <Dialog.Content name="budget-form">
+          <Dialog.Content>
             <form onSubmit={handleSubmit}>
               <Dialog.Header>
                 <Dialog.Title>Edit budget</Dialog.Title>
