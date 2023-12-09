@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { twJoin, twMerge } from 'tailwind-merge';
 import { Transition, TransitionStatus } from 'react-transition-group';
+import { useClickOutside } from 'shared/hooks/useClickOutside';
 
 type DialogProps = {
   children: React.ReactNode;
@@ -69,7 +70,7 @@ const DialogOverlay = ({ state }: DialogOverlayProps) => {
 
 const DialogContent = ({ children, size = 'default' }: DialogContentProps) => {
   const context = useContext(DialogContext);
-  const ref = useRef(null);
+  const ref = useClickOutside(context.onClose);
 
   const sizes = {
     sm: 'sm:max-w-[300px]',
