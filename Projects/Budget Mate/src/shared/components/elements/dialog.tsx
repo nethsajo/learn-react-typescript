@@ -19,6 +19,7 @@ type DialogOverlayProps = {
 
 type DialogContentProps = {
   children: React.ReactNode;
+  size?: 'sm' | 'default' | 'lg' | 'xl';
 };
 
 type DialogTriggerProps = {
@@ -66,9 +67,16 @@ const DialogOverlay = ({ state }: DialogOverlayProps) => {
   );
 };
 
-const DialogContent = ({ children }: DialogContentProps) => {
+const DialogContent = ({ children, size = 'default' }: DialogContentProps) => {
   const context = useContext(DialogContext);
   const ref = useRef(null);
+
+  const sizes = {
+    sm: 'sm:max-w-[300px]',
+    default: 'sm:max-w-[500px]',
+    lg: 'sm:max-w-[800px]',
+    xl: 'sm:max-w-[1140px]',
+  };
 
   return (
     <Transition nodeRef={ref} in={context.open} timeout={100} unmountOnExit>
@@ -79,7 +87,7 @@ const DialogContent = ({ children }: DialogContentProps) => {
             ref={ref}
             role="dialog"
             data-state={state}
-            className="fixed left-[50%] top-[50%] z-50 grid w-full max-w-2xl translate-x-[-50%] translate-y-[-50%] gap-4 border bg-white px-4 py-8 shadow-lg duration-200 data-[state=entering]:animate-in data-[state=exiting]:animate-out data-[state=entering]:fade-in-0 data-[state=exiting]:fade-out-0 data-[state=entering]:zoom-in-95 data-[state=exiting]:zoom-out-95 data-[state=entering]:slide-in-from-left-1/2 data-[state=entering]:slide-in-from-top-[48%] data-[state=exiting]:slide-out-to-left-1/2 data-[state=exiting]:slide-out-to-top-[48%] sm:max-w-[525px] sm:rounded-lg sm:px-6"
+            className={`fixed left-[50%] top-[50%] z-50 grid w-full max-w-2xl translate-x-[-50%] translate-y-[-50%] gap-4 border bg-white px-4 py-8 shadow-lg duration-200 data-[state=entering]:animate-in data-[state=exiting]:animate-out data-[state=entering]:fade-in-0 data-[state=exiting]:fade-out-0 data-[state=entering]:zoom-in-95 data-[state=exiting]:zoom-out-95 data-[state=entering]:slide-in-from-left-1/2 data-[state=entering]:slide-in-from-top-[48%] data-[state=exiting]:slide-out-to-left-1/2 data-[state=exiting]:slide-out-to-top-[48%] ${sizes[size]} sm:rounded-lg sm:px-6`}
           >
             {children}
             <button
