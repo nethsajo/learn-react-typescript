@@ -27,19 +27,19 @@ export function Budget({ budget, onSetBudget }: Props) {
   };
 
   return (
-    <Card className="bg-blue-500">
+    <Card>
       <div className="flex items-center space-x-4">
         <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-50 text-blue-500">
           <CircleDollarSign className="h-6 w-6 stroke-current" />
         </div>
         <div className="flex flex-1 flex-col">
-          <h2 className="text-xl font-semibold tracking-tight text-blue-50">&#8369; {budget}</h2>
-          <span className="text-sm font-medium text-slate-100">Budget</span>
+          <h2 className="text-xl font-semibold tracking-tight text-slate-600">&#8369; {budget}</h2>
+          <span className="text-sm font-medium text-slate-400">Budget</span>
         </div>
         <Dialog>
           <Dialog.Trigger>
             <Button color="none">
-              <Pencil className="h-6 w-6 stroke-blue-100" />
+              <Pencil className="h-6 w-6 stroke-slate-500 transition-colors hover:stroke-slate-600" />
             </Button>
           </Dialog.Trigger>
           <Dialog.Content>

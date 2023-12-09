@@ -6,7 +6,5 @@ type Props = {
 };
 
 export function Card({ className = '', children }: React.PropsWithChildren<Props>) {
-  return (
-    <div className={twMerge('rounded-md bg-white p-4 shadow-sm sm:p-6', className)}>{children}</div>
-  );
+  return <div className={twMerge('last:border-r-0 sm:border-r', className)}>{children}</div>;
 }

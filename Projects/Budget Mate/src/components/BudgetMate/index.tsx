@@ -28,13 +28,13 @@ export default function BudgetMate() {
   const onSetBudget = (amount: number) => setBudget(amount);
   return (
     <div className="mx-auto my-12 max-w-none px-4 sm:px-6 lg:max-w-4xl 2xl:max-w-5xl">
-      <header className="mb-8 flex flex-col items-start sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-bold tracking-tight text-slate-500 sm:text-4xl">
+      <header className="mb-8 flex flex-col items-center sm:flex-row sm:justify-between">
+        <h1 className="mb-4 text-2xl font-bold tracking-tight text-slate-700 sm:mb-0 sm:text-4xl">
           Budget Mate
         </h1>
         <Form onAddExpenses={onAddExpense} />
       </header>
-      <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
+      <div className="grid-col-1 mb-6 grid items-center gap-4 rounded-md bg-white p-4 shadow-sm sm:grid-cols-3 sm:gap-6 sm:p-6">
         <Budget budget={budget} onSetBudget={onSetBudget} />
         <Balance balance={balance} />
         <Spend spend={spend} />
