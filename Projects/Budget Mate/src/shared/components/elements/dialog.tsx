@@ -1,10 +1,10 @@
 import { X } from 'lucide-react';
-import React, { useRef } from 'react';
+import React from 'react';
 import { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { twJoin, twMerge } from 'tailwind-merge';
-import { Transition, TransitionStatus } from 'react-transition-group';
+import { Transition, type TransitionStatus } from 'react-transition-group';
 import { useClickOutside } from 'shared/hooks/useClickOutside';
+import { twJoin, twMerge } from 'tailwind-merge';
 
 type DialogProps = {
   children: React.ReactNode;
@@ -56,8 +56,6 @@ const DialogPortal = ({ children }: DialogPortalProps) => {
 };
 
 const DialogOverlay = ({ state }: DialogOverlayProps) => {
-  const context = useContext(DialogContext);
-
   return (
     <div
       data-state={state}
