@@ -3,6 +3,7 @@ import { type ChangeEvent, type FormEvent, useState } from 'react';
 import { Button } from 'shared/components/elements/button';
 import Dialog from 'shared/components/elements/dialog';
 import { Input } from 'shared/components/elements/input';
+import { formatNumber } from 'shared/utils/commons';
 
 import { Card } from './Card';
 
@@ -34,7 +35,7 @@ export function Budget({ budget, onSetBudget }: Props) {
         </div>
         <div className="flex flex-1 flex-col">
           <h2 className="text-xl font-semibold tracking-tight text-slate-600">
-            &#8369; {budget.toLocaleString()}
+            &#8369; {formatNumber(budget)}
           </h2>
           <span className="text-sm font-medium text-slate-400">Budget</span>
         </div>

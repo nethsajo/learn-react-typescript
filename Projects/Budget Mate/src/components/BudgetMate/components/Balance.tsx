@@ -1,4 +1,5 @@
 import { Scale } from 'lucide-react';
+import { formatNumber } from 'shared/utils/commons';
 
 import { Card } from './Card';
 
@@ -15,7 +16,7 @@ export function Balance({ balance }: Props) {
         </div>
         <div className="flex flex-col">
           <h2 className="text-xl font-semibold tracking-tight text-slate-600">
-            &#8369; {balance.toLocaleString()}
+            &#8369; {formatNumber(balance)}
           </h2>
           <span className="text-sm font-medium text-slate-400">Remaining Balance</span>
         </div>

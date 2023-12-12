@@ -1,5 +1,7 @@
 import { Button } from 'shared/components/elements/button';
-import { Expense } from './types';
+import { formatNumber } from 'shared/utils/commons';
+
+import { type Expense } from './types';
 
 type Props = {
   expenses: Expense[];
@@ -28,7 +30,9 @@ export function Expenses({ expenses, onRemoveExpense }: Props) {
               <div key={expense.id} className="flex rounded-md bg-white px-4 py-2 shadow-sm">
                 <div className="">
                   <p className="font-bold text-slate-600">{expense.item}</p>
-                  <span className="text-sm text-slate-500">$ {expense.cost.toLocaleString()}</span>
+                  <span className="text-sm font-medium text-slate-500">
+                    &#8369; {formatNumber(expense.cost)}
+                  </span>
                 </div>
                 <div className="ml-auto flex flex-col space-y-1">
                   <p className="text-sm text-slate-500">{formatDate(expense.date)}</p>
