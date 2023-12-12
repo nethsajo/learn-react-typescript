@@ -33,7 +33,9 @@ export function Budget({ budget, onSetBudget }: Props) {
           <CircleDollarSign className="h-6 w-6 stroke-current" />
         </div>
         <div className="flex flex-1 flex-col">
-          <h2 className="text-xl font-semibold tracking-tight text-slate-600">&#8369; {budget}</h2>
+          <h2 className="text-xl font-semibold tracking-tight text-slate-600">
+            &#8369; {budget.toLocaleString()}
+          </h2>
           <span className="text-sm font-medium text-slate-400">Budget</span>
         </div>
         <Dialog>
