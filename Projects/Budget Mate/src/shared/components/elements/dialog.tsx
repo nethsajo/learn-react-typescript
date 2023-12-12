@@ -19,6 +19,7 @@ type DialogOverlayProps = {
 };
 
 type DialogContentProps = {
+  children: React.ReactNode;
   size?: 'sm' | 'default' | 'lg' | 'xl';
 };
 
@@ -65,10 +66,7 @@ const DialogOverlay = ({ state }: DialogOverlayProps) => {
   );
 };
 
-const DialogContent = ({
-  children,
-  size = 'default',
-}: React.PropsWithChildren<DialogContentProps>) => {
+const DialogContent = ({ children, size = 'default' }: DialogContentProps) => {
   const context = useContext(DialogContext);
   const ref = useClickOutside(context.onClose);
 
@@ -90,7 +88,7 @@ const DialogContent = ({
             data-state={state}
             className={`fixed left-[50%] top-[50%] z-50 grid w-full max-w-2xl translate-x-[-50%] translate-y-[-50%] gap-4 border bg-white px-4 py-8 shadow-lg duration-200 data-[state=entering]:animate-in data-[state=exiting]:animate-out data-[state=entering]:fade-in-0 data-[state=exiting]:fade-out-0 data-[state=entering]:zoom-in-95 data-[state=exiting]:zoom-out-95 data-[state=entering]:slide-in-from-left-1/2 data-[state=entering]:slide-in-from-top-[48%] data-[state=exiting]:slide-out-to-left-1/2 data-[state=exiting]:slide-out-to-top-[48%] ${sizes[size]} sm:rounded-lg sm:px-6`}
           >
-            {React.cloneElement(children as React.ReactElement, { onClose: context.onClose })}
+            {children}
             <button
               className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-slate-300 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-transparent focus:ring-offset-2 disabled:pointer-events-none"
               onClick={context.onClose}

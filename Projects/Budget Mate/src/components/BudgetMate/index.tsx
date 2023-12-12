@@ -12,7 +12,7 @@ export default function BudgetMate() {
   const [expenses, setExpenses] = useState<Expense[]>([]);
 
   const spend = expenses.reduce(function (accumulator: number, expense: Expense) {
-    return accumulator + Number(expense.cost);
+    return accumulator + expense.cost;
   }, 0);
 
   const balance = Math.abs(budget - spend);
@@ -32,7 +32,7 @@ export default function BudgetMate() {
         <h1 className="mb-4 text-2xl font-bold tracking-tight text-slate-700 sm:mb-0 sm:text-4xl">
           Budget Mate
         </h1>
-        <Form onAddExpenses={onAddExpense} />
+        {budget > 0 && <Form onAddExpenses={onAddExpense} />}
       </header>
       <div className="grid-col-1 mb-6 grid items-center gap-4 rounded-md bg-white p-4 shadow-sm sm:grid-cols-3 sm:gap-6 sm:p-6">
         <Budget budget={budget} onSetBudget={onSetBudget} />
