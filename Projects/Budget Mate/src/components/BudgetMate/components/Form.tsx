@@ -1,8 +1,9 @@
+import { Plus } from 'lucide-react';
 import { type ChangeEvent, type FormEvent, useState } from 'react';
 import { Button } from 'shared/components/elements/button';
 import Dialog from 'shared/components/elements/dialog';
 import { Input } from 'shared/components/elements/input';
-import { Plus } from 'lucide-react';
+
 import { type Expense } from './types';
 
 type Props = {
