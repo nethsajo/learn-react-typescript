@@ -75,7 +75,9 @@ export function Form({ onAddExpenses }: Props) {
           </Dialog.Description>
         </Dialog.Header>
         <form onSubmit={handleSubmit}>
-          <div className="mb-6 max-h-[350px] overflow-y-auto pr-3">
+          <div
+            className={`mb-6 max-h-[350px] overflow-y-auto ${items.length > 1 ? 'pr-3' : 'pr-0'}`}
+          >
             {items.map((expense, index) => {
               return (
                 <div
