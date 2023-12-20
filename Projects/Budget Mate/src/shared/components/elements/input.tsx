@@ -29,7 +29,7 @@ export const Input = React.forwardRef(
           value={value}
           onChange={onChange}
           className={twMerge(
-            'rounded-sm border-0 bg-gray-100 px-3 py-1 text-sm text-gray-500 transition duration-300 focus:outline-none focus:outline-offset-2 focus:ring-2 disabled:cursor-not-allowed disabled:bg-gray-100',
+            'rounded-sm border-0 bg-gray-100 px-3 py-1 text-sm text-gray-500 transition duration-300 focus:ring-0 disabled:cursor-not-allowed disabled:bg-gray-100',
             className
           )}
         />

@@ -14,6 +14,7 @@ type Props = {
 
 export function Budget({ budget, onSetBudget }: Props) {
   const [amount, setAmount] = useState(budget);
+  const [open, setOpen] = useState(false);
 
   const handleAmount = (e: ChangeEvent<HTMLInputElement>) => {
     setAmount(Number(e.target.value));
@@ -25,6 +26,7 @@ export function Budget({ budget, onSetBudget }: Props) {
     if (!amount) return;
 
     onSetBudget(amount);
+    setOpen(false);
   };
 
   return (

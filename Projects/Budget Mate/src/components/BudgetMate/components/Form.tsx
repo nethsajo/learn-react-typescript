@@ -55,6 +55,10 @@ export function Form({ onAddExpenses }: Props) {
     setItems(currentItems => [...currentItems, newItem]);
   };
 
+  const handleRemoveItem = (id: string | number) => {
+    setItems(currentItems => currentItems.filter(item => item.id !== id));
+  };
+
   return (
     <Dialog>
       <Dialog.Trigger>
@@ -71,61 +75,73 @@ export function Form({ onAddExpenses }: Props) {
           </Dialog.Description>
         </Dialog.Header>
         <form onSubmit={handleSubmit}>
-          {items.map(expense => {
-            return (
-              <div
-                key={expense.id}
-                className="mb-4 grid grid-cols-1 gap-3 border-b pb-6 last:mb-0 last:border-b-0 last:pb-0 sm:grid-cols-4 sm:grid-rows-2"
-              >
-                <div className="col-span-2 row-span-1 sm:col-span-full">
-                  <Input
-                    label="Item"
-                    id={`item--${expense.id}`}
-                    value={expense.item}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      handleInputChange({
-                        id: expense.id,
-                        name: 'item',
-                        value: e.target.value,
-                      })
-                    }
-                    className="rounded-md py-2 shadow-sm"
-                  />
+          <div className="mb-6 max-h-[350px] overflow-y-auto pr-3">
+            {items.map((expense, index) => {
+              return (
+                <div
+                  key={expense.id}
+                  className="mb-4 flex flex-col space-y-2 border-b pb-4 last:mb-0 last:border-b-0 last:pb-0"
+                >
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-6 sm:grid-rows-2">
+                    <div className="col-span-3 row-span-1 sm:col-span-full">
+                      <Input
+                        label="Item"
+                        id={`item--${expense.id}`}
+                        value={expense.item}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          handleInputChange({
+                            id: expense.id,
+                            name: 'item',
+                            value: e.target.value,
+                          })
+                        }
+                        className="rounded-md py-2 shadow-sm"
+                      />
+                    </div>
+                    <div className="col-span-3 row-span-2">
+                      <Input
+                        type="date"
+                        label="Date"
+                        id={`date--${expense.id}`}
+                        value={expense.date}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          handleInputChange({
+                            id: expense.id,
+                            name: 'date',
+                            value: e.target.value,
+                          })
+                        }
+                        className="rounded-md py-2 shadow-sm"
+                      />
+                    </div>
+                    <div className="col-span-3 row-span-2">
+                      <Input
+                        label="Cost"
+                        id={`cost--${expense.id}`}
+                        value={expense.cost}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                          handleInputChange({
+                            id: expense.id,
+                            name: 'cost',
+                            value: Number(e.target.value),
+                          })
+                        }
+                        className="rounded-md py-2 shadow-sm"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    className="self-end text-xs font-medium text-red-500 transition-colors hover:text-red-600 disabled:cursor-not-allowed disabled:text-red-400"
+                    onClick={() => handleRemoveItem(expense.id)}
+                    disabled={index === 0}
+                  >
+                    Remove
+                  </button>
                 </div>
-                <div className="col-span-2 row-span-2">
-                  <Input
-                    type="date"
-                    label="Date"
-                    id={`date--${expense.id}`}
-                    value={expense.date}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      handleInputChange({
-                        id: expense.id,
-                        name: 'date',
-                        value: e.target.value,
-                      })
-                    }
-                    className="rounded-md py-2 shadow-sm"
-                  />
-                </div>
-                <div className="col-span-2 row-span-2">
-                  <Input
-                    label="Cost"
-                    id={`cost--${expense.id}`}
-                    value={expense.cost}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                      handleInputChange({
-                        id: expense.id,
-                        name: 'cost',
-                        value: Number(e.target.value),
-                      })
-                    }
-                    className="rounded-md py-2 shadow-sm"
-                  />
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
           <div className="flex justify-end">
             <Button
               className="bg-blue-100 text-blue-600 hover:bg-blue-500 hover:text-white"
