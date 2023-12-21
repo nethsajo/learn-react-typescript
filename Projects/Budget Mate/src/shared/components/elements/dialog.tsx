@@ -1,6 +1,5 @@
 import { X } from 'lucide-react';
-import React from 'react';
-import { useContext, useState } from 'react';
+import React, { cloneElement, useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Transition, type TransitionStatus } from 'react-transition-group';
 import { useClickOutside } from 'shared/hooks/useClickOutside';
@@ -8,6 +7,9 @@ import { twJoin, twMerge } from 'tailwind-merge';
 
 type DialogProps = {
   children: React.ReactNode;
+  open: boolean;
+  onOpen: () => void;
+  onClose: () => void;
 };
 
 type DialogPortalProps = {
@@ -39,14 +41,12 @@ const DialogContext = React.createContext<Context>({
   onClose: () => {},
 });
 
-const Dialog = ({ children }: DialogProps) => {
-  const [open, setOpen] = useState(false);
+const Dialog = ({ children, open, onOpen, onClose }: DialogProps) => {
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
 
-  const handleOpen = () => setOpen(true);
-
-  const handleClose = () => setOpen(false);
-
-  const dialogContext = { open, onOpen: handleOpen, onClose: handleClose };
+  const dialogContext = { open, onOpen, onClose };
 
   return <DialogContext.Provider value={dialogContext}>{children}</DialogContext.Provider>;
 };

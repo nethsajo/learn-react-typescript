@@ -14,6 +14,15 @@ type Props = {
 
 export function Budget({ budget, onSetBudget }: Props) {
   const [amount, setAmount] = useState(budget);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleAmount = (e: ChangeEvent<HTMLInputElement>) => {
     setAmount(Number(e.target.value));
@@ -40,7 +49,7 @@ export function Budget({ budget, onSetBudget }: Props) {
           <span className="text-sm font-medium text-slate-400">Budget</span>
         </div>
         <div className="inline-flex items-center justify-center self-stretch sm:mx-4">
-          <Dialog>
+          <Dialog open={open} onOpen={handleOpen} onClose={handleClose}>
             <Dialog.Trigger>
               <Button color="none">
                 <Pencil className="h-6 w-6 stroke-slate-500 transition-colors hover:stroke-slate-600" />

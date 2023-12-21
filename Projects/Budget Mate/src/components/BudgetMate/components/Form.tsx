@@ -17,6 +17,7 @@ type InputProps = {
 };
 
 export function Form({ onAddExpenses }: Props) {
+  const [open, setOpen] = useState(false);
   const [items, setItems] = useState<Expense[]>([
     {
       id: crypto.randomUUID(),
@@ -42,6 +43,7 @@ export function Form({ onAddExpenses }: Props) {
     e.preventDefault();
 
     onAddExpenses(items);
+    setOpen(false);
   };
 
   const handleAddItem = () => {
@@ -59,8 +61,16 @@ export function Form({ onAddExpenses }: Props) {
     setItems(currentItems => currentItems.filter(item => item.id !== id));
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpen={handleOpen} onClose={handleClose}>
       <Dialog.Trigger>
         <Button size="lg" color="primary">
           Add
@@ -154,10 +164,12 @@ export function Form({ onAddExpenses }: Props) {
               <span>Add</span>
             </Button>
           </div>
+        </form>
+        <Dialog.Footer className="sm:justify-start">
           <Button type="submit" size="lg">
             Submit
           </Button>
-        </form>
+        </Dialog.Footer>
       </Dialog.Content>
     </Dialog>
   );
