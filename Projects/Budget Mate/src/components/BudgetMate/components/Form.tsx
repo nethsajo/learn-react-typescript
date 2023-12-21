@@ -27,6 +27,14 @@ export function Form({ onAddExpenses }: Props) {
     },
   ]);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleInputChange = ({ id, name, value }: InputProps) => {
     setItems(currentItems =>
       currentItems.map(current => {
@@ -43,7 +51,7 @@ export function Form({ onAddExpenses }: Props) {
     e.preventDefault();
 
     onAddExpenses(items);
-    setOpen(false);
+    handleClose();
   };
 
   const handleAddItem = () => {
@@ -59,14 +67,6 @@ export function Form({ onAddExpenses }: Props) {
 
   const handleRemoveItem = (id: string | number) => {
     setItems(currentItems => currentItems.filter(item => item.id !== id));
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -164,12 +164,12 @@ export function Form({ onAddExpenses }: Props) {
               <span>Add</span>
             </Button>
           </div>
+          <Dialog.Footer className="mt-6 sm:justify-start">
+            <Button type="submit" size="lg">
+              Submit
+            </Button>
+          </Dialog.Footer>
         </form>
-        <Dialog.Footer className="sm:justify-start">
-          <Button type="submit" size="lg">
-            Submit
-          </Button>
-        </Dialog.Footer>
       </Dialog.Content>
     </Dialog>
   );

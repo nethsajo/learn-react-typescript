@@ -19,7 +19,7 @@ export function Expenses({ expenses, onRemoveExpense }: Props) {
   };
 
   return (
-    <div>
+    <>
       <h2 className="mb-3 font-semibold text-slate-600">
         Your {expenses.length > 1 ? 'expenses' : 'expense'}
       </h2>
@@ -28,14 +28,12 @@ export function Expenses({ expenses, onRemoveExpense }: Props) {
           {expenses.map(expense => {
             return (
               <div key={expense.id} className="flex rounded-md bg-white px-4 py-2 shadow-sm">
-                <div className="">
+                <div className="grid w-full grid-cols-2 items-center gap-2 sm:grid-cols-[auto_1fr_auto_auto]">
                   <p className="font-bold text-slate-600">{expense.item}</p>
+                  <span className="text-sm">{formatDate(expense.date)}</span>
                   <span className="text-sm font-medium text-slate-500">
                     &#8369; {formatNumber(expense.cost)}
                   </span>
-                </div>
-                <div className="ml-auto flex flex-col space-y-1">
-                  <p className="text-sm text-slate-500">{formatDate(expense.date)}</p>
                   <Button
                     color="danger"
                     size="xs"
@@ -54,6 +52,6 @@ export function Expenses({ expenses, onRemoveExpense }: Props) {
           Currently, there are no recorded expenses. Start adding and track your expenses!
         </p>
       )}
-    </div>
+    </>
   );
 }

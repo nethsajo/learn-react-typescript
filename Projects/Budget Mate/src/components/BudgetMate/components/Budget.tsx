@@ -34,6 +34,7 @@ export function Budget({ budget, onSetBudget }: Props) {
     if (!amount) return;
 
     onSetBudget(amount);
+    handleClose();
   };
 
   return (
