@@ -52,6 +52,14 @@ export function Form({ onAddExpenses }: Props) {
 
     onAddExpenses(items);
     handleClose();
+    setItems([
+      {
+        id: crypto.randomUUID(),
+        item: '',
+        date: new Date().toISOString().slice(0, 10),
+        cost: 0,
+      },
+    ]);
   };
 
   const handleAddItem = () => {
