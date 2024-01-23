@@ -1,4 +1,4 @@
-import { X, Tag } from 'lucide-react';
+import { Tag, X } from 'lucide-react';
 import { formatNumber } from 'shared/utils/commons';
 
 import { type Expense } from './types';
