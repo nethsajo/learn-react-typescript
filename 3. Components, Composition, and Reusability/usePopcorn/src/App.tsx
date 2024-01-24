@@ -6,7 +6,9 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [popularMovies, setPopularMovies] = useState({});
 
-  const handleSetPage = () => {};
+  const handleSetPage = (page: number) => {
+    setPage(page);
+  };
 
   useEffect(() => {
     const handleFetchMovies = async () => {
@@ -21,5 +23,18 @@ export default function App() {
     handleFetchMovies();
   }, [page]);
 
-  return <div>{JSON.stringify(popularMovies.results)}</div>;
+  return (
+    <div>
+      {JSON.stringify(popularMovies.results)}
+      <div className="mt-4 flex items-center space-x-2">
+        {[...Array(20)].map((_, index: number) => {
+          return (
+            <button key={index} onClick={() => handleSetPage(index)}>
+              {index + 1}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
