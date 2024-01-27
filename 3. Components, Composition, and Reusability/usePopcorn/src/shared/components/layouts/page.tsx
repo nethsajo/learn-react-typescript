@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Navbar } from '../partials/navbar';
 import { Footer } from '../partials/footer';
+import { Navbar } from '../partials/navbar';
 
 export function PageLayout({ children }: React.PropsWithChildren) {
   return (
