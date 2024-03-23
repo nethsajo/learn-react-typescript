@@ -32,7 +32,7 @@ devDependencies:
     specifier: ^20.6.4
     version: 20.6.4
   '@types/react':
-    specifier: ^18.2.15
+    specifier: ^18.2.22
     version: 18.2.22
   '@types/react-dom':
     specifier: ^18.2.7
@@ -41,13 +41,13 @@ devDependencies:
     specifier: ^4.4.10
     version: 4.4.10
   '@typescript-eslint/eslint-plugin':
-    specifier: ^6.0.0
+    specifier: ^6.7.2
     version: 6.7.2(@typescript-eslint/parser@6.7.2)(eslint@8.50.0)(typescript@5.2.2)
   '@typescript-eslint/parser':
-    specifier: ^6.0.0
+    specifier: ^6.7.2
     version: 6.7.2(eslint@8.50.0)(typescript@5.2.2)
   '@vitejs/plugin-react':
-    specifier: ^4.0.3
+    specifier: ^4.0.4
     version: 4.0.4(vite@4.4.9)
   autoprefixer:
     specifier: ^10.4.16
@@ -56,7 +56,7 @@ devDependencies:
     specifier: ^16.3.2
     version: 16.3.2
   eslint:
-    specifier: ^8.45.0
+    specifier: ^8.50.0
     version: 8.50.0
   eslint-config-airbnb:
     specifier: ^19.0.4
@@ -113,10 +113,10 @@ devDependencies:
     specifier: ^10.9.1
     version: 10.9.1(@types/node@20.6.4)(typescript@5.2.2)
   typescript:
-    specifier: ^5.0.2
+    specifier: ^5.2.2
     version: 5.2.2
   vite:
-    specifier: ^4.4.5
+    specifier: ^4.4.9
     version: 4.4.9(@types/node@20.6.4)
   vite-plugin-svgr:
     specifier: ^4.1.0
@@ -1246,7 +1246,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.21.11
-      caniuse-lite: 1.0.30001538
+      caniuse-lite: 1.0.30001600
       fraction.js: 4.3.6
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -1320,7 +1320,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001538
+      caniuse-lite: 1.0.30001600
       electron-to-chromium: 1.4.528
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.21.11)
@@ -1355,8 +1355,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite@1.0.30001538:
-    resolution: {integrity: sha512-HWJnhnID+0YMtGlzcp3T9drmBJUVDchPJ08tpUGFLs9CYlwWPH2uLgpHn8fND5pCgXVtnGS3H4QR9XLMHVNkHw==}
+  /caniuse-lite@1.0.30001600:
+    resolution: {integrity: sha512-+2S9/2JFhYmYaDpZvo0lKkfvuKIglrx68MwOBqMGHhQsNkLjB5xtc/TGoEPs+MxjSyN/72qer2g97nzR641mOQ==}
     dev: true
 
   /chalk@2.4.2:
