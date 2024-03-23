@@ -41,7 +41,8 @@ export function Navbar() {
           <div className="flex flex-col gap-7">
             <button
               type="button"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-orange-500"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-orange-500 transition-colors duration-300 hover:bg-orange-600"
+              onClick={handleToggleNavbar}
             >
               <X />
             </button>

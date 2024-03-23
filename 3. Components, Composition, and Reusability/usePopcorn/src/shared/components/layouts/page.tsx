@@ -7,7 +7,7 @@ export function PageLayout({ children }: React.PropsWithChildren) {
   return (
     <React.Fragment>
       <Navbar />
-      <div className="main">{children}</div>
+      <main className="main">{children}</main>
       <Footer />
     </React.Fragment>
   );
