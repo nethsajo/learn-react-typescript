@@ -27,6 +27,13 @@ export function Navbar() {
             <Popcorn size={20} color="currentColor" />
           </div>
         </div>
+        <div className="absolute left-0 hidden h-auto w-full bg-transparent lg:block">
+          <div className="mx-auto flex justify-center space-x-6 text-sm">
+            <Link to={ROUTES.POPULAR}>Popular</Link>
+            <Link to={ROUTES.TOPRATED}>Top Rated</Link>
+            <Link to={ROUTES.UPCOMING}>Upcoming</Link>
+          </div>
+        </div>
         <div className="flex items-center">
           <button
             type="button"
