@@ -1,6 +1,13 @@
 {
   "version": "0.2",
   "language": "en",
-  "words": ["lucide", "TOPRATED", "tailwindcss"],
-  "ignorePaths": ["./node_modules", "./build", "./dist", "./pnpm-lock.yaml", "./package.json"]
+  "words": ["lucide", "TOPRATED", "TMDB", "tailwindcss"],
+  "ignorePaths": [
+    "./node_modules",
+    "./build",
+    "./dist",
+    "./pnpm-lock.yaml",
+    "./package.json",
+    "./vite.config.ts"
+  ]
 }

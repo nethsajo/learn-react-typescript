@@ -11,7 +11,7 @@ export function Navbar() {
   };
 
   return (
-    <div className="sticky top-0 bg-white">
+    <div className="sticky top-0 z-10 bg-white">
       <div className="container relative mx-auto flex h-16 items-center justify-between px-6 md:px-24 lg:px-36 xl:px-40">
         <div className="flex items-center">
           <div
