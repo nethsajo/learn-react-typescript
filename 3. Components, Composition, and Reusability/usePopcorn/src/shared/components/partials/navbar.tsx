@@ -28,7 +28,7 @@ export function Navbar() {
           </div>
         </div>
         <div className="absolute left-0 hidden h-auto w-full bg-transparent lg:block">
-          <div className="mx-auto flex justify-center space-x-6 text-sm">
+          <div className="mx-auto flex justify-center space-x-6 text-sm font-medium text-gray-500">
             <Link to={ROUTES.POPULAR}>Popular</Link>
             <Link to={ROUTES.TOPRATED}>Top Rated</Link>
             <Link to={ROUTES.UPCOMING}>Upcoming</Link>
