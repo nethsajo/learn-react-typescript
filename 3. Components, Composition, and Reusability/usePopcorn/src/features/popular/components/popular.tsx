@@ -17,7 +17,7 @@ export function PopularMovies({ movies }: PopularProps) {
             return (
               <Link to={`${ROUTES.MOVIE}/${movie.id}`} key={movie.id} className="relative h-full">
                 <img
-                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={`${movie.original_title} poster`}
                   className="rounded-md"
                 />
