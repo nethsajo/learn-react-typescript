@@ -3,6 +3,7 @@ import { RootLayout } from 'shared/components/layouts/root';
 import { ROUTES } from 'shared/constants/commons';
 
 import HomePage from './pages';
+import MoviePage from './pages/movie';
 import NotFoundPage from './pages/not-found';
 import PopularPage from './pages/popular';
 import TopRatedPage from './pages/top-rated';
@@ -16,6 +17,7 @@ export default function App() {
         <Route path={ROUTES.POPULAR} element={<PopularPage />} />
         <Route path={ROUTES.TOPRATED} element={<TopRatedPage />} />
         <Route path={ROUTES.UPCOMING} element={<UpcomingPage />} />
+        <Route path={`${ROUTES.MOVIE}/:id`} element={<MoviePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </RootLayout>

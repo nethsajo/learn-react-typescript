@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { TMDB_ACCESS_TOKEN } from 'shared/constants/environments';
 
 const PrivateInstance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
@@ -11,7 +12,7 @@ const PrivateInstance = axios.create({
 PrivateInstance.interceptors.request.use(
   config => {
     if (config.headers) {
-      config.headers.Authorization = `Bearer ${process.env.TMDB_ACCESS_TOKEN}`;
+      config.headers.Authorization = `Bearer ${TMDB_ACCESS_TOKEN}`;
     }
     return config;
   },
