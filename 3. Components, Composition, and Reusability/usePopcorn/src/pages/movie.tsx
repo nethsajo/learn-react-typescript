@@ -7,5 +7,7 @@ export default function MoviePage() {
   const movie = useGetMovie(id);
   const casts = useGetMovieCasts(id);
 
-  return movie && <Movie movie={movie} casts={casts} />;
+  if (!movie) return;
+
+  return <Movie movie={movie} casts={casts} />;
 }

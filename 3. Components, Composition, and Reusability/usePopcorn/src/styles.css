@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-100 font-inter text-slate-600;
+    @apply bg-slate-900 font-inter;
   }
 }
 

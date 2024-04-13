@@ -55,19 +55,19 @@ export function Movie({ movie, casts }: MovieProps) {
           </div>
           <div className="space-y-4">
             <h2 className="text-lg text-gray-300 md:text-xl">Casts</h2>
-            <div className="flex flex-nowrap items-center space-x-4 overflow-x-auto">
+            <div className="flex flex-nowrap items-start space-x-6 overflow-x-auto">
               {casts.map(cast => {
                 return (
-                  <div
-                    key={cast.id}
-                    className="relative h-full min-w-[9rem] max-w-[9rem] pb-2 md:min-w-[10rem] md:max-w-[10rem]"
-                  >
-                    <img
-                      src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
-                      alt={`${cast.name} photo`}
-                      className="rounded-md"
-                    />
-                    <p className="mt-2 text-sm text-gray-200">{cast.name}</p>
+                  <div key={cast.id} className="flex flex-col">
+                    <div className="relative grid h-full min-w-[9rem] max-w-[9rem] md:min-w-[10rem] md:max-w-[10rem]">
+                      <img
+                        src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                        alt={`${cast.name} photo`}
+                        className="rounded-md"
+                      />
+                    </div>
+                    <span className="mt-2 text-sm text-gray-200">{cast.name}</span>
+                    <span>{cast.character}</span>
                   </div>
                 );
               })}

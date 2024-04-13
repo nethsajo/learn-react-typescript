@@ -11,16 +11,16 @@ export function Navbar() {
   };
 
   return (
-    <div className="sticky top-0 z-10 bg-white">
+    <div className="sticky top-0 z-10 bg-slate-800">
       <div className="container relative mx-auto flex h-16 items-center justify-between px-6 md:px-24 lg:px-36 xl:px-40">
         <div className="flex items-center">
           <div
             className="group mr-3 flex cursor-pointer flex-col space-y-1 lg:hidden"
             onClick={handleToggleNavbar}
           >
-            <span className="h-0.5 w-5 rounded-sm bg-slate-700 transition duration-300 group-hover:bg-slate-800"></span>
-            <span className="h-0.5 w-5 rounded-sm bg-slate-700 transition duration-300 group-hover:bg-slate-800"></span>
-            <span className="h-0.5 w-5 rounded-sm bg-slate-700 transition duration-300 group-hover:bg-slate-800"></span>
+            <span className="h-0.5 w-5 rounded-sm bg-slate-200 transition duration-300 group-hover:bg-slate-300"></span>
+            <span className="h-0.5 w-5 rounded-sm bg-slate-200 transition duration-300 group-hover:bg-slate-300"></span>
+            <span className="h-0.5 w-5 rounded-sm bg-slate-200 transition duration-300 group-hover:bg-slate-300"></span>
           </div>
           <div className="flex items-center space-x-1 text-orange-500">
             <span className="text-lg font-semibold">usePopcorn</span>
@@ -28,7 +28,7 @@ export function Navbar() {
           </div>
         </div>
         <div className="absolute left-0 hidden h-auto w-full bg-transparent lg:block">
-          <div className="mx-auto flex justify-center space-x-6 text-sm font-medium text-gray-500">
+          <div className="mx-auto flex justify-center space-x-6 text-sm font-medium text-slate-300">
             <Link to={ROUTES.POPULAR}>Popular</Link>
             <Link to={ROUTES.TOPRATED}>Top Rated</Link>
             <Link to={ROUTES.UPCOMING}>Upcoming</Link>
