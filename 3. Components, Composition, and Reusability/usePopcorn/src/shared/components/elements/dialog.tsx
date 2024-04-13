@@ -1,5 +1,5 @@
 import { X } from 'lucide-react';
-import React, { cloneElement, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { createPortal } from 'react-dom';
 import { Transition, type TransitionStatus } from 'react-transition-group';
 import { useClickOutside } from 'shared/hooks/useClickOutside';
