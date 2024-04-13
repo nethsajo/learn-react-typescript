@@ -10,3 +10,11 @@ export interface Movie {
   runtime: number;
   release_date: string;
 }
+
+export interface MovieCast {
+  id: number;
+  known_for_department: string;
+  name: string;
+  profile_path: string;
+  character: string;
+}
