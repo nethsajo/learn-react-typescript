@@ -28,7 +28,7 @@ export function MovieStarRating({
   };
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="space-y-2">
       <span className="text-sm text-gray-300">How would you rate this movie?</span>
       <div className="flex items-center">
         {Array.from({ length: maxRating }, (_, i) => (
