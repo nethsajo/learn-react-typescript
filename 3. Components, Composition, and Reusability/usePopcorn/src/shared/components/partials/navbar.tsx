@@ -1,4 +1,4 @@
-import { MonitorCheck, Popcorn, X } from 'lucide-react';
+import { Menu, MonitorCheck, Popcorn, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'shared/constants/commons';
@@ -11,21 +11,23 @@ export function Navbar() {
   };
 
   return (
-    <div className="sticky top-0 z-10 bg-slate-800">
+    <div className="sticky top-0 z-10">
       <div className="container relative mx-auto flex h-16 items-center justify-between px-6 md:px-24 lg:px-36 xl:px-40">
         <div className="flex items-center">
           <div
-            className="group mr-3 flex cursor-pointer flex-col space-y-1 lg:hidden"
+            className="group z-[3] mr-3 flex cursor-pointer flex-col space-y-1 lg:hidden"
             onClick={handleToggleNavbar}
           >
-            <span className="h-0.5 w-5 rounded-sm bg-slate-200 transition duration-300 group-hover:bg-slate-300"></span>
-            <span className="h-0.5 w-5 rounded-sm bg-slate-200 transition duration-300 group-hover:bg-slate-300"></span>
-            <span className="h-0.5 w-5 rounded-sm bg-slate-200 transition duration-300 group-hover:bg-slate-300"></span>
+            <Menu className={`stroke-white ${toggle ? 'hidden' : 'block'}`} />
           </div>
-          <div className="flex items-center space-x-1 text-orange-500">
+
+          <Link
+            to={ROUTES.HOME}
+            className={`${toggle ? 'hidden' : 'z-[3] flex items-center'} space-x-1 text-orange-500`}
+          >
             <span className="text-lg font-semibold">usePopcorn</span>
             <Popcorn size={20} color="currentColor" />
-          </div>
+          </Link>
         </div>
         <div className="absolute left-0 hidden h-auto w-full bg-transparent lg:block">
           <div className="mx-auto flex justify-center space-x-6 text-sm font-medium text-slate-300">
