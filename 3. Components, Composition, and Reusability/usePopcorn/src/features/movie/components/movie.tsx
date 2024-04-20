@@ -1,7 +1,8 @@
 import { Calendar, ChevronLeft, Plus } from 'lucide-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageLayout } from 'shared/components/layouts/page';
+import { WatchedMovieContext } from 'shared/contexts/movie/use-movie-context';
 
 import { type MovieCast, type MovieDetails } from '../types';
 import { MovieCasts } from './movie-casts';
@@ -18,6 +19,7 @@ type MovieProps = {
 
 export function Movie({ movie, casts }: MovieProps) {
   const [userRating, setUserRating] = useState(0);
+  const context = useContext(WatchedMovieContext);
 
   const directed = casts.find(cast => cast.known_for_department.toLowerCase() === 'directing');
   const navigate = useNavigate();
