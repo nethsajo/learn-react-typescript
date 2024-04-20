@@ -1,4 +1,5 @@
 import { Calendar, ChevronLeft, Plus } from 'lucide-react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageLayout } from 'shared/components/layouts/page';
 
@@ -7,6 +8,7 @@ import { MovieCasts } from './movie-casts';
 import { MovieDescription } from './movie-description';
 import { MovieGenre } from './movie-genre';
 import { MovieInfo } from './movie-info';
+import { MovieStarRating } from './movie-star-rating';
 import { MovieTitle } from './movie-title';
 
 type MovieProps = {
@@ -15,6 +17,8 @@ type MovieProps = {
 };
 
 export function Movie({ movie, casts }: MovieProps) {
+  const [userRating, setUserRating] = useState(0);
+
   const directed = casts.find(cast => cast.known_for_department.toLowerCase() === 'directing');
   const navigate = useNavigate();
 
@@ -64,6 +68,7 @@ export function Movie({ movie, casts }: MovieProps) {
                 <MovieGenre genres={movie.genres} />
               </div>
             </div>
+            <MovieStarRating maxRating={10} onSetRating={setUserRating} />
           </div>
           {/* <MoviePoster poster={movie.poster_path} /> */}
         </div>

@@ -39,10 +39,20 @@ export function Navbar() {
         <div className="flex items-center">
           <button
             type="button"
-            className="flex h-7 w-7 items-center justify-center rounded-md bg-orange-100 text-orange-500 transition-colors duration-300"
+            className={`z-[3]  h-7 w-7 cursor-pointer rounded-md bg-orange-100 text-orange-500 transition-colors duration-300 ${
+              toggle ? 'hidden' : 'flex items-center justify-center'
+            }`}
           >
             <MonitorCheck size={20} color="currentColor" />
           </button>
+          <div className="fixed right-0 top-0 z-10 h-full w-full bg-slate-900 xxs:w-[320px]">
+            <div className="p-6">
+              <button className="mb-8">
+                <X />
+              </button>
+              <h2>My Watch List</h2>
+            </div>
+          </div>
         </div>
         <div
           className={`fixed left-0 top-0 h-screen w-full px-[15%] py-[15%] text-white lg:hidden ${
