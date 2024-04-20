@@ -13,7 +13,7 @@ export function PopularMovies({ movies }: PopularProps) {
     <PageLayout>
       <div className="container mx-auto my-8 px-6 md:px-24 lg:px-36 xl:px-40">
         <h1 className="mb-4 text-xl font-semibold text-slate-200 md:mb-8 md:text-2xl lg:text-3xl">
-          Popular Movies
+          Popular on usePopcorn
         </h1>
         <div className="grid gap-6 xxs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {movies.map(movie => {

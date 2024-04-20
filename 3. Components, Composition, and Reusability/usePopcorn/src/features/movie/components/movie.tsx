@@ -1,10 +1,11 @@
-import { Calendar, ChevronLeft, Clock } from 'lucide-react';
+import { Calendar, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 import { type MovieCast, type MovieDetails } from '../types';
 import { MovieCasts } from './movie-casts';
 import { MovieDescription } from './movie-description';
 import { MovieGenre } from './movie-genre';
+import { MovieInfo } from './movie-info';
 import { MovieTitle } from './movie-title';
 
 type MovieProps = {
@@ -38,16 +39,13 @@ export function Movie({ movie, casts }: MovieProps) {
           <div className="mb-4 space-y-5">
             <MovieTitle title={movie.title} average={movie.vote_average} />
             <div className="flex items-center space-x-4 text-sm text-gray-200">
-              <div className="flex items-center space-x-1.5 text-sm">
+              <MovieInfo info={movie.release_date}>
                 <Calendar size={20} className="text-gray-300" />
-                <span>{movie.release_date}</span>
-              </div>
-              <div className="flex items-center space-x-1.5 text-sm">
-                <Clock size={20} className="text-gray-300" />
-                <span>
-                  {Math.floor(movie.runtime / 60)}:{movie.runtime % 60}m
-                </span>
-              </div>
+              </MovieInfo>
+              <MovieInfo info={`${Math.floor(movie.runtime / 60)}:${movie.runtime % 60}m`}>
+                <Calendar size={20} className="text-gray-300" />
+              </MovieInfo>
+              <button>Test</button>
             </div>
             <MovieDescription tagline={movie.tagline} overview={movie.overview} />
             <div className="space-y-3">
