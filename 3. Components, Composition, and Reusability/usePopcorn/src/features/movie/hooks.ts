@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import { MovieService } from './services';
-import { type Movie, type MovieCast } from './types';
+import { type MovieCast, type MovieDetails } from './types';
 
 export const useGetMovie = (id: string | undefined) => {
-  const [movie, setMovie] = useState<Movie | undefined>(undefined);
+  const [movie, setMovie] = useState<MovieDetails | undefined>(undefined);
 
   useEffect(() => {
     const fetchMovie = async () => {

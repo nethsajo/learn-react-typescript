@@ -1,14 +1,14 @@
 import { Calendar, ChevronLeft, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-import { type Movie, type MovieCast } from '../types';
+import { type MovieCast, type MovieDetails } from '../types';
 import { MovieCasts } from './movie-casts';
 import { MovieDescription } from './movie-description';
 import { MovieGenre } from './movie-genre';
 import { MovieTitle } from './movie-title';
 
 type MovieProps = {
-  movie: Movie;
+  movie: MovieDetails;
   casts: MovieCast[];
 };
 
@@ -27,15 +27,15 @@ export function Movie({ movie, casts }: MovieProps) {
         className="fixed left-0 top-0 h-screen w-full object-cover"
       />
       <div className="fixed left-0 top-0 h-screen w-full bg-black/60 backdrop-blur-[2px]" />
-      <div className="relative mx-auto max-w-7xl p-6 md:p-16 lg:p-24">
+      <div className="relative mx-auto max-w-7xl p-6 md:p-16 lg:p-20">
         <button
           className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-gray-600 shadow-md transition-colors duration-500 hover:bg-gray-200 hover:text-gray-700 active:bg-gray-300 active:text-gray-700"
           onClick={handleBack}
         >
           <ChevronLeft className="stroke-current" />
         </button>
-        <div className="my-8 flex flex-col items-center justify-between md:flex-row md:items-start">
-          <div className="mb-4 space-y-5 md:mr-8">
+        <div className="my-8">
+          <div className="mb-4 space-y-5">
             <MovieTitle title={movie.title} average={movie.vote_average} />
             <div className="flex items-center space-x-4 text-sm text-gray-200">
               <div className="flex items-center space-x-1.5 text-sm">
