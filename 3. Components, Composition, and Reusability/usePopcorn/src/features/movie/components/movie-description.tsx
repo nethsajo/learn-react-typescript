@@ -1,6 +1,6 @@
-import { type Movie } from '../types';
+import { type MovieDetails } from '../types';
 
-type Props = Pick<Movie, 'tagline' | 'overview'>;
+type Props = Pick<MovieDetails, 'tagline' | 'overview'>;
 
 export function MovieDescription({ tagline, overview }: Props) {
   return (
