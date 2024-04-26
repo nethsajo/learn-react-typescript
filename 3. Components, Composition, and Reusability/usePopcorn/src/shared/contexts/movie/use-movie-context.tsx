@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { type MovieDetails } from 'src/features/movie/types';
+import { type MovieWatched } from 'src/features/movie/types';
 
 type WatchedMoviesContextType = {
-  watched: Array<MovieDetails>;
-  addWatchedMovie: (movie: MovieDetails) => void;
-  removeWatchedMovie: (id: string) => void;
+  watched: Array<MovieWatched>;
+  addWatchedMovie: (movie: MovieWatched) => void;
+  removeWatchedMovie: (id: number) => void;
 };
 
 export const WatchedMovieContext = React.createContext<WatchedMoviesContextType>({
@@ -14,13 +14,13 @@ export const WatchedMovieContext = React.createContext<WatchedMoviesContextType>
 });
 
 export default function WatchMovieProvider({ children }: React.PropsWithChildren) {
-  const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState<MovieWatched[]>([]);
 
-  const handleAddWatchedMovie = (movie: MovieDetails) => {
-    console.log(movie);
+  const handleAddWatchedMovie = (movie: MovieWatched) => {
+    setWatched(watchedMovies => [...watchedMovies, movie]);
   };
-  const handleRemoveWatchedMovie = (id: string) => {
-    console.log(id);
+  const handleRemoveWatchedMovie = (id: number) => {
+    setWatched(watchedMovies => watchedMovies.filter(watchedMovie => watchedMovie.id !== id));
   };
 
   return (

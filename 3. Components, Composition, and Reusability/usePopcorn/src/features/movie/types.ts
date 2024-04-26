@@ -18,3 +18,12 @@ export interface MovieCast {
   profile_path: string;
   character: string;
 }
+
+export interface MovieWatched {
+  id: number;
+  title: string;
+  poster_path: string;
+  runtime: number;
+  vote_average: number;
+  userRating: number;
+}

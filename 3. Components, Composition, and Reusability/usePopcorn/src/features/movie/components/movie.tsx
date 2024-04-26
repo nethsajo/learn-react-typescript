@@ -24,8 +24,17 @@ export function Movie({ movie, casts }: MovieProps) {
   const directed = casts.find(cast => cast.known_for_department.toLowerCase() === 'directing');
   const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate(-1);
+  const handleBack = () => navigate(-1);
+
+  const handleAddWatchMovie = () => {
+    context.addWatchedMovie({
+      id: movie.id,
+      title: movie.title,
+      poster_path: movie.poster_path,
+      runtime: movie.runtime,
+      vote_average: movie.vote_average,
+      userRating,
+    });
   };
 
   return (
@@ -54,7 +63,10 @@ export function Movie({ movie, casts }: MovieProps) {
                   <Calendar size={20} className="text-gray-300" />
                 </MovieInfo>
               </div>
-              <button className="inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-1 text-xs font-medium text-orange-50 transition-colors duration-300 hover:bg-orange-600 active:bg-orange-700">
+              <button
+                onClick={handleAddWatchMovie}
+                className="inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-1 text-xs font-medium text-orange-50 transition-colors duration-300 hover:bg-orange-600 active:bg-orange-700"
+              >
                 <Plus className="mr-1 stroke-current" />
                 Add to List
               </button>
