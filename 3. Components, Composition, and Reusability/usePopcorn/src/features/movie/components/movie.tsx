@@ -1,4 +1,4 @@
-import { Calendar, ChevronLeft, Plus } from 'lucide-react';
+import { ChevronLeft, Plus } from 'lucide-react';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageLayout } from 'shared/components/layouts/page';
@@ -18,13 +18,13 @@ type MovieProps = {
 };
 
 export function Movie({ movie, casts }: MovieProps) {
+  const navigate = useNavigate();
   const [userRating, setUserRating] = useState(0);
   const context = useContext(WatchedMovieContext);
 
-  const directed = casts.find(cast => cast.known_for_department.toLowerCase() === 'directing');
-  const navigate = useNavigate();
-
-  const handleBack = () => navigate(-1);
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   const handleAddWatchMovie = () => {
     context.addWatchedMovie({
@@ -53,16 +53,15 @@ export function Movie({ movie, casts }: MovieProps) {
         </button>
         <div className="my-8">
           <div className="mb-4 space-y-5">
-            <MovieTitle title={movie.title} average={movie.vote_average} />
-            <div className="grid items-center gap-4 sm:grid-cols-[max-content_max-content]">
-              <div className="flex items-center space-x-4 text-sm text-gray-200">
-                <MovieInfo info={movie.release_date}>
-                  <Calendar size={20} className="text-gray-300" />
-                </MovieInfo>
-                <MovieInfo info={`${Math.floor(movie.runtime / 60)}:${movie.runtime % 60}m`}>
-                  <Calendar size={20} className="text-gray-300" />
-                </MovieInfo>
-              </div>
+            <MovieTitle title={movie.title} />
+            <MovieInfo movie={movie} />
+            <MovieDescription tagline={movie.tagline} overview={movie.overview} />
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-gray-300">Genre:</span>
+              <MovieGenre genres={movie.genres} />
+            </div>
+            <MovieStarRating maxRating={10} onSetRating={setUserRating} />
+            {userRating > 0 && (
               <button
                 onClick={handleAddWatchMovie}
                 className="inline-flex items-center justify-center rounded-sm bg-orange-500 px-6 py-1 text-xs font-medium text-orange-50 transition-colors duration-300 hover:bg-orange-600 active:bg-orange-700"
@@ -70,19 +69,7 @@ export function Movie({ movie, casts }: MovieProps) {
                 <Plus className="mr-1 stroke-current" />
                 Add to List
               </button>
-            </div>
-            <MovieDescription tagline={movie.tagline} overview={movie.overview} />
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-300">Directed by:</span>
-                <span className="text-sm font-medium text-gray-200">{directed?.name ?? 'N/A'}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-300">Genre:</span>
-                <MovieGenre genres={movie.genres} />
-              </div>
-            </div>
-            <MovieStarRating maxRating={10} onSetRating={setUserRating} />
+            )}
           </div>
           {/* <MoviePoster poster={movie.poster_path} /> */}
         </div>
