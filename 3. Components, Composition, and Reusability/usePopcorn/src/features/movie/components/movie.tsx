@@ -18,9 +18,10 @@ type MovieProps = {
 };
 
 export function Movie({ movie, casts }: MovieProps) {
-  const navigate = useNavigate();
   const [userRating, setUserRating] = useState(0);
   const context = useContext(WatchedMovieContext);
+
+  const navigate = useNavigate();
 
   const handleBack = () => {
     navigate(-1);
