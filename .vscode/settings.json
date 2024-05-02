@@ -1,17 +1,19 @@
 {
   "workbench.colorTheme": "One Dark Pro Flat",
+  /* Editor */
   "editor.tabSize": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
   },
+
+  /* ESLint */
+  "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
   "eslint.workingDirectories": [{ "mode": "auto" }] /* For Monorepo */,
-  "search.exclude": {
-    "**/node_modules": true,
-    "pnpm-lock.yaml": true,
-    "**/.pnpm-store": true
-  }
+
+  /* Others */
+  "cSpell.language": "en,en-US,en-GB"
 }
