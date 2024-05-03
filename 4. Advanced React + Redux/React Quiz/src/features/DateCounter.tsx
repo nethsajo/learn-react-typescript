@@ -10,7 +10,7 @@ enum CountAction {
 
 type Count = {
   type: CountAction;
-  payload: number;
+  payload?: number;
 };
 
 type State = {
@@ -18,73 +18,61 @@ type State = {
   step: number;
 };
 
+const initialState = { count: 0, step: 1 };
+
 const reducer = (state: State, action: Count) => {
   switch (action.type) {
     case CountAction.INCREMENT:
       return {
         ...state,
-        count: state.count + action.payload,
+        count: state.count + state.step,
       };
     case CountAction.DECREMENT:
       return {
         ...state,
-        count: state.count - action.payload,
+        count: state.count - state.step,
       };
     case CountAction.SET_COUNT:
       return {
         ...state,
-        count: action.payload,
+        count: action.payload ? action.payload : state.count,
       };
     case CountAction.SET_STEP:
       return {
         ...state,
-        step: action.payload,
+        step: action.payload ? action.payload : state.step,
       };
     case CountAction.RESET:
-      return {
-        ...state,
-        count: 0,
-        step: 1,
-      };
+      return initialState;
     default:
-      return state;
+      throw new Error('Unknown action');
   }
 };
 
 export default function DateCounter() {
-  // const [step, setStep] = useState(1);
-  // const [count, setCount] = useState(0);
-
-  const initialState = { count: 0, step: 1 };
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const date = new Date();
   date.setDate(date.getDate() + state.count);
 
   const handleStep = (e: ChangeEvent<HTMLInputElement>) => {
-    // setStep(Number(e.target.value));
     dispatch({ type: CountAction.SET_STEP, payload: Number(e.target.value) });
   };
 
   const handleCount = (e: ChangeEvent<HTMLInputElement>) => {
-    // setCount(Number(e.target.value));
     dispatch({ type: CountAction.SET_COUNT, payload: Number(e.target.value) });
   };
 
   const handleIncrementCount = () => {
-    // setCount(prevCount => prevCount + step);
-    dispatch({ type: CountAction.INCREMENT, payload: state.step });
+    dispatch({ type: CountAction.INCREMENT });
   };
 
   const handleDecrementCount = () => {
-    // setCount(prevCount => prevCount - step);
-    dispatch({ type: CountAction.DECREMENT, payload: state.step });
+    dispatch({ type: CountAction.DECREMENT });
   };
 
   const handleReset = () => {
-    // setStep(1);
-    // setCount(0);
-    // dispatch({ type: CountAction.RESET });
+    dispatch({ type: CountAction.RESET });
   };
 
   const classes =
