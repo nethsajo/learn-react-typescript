@@ -10,7 +10,12 @@ export default function App() {
         </h1>
       </div>
       <div className="">
-        <progress className="h-4 w-full rounded-md bg-gray-200"></progress>
+        <div className="relative mb-2 h-2 w-full overflow-hidden rounded-full bg-slate-700">
+          <div
+            className="absolute h-full bg-blue-500 transition-all duration-300"
+            style={{ width: '15%' }}
+          />
+        </div>
         <div className="flex justify-between">
           <span>
             Question <span className="font-bold">2</span> / 15
