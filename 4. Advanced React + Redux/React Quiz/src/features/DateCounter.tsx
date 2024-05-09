@@ -80,7 +80,7 @@ export default function DateCounter() {
 
   return (
     <div className="flex h-screen w-full items-center justify-center">
-      <div className="mx-auto w-full max-w-lg rounded-md border-2 border-gray-200 bg-white p-8">
+      <div className="mx-auto w-full max-w-lg rounded-md border border-gray-200 bg-white p-8">
         <div className="space-y-6">
           <div className="flex items-center justify-center space-x-4">
             <input type="range" value={state.step} onChange={handleStep} min={0} max={10} />
