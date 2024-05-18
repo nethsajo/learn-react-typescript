@@ -79,10 +79,6 @@ export default function App() {
     fetchQuestions();
   }, []);
 
-  const handleStart = () => {
-    dispatch({ type: Type.START });
-  };
-
   const numberOfQuestions = questions.length;
   const maxPossiblePoints = questions.reduce((current: number, question: Question) => {
     return current + question.points;
