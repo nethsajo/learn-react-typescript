@@ -1,8 +1,12 @@
+import { Dispatch } from 'react';
+import { Action, Type } from 'src/App';
+
 type Props = {
   numberOfQuestions: number;
+  dispatch: Dispatch<Action>;
 };
 
-export function QuizStart({ numberOfQuestions }: Props) {
+export function QuizStart({ numberOfQuestions, dispatch }: Props) {
   return (
     <div className="text-center">
       <h2 className="mb-2 text-2xl font-medium sm:text-2xl md:text-3xl">
@@ -11,7 +15,10 @@ export function QuizStart({ numberOfQuestions }: Props) {
       <p className="mb-8 text-sm text-slate-400">
         {numberOfQuestions} questions to test your React mastery
       </p>
-      <button className="rounded-sm bg-sky-500 px-6 py-2 text-sm font-semibold text-sky-100 transition-colors duration-300 hover:bg-sky-600">
+      <button
+        className="rounded-sm bg-sky-500 px-6 py-2 text-sm font-semibold text-sky-100 transition-colors duration-300 hover:bg-sky-600 active:bg-sky-700"
+        onClick={() => dispatch({ type: Type.START })}
+      >
         Let's Start
       </button>
     </div>
