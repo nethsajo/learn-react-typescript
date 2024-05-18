@@ -2,9 +2,9 @@ import { useEffect, useReducer } from 'react';
 import { Question } from 'shared/types/question';
 import { QuizFooter } from './features/quiz/components/quiz-footer';
 import { QuizHeader } from './features/quiz/components/quiz-header';
-import { QuizList } from './features/quiz/components/quiz-list';
 import { QuizLoader } from './features/quiz/components/quiz-loader';
 import { QuizProgress } from './features/quiz/components/quiz-progress';
+import { QuizQuestion } from './features/quiz/components/quiz-question';
 import { QuizStart } from './features/quiz/components/quiz-start';
 
 // Define action types
@@ -14,7 +14,7 @@ export enum Type {
   START = 'START',
 }
 
-type ActionWithType<T extends keyof typeof Type, P = undefined> = {
+type ActionWithType<T extends keyof typeof Type, P = void> = {
   type: T;
   payload?: P;
 };
@@ -27,12 +27,14 @@ export type Action =
 // Define state type
 interface State {
   questions: Question[];
+  index: number;
   remaining?: number;
   status: 'ready' | 'active' | 'finished' | 'loading' | 'error';
 }
 
 const initialState: State = {
   questions: [],
+  index: 0,
   remaining: 0,
   status: 'loading',
 };
@@ -63,13 +65,13 @@ const reducer = (state: State, action: Action): State => {
 };
 
 export default function App() {
-  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, remaining, index, status }, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await fetch('http://localhost:8000/questions');
-        const data = (await response.json()) as Question[];
+        const data = await response.json();
         dispatch({ type: Type.DATA_RECEIVED, payload: data });
       } catch (error) {
         dispatch({ type: Type.DATA_FAILED });
@@ -101,7 +103,7 @@ export default function App() {
             maxPossiblePoints={maxPossiblePoints}
           />
           <div className="flex flex-col space-y-6">
-            <QuizList />
+            <QuizQuestion question={questions[index]!} />
             <QuizFooter />
           </div>
         </>
