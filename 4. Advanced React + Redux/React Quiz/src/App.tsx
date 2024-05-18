@@ -3,7 +3,9 @@ import { Question } from 'shared/types/question';
 import { QuizFooter } from './features/quiz/components/quiz-footer';
 import { QuizHeader } from './features/quiz/components/quiz-header';
 import { QuizList } from './features/quiz/components/quiz-list';
+import { QuizLoader } from './features/quiz/components/quiz-loader';
 import { QuizProgress } from './features/quiz/components/quiz-progress';
+import { QuizStart } from './features/quiz/components/quiz-start';
 
 // Define action types
 enum Type {
@@ -49,7 +51,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
 };
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status }, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -65,25 +67,30 @@ export default function App() {
     fetchQuestions();
   }, []);
 
-  const maxPossiblePoints = state.questions.reduce((current, question) => {
+  const maxPossiblePoints = questions.reduce((current, question) => {
     return current + question.points;
   }, 0);
 
   return (
     <div className="mx-auto my-12 flex max-w-lg flex-col justify-center space-y-8 px-4 md:max-w-2xl">
       <QuizHeader />
-      {state.status === 'loading' && <>Loading...</>}
-      {state.status === 'error' && (
+      {status === 'loading' && <QuizLoader />}
+      {status === 'error' && (
         <div className="text-center">There was an error fetching questions...</div>
       )}
-      <QuizProgress
-        numberOfQuestions={state.questions.length}
-        maxPossiblePoints={maxPossiblePoints}
-      />
-      <div className="flex flex-col space-y-6">
-        <QuizList />
-        <QuizFooter />
-      </div>
+      {status === 'ready' && <QuizStart numberOfQuestions={questions.length} />}
+      {status === 'active' && (
+        <>
+          <QuizProgress
+            numberOfQuestions={questions.length}
+            maxPossiblePoints={maxPossiblePoints}
+          />
+          <div className="flex flex-col space-y-6">
+            <QuizList />
+            <QuizFooter />
+          </div>
+        </>
+      )}
     </div>
   );
 }
