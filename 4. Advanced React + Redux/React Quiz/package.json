@@ -54,5 +54,6 @@
     "vite": "^4.4.9",
     "vite-plugin-svgr": "^4.1.0",
     "vite-tsconfig-paths": "^4.2.1"
-  }
+  },
+  "packageManager": "pnpm@9.1.1"
 }
