@@ -3,6 +3,7 @@ import { Question } from 'shared/types/question';
 import { QuizFooter } from './features/quiz/components/quiz-footer';
 import { QuizHeader } from './features/quiz/components/quiz-header';
 import { QuizList } from './features/quiz/components/quiz-list';
+import { QuizProgress } from './features/quiz/components/quiz-progress';
 
 // Define action types
 enum Type {
@@ -10,7 +11,7 @@ enum Type {
   DATA_FAILED = 'DATA_FAILED',
 }
 
-type ActionWithType<T extends keyof typeof Type, P = void> = {
+type ActionWithType<T extends keyof typeof Type, P = undefined> = {
   type: T;
   payload?: P;
 };
@@ -35,7 +36,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
       return {
         ...state,
         status: 'ready',
-        questions: action.payload || [],
+        questions: action.payload ?? [],
       };
     case Type.DATA_FAILED:
       return {
@@ -57,32 +58,24 @@ export default function App() {
         const data = await response.json();
         dispatch({ type: Type.DATA_RECEIVED, payload: data });
       } catch (error) {
-        console.error(error);
+        dispatch({ type: Type.DATA_FAILED });
       }
     };
 
     fetchQuestions();
   }, []);
 
+  const maxPossiblePoints = state.questions.reduce((current, question) => {
+    return current + question.points;
+  }, 0);
+
   return (
     <div className="mx-auto my-12 flex max-w-lg flex-col justify-center space-y-8 px-4 md:max-w-2xl">
       <QuizHeader />
-      <div className="flex flex-col space-y-4">
-        <div className="relative h-2 w-full overflow-hidden rounded-full bg-slate-700">
-          <div
-            className="absolute h-full bg-blue-500 transition-all duration-300"
-            style={{ width: '15%' }}
-          />
-        </div>
-        <div className="flex justify-between">
-          <span>
-            Question <span className="font-bold">2</span> / 15
-          </span>
-          <span>
-            <span className="font-bold">10</span> / 280 points
-          </span>
-        </div>
-      </div>
+      <QuizProgress
+        numberOfQuestions={state.questions.length}
+        maxPossiblePoints={maxPossiblePoints}
+      />
       <div className="flex flex-col space-y-6">
         <QuizList />
         <QuizFooter />
