@@ -12,6 +12,7 @@ export enum Type {
   DATA_RECEIVED = 'DATA_RECEIVED',
   DATA_FAILED = 'DATA_FAILED',
   START = 'START',
+  NEW_ANSWER = 'NEW_ANSWER',
 }
 
 type ActionWithType<T extends keyof typeof Type, P = void> = {
@@ -22,13 +23,15 @@ type ActionWithType<T extends keyof typeof Type, P = void> = {
 export type Action =
   | ActionWithType<Type.DATA_RECEIVED, Question[]>
   | ActionWithType<Type.DATA_FAILED>
-  | ActionWithType<Type.START, number>;
+  | ActionWithType<Type.START, number>
+  | ActionWithType<Type.NEW_ANSWER, null | number>;
 
 // Define state type
 interface State {
   questions: Question[];
   index: number;
   remaining?: number;
+  answer: number | null;
   status: 'ready' | 'active' | 'finished' | 'loading' | 'error';
 }
 
@@ -36,6 +39,7 @@ const initialState: State = {
   questions: [],
   index: 0,
   remaining: 0,
+  answer: null,
   status: 'loading',
 };
 
@@ -59,6 +63,8 @@ const reducer = (state: State, action: Action): State => {
         status: 'active',
         remaining: state.questions.length * 30,
       };
+    case Type.NEW_ANSWER:
+      return { ...state };
     default:
       throw new Error('Unknown action type');
   }
@@ -103,7 +109,7 @@ export default function App() {
             maxPossiblePoints={maxPossiblePoints}
           />
           <div className="flex flex-col space-y-6">
-            <QuizQuestion question={questions[index]!} />
+            <QuizQuestion index={index} question={questions[index]!} />
             <QuizFooter />
           </div>
         </>

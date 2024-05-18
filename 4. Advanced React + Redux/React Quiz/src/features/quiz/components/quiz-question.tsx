@@ -1,14 +1,15 @@
 import { Question } from 'shared/types/question';
 
 type Props = {
+  index: number;
   question: Question;
 };
 
-export function QuizQuestion({ question }: Props) {
+export function QuizQuestion({ index, question }: Props) {
   return (
     <div className="space-y-4">
       <p className="text-balance text-lg font-bold text-slate-300 sm:text-xl">
-        {question.question}
+        {index + 1}. {question.question}
       </p>
       <div className="space-y-4">
         {question.options.map(option => (
