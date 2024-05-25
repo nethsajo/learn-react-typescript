@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react';
+import { Reducer, useEffect, useReducer } from 'react';
 import { Question } from 'shared/types/question';
 import { QuizFooter } from './features/quiz/components/quiz-footer';
 import { QuizHeader } from './features/quiz/components/quiz-header';
@@ -24,14 +24,15 @@ export type Action =
   | ActionWithType<Type.DATA_RECEIVED, Question[]>
   | ActionWithType<Type.DATA_FAILED>
   | ActionWithType<Type.START, number>
-  | ActionWithType<Type.NEW_ANSWER, null | number>;
+  | ActionWithType<Type.NEW_ANSWER, number | null>;
 
 // Define state type
 interface State {
   questions: Question[];
   index: number;
   remaining?: number;
-  answer: number | null;
+  answer?: number | null;
+  points: number;
   status: 'ready' | 'active' | 'finished' | 'loading' | 'error';
 }
 
@@ -40,11 +41,12 @@ const initialState: State = {
   index: 0,
   remaining: 0,
   answer: null,
+  points: 0,
   status: 'loading',
 };
 
 // Define reducer function
-const reducer = (state: State, action: Action): State => {
+const reducer: Reducer<State, Action> = (state, action): State => {
   switch (action.type) {
     case Type.DATA_RECEIVED:
       return {
@@ -64,14 +66,24 @@ const reducer = (state: State, action: Action): State => {
         remaining: state.questions.length * 30,
       };
     case Type.NEW_ANSWER:
-      return { ...state };
+      const question = state.questions.at(state.index) as Question;
+      const isCorrect = question.correctOption === action.payload;
+
+      return {
+        ...state,
+        answer: action.payload,
+        points: isCorrect ? state.points + question.points : state.points,
+      };
     default:
       throw new Error('Unknown action type');
   }
 };
 
 export default function App() {
-  const [{ questions, remaining, index, status }, dispatch] = useReducer(reducer, initialState);
+  const [{ status, questions, index, remaining, answer, points }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -105,11 +117,18 @@ export default function App() {
       {status === 'active' && (
         <>
           <QuizProgress
+            count={index}
             numberOfQuestions={numberOfQuestions}
             maxPossiblePoints={maxPossiblePoints}
+            points={points}
           />
           <div className="flex flex-col space-y-6">
-            <QuizQuestion index={index} question={questions[index]!} />
+            <QuizQuestion
+              count={index}
+              question={questions[index]!}
+              dispatch={dispatch}
+              answer={answer}
+            />
             <QuizFooter />
           </div>
         </>

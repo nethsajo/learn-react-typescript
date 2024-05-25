@@ -1,9 +1,11 @@
 type Props = {
+  count: number;
   maxPossiblePoints: number;
   numberOfQuestions: number;
+  points: number;
 };
 
-export function QuizProgress({ numberOfQuestions, maxPossiblePoints }: Props) {
+export function QuizProgress({ count, numberOfQuestions, maxPossiblePoints, points }: Props) {
   return (
     <div className="flex flex-col space-y-4">
       <div className="relative h-2 w-full overflow-hidden rounded-full bg-slate-700">
@@ -14,10 +16,10 @@ export function QuizProgress({ numberOfQuestions, maxPossiblePoints }: Props) {
       </div>
       <div className="flex justify-between">
         <span>
-          Question <span className="font-bold">2</span> / {numberOfQuestions}
+          Question <span className="font-bold">{count + 1}</span> / {numberOfQuestions}
         </span>
         <span>
-          <span className="font-bold">10</span> / {maxPossiblePoints} points
+          <span className="font-bold">{points}</span> / {maxPossiblePoints} points
         </span>
       </div>
     </div>
