@@ -125,6 +125,7 @@ export default function App() {
             numberOfQuestions={numberOfQuestions}
             maxPossiblePoints={maxPossiblePoints}
             points={points}
+            answer={answer}
           />
           <div className="flex flex-col space-y-6">
             <QuizQuestion
