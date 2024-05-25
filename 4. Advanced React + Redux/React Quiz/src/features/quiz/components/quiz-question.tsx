@@ -15,7 +15,7 @@ export function QuizQuestion({ count, question, dispatch, answer }: Props) {
 
   return (
     <div className="space-y-4">
-      <p className="text-balance text-lg font-bold text-slate-300 sm:text-xl">
+      <p className="text-lg font-bold text-slate-300 sm:text-xl">
         {count + 1}. {question.question}
       </p>
       <div className="space-y-4">

@@ -13,6 +13,7 @@ export enum Type {
   DATA_FAILED = 'DATA_FAILED',
   START = 'START',
   NEW_ANSWER = 'NEW_ANSWER',
+  NEXT_QUESTION = 'NEXT_QUESTION',
 }
 
 type ActionWithType<T extends keyof typeof Type, P = void> = {
@@ -24,7 +25,8 @@ export type Action =
   | ActionWithType<Type.DATA_RECEIVED, Question[]>
   | ActionWithType<Type.DATA_FAILED>
   | ActionWithType<Type.START, number>
-  | ActionWithType<Type.NEW_ANSWER, number | null>;
+  | ActionWithType<Type.NEW_ANSWER, number | null>
+  | ActionWithType<Type.NEXT_QUESTION>;
 
 // Define state type
 interface State {
@@ -74,6 +76,8 @@ const reducer: Reducer<State, Action> = (state, action): State => {
         answer: action.payload,
         points: isCorrect ? state.points + question.points : state.points,
       };
+    case Type.NEXT_QUESTION:
+      return { ...state, index: state.index + 1, answer: null };
     default:
       throw new Error('Unknown action type');
   }
@@ -129,7 +133,7 @@ export default function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <QuizFooter />
+            <QuizFooter answer={answer} dispatch={dispatch} />
           </div>
         </>
       )}
