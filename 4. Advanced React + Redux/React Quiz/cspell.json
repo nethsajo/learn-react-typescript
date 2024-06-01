@@ -1,7 +1,7 @@
 {
   "version": "0.2",
   "language": "en",
-  "words": ["lucide", "TOPRATED", "TMDB", "tailwindcss"],
+  "words": ["lucide", "TOPRATED", "TMDB", "tailwindcss", "highscore"],
   "ignorePaths": [
     "./node_modules",
     "./build",

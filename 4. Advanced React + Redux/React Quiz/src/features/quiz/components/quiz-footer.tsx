@@ -7,6 +7,8 @@ type Props = {
 };
 
 export function QuizFooter({ dispatch, answer }: Props) {
+  if (answer === null) return null;
+
   return (
     <div className="flex items-center justify-between">
       <div className="rounded-md px-4 py-2 ring-1 ring-white/10">07:18</div>

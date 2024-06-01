@@ -1,8 +1,9 @@
 import { Reducer, useEffect, useReducer } from 'react';
 import { Question } from 'shared/types/question';
-import { QuizFooter } from './features/quiz/components/quiz-footer';
+import { QuizFinish } from './features/quiz/components/quiz-finish';
 import { QuizHeader } from './features/quiz/components/quiz-header';
 import { QuizLoader } from './features/quiz/components/quiz-loader';
+import { QuizNext } from './features/quiz/components/quiz-next';
 import { QuizProgress } from './features/quiz/components/quiz-progress';
 import { QuizQuestion } from './features/quiz/components/quiz-question';
 import { QuizStart } from './features/quiz/components/quiz-start';
@@ -14,6 +15,7 @@ export enum Type {
   START = 'START',
   NEW_ANSWER = 'NEW_ANSWER',
   NEXT_QUESTION = 'NEXT_QUESTION',
+  FINISH = 'FINISH',
 }
 
 type ActionWithType<T extends keyof typeof Type, P = void> = {
@@ -26,7 +28,8 @@ export type Action =
   | ActionWithType<Type.DATA_FAILED>
   | ActionWithType<Type.START, number>
   | ActionWithType<Type.NEW_ANSWER, number | null>
-  | ActionWithType<Type.NEXT_QUESTION>;
+  | ActionWithType<Type.NEXT_QUESTION>
+  | ActionWithType<Type.FINISH>;
 
 // Define state type
 interface State {
@@ -35,6 +38,7 @@ interface State {
   remaining?: number;
   answer?: number | null;
   points: number;
+  highscore: number;
   status: 'ready' | 'active' | 'finished' | 'loading' | 'error';
 }
 
@@ -44,6 +48,7 @@ const initialState: State = {
   remaining: 0,
   answer: null,
   points: 0,
+  highscore: 0,
   status: 'loading',
 };
 
@@ -78,13 +83,19 @@ const reducer: Reducer<State, Action> = (state, action): State => {
       };
     case Type.NEXT_QUESTION:
       return { ...state, index: state.index + 1, answer: null };
+    case Type.FINISH:
+      return {
+        ...state,
+        status: 'finished',
+        highscore: state.points > state.highscore ? state.points : state.highscore,
+      };
     default:
       throw new Error('Unknown action type');
   }
 };
 
 export default function App() {
-  const [{ status, questions, index, remaining, answer, points }, dispatch] = useReducer(
+  const [{ status, questions, index, remaining, answer, points, highscore }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -134,9 +145,19 @@ export default function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <QuizFooter answer={answer} dispatch={dispatch} />
+            <div className="flex items-center justify-between">
+              <QuizNext
+                index={index}
+                numberOfQuestions={numberOfQuestions}
+                answer={answer}
+                dispatch={dispatch}
+              />
+            </div>
           </div>
         </>
+      )}
+      {status === 'finished' && (
+        <QuizFinish points={points} maxPossiblePoints={maxPossiblePoints} highscore={highscore} />
       )}
     </div>
   );
