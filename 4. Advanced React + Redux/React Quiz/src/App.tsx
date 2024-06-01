@@ -16,6 +16,7 @@ export enum Type {
   NEW_ANSWER = 'NEW_ANSWER',
   NEXT_QUESTION = 'NEXT_QUESTION',
   FINISH = 'FINISH',
+  RESTART = 'RESTART',
 }
 
 type ActionWithType<T extends keyof typeof Type, P = void> = {
@@ -29,7 +30,8 @@ export type Action =
   | ActionWithType<Type.START, number>
   | ActionWithType<Type.NEW_ANSWER, number | null>
   | ActionWithType<Type.NEXT_QUESTION>
-  | ActionWithType<Type.FINISH>;
+  | ActionWithType<Type.FINISH>
+  | ActionWithType<Type.RESTART>;
 
 // Define state type
 interface State {
@@ -89,6 +91,8 @@ const reducer: Reducer<State, Action> = (state, action): State => {
         status: 'finished',
         highscore: state.points > state.highscore ? state.points : state.highscore,
       };
+    case Type.RESTART:
+      return { ...initialState, questions: state.questions, status: 'ready' };
     default:
       throw new Error('Unknown action type');
   }
@@ -157,7 +161,12 @@ export default function App() {
         </>
       )}
       {status === 'finished' && (
-        <QuizFinish points={points} maxPossiblePoints={maxPossiblePoints} highscore={highscore} />
+        <QuizFinish
+          points={points}
+          maxPossiblePoints={maxPossiblePoints}
+          highscore={highscore}
+          dispatch={dispatch}
+        />
       )}
     </div>
   );

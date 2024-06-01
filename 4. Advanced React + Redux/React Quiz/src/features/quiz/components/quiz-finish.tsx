@@ -1,10 +1,14 @@
+import { Dispatch } from 'react';
+import { Action, Type } from 'src/App';
+
 type Props = {
   points: number;
   maxPossiblePoints: number;
   highscore: number;
+  dispatch: Dispatch<Action>;
 };
 
-export function QuizFinish({ points, maxPossiblePoints, highscore }: Props) {
+export function QuizFinish({ points, maxPossiblePoints, highscore, dispatch }: Props) {
   const percentage = (points / maxPossiblePoints) * 100;
 
   let emoji;
@@ -18,10 +22,16 @@ export function QuizFinish({ points, maxPossiblePoints, highscore }: Props) {
   return (
     <div className="text-center text-slate-300">
       <p>
-        You scored <strong className="text-sky-500">{points}</strong> out of {maxPossiblePoints} (
-        {Math.round(percentage)})%
+        <span>{emoji}</span>You scored <strong className="text-sky-500">{points}</strong> out of{' '}
+        {maxPossiblePoints} ({Math.ceil(percentage)})%
       </p>
-      <p>High score: {highscore} points</p>
+      <p className="font-medium">High score: {highscore} points</p>
+      <button
+        onClick={() => dispatch({ type: Type.RESTART })}
+        className="mt-4 rounded-sm bg-sky-500 px-6 py-1.5 font-medium text-slate-200 transition-colors duration-300 hover:bg-sky-600"
+      >
+        Restart
+      </button>
     </div>
   );
 }
