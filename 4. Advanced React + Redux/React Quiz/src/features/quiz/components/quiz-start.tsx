@@ -39,7 +39,7 @@ export function QuizStart({ numberOfQuestions, dispatch }: Props) {
                 key={index}
                 className="flex items-center space-x-2 rounded-full bg-slate-600/50 px-4 py-1 text-sm text-slate-300 transition-colors duration-300 hover:bg-blue-500 active:bg-blue-600"
               >
-                <span className="uppercase">{language}</span>
+                <span className="font-medium uppercase">{language}</span>
                 <LanguageLogo className="fill-current" />
               </button>
             );
