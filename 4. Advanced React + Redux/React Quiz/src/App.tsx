@@ -134,7 +134,7 @@ export default function App() {
   }, 0);
 
   return (
-    <div className="mx-auto my-12 flex max-w-lg flex-col justify-center space-y-8 px-4 md:max-w-2xl">
+    <div className="mx-auto my-24 flex max-w-lg flex-col justify-center space-y-8 px-4 md:max-w-2xl">
       <QuizHeader />
       {status === 'loading' && <QuizLoader />}
       {status === 'error' && (

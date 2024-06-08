@@ -1,11 +1,11 @@
-import ReactLogo from 'shared/assets/react.svg?react';
+import Ninja from 'shared/assets/ninja.svg?react';
 
 export function QuizHeader() {
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-8">
-      <ReactLogo className="h-14 w-14 fill-sky-500 sm:h-20 sm:w-20 md:h-28 md:w-28" />
-      <h1 className="text-4xl font-extrabold uppercase tracking-wide text-slate-200 md:text-5xl">
-        The React Quiz
+    <div className="flex flex-col items-center justify-center sm:flex-row sm:space-x-8">
+      <Ninja className="h-14 w-14 fill-blue-400" />
+      <h1 className="mt-4 text-3xl font-extrabold tracking-wide text-slate-200 sm:mt-0 sm:text-4xl md:text-5xl">
+        WebDevNinja
       </h1>
     </div>
   );
