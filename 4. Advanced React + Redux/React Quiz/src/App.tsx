@@ -7,6 +7,8 @@ import { QuizNext } from './features/quiz/components/quiz-next';
 import { QuizProgress } from './features/quiz/components/quiz-progress';
 import { QuizQuestion } from './features/quiz/components/quiz-question';
 import { QuizStart } from './features/quiz/components/quiz-start';
+import { QuizTimer } from './features/quiz/components/quiz-timer';
+import { SECONDS_PER_QUESTION } from './features/quiz/constants';
 
 // Define action types
 export enum Type {
@@ -17,6 +19,7 @@ export enum Type {
   NEXT_QUESTION = 'NEXT_QUESTION',
   FINISH = 'FINISH',
   RESTART = 'RESTART',
+  TICK = 'TICK',
 }
 
 type ActionWithType<T extends keyof typeof Type, P = void> = {
@@ -31,13 +34,14 @@ export type Action =
   | ActionWithType<Type.NEW_ANSWER, number | null>
   | ActionWithType<Type.NEXT_QUESTION>
   | ActionWithType<Type.FINISH>
-  | ActionWithType<Type.RESTART>;
+  | ActionWithType<Type.RESTART>
+  | ActionWithType<Type.TICK>;
 
 // Define state type
 interface State {
   questions: Question[];
   index: number;
-  remaining?: number;
+  remaining: number;
   answer?: number | null;
   points: number;
   highscore: number;
@@ -72,7 +76,7 @@ const reducer: Reducer<State, Action> = (state, action): State => {
       return {
         ...state,
         status: 'active',
-        remaining: state.questions.length * 30,
+        remaining: state.questions.length * SECONDS_PER_QUESTION,
       };
     case Type.NEW_ANSWER:
       const question = state.questions.at(state.index) as Question;
@@ -93,6 +97,12 @@ const reducer: Reducer<State, Action> = (state, action): State => {
       };
     case Type.RESTART:
       return { ...initialState, questions: state.questions, status: 'ready' };
+    case Type.TICK:
+      return {
+        ...state,
+        remaining: state.remaining - 1,
+        status: state.remaining === 0 ? 'finished' : state.status,
+      };
     default:
       throw new Error('Unknown action type');
   }
@@ -149,14 +159,15 @@ export default function App() {
               dispatch={dispatch}
               answer={answer}
             />
-            <div className="flex items-center justify-between">
+            <footer className="flex items-center justify-between">
+              <QuizTimer remaining={remaining} dispatch={dispatch} />
               <QuizNext
                 index={index}
                 numberOfQuestions={numberOfQuestions}
                 answer={answer}
                 dispatch={dispatch}
               />
-            </div>
+            </footer>
           </div>
         </>
       )}
