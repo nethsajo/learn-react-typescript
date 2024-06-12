@@ -1,5 +1,5 @@
 import { Reducer, useEffect, useReducer } from 'react';
-import { Question } from 'shared/types/question';
+import { Question, Questions } from 'shared/types/question';
 import { QuizFinish } from './features/quiz/components/quiz-finish';
 import { QuizHeader } from './features/quiz/components/quiz-header';
 import { QuizLoader } from './features/quiz/components/quiz-loader';
@@ -15,6 +15,7 @@ export enum Type {
   DATA_RECEIVED = 'DATA_RECEIVED',
   DATA_FAILED = 'DATA_FAILED',
   START = 'START',
+  SELECT_CATEGORY = 'SELECT_CATEGORY',
   NEW_ANSWER = 'NEW_ANSWER',
   NEXT_QUESTION = 'NEXT_QUESTION',
   FINISH = 'FINISH',
@@ -28,8 +29,9 @@ type ActionWithType<T extends keyof typeof Type, P = void> = {
 };
 
 export type Action =
-  | ActionWithType<Type.DATA_RECEIVED, Question[]>
+  | ActionWithType<Type.DATA_RECEIVED, Questions[]>
   | ActionWithType<Type.DATA_FAILED>
+  | ActionWithType<Type.SELECT_CATEGORY, string>
   | ActionWithType<Type.START, number>
   | ActionWithType<Type.NEW_ANSWER, number | null>
   | ActionWithType<Type.NEXT_QUESTION>
@@ -39,6 +41,8 @@ export type Action =
 
 // Define state type
 interface State {
+  data: Questions[];
+  category: string;
   questions: Question[];
   index: number;
   remaining: number;
@@ -49,6 +53,8 @@ interface State {
 }
 
 const initialState: State = {
+  data: [],
+  category: '',
   questions: [],
   index: 0,
   remaining: 0,
@@ -65,12 +71,20 @@ const reducer: Reducer<State, Action> = (state, action): State => {
       return {
         ...state,
         status: 'ready',
-        questions: action.payload ?? [],
+        data: action.payload ?? [],
       };
     case Type.DATA_FAILED:
       return {
         ...state,
         status: 'error',
+      };
+    case Type.SELECT_CATEGORY:
+      const found = state.data.find(question => question.category === action.payload);
+
+      return {
+        ...state,
+        category: action.payload ?? '',
+        questions: found?.questions ?? [],
       };
     case Type.START:
       return {
@@ -117,7 +131,7 @@ export default function App() {
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
-        const response = await fetch('http://localhost:8000/questions');
+        const response = await fetch('http://localhost:8000/data');
         const data = await response.json();
         dispatch({ type: Type.DATA_RECEIVED, payload: data });
       } catch (error) {

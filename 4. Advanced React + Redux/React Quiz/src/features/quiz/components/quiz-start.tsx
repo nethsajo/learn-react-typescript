@@ -4,7 +4,7 @@ import HTML5Logo from 'shared/assets/html5.svg?react';
 import JavaScriptLogo from 'shared/assets/javascript.svg?react';
 import ReactLogo from 'shared/assets/react.svg?react';
 import TypeScriptLogo from 'shared/assets/typescript.svg?react';
-import { Action } from 'src/App';
+import { Action, Type } from 'src/App';
 import { LANGUAGES } from '../constants';
 
 type Props = {
@@ -28,7 +28,7 @@ export function QuizStart({ numberOfQuestions, dispatch }: Props) {
         frontiers of HTML, CSS, JavaScript, TypeScript, and React. Prove your front-end mastery
         starts now!
       </h2>
-      <div className="space-y-4">
+      <div className="space-y-6">
         <p className="text-slate-400">Select a language to start your mastery!</p>
         <div className="flex items-center justify-center space-x-2">
           {LANGUAGES.map((language, index) => {
@@ -37,7 +37,9 @@ export function QuizStart({ numberOfQuestions, dispatch }: Props) {
             return (
               <button
                 key={index}
+                type="button"
                 className="flex items-center space-x-2 rounded-full bg-slate-600/50 px-4 py-1 text-sm text-slate-300 transition-colors duration-300 hover:bg-blue-500 active:bg-blue-600"
+                onClick={() => dispatch({ type: Type.SELECT_CATEGORY, payload: language })}
               >
                 <span className="font-medium uppercase">{language}</span>
                 <LanguageLogo className="fill-current" />
