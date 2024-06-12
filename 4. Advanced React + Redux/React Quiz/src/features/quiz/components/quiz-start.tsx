@@ -8,7 +8,6 @@ import { Action, Type } from 'src/App';
 import { LANGUAGES } from '../constants';
 
 type Props = {
-  numberOfQuestions: number;
   dispatch: Dispatch<Action>;
 };
 
@@ -20,7 +19,7 @@ const languages = {
   react: ReactLogo,
 };
 
-export function QuizStart({ numberOfQuestions, dispatch }: Props) {
+export function QuizStart({ dispatch }: Props) {
   return (
     <div className="space-y-8 text-center">
       <h2 className="mb-2 text-base text-slate-300 sm:text-xl">

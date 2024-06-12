@@ -1,5 +1,6 @@
 import { Reducer, useEffect, useReducer } from 'react';
 import { Question, Questions } from 'shared/types/question';
+import { QuizDifficulty } from './features/quiz/components/quiz-difficulty';
 import { QuizFinish } from './features/quiz/components/quiz-finish';
 import { QuizHeader } from './features/quiz/components/quiz-header';
 import { QuizLoader } from './features/quiz/components/quiz-loader';
@@ -16,11 +17,19 @@ export enum Type {
   DATA_FAILED = 'DATA_FAILED',
   START = 'START',
   SELECT_CATEGORY = 'SELECT_CATEGORY',
+  SELECT_DIFFICULTY = 'SELECT_DIFFICULTY',
   NEW_ANSWER = 'NEW_ANSWER',
   NEXT_QUESTION = 'NEXT_QUESTION',
   FINISH = 'FINISH',
   RESTART = 'RESTART',
   TICK = 'TICK',
+}
+
+export enum Difficulty {
+  ALL = 'ALL',
+  EASY = 'EASY',
+  MEDIUM = 'MEDIUM',
+  HARD = 'HARD',
 }
 
 type ActionWithType<T extends keyof typeof Type, P = void> = {
@@ -32,6 +41,7 @@ export type Action =
   | ActionWithType<Type.DATA_RECEIVED, Questions[]>
   | ActionWithType<Type.DATA_FAILED>
   | ActionWithType<Type.SELECT_CATEGORY, string>
+  | ActionWithType<Type.SELECT_DIFFICULTY, string>
   | ActionWithType<Type.START, number>
   | ActionWithType<Type.NEW_ANSWER, number | null>
   | ActionWithType<Type.NEXT_QUESTION>
@@ -43,18 +53,20 @@ export type Action =
 interface State {
   data: Questions[];
   category: string;
+  difficulty: string;
   questions: Question[];
   index: number;
   remaining: number;
   answer?: number | null;
   points: number;
   highscore: number;
-  status: 'ready' | 'active' | 'finished' | 'loading' | 'error';
+  status: 'ready' | 'active' | 'level' | 'finished' | 'loading' | 'error';
 }
 
 const initialState: State = {
   data: [],
   category: '',
+  difficulty: '',
   questions: [],
   index: 0,
   remaining: 0,
@@ -83,8 +95,14 @@ const reducer: Reducer<State, Action> = (state, action): State => {
 
       return {
         ...state,
+        status: 'level',
         category: action.payload ?? '',
         questions: found?.questions ?? [],
+      };
+    case Type.SELECT_DIFFICULTY:
+      return {
+        ...state,
+        difficulty: action.payload ?? '',
       };
     case Type.START:
       return {
@@ -154,9 +172,8 @@ export default function App() {
       {status === 'error' && (
         <div className="text-center">There was an error fetching questions...</div>
       )}
-      {status === 'ready' && (
-        <QuizStart numberOfQuestions={numberOfQuestions} dispatch={dispatch} />
-      )}
+      {status === 'ready' && <QuizStart dispatch={dispatch} />}
+      {status === 'level' && <QuizDifficulty dispatch={dispatch} />}
       {status === 'active' && (
         <>
           <QuizProgress
