@@ -8,4 +8,5 @@ export type Question = {
   options: string[];
   correctOption: number;
   points: number;
+  difficulty: string;
 };

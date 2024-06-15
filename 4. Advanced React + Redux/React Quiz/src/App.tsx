@@ -9,7 +9,11 @@ import { QuizProgress } from './features/quiz/components/quiz-progress';
 import { QuizQuestion } from './features/quiz/components/quiz-question';
 import { QuizStart } from './features/quiz/components/quiz-start';
 import { QuizTimer } from './features/quiz/components/quiz-timer';
-import { SECONDS_PER_QUESTION } from './features/quiz/constants';
+import {
+  MAX_NUMBER_OF_QUESTIONS,
+  MAX_NUMBER_OF_TAKE_QUESTIONS,
+  SECONDS_PER_QUESTION,
+} from './features/quiz/constants';
 
 // Define action types
 export enum Type {
@@ -18,6 +22,7 @@ export enum Type {
   START = 'START',
   SELECT_CATEGORY = 'SELECT_CATEGORY',
   SELECT_DIFFICULTY = 'SELECT_DIFFICULTY',
+  SET_NUMBER_OF_QUESTIONS = 'SET_NUMBER_OF_QUESTIONS',
   NEW_ANSWER = 'NEW_ANSWER',
   NEXT_QUESTION = 'NEXT_QUESTION',
   FINISH = 'FINISH',
@@ -26,10 +31,10 @@ export enum Type {
 }
 
 export enum Difficulty {
-  ALL = 'ALL',
-  EASY = 'EASY',
-  MEDIUM = 'MEDIUM',
-  HARD = 'HARD',
+  ALL = 'all',
+  EASY = 'easy',
+  MEDIUM = 'medium',
+  HARD = 'hard',
 }
 
 type ActionWithType<T extends keyof typeof Type, P = void> = {
@@ -42,6 +47,7 @@ export type Action =
   | ActionWithType<Type.DATA_FAILED>
   | ActionWithType<Type.SELECT_CATEGORY, string>
   | ActionWithType<Type.SELECT_DIFFICULTY, string>
+  | ActionWithType<Type.SET_NUMBER_OF_QUESTIONS, number>
   | ActionWithType<Type.START, number>
   | ActionWithType<Type.NEW_ANSWER, number | null>
   | ActionWithType<Type.NEXT_QUESTION>
@@ -55,18 +61,22 @@ interface State {
   category: string;
   difficulty: string;
   questions: Question[];
+  totalQuestions: number;
+  takeQuestions: number;
   index: number;
   remaining: number;
   answer?: number | null;
   points: number;
   highscore: number;
-  status: 'ready' | 'active' | 'level' | 'finished' | 'loading' | 'error';
+  status: 'ready' | 'active' | 'process' | 'finished' | 'loading' | 'error';
 }
 
 const initialState: State = {
   data: [],
   category: '',
-  difficulty: '',
+  difficulty: 'all',
+  totalQuestions: MAX_NUMBER_OF_QUESTIONS,
+  takeQuestions: MAX_NUMBER_OF_TAKE_QUESTIONS,
   questions: [],
   index: 0,
   remaining: 0,
@@ -95,14 +105,24 @@ const reducer: Reducer<State, Action> = (state, action): State => {
 
       return {
         ...state,
-        status: 'level',
+        status: 'process',
         category: action.payload ?? '',
         questions: found?.questions ?? [],
       };
     case Type.SELECT_DIFFICULTY:
+      const questions = state.questions.filter(question => question.difficulty === action.payload);
+      const length = Difficulty.ALL === action.payload ? state.questions.length : questions.length;
+
       return {
         ...state,
         difficulty: action.payload ?? '',
+        totalQuestions: length,
+        takeQuestions: length,
+      };
+    case Type.SET_NUMBER_OF_QUESTIONS:
+      return {
+        ...state,
+        takeQuestions: action.payload ?? 1,
       };
     case Type.START:
       return {
@@ -141,15 +161,17 @@ const reducer: Reducer<State, Action> = (state, action): State => {
 };
 
 export default function App() {
-  const [{ status, difficulty, questions, index, remaining, answer, points, highscore }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { status, difficulty, totalQuestions, questions, index, remaining, answer, points, highscore },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await fetch('http://localhost:8000/data');
         const data = await response.json();
-        dispatch({ type: Type.DATA_RECEIVED, payload: data });
+        dispatch({ type: Type.DATA_RECEIVED, payload: data as Questions[] });
       } catch (error) {
         dispatch({ type: Type.DATA_FAILED });
       }
@@ -171,7 +193,13 @@ export default function App() {
         <div className="text-center">There was an error fetching questions...</div>
       )}
       {status === 'ready' && <QuizStart dispatch={dispatch} />}
-      {status === 'level' && <QuizDifficulty dispatch={dispatch} difficulty={difficulty} />}
+      {status === 'process' && (
+        <QuizDifficulty
+          dispatch={dispatch}
+          difficulty={difficulty}
+          totalQuestions={totalQuestions}
+        />
+      )}
       {status === 'active' && (
         <>
           <QuizProgress
