@@ -141,10 +141,8 @@ const reducer: Reducer<State, Action> = (state, action): State => {
 };
 
 export default function App() {
-  const [{ status, questions, index, remaining, answer, points, highscore }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ status, difficulty, questions, index, remaining, answer, points, highscore }, dispatch] =
+    useReducer(reducer, initialState);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -173,7 +171,7 @@ export default function App() {
         <div className="text-center">There was an error fetching questions...</div>
       )}
       {status === 'ready' && <QuizStart dispatch={dispatch} />}
-      {status === 'level' && <QuizDifficulty dispatch={dispatch} />}
+      {status === 'level' && <QuizDifficulty dispatch={dispatch} difficulty={difficulty} />}
       {status === 'active' && (
         <>
           <QuizProgress

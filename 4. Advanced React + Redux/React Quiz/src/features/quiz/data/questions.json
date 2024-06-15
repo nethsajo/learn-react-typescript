@@ -12,7 +12,8 @@
             "It specifies the character encoding of the document."
           ],
           "correctOption": 0,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'article' element in HTML5?",
@@ -23,7 +24,8 @@
             "It represents a self-contained composition that can be independently distributed or reused."
           ],
           "correctOption": 3,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'video' element in HTML5?",
@@ -34,7 +36,8 @@
             "It represents a form element for video input."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'canvas' element in HTML5?",
@@ -45,7 +48,8 @@
             "It represents a form element for canvas input."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'header' element in HTML5?",
@@ -56,7 +60,8 @@
             "It sets the title of the web page."
           ],
           "correctOption": 0,
-          "points": 10
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'nav' element in HTML5?",
@@ -67,7 +72,8 @@
             "It represents a form element."
           ],
           "correctOption": 1,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'figure' and 'figcaption' elements in HTML5?",
@@ -78,7 +84,8 @@
             "They represent form elements."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'input' element with the 'type' attribute set to 'email' in HTML5?",
@@ -89,7 +96,8 @@
             "It represents a form element for file input."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'aside' element in HTML5?",
@@ -100,7 +108,8 @@
             "It represents a form element."
           ],
           "correctOption": 0,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'meter' element in HTML5?",
@@ -111,7 +120,8 @@
             "It represents a form element for file input."
           ],
           "correctOption": 2,
-          "points": 15
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'progress' element in HTML5?",
@@ -122,7 +132,8 @@
             "It represents a form element for file input."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'output' element in HTML5?",
@@ -133,7 +144,8 @@
             "It represents a form element for file input."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'details' and 'summary' elements in HTML5?",
@@ -144,7 +156,8 @@
             "They represent form elements."
           ],
           "correctOption": 1,
-          "points": 20
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'datalist' element in HTML5?",
@@ -155,7 +168,8 @@
             "It represents a form element for file input."
           ],
           "correctOption": 1,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'time' element in HTML5?",
@@ -166,7 +180,8 @@
             "It specifies the character encoding of the document."
           ],
           "correctOption": 2,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         }
       ]
     },
@@ -182,7 +197,8 @@
             "It sets the border style of an element."
           ],
           "correctOption": 1,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'flex' layout in CSS3?",
@@ -193,7 +209,8 @@
             "It provides a way to create responsive images."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'transition' property in CSS3?",
@@ -204,7 +221,8 @@
             "It allows you to create responsive layouts."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'transform' property in CSS3?",
@@ -215,7 +233,8 @@
             "It allows you to create responsive layouts."
           ],
           "correctOption": 2,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'background' shorthand property in CSS3?",
@@ -226,7 +245,8 @@
             "It sets the background color, image, repeat, position, and attachment of an element."
           ],
           "correctOption": 3,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'border-radius' property in CSS3?",
@@ -237,7 +257,8 @@
             "It allows you to create responsive layouts."
           ],
           "correctOption": 2,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'text-shadow' property in CSS3?",
@@ -248,7 +269,8 @@
             "It adds a shadow effect to an element."
           ],
           "correctOption": 1,
-          "points": 10
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'gradient' function in CSS3?",
@@ -259,7 +281,8 @@
             "It allows you to create animations and transitions."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 25,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'opacity' property in CSS3?",
@@ -270,7 +293,8 @@
             "It sets the transparency level of an element."
           ],
           "correctOption": 3,
-          "points": 10
+          "points": 10,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the '@media' rule in CSS3?",
@@ -281,7 +305,8 @@
             "It allows you to apply different styles based on certain conditions like screen size or resolution."
           ],
           "correctOption": 3,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'calc()' function in CSS3?",
@@ -292,7 +317,8 @@
             "It sets the transparency level of an element."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'overflow' property in CSS3?",
@@ -303,7 +329,8 @@
             "It sets the border style of an element."
           ],
           "correctOption": 2,
-          "points": 10
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'animation' property in CSS3?",
@@ -314,7 +341,8 @@
             "It allows you to create animations by specifying keyframes and timing functions."
           ],
           "correctOption": 3,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'font-face' rule in CSS3?",
@@ -325,7 +353,8 @@
             "It sets the font family of an element."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'word-wrap' property in CSS3?",
@@ -336,7 +365,8 @@
             "It sets the text alignment of an element."
           ],
           "correctOption": 2,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         }
       ]
     },
@@ -352,7 +382,8 @@
             "None of the above."
           ],
           "correctOption": 1,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'this' keyword in JavaScript?",
@@ -363,7 +394,8 @@
             "It depends on the context and how the function is called."
           ],
           "correctOption": 3,
-          "points": 10
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the difference between 'let' and 'var' in JavaScript?",
@@ -374,7 +406,8 @@
             "'let' and 'var' are both used to declare variables, but they have no other differences."
           ],
           "correctOption": 2,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'spread' operator (...) in JavaScript?",
@@ -385,7 +418,8 @@
             "It is used to remove duplicates from an array or object."
           ],
           "correctOption": 0,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the difference between 'undefined' and 'null' in JavaScript?",
@@ -396,7 +430,8 @@
             "They are both used to represent no value, but they cannot be used interchangeably."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'arrow' function syntax in JavaScript?",
@@ -407,7 +442,8 @@
             "It is used to define a function that can only be called asynchronously."
           ],
           "correctOption": 2,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'async/await' keywords in JavaScript?",
@@ -418,7 +454,8 @@
             "They are used for object-oriented programming."
           ],
           "correctOption": 1,
-          "points": 25
+          "points": 25,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'Promise' object in JavaScript?",
@@ -429,7 +466,8 @@
             "It is used for object-oriented programming."
           ],
           "correctOption": 1,
-          "points": 30
+          "points": 30,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'map' method in JavaScript?",
@@ -440,7 +478,8 @@
             "It is used to create a new array with the results of calling a provided function on every element of the original array."
           ],
           "correctOption": 3,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'filter' method in JavaScript?",
@@ -451,7 +490,8 @@
             "It is used to merge two arrays."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'reduce' method in JavaScript?",
@@ -462,7 +502,8 @@
             "It is used to sort the elements of an array."
           ],
           "correctOption": 0,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'bind' method in JavaScript?",
@@ -473,7 +514,8 @@
             "It is used to convert a function to a string."
           ],
           "correctOption": 2,
-          "points": 25
+          "points": 25,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'Object.freeze' method in JavaScript?",
@@ -484,7 +526,8 @@
             "It converts an object to a string."
           ],
           "correctOption": 2,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'destructuring' syntax in JavaScript?",
@@ -495,7 +538,8 @@
             "It is used to extract values from arrays or objects and assign them to variables."
           ],
           "correctOption": 3,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'template literals' in JavaScript?",
@@ -506,7 +550,8 @@
             "They are used to define objects."
           ],
           "correctOption": 1,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         }
       ]
     },
@@ -522,7 +567,8 @@
             "It is used to define a constant that can hold any type of value."
           ],
           "correctOption": 2,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the difference between 'interface' and 'type' in TypeScript?",
@@ -533,7 +579,8 @@
             "There is no difference; they are interchangeable."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the '?' operator in TypeScript?",
@@ -544,7 +591,8 @@
             "It is used to define non-nullable types."
           ],
           "correctOption": 1,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the difference between 'let' and 'const' in TypeScript?",
@@ -555,7 +603,8 @@
             "There is no difference; they are interchangeable."
           ],
           "correctOption": 0,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'readonly' modifier in TypeScript?",
@@ -566,7 +615,8 @@
             "It is used to define properties that cannot be modified after initialization."
           ],
           "correctOption": 3,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'never' type in TypeScript?",
@@ -577,7 +627,8 @@
             "It represents a type that can hold any value except null and undefined."
           ],
           "correctOption": 1,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'unknown' type in TypeScript?",
@@ -588,7 +639,8 @@
             "It represents a type that can only hold primitive values."
           ],
           "correctOption": 1,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'keyof' operator in TypeScript?",
@@ -599,7 +651,8 @@
             "It is used to create a new primitive type from an object type."
           ],
           "correctOption": 2,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'extends' keyword in TypeScript interfaces?",
@@ -610,7 +663,8 @@
             "It is used to define that a class extends another class."
           ],
           "correctOption": 2,
-          "points": 15
+          "points": 25,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'implements' keyword in TypeScript?",
@@ -621,7 +675,8 @@
             "It is used to define that an interface implements one or more interfaces."
           ],
           "correctOption": 2,
-          "points": 15
+          "points": 25,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'declare' keyword in TypeScript?",
@@ -632,7 +687,8 @@
             "It is used to define types and interfaces in TypeScript."
           ],
           "correctOption": 0,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "What is the purpose of the 'namespace' keyword in TypeScript?",
@@ -643,7 +699,8 @@
             "It is used to define a new interface."
           ],
           "correctOption": 2,
-          "points": 15
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What is the purpose of the 'export' keyword in TypeScript?",
@@ -654,7 +711,8 @@
             "It is used to import variables, functions, classes, or interfaces from another module."
           ],
           "correctOption": 2,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What is the purpose of the 'import' keyword in TypeScript?",
@@ -665,7 +723,8 @@
             "It is used to make variables, functions, classes, or interfaces available outside the current module."
           ],
           "correctOption": 1,
-          "points": 10
+          "points": 15,
+          "difficulty": "medium"
         }
       ]
     },
@@ -676,25 +735,29 @@
           "question": "Which is the most popular JavaScript framework?",
           "options": ["Angular", "React", "Svelte", "Vue"],
           "correctOption": 1,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "Which company invented React?",
           "options": ["Google", "Apple", "Netflix", "Facebook"],
           "correctOption": 3,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "What's the fundamental building block of React apps?",
           "options": ["Components", "Blocks", "Elements", "Effects"],
           "correctOption": 0,
-          "points": 10
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "What's the name of the syntax we use to describe the UI in React components?",
           "options": ["FBJ", "Babel", "JSX", "ES2015"],
           "correctOption": 2,
-          "points": 10
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "How does data flow naturally in React apps?",
@@ -705,13 +768,15 @@
             "The developers decides"
           ],
           "correctOption": 0,
-          "points": 10
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "How to pass data into a child component?",
           "options": ["State", "Props", "PropTypes", "Parameters"],
           "correctOption": 1,
-          "points": 10
+          "points": 10,
+          "difficulty": "easy"
         },
         {
           "question": "When to use derived state?",
@@ -722,7 +787,8 @@
             "Whenever the state can be computed from another state variable"
           ],
           "correctOption": 3,
-          "points": 30
+          "points": 30,
+          "difficulty": "hard"
         },
         {
           "question": "What triggers a UI re-render in React?",
@@ -733,7 +799,8 @@
             "Adding event listeners to DOM elements"
           ],
           "correctOption": 2,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "When do we directly \"touch\" the DOM in React?",
@@ -744,7 +811,8 @@
             "Almost never"
           ],
           "correctOption": 3,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         },
         {
           "question": "In what situation do we use a callback to update state?",
@@ -755,7 +823,8 @@
             "When the new state depends on the previous state"
           ],
           "correctOption": 3,
-          "points": 30
+          "points": 30,
+          "difficulty": "hard"
         },
         {
           "question": "If we pass a function to useState, when will that function be called?",
@@ -766,13 +835,15 @@
             "The first time we update the state"
           ],
           "correctOption": 2,
-          "points": 30
+          "points": 30,
+          "difficulty": "hard"
         },
         {
           "question": "Which hook to use for an API request on the component's initial render?",
           "options": ["useState", "useEffect", "useRef", "useReducer"],
           "correctOption": 1,
-          "points": 10
+          "points": 15,
+          "difficulty": "medium"
         },
         {
           "question": "Which variables should go into the useEffect dependency array?",
@@ -783,7 +854,8 @@
             "All variables needed for clean up"
           ],
           "correctOption": 2,
-          "points": 30
+          "points": 30,
+          "difficulty": "hard"
         },
         {
           "question": "An effect will always run on the initial render.",
@@ -794,7 +866,8 @@
             "In depends on the code in the effect"
           ],
           "correctOption": 0,
-          "points": 30
+          "points": 30,
+          "difficulty": "hard"
         },
         {
           "question": "When will an effect run if it doesn't have a dependency array?",
@@ -805,7 +878,8 @@
             "Each time the component is re-rendered"
           ],
           "correctOption": 3,
-          "points": 20
+          "points": 20,
+          "difficulty": "hard"
         }
       ]
     }
