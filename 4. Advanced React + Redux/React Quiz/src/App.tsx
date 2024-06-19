@@ -1,5 +1,6 @@
 import { Reducer, useEffect, useReducer } from 'react';
 import { Question, Questions } from 'shared/types/question';
+import { QuizBegin } from './features/quiz/components/quiz-begin';
 import { QuizDifficulty } from './features/quiz/components/quiz-difficulty';
 import { QuizFinish } from './features/quiz/components/quiz-finish';
 import { QuizHeader } from './features/quiz/components/quiz-header';
@@ -23,6 +24,8 @@ export enum Type {
   SELECT_CATEGORY = 'SELECT_CATEGORY',
   SELECT_DIFFICULTY = 'SELECT_DIFFICULTY',
   SET_NUMBER_OF_QUESTIONS = 'SET_NUMBER_OF_QUESTIONS',
+  GENERATE = 'GENERATE',
+  BEGIN = 'BEGIN',
   NEW_ANSWER = 'NEW_ANSWER',
   NEXT_QUESTION = 'NEXT_QUESTION',
   FINISH = 'FINISH',
@@ -48,6 +51,8 @@ export type Action =
   | ActionWithType<Type.SELECT_CATEGORY, string>
   | ActionWithType<Type.SELECT_DIFFICULTY, string>
   | ActionWithType<Type.SET_NUMBER_OF_QUESTIONS, number>
+  | ActionWithType<Type.GENERATE>
+  | ActionWithType<Type.BEGIN>
   | ActionWithType<Type.START, number>
   | ActionWithType<Type.NEW_ANSWER, number | null>
   | ActionWithType<Type.NEXT_QUESTION>
@@ -68,7 +73,15 @@ interface State {
   answer?: number | null;
   points: number;
   highscore: number;
-  status: 'ready' | 'active' | 'process' | 'finished' | 'loading' | 'error';
+  status:
+    | 'ready'
+    | 'for_processing'
+    | 'generate'
+    | 'begin'
+    | 'active'
+    | 'finished'
+    | 'loading'
+    | 'error';
 }
 
 const initialState: State = {
@@ -105,7 +118,7 @@ const reducer: Reducer<State, Action> = (state, action): State => {
 
       return {
         ...state,
-        status: 'process',
+        status: 'for_processing',
         category: action.payload ?? '',
         questions: found?.questions ?? [],
       };
@@ -123,6 +136,26 @@ const reducer: Reducer<State, Action> = (state, action): State => {
       return {
         ...state,
         takeQuestions: action.payload ?? 1,
+      };
+    case Type.GENERATE:
+      let questionnaires: Question[] = [];
+
+      if (Difficulty.ALL === state.difficulty) {
+        questionnaires = state.questions;
+      } else {
+        questionnaires = state.questions.filter(
+          question => question.difficulty === state.difficulty
+        );
+      }
+
+      return {
+        ...state,
+        status: 'begin',
+        questions: questionnaires.slice(0, state.takeQuestions),
+      };
+    case Type.BEGIN:
+      return {
+        ...state,
       };
     case Type.START:
       return {
@@ -162,7 +195,18 @@ const reducer: Reducer<State, Action> = (state, action): State => {
 
 export default function App() {
   const [
-    { status, difficulty, totalQuestions, questions, index, remaining, answer, points, highscore },
+    {
+      status,
+      category,
+      difficulty,
+      totalQuestions,
+      questions,
+      index,
+      remaining,
+      answer,
+      points,
+      highscore,
+    },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -193,12 +237,15 @@ export default function App() {
         <div className="text-center">There was an error fetching questions...</div>
       )}
       {status === 'ready' && <QuizStart dispatch={dispatch} />}
-      {status === 'process' && (
+      {status === 'for_processing' && (
         <QuizDifficulty
           dispatch={dispatch}
           difficulty={difficulty}
           totalQuestions={totalQuestions}
         />
+      )}
+      {status === 'begin' && (
+        <QuizBegin language={category} difficulty={difficulty} total={totalQuestions} />
       )}
       {status === 'active' && (
         <>

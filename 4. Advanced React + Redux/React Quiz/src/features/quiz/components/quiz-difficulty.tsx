@@ -1,6 +1,8 @@
 import { LEVELS } from 'shared/constants/level';
 
-import { ChangeEvent, Dispatch, useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
+import { ChangeEvent, Dispatch, useState } from 'react';
 import { Action, Type } from 'src/App';
 
 type Props = {
@@ -10,16 +12,16 @@ type Props = {
 };
 
 export function QuizDifficulty({ dispatch, difficulty, totalQuestions }: Props) {
-  const [range, setRange] = useState(1);
+  const [numberOfQuestions, setNumberOfQuestions] = useState(totalQuestions);
 
   const handleSetNumberOfQuestions = (event: ChangeEvent<HTMLInputElement>) => {
-    setRange(Number(event.target.value));
+    setNumberOfQuestions(Number(event.target.value));
     dispatch({ type: Type.SET_NUMBER_OF_QUESTIONS, payload: Number(event.target.value) });
   };
 
   // Reset the value of range when totalQuestions change
   useEffect(() => {
-    setRange(1);
+    setNumberOfQuestions(totalQuestions);
   }, [totalQuestions]);
 
   return (
@@ -31,7 +33,7 @@ export function QuizDifficulty({ dispatch, difficulty, totalQuestions }: Props) 
         {LEVELS.map((level, index) => (
           <button
             key={index}
-            className={`rounded-md border border-slate-700 px-4 py-1.5 text-sm font-medium capitalize text-slate-50 hover:bg-blue-400 hover:text-slate-100 ${difficulty === level ? 'bg-blue-400' : null}`}
+            className={`rounded-md border border-slate-700 px-4 py-1.5 text-sm font-medium capitalize text-slate-50 transition-colors duration-150 hover:bg-blue-400 hover:text-slate-100 ${difficulty === level ? 'bg-blue-400' : null}`}
             onClick={() => dispatch({ type: Type.SELECT_DIFFICULTY, payload: level })}
           >
             {level}
@@ -43,17 +45,24 @@ export function QuizDifficulty({ dispatch, difficulty, totalQuestions }: Props) 
         <div className="flex items-center justify-center space-x-4">
           <input
             type="range"
-            value={range}
+            value={numberOfQuestions}
             min={1}
             max={totalQuestions}
             onChange={handleSetNumberOfQuestions}
           />
-          <span className="font-bold">{range}</span>
+          <span className="font-bold">{numberOfQuestions}</span>
         </div>
       </div>
       <div className="mx-auto flex max-w-md items-center justify-between">
-        <button className="rounded-sm bg-slate-700 px-3 py-1.5 text-sm">Change language</button>
-        <button className="rounded-sm bg-blue-500 px-3 py-1.5 text-sm">Next</button>
+        <button className="rounded-sm bg-slate-700 px-3 py-1.5 text-sm transition-colors duration-150 hover:bg-slate-800">
+          Change language
+        </button>
+        <button
+          className="rounded-sm bg-blue-500 px-3 py-1.5 text-sm transition-colors duration-150 hover:bg-blue-600"
+          onClick={() => dispatch({ type: Type.GENERATE })}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

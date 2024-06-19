@@ -22,14 +22,13 @@ const languages = {
 export function QuizStart({ dispatch }: Props) {
   return (
     <div className="space-y-8 text-center">
-      <h2 className="mb-2 text-base text-slate-300 sm:text-xl">
+      <h2 className="mb-2 text-balance text-base text-slate-300 sm:text-lg">
         <strong className="text-blue-300">Ninjas</strong>, unite! Time to conquer the untamed
-        frontiers of HTML, CSS, JavaScript, TypeScript, and React. Prove your front-end mastery
-        starts now!
+        frontiers of HTML, CSS, JavaScript, TypeScript, and React. Prove your front-end mastery!
       </h2>
       <div className="space-y-6">
         <p className="text-slate-400">Select a language to start your mastery!</p>
-        <div className="flex items-center justify-center space-x-2">
+        <div className="flex flex-wrap items-center justify-center gap-2">
           {LANGUAGES.map((language, index) => {
             const LanguageLogo = languages[language];
 
