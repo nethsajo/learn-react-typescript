@@ -54,7 +54,10 @@ export function QuizDifficulty({ dispatch, difficulty, totalQuestions }: Props) 
         </div>
       </div>
       <div className="mx-auto flex max-w-md items-center justify-between">
-        <button className="rounded-sm bg-slate-700 px-3 py-1.5 text-sm transition-colors duration-150 hover:bg-slate-800">
+        <button
+          className="rounded-sm bg-slate-700 px-3 py-1.5 text-sm transition-colors duration-150 hover:bg-slate-800"
+          onClick={() => dispatch({ type: Type.CHANGE_CATEGORY })}
+        >
           Change language
         </button>
         <button

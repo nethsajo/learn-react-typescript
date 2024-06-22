@@ -22,6 +22,7 @@ export enum Type {
   DATA_FAILED = 'DATA_FAILED',
   START = 'START',
   SELECT_CATEGORY = 'SELECT_CATEGORY',
+  CHANGE_CATEGORY = 'CHANGE_CATEGORY',
   SELECT_DIFFICULTY = 'SELECT_DIFFICULTY',
   SET_NUMBER_OF_QUESTIONS = 'SET_NUMBER_OF_QUESTIONS',
   GENERATE = 'GENERATE',
@@ -49,6 +50,7 @@ export type Action =
   | ActionWithType<Type.DATA_RECEIVED, Questions[]>
   | ActionWithType<Type.DATA_FAILED>
   | ActionWithType<Type.SELECT_CATEGORY, string>
+  | ActionWithType<Type.CHANGE_CATEGORY>
   | ActionWithType<Type.SELECT_DIFFICULTY, string>
   | ActionWithType<Type.SET_NUMBER_OF_QUESTIONS, number>
   | ActionWithType<Type.GENERATE>
@@ -121,6 +123,15 @@ const reducer: Reducer<State, Action> = (state, action): State => {
         status: 'for_processing',
         category: action.payload ?? '',
         questions: found?.questions ?? [],
+      };
+    case Type.CHANGE_CATEGORY:
+      return {
+        ...state,
+        status: 'ready',
+        category: '',
+        questions: [],
+        totalQuestions: MAX_NUMBER_OF_QUESTIONS,
+        takeQuestions: MAX_NUMBER_OF_TAKE_QUESTIONS,
       };
     case Type.SELECT_DIFFICULTY:
       const questions = state.questions.filter(question => question.difficulty === action.payload);
@@ -199,6 +210,7 @@ export default function App() {
       status,
       category,
       difficulty,
+      takeQuestions,
       totalQuestions,
       questions,
       index,
@@ -245,7 +257,12 @@ export default function App() {
         />
       )}
       {status === 'begin' && (
-        <QuizBegin language={category} difficulty={difficulty} total={totalQuestions} />
+        <QuizBegin
+          dispatch={dispatch}
+          language={category}
+          difficulty={difficulty}
+          total={takeQuestions}
+        />
       )}
       {status === 'active' && (
         <>
