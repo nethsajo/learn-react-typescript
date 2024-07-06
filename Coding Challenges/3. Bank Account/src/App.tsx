@@ -24,9 +24,9 @@ type Action<T extends keyof typeof Transaction, P = void> = {
 
 export type Actions =
   | Action<Transaction.SET_OPEN_ACCOUNT>
-  | Action<Transaction.SET_DEPOSIT_ACCOUNT>
-  | Action<Transaction.SET_WITHDRAW_ACCOUNT>
-  | Action<Transaction.SET_REQUEST_LOAN>
+  | Action<Transaction.SET_DEPOSIT_ACCOUNT, number>
+  | Action<Transaction.SET_WITHDRAW_ACCOUNT, number>
+  | Action<Transaction.SET_REQUEST_LOAN, number>
   | Action<Transaction.SET_PAY_LOAN>
   | Action<Transaction.SET_CLOSE_ACCOUNT>;
 
@@ -37,7 +37,9 @@ const initialState: State = {
   isLoanRequested: false,
 };
 
-const reducer: Reducer<State, Actions> = (state, action) => {
+const reducer: Reducer<State, Actions> = (state, action): State => {
+  if (!state.isOpen && action.type !== Transaction.SET_OPEN_ACCOUNT) return state;
+
   switch (action.type) {
     case Transaction.SET_OPEN_ACCOUNT:
       return {
@@ -48,31 +50,31 @@ const reducer: Reducer<State, Actions> = (state, action) => {
     case Transaction.SET_DEPOSIT_ACCOUNT:
       return {
         ...state,
-        balance: state.balance + 150,
+        balance: state.balance + (action.payload ?? 0),
       };
     case Transaction.SET_WITHDRAW_ACCOUNT:
       return {
         ...state,
-        balance: state.balance - 50,
+        balance: state.balance - (action.payload ?? 0),
       };
     case Transaction.SET_REQUEST_LOAN:
+      if (state.loan > 0) return state;
+
       return {
         ...state,
         isLoanRequested: true,
-        loan: state.loan + 5000,
-        balance: state.balance + 5000,
+        loan: state.loan + (action.payload ?? 0),
+        balance: state.balance + (action.payload ?? 0),
       };
     case Transaction.SET_PAY_LOAN:
       return {
         ...state,
         isLoanRequested: false,
         loan: 0,
-        balance: state.balance - 5000,
+        balance: state.balance - state.loan,
       };
     case Transaction.SET_CLOSE_ACCOUNT:
-      if (state.balance === 0 && state.loan === 0) {
-        return initialState;
-      }
+      if (state.balance === 0 && state.loan === 0) return initialState;
 
       return state;
     default:
@@ -87,13 +89,13 @@ export default function App() {
     dispatch({ type: Transaction.SET_OPEN_ACCOUNT });
   };
   const handleDeposit = () => {
-    dispatch({ type: Transaction.SET_DEPOSIT_ACCOUNT });
+    dispatch({ type: Transaction.SET_DEPOSIT_ACCOUNT, payload: 150 });
   };
   const handleWithdraw = () => {
-    dispatch({ type: Transaction.SET_WITHDRAW_ACCOUNT });
+    dispatch({ type: Transaction.SET_WITHDRAW_ACCOUNT, payload: 50 });
   };
   const handleRequestLoan = () => {
-    dispatch({ type: Transaction.SET_REQUEST_LOAN });
+    dispatch({ type: Transaction.SET_REQUEST_LOAN, payload: 5000 });
   };
   const handlePayLoan = () => {
     dispatch({ type: Transaction.SET_PAY_LOAN });
@@ -105,14 +107,14 @@ export default function App() {
   return (
     <div className="mx-auto flex max-w-md flex-col items-center space-y-6 pt-11">
       <header className="flex flex-col items-center space-y-2">
-        <h1>useReducer Bank Account</h1>
+        <h1 className="text-lg font-bold">useReducer Bank Account</h1>
         <div className="grid grid-cols-[100px_1fr]">
-          <p>Balance</p>
-          <p>{state.balance}</p>
+          <p className="text-sm font-medium">Balance</p>
+          <p className="text-sm">{state.balance}</p>
         </div>
         <div className="grid grid-cols-[100px_1fr]">
-          <p>Loan</p>
-          <p>{state.loan}</p>
+          <p className="text-sm font-medium">Loan</p>
+          <p className="text-sm">{state.loan}</p>
         </div>
       </header>
       <div className="flex flex-wrap justify-center gap-1">
