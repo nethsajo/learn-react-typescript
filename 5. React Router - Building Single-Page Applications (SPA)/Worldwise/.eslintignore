@@ -1,0 +1,17 @@
+# directories
+node_modules/
+dist/
+build/
+.pnpm-store/
+
+
+# configs
+*.config.js
+*.config.ts
+*.config.mjs
+*.config.cjs
+
+# locks
+*-lock.json
+*-lock.yaml
+*.lock
