@@ -1,3 +1,9 @@
+import { PageLayout } from '@/components/layout/page';
+
 export default function PricingPage() {
-  return <div>Hello from Pricing page</div>
+  return (
+    <PageLayout>
+      <h1>Hello from Pricing Page!</h1>
+    </PageLayout>
+  );
 }
