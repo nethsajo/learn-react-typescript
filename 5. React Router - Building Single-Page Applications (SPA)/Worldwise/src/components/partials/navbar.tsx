@@ -18,10 +18,12 @@ export function Navbar() {
         <div
           className={`${isToggle ? 'pointer-events-auto visible translate-x-0 translate-y-0 opacity-100' : 'pointer-events-none invisible translate-x-full translate-y-full opacity-0'} fixed left-0 top-0 h-full w-full bg-black/40 backdrop-blur-sm transition-all duration-300 ease-in md:pointer-events-auto md:visible md:static md:w-auto md:translate-x-0 md:translate-y-0 md:bg-transparent md:opacity-100`}
         >
-          <div className="flex h-full flex-col items-center justify-center space-y-8 font-medium uppercase text-slate-200 md:flex-row md:space-x-8 md:space-y-0">
+          <div className="flex h-full flex-col items-center justify-center space-y-10 text-base font-medium uppercase text-slate-200 md:flex-row md:space-x-10 md:space-y-0">
             <Link to="/pricing">Pricing</Link>
-            <Link to="/product">Product</Link>
-            <Link to="/login">Login</Link>
+            <Link to="/product">About</Link>
+            <Link to="/login" className="rounded-sm bg-emerald-500 px-4 py-1.5 text-gray-700">
+              Login
+            </Link>
           </div>
         </div>
         <button onClick={handleToggleNav} className="z-10 flex text-slate-200 md:hidden">
