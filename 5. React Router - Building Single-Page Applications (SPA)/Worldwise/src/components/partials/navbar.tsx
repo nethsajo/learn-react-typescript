@@ -21,7 +21,7 @@ export function Navbar() {
           <div className="flex h-full flex-col items-center justify-center space-y-10 text-base font-medium uppercase text-slate-200 md:flex-row md:space-x-10 md:space-y-0">
             <Link to="/pricing">Pricing</Link>
             <Link to="/product">About</Link>
-            <Link to="/login" className="rounded-sm bg-emerald-500 px-4 py-1.5 text-gray-700">
+            <Link to="/login" className="rounded-sm bg-emerald-500 px-4 py-1.5 text-slate-200">
               Login
             </Link>
           </div>

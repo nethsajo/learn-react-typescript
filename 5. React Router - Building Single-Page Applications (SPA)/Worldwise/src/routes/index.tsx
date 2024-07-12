@@ -16,7 +16,7 @@ export default function HomePage() {
           </h2>
           <Link
             to="/login"
-            className="inline-flex rounded-md bg-emerald-500 px-6 py-2 text-base font-semibold uppercase text-gray-700 sm:text-lg"
+            className="inline-flex rounded-md bg-emerald-500 px-6 py-2 text-base font-medium uppercase text-slate-100 sm:text-lg"
           >
             Start tracking now
           </Link>
@@ -25,3 +25,5 @@ export default function HomePage() {
     </PageLayout>
   );
 }
+
+2025;
