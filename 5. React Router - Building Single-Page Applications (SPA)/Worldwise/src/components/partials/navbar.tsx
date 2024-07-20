@@ -13,7 +13,7 @@ export function Navbar() {
     <header>
       <div className="flex items-center justify-between">
         <Link to="/">
-          <img src="/logo.png" alt="Worldwise Logo" className="h-12" />
+          <img src="/logo.png" alt="Worldwise Logo" className="h-10 sm:h-12" />
         </Link>
         <div
           className={`${isToggle ? 'pointer-events-auto visible translate-x-0 translate-y-0 opacity-100' : 'pointer-events-none invisible translate-x-full translate-y-full opacity-0'} fixed left-0 top-0 h-full w-full bg-black/40 backdrop-blur-sm transition-all duration-300 ease-in md:pointer-events-auto md:visible md:static md:w-auto md:translate-x-0 md:translate-y-0 md:bg-transparent md:opacity-100`}
