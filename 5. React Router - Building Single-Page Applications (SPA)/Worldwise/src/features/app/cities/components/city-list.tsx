@@ -1,4 +1,5 @@
 import { useCitiesQuery } from '@/hooks/query/use-cities-query';
+import { formatDate } from '@/utils/format-date';
 import { X } from 'lucide-react';
 
 export function CityList() {
@@ -27,8 +28,8 @@ export function CityList() {
               className="h-full rounded-sm ring-1 ring-slate-600"
             />
           </span>
-          <h3 className="mr-auto text-slate-300">{city.cityName}</h3>
-          <time className="text-slate-400">{city.date}</time>
+          <h3 className="mr-auto font-medium text-slate-200">{city.cityName}</h3>
+          <time className="text-right text-slate-400">{formatDate(city.date)}</time>
           <button className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-slate-700 shadow-sm ring-1 ring-slate-700 transition-colors duration-150 hover:bg-slate-800 active:bg-slate-900">
             <X className="h-3 w-3 fill-current" />
           </button>
