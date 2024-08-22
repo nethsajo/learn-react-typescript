@@ -6,6 +6,7 @@ import HomePage from './routes';
 import AboutPage from './routes/about';
 import AppPage from './routes/app';
 import CitiesPage from './routes/cities';
+import CountriesPage from './routes/countries';
 import LoginPage from './routes/login';
 import NotFoundPage from './routes/not-found';
 import PricingPage from './routes/pricing';
@@ -24,7 +25,7 @@ export default function App() {
           <Route path="/app" element={<AppPage />}>
             <Route index element={<CitiesPage />}></Route>
             <Route path="cities" element={<CitiesPage />}></Route>
-            <Route path="countries" element={<p>List of countries</p>}></Route>
+            <Route path="countries" element={<CountriesPage />}></Route>
             <Route path="form" element={<p>Form</p>}></Route>
           </Route>
           {/* Will be matched if none of the other routes are matched */}
