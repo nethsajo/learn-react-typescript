@@ -6,4 +6,5 @@ export const ROUTES = {
   APP: '/app',
   CITIES: 'cities',
   COUNTRIES: 'countries',
+  FORM: 'form',
 } as const;
