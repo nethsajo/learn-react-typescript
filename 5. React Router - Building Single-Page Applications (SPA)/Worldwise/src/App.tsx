@@ -3,6 +3,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Route, Routes } from 'react-router-dom';
 import { RootLayout } from './components/layout/root';
 import { ROUTES } from './constants/routes';
+import { AddCityForm } from './features/app/cities/components/add-city-form';
 import HomePage from './routes';
 import AboutPage from './routes/about';
 import AppPage from './routes/app';
@@ -29,7 +30,7 @@ export default function App() {
             <Route path={ROUTES.CITIES} element={<CitiesPage />}></Route>
             <Route path={`${ROUTES.CITIES}/:id`} element={<CityPage />}></Route>
             <Route path={ROUTES.COUNTRIES} element={<CountriesPage />}></Route>
-            <Route path="form" element={<p>Form</p>}></Route>
+            <Route path={ROUTES.FORM} element={<AddCityForm />}></Route>
           </Route>
           {/* Will be matched if none of the other routes are matched */}
           <Route path="*" element={<NotFoundPage />}></Route>
