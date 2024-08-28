@@ -8,7 +8,7 @@ export interface ButtonProps
 }
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-black focus-visible:outline-none <focus-visible:ring-2></focus-visible:ring-2> focus-visible:ring-[#020817] disabled:pointer-events-none disabled:opacity-50 transition-colors',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 disabled:pointer-events-none disabled:opacity-50 transition-colors',
   {
     variants: {
       variant: {
@@ -34,9 +34,9 @@ const buttonVariants = cva(
   }
 );
 
-const Button = ({ className, variant, size, children, ...props }: ButtonProps) => {
+const Button = ({ className, variant, size, children, type = 'button', ...props }: ButtonProps) => {
   return (
-    <button className={cn(buttonVariants({ variant, size, className }))} {...props}>
+    <button type={type} {...props} className={cn(buttonVariants({ variant, size, className }))}>
       {children}
     </button>
   );

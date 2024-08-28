@@ -41,11 +41,9 @@ export function AddCityForm() {
           className="block w-full resize-none rounded-md border-0 bg-gray-200 bg-transparent py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
         />
       </div>
-      <div className="flex items-center">
-        <Button type="submit" variant="link">
-          Add
-        </Button>
-        <button className="ml-auto">Back</button>
+      <div className="flex items-center justify-between">
+        <Button type="submit">Add</Button>
+        <Button variant="secondary">Back</Button>
       </div>
     </form>
   );
