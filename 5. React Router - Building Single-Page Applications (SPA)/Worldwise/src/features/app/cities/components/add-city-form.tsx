@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { ChevronLeft } from 'lucide-react';
 import { type FormEvent } from 'react';
 
 export function AddCityForm() {
@@ -16,7 +17,7 @@ export function AddCityForm() {
           type="text"
           id="city"
           readOnly
-          className="block w-full rounded-md border-0 bg-gray-200 bg-transparent py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-400 read-only:bg-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
+          className="block w-full rounded-md border-0 bg-gray-200 bg-transparent py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-400 read-only:bg-gray-300 read-only:ring-0 focus:ring-2 focus:ring-inset focus:ring-emerald-600 read-only:focus:ring-0 sm:text-sm sm:leading-6"
         />
       </div>
       <div className="flex flex-col space-y-1.5">
@@ -42,8 +43,11 @@ export function AddCityForm() {
         />
       </div>
       <div className="flex items-center justify-between">
-        <Button type="submit">Add</Button>
-        <Button variant="secondary">Back</Button>
+        <Button variant="secondary">
+          <ChevronLeft className="stroke-current" />
+          Back
+        </Button>
+        <Button type="submit">Submit</Button>
       </div>
     </form>
   );
