@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { type FormEvent } from 'react';
 
 export function AddCityForm() {
@@ -15,7 +16,7 @@ export function AddCityForm() {
           type="text"
           id="city"
           readOnly
-          className="block w-full rounded-md border-0 bg-gray-200 bg-transparent py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
+          className="block w-full rounded-md border-0 bg-gray-200 bg-transparent py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-400 read-only:bg-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
         />
       </div>
       <div className="flex flex-col space-y-1.5">
@@ -26,7 +27,7 @@ export function AddCityForm() {
           type="date"
           name="date"
           id="date"
-          className="block w-full rounded-md border-0 bg-gray-200 bg-transparent py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
+          className="block w-full rounded-md border-0 bg-gray-200 bg-transparent py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
         />
       </div>
       <div className="flex flex-col space-y-1.5">
@@ -37,11 +38,13 @@ export function AddCityForm() {
           rows={3}
           name="notes"
           id="notes"
-          className="block w-full resize-none rounded-md border-0 bg-gray-200 bg-transparent py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
+          className="block w-full resize-none rounded-md border-0 bg-gray-200 bg-transparent py-1.5 text-gray-300 shadow-sm ring-1 ring-inset ring-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6"
         />
       </div>
       <div className="flex items-center">
-        <button>Add</button>
+        <Button type="submit" variant="link">
+          Add
+        </Button>
         <button className="ml-auto">Back</button>
       </div>
     </form>
