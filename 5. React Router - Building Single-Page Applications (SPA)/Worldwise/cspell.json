@@ -1,7 +1,7 @@
 {
   "version": "0.2",
   "language": "en",
-  "words": ["Worldwise", "tailwindcss", "lucide", "tanstack"],
+  "words": ["Worldwise", "tailwindcss", "lucide", "tanstack", "clsx"],
   "ignorePaths": [
     "./node_modules",
     "./build",
