@@ -31,7 +31,7 @@ export function Navbar() {
             >
               About
             </NavLink>
-            <Link to="/login" className="rounded-sm bg-emerald-500 px-4 py-1.5 text-slate-200">
+            <Link to="/login" className="rounded-sm bg-emerald-500 px-4 py-1.5 text-gray-100">
               Login
             </Link>
           </div>
