@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { RootLayout } from './components/layout/root';
 import { ROUTES } from './constants/routes';
 import { AddCityForm } from './features/app/cities/components/add-city-form';
@@ -26,7 +26,10 @@ export default function App() {
           <Route path={ROUTES.PRICING} element={<PricingPage />}></Route>
           <Route path={ROUTES.LOGIN} element={<LoginPage />}></Route>
           <Route path={ROUTES.APP} element={<AppPage />}>
-            <Route index element={<CitiesPage />}></Route>
+            {/* Immediately navigate to the /cities using the Navigate component  */}
+            {/* In order to fix the back, we need to add the `replace` keyword  */}
+            {/* Replace - it will replace the current element in the history stack */}
+            <Route index element={<Navigate replace to={ROUTES.CITIES} />}></Route>
             <Route path={ROUTES.CITIES} element={<CitiesPage />}></Route>
             <Route path={`${ROUTES.CITIES}/:id`} element={<CityPage />}></Route>
             <Route path={ROUTES.COUNTRIES} element={<CountriesPage />}></Route>
