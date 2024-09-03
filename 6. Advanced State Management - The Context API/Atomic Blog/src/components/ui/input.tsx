@@ -8,12 +8,17 @@ export interface InputProps
 }
 
 const inputVariants = cva(
-  'block w-full rounded-md h-10 px-3 py-2 shadow-sm read-only:focus:ring-0 read-only:ring-0 sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-600 disabled:cursor-not-allowed disabled:opacity-50',
+  'block w-full rounded-md px-3 py-2 shadow-sm read-only:focus:ring-0 read-only:ring-0 sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       variant: {
-        filled: 'bg-gray-200 read-only:bg-gray-300 ring-gray-400',
-        outline: 'border border-zinc-400/60 bg-transparent text-gray-200 dark:[color-scheme:dark]',
+        filled: 'bg-white read-only:bg-gray-300',
+        outline: 'border border-zinc-400/60 bg-transparent text-gray-800 placeholder:text-gray-500',
+      },
+      scale: {
+        sm: 'h-8',
+        lg: 'h-9',
+        xl: 'h-11',
       },
     },
     defaultVariants: {
@@ -22,8 +27,10 @@ const inputVariants = cva(
   }
 );
 
-const Input = ({ type = 'text', className, variant, ...props }: InputProps) => {
-  return <input type={type} {...props} className={cn(inputVariants({ variant, className }))} />;
+const Input = ({ type = 'text', className, scale, variant, ...props }: InputProps) => {
+  return (
+    <input type={type} {...props} className={cn(inputVariants({ variant, scale, className }))} />
+  );
 };
 
 export { Input };
