@@ -4,7 +4,7 @@ import { Atom } from 'lucide-react';
 
 export function Header() {
   return (
-    <header className="grid w-full grid-cols-[1fr_auto] items-center gap-x-2 gap-y-4 md:grid-cols-[1fr_auto_auto_auto]">
+    <header className="grid w-full grid-cols-[1fr_auto] items-center gap-x-4 gap-y-4 md:grid-cols-[1fr_auto_auto_auto]">
       <div className="inline-flex items-center space-x-1 text-gray-900">
         <Atom size={32} className="stroke-indigo-900" />
         <h1 className="text-xl font-bold sm:text-2xl">The Atomic Blog</h1>
