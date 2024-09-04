@@ -16,25 +16,35 @@ export function Header({ blogCount, query, setQuery, onClearBlog }: HeaderProps)
   };
 
   return (
-    <header className="grid w-full grid-cols-[1fr_auto] items-center gap-x-4 gap-y-4 md:grid-cols-[1fr_auto_auto_auto]">
-      <div className="inline-flex items-center space-x-1 text-gray-900">
-        <Atom size={32} className="stroke-indigo-900" />
-        <h1 className="text-xl font-bold sm:text-2xl">The Atomic Blog</h1>
+    <header className="flex flex-col space-y-6">
+      <div className="grid w-full grid-cols-8 grid-rows-2 items-center gap-x-4 gap-y-4 sm:grid-rows-none">
+        <div className="col-span-full inline-flex items-center space-x-1 text-gray-900 sm:col-span-4">
+          <Atom size={32} className="stroke-indigo-900" />
+          <h1 className="text-xl font-bold sm:text-2xl">The Atomic Blog</h1>
+        </div>
+        <Input
+          id="search"
+          scale="lg"
+          variant="outline"
+          placeholder="Search posts..."
+          value={query}
+          onChange={handleChangeQuery}
+          className="col-span-6 sm:col-span-3"
+        />
+        <Button
+          size="lg"
+          variant="default"
+          onClick={onClearBlog}
+          className="col-span-2 sm:col-span-1"
+        >
+          Clear
+        </Button>
       </div>
-      <p className="w-full font-medium text-gray-500">
-        🚀 <span className="text-sm font-bold text-gray-900">{blogCount}</span> atomic posts found
-      </p>
-      <Input
-        id="search"
-        scale="lg"
-        variant="outline"
-        placeholder="Search posts..."
-        value={query}
-        onChange={handleChangeQuery}
-      />
-      <Button size="lg" variant="default" onClick={onClearBlog}>
-        Clear posts
-      </Button>
+      <div className="">
+        <p className="w-full font-medium text-gray-500">
+          🚀 <span className="text-sm font-bold text-gray-900">{blogCount}</span> atomic posts found
+        </p>
+      </div>
     </header>
   );
 }

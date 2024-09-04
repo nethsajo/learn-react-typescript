@@ -48,7 +48,7 @@ export function AddBlogForm({ onSubmitBlog }: AddBlogFormProps) {
           onChange={handleChangeBody}
         />
         <div className="flex justify-end">
-          <Button type="submit">Add post</Button>
+          <Button type="submit">Submit</Button>
         </div>
       </form>
     </div>
