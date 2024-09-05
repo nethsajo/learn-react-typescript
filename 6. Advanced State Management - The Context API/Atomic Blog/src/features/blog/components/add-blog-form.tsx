@@ -6,9 +6,10 @@ import { useState, type ChangeEvent, type FormEvent } from 'react';
 
 export type AddBlogFormProps = {
   onSubmitBlog: (blog: Blog) => void;
+  onCloseForm: () => void;
 };
 
-export function AddBlogForm({ onSubmitBlog }: AddBlogFormProps) {
+export function AddBlogForm({ onSubmitBlog, onCloseForm }: AddBlogFormProps) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
@@ -47,7 +48,10 @@ export function AddBlogForm({ onSubmitBlog }: AddBlogFormProps) {
           value={body}
           onChange={handleChangeBody}
         />
-        <div className="flex justify-end">
+        <div className="flex justify-end space-x-2">
+          <Button variant="secondary" onClick={onCloseForm}>
+            Cancel
+          </Button>
           <Button type="submit">Submit</Button>
         </div>
       </form>

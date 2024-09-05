@@ -8,9 +8,10 @@ export type HeaderProps = {
   query: string;
   setQuery: (value: string) => void;
   onClearBlog: () => void;
+  onOpenForm: () => void;
 };
 
-export function Header({ blogCount, query, setQuery, onClearBlog }: HeaderProps) {
+export function Header({ blogCount, query, setQuery, onClearBlog, onOpenForm }: HeaderProps) {
   const handleChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
@@ -40,10 +41,13 @@ export function Header({ blogCount, query, setQuery, onClearBlog }: HeaderProps)
           Clear
         </Button>
       </div>
-      <div className="">
-        <p className="w-full font-medium text-gray-500">
+      <div className="flex items-center">
+        <p className="font-medium text-gray-500">
           🚀 <span className="text-sm font-bold text-gray-900">{blogCount}</span> atomic posts found
         </p>
+        <Button className="ml-auto" onClick={onOpenForm}>
+          Create post
+        </Button>
       </div>
     </header>
   );
