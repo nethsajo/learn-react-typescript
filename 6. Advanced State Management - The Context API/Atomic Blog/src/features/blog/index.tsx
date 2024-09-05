@@ -1,3 +1,4 @@
+import { PostContext } from '@/contexts/post';
 import { type Blog } from '@/types/blog';
 import { useState } from 'react';
 import { AddBlogForm } from './components/add-blog-form';
@@ -7,7 +8,8 @@ import { createRandomPost } from './utils/create-random-post';
 
 export default function AtomicBlog() {
   const [query, setQuery] = useState('');
-  const [isOpenForm, setIsOpenForm] = useState(false);
+  const [isToggle, setIsToggle] = useState(false);
+  //The callback function will only run in initial render
   const [blogs, setBlogs] = useState<Blog[]>(() =>
     Array.from({ length: 30 }, () => createRandomPost())
   );
@@ -16,29 +18,23 @@ export default function AtomicBlog() {
     setBlogs(blogs => [...blogs, blog]);
   };
 
-  const handleClearBlog = () => {
-    setBlogs([]);
-  };
+  const handleClearBlog = () => setBlogs([]);
 
-  const handleOpenForm = () => setIsOpenForm(true);
-  const handleCloseForm = () => setIsOpenForm(false);
+  const handleToggleForm = () => setIsToggle(toggle => !toggle);
 
+  // Derived state. These are the posts that will actually be displayed
   const posts =
     query.length > 0
       ? blogs.filter(blog => `${blog.title} ${blog.body}`.toLowerCase().includes(query))
       : blogs;
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col space-y-8 px-4 py-12 sm:px-6">
-      <Header
-        query={query}
-        blogCount={posts.length}
-        setQuery={setQuery}
-        onClearBlog={handleClearBlog}
-        onOpenForm={handleOpenForm}
-      />
-      {isOpenForm && <AddBlogForm onSubmitBlog={handleSubmitBlog} onCloseForm={handleCloseForm} />}
-      <BlogList blogs={posts} />
-    </div>
+    <PostContext.Provider value={{ isToggle, posts, onToggleForm: handleToggleForm }}>
+      <div className="mx-auto flex max-w-7xl flex-col space-y-8 px-4 py-12 sm:px-6">
+        <Header query={query} setQuery={setQuery} onClearBlog={handleClearBlog} />
+        {isToggle && <AddBlogForm onSubmitBlog={handleSubmitBlog} />}
+        <BlogList />
+      </div>
+    </PostContext.Provider>
   );
 }

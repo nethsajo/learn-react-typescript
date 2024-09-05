@@ -1,15 +1,16 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { PostContext } from '@/contexts/post';
 import { type Blog } from '@/types/blog';
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useContext, useState, type ChangeEvent, type FormEvent } from 'react';
 
 export type AddBlogFormProps = {
   onSubmitBlog: (blog: Blog) => void;
-  onCloseForm: () => void;
 };
 
-export function AddBlogForm({ onSubmitBlog, onCloseForm }: AddBlogFormProps) {
+export function AddBlogForm({ onSubmitBlog }: AddBlogFormProps) {
+  const context = useContext(PostContext);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
@@ -49,7 +50,7 @@ export function AddBlogForm({ onSubmitBlog, onCloseForm }: AddBlogFormProps) {
           onChange={handleChangeBody}
         />
         <div className="flex justify-end space-x-2">
-          <Button variant="secondary" onClick={onCloseForm}>
+          <Button variant="secondary" onClick={context.onToggleForm}>
             Cancel
           </Button>
           <Button type="submit">Submit</Button>

@@ -1,13 +1,12 @@
-import { type Blog } from '@/types/blog';
+import { PostContext } from '@/contexts/post';
+import { useContext } from 'react';
 
-export type BlogProps = {
-  blogs: Blog[];
-};
+export function BlogList() {
+  const context = useContext(PostContext);
 
-export function BlogList({ blogs }: BlogProps) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {blogs.map((post, index) => {
+      {context.posts.map((post, index) => {
         return (
           <div
             key={`post--${index}`}

@@ -1,17 +1,18 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PostContext } from '@/contexts/post';
 import { Atom } from 'lucide-react';
-import { type ChangeEvent } from 'react';
+import { useContext, type ChangeEvent } from 'react';
 
 export type HeaderProps = {
-  blogCount: number;
   query: string;
   setQuery: (value: string) => void;
   onClearBlog: () => void;
-  onOpenForm: () => void;
 };
 
-export function Header({ blogCount, query, setQuery, onClearBlog, onOpenForm }: HeaderProps) {
+export function Header({ query, setQuery, onClearBlog }: HeaderProps) {
+  const context = useContext(PostContext);
+
   const handleChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
@@ -43,9 +44,10 @@ export function Header({ blogCount, query, setQuery, onClearBlog, onOpenForm }: 
       </div>
       <div className="flex items-center">
         <p className="font-medium text-gray-500">
-          🚀 <span className="text-sm font-bold text-gray-900">{blogCount}</span> atomic posts found
+          🚀 <span className="text-sm font-bold text-gray-900">{context.posts.length}</span> atomic
+          posts found
         </p>
-        <Button className="ml-auto" onClick={onOpenForm}>
+        <Button className="ml-auto" onClick={context.onToggleForm} disabled={context.isToggle}>
           Create post
         </Button>
       </div>
