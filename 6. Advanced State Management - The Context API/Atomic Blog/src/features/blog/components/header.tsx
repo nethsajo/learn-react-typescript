@@ -1,21 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { PostContext } from '@/contexts/post';
 import { Atom } from 'lucide-react';
 import { useContext, type ChangeEvent } from 'react';
+import { PostContext } from '../contexts/post';
 
-export type HeaderProps = {
-  query: string;
-  setQuery: (value: string) => void;
-  onClearBlog: () => void;
-};
-
-export function Header({ query, setQuery, onClearBlog }: HeaderProps) {
+export function Header() {
   const context = useContext(PostContext);
-
-  const handleChangeQuery = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
-  };
 
   return (
     <header className="flex flex-col space-y-6">
@@ -29,14 +19,16 @@ export function Header({ query, setQuery, onClearBlog }: HeaderProps) {
           scale="lg"
           variant="outline"
           placeholder="Search posts..."
-          value={query}
-          onChange={handleChangeQuery}
+          value={context.query}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            context.onSetQuery(event.target.value)
+          }
           className="col-span-6 sm:col-span-3"
         />
         <Button
           size="lg"
           variant="default"
-          onClick={onClearBlog}
+          onClick={context.onClearBlog}
           className="col-span-2 sm:col-span-1"
         >
           Clear
