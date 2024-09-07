@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Atom } from 'lucide-react';
-import { useContext, type ChangeEvent } from 'react';
-import { PostContext } from '../contexts/post';
+import { type ChangeEvent } from 'react';
+import { usePosts } from '../contexts/post';
 
 export function Header() {
-  const context = useContext(PostContext);
+  const context = usePosts();
 
   return (
     <header className="flex flex-col space-y-6">

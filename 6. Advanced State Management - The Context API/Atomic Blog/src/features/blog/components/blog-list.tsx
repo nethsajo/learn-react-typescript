@@ -1,8 +1,7 @@
-import { useContext } from 'react';
-import { PostContext } from '../contexts/post';
+import { usePosts } from '../contexts/post';
 
 export function BlogList() {
-  const context = useContext(PostContext);
+  const context = usePosts();
 
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

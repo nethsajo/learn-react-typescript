@@ -1,6 +1,6 @@
 import { createRandomPost } from '@/features/blog/utils/create-random-post';
 import { type Blog } from '@/types/blog';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 // 1. CREATE CONTEXT
 
@@ -72,4 +72,9 @@ const PostProvider = ({ children }: Children) => {
   );
 };
 
-export { PostContext, PostProvider };
+const usePosts = () => {
+  const context = useContext(PostContext);
+  return context;
+};
+
+export { PostProvider, usePosts };

@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useContext, useState, type ChangeEvent, type FormEvent } from 'react';
-import { PostContext } from '../contexts/post';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { usePosts } from '../contexts/post';
 
 export function AddBlogForm() {
-  const context = useContext(PostContext);
+  const context = usePosts();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
