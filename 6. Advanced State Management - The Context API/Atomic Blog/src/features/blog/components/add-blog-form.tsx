@@ -1,36 +1,23 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { PostContext } from '@/contexts/post';
-import { type Blog } from '@/types/blog';
 import { useContext, useState, type ChangeEvent, type FormEvent } from 'react';
+import { PostContext } from '../contexts/post';
 
-export type AddBlogFormProps = {
-  onSubmitBlog: (blog: Blog) => void;
-};
-
-export function AddBlogForm({ onSubmitBlog }: AddBlogFormProps) {
+export function AddBlogForm() {
   const context = useContext(PostContext);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
-  const handleChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  };
-
-  const handleChangeBody = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setBody(event.target.value);
-  };
-
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    onSubmitBlog({ title, body });
+    context.onSubmitBlog({ title, body });
 
     setTitle('');
     setBody('');
   };
 
-  return (
+  return context.isToggle ? (
     <div className="w-full rounded-md bg-gray-100 p-4">
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
@@ -39,7 +26,7 @@ export function AddBlogForm({ onSubmitBlog }: AddBlogFormProps) {
           scale="sm"
           placeholder="Post title"
           value={title}
-          onChange={handleChangeTitle}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => setTitle(event.target.value)}
         />
         <Textarea
           id="body"
@@ -47,7 +34,7 @@ export function AddBlogForm({ onSubmitBlog }: AddBlogFormProps) {
           variant="outline"
           placeholder="Post body"
           value={body}
-          onChange={handleChangeBody}
+          onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setBody(event.target.value)}
         />
         <div className="flex justify-end space-x-2">
           <Button variant="secondary" onClick={context.onToggleForm}>
@@ -57,5 +44,5 @@ export function AddBlogForm({ onSubmitBlog }: AddBlogFormProps) {
         </div>
       </form>
     </div>
-  );
+  ) : null;
 }
