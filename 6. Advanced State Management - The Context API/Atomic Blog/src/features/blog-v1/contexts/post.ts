@@ -1,8 +1,6 @@
 import { type Blog } from '@/types/blog';
 import React from 'react';
 
-// 1. CREATE CONTEXT
-
 type State = {
   isToggle: boolean;
   posts: Blog[];
