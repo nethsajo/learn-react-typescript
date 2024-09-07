@@ -1,5 +1,5 @@
-import { PostContext } from '@/contexts/post';
 import { useContext } from 'react';
+import { PostContext } from '../contexts/post';
 
 export function BlogList() {
   const context = useContext(PostContext);
