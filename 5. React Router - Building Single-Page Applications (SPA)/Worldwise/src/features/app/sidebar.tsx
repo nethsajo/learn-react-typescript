@@ -1,5 +1,6 @@
 import { ROUTES } from '@/constants/routes';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
+import { SidebarLink } from './sidebar-link';
 
 export function Sidebar() {
   return (
@@ -9,23 +10,9 @@ export function Sidebar() {
           <Link to="/">
             <img src="/logo.png" alt="Worldwise Logo" className="h-10 sm:h-12" />
           </Link>
-          <div className="flex items-center rounded-md bg-gray-800 p-1" tabIndex={0}>
-            <NavLink
-              to={ROUTES.CITIES}
-              className={({ isActive }) =>
-                `inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-sm font-medium ring-offset-gray-800 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${isActive ? 'bg-gray-600 text-gray-200 shadow-sm' : 'bg-transparent text-gray-400'}`
-              }
-            >
-              Cities
-            </NavLink>
-            <NavLink
-              to={ROUTES.COUNTRIES}
-              className={({ isActive }) =>
-                `inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1 text-sm font-medium ring-offset-gray-800 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${isActive ? 'bg-gray-600 text-gray-200 shadow-sm' : 'bg-transparent text-gray-400'}`
-              }
-            >
-              Countries
-            </NavLink>
+          <div className="flex items-center rounded-md bg-gray-800 p-1 outline-none" tabIndex={0}>
+            <SidebarLink to={ROUTES.CITIES}>Cities</SidebarLink>
+            <SidebarLink to={ROUTES.COUNTRIES}>Countries</SidebarLink>
           </div>
           {/* The outlet element is just used to determine where child routes of parent routes should be displayed within the parent routes instead of a new page */}
           <Outlet />
