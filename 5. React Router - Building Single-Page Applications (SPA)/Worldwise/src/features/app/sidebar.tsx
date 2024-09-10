@@ -4,9 +4,9 @@ import { SidebarLink } from './sidebar-link';
 
 export function Sidebar() {
   return (
-    <div className="h-full w-[560px] rounded-bl-md rounded-tl-md bg-gray-700 p-6">
+    <div className="order-2 h-2/3 w-full bg-gray-700 p-4 lg:order-1 lg:h-full lg:w-[560px] lg:rounded-bl-md lg:rounded-tl-md lg:p-6">
       <div className="flex h-full flex-col items-center overflow-hidden">
-        <div className="flex w-full flex-col items-center space-y-8 px-10">
+        <div className="flex w-full flex-col items-center space-y-8 lg:px-10">
           <Link to="/">
             <img src="/logo.png" alt="Worldwise Logo" className="h-10 sm:h-12" />
           </Link>
