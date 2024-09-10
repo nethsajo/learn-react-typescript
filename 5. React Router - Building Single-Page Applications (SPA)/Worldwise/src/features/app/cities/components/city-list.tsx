@@ -16,20 +16,20 @@ export function CityList() {
     );
 
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex w-full flex-col space-y-4 sm:w-auto">
       {cities.map(city => (
         <Link to={`${city.id}?lat=${city.position.lat}&lng=${city.position.lng}`} key={city.id}>
-          <div className="grid grid-cols-[32px_1fr_1fr_24px] items-center gap-4 rounded-md border-l-4 border-l-emerald-500 bg-gray-600 px-4 py-2.5">
-            <picture className="h-6 max-h-6 w-8">
+          <div className="grid grid-cols-[32px_1fr_24px] grid-rows-2 items-center gap-x-4 rounded-md border-l-4 border-l-emerald-500 bg-gray-600 px-4 py-2.5 sm:grid-cols-[32px_1fr_1fr_24px] sm:grid-rows-1 lg:grid-rows-1">
+            <picture className="row-span-full h-6 max-h-6 w-8 sm:row-span-1">
               <img
                 src={`https://flagcdn.com/${city.abbreviation}.svg`}
                 alt={`Flag of ${city.abbreviation}`}
                 className="h-full w-full rounded-sm ring-1 ring-gray-600"
               />
             </picture>
-            <h3 className="mr-auto font-medium text-gray-200">{city.cityName}</h3>
-            <time className="text-right text-gray-400">{formatDate(city.date)}</time>
-            <button className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-700 shadow-sm ring-1 ring-gray-700 transition-colors duration-150 hover:bg-gray-800 active:bg-gray-900">
+            <h3 className="row-span-1 mr-auto font-medium text-gray-200">{city.cityName}</h3>
+            <time className="row-start-2 text-gray-400 sm:row-span-1">{formatDate(city.date)}</time>
+            <button className="col-span-2 row-span-full inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-700 shadow-sm ring-1 ring-gray-700 transition-colors duration-150 hover:bg-gray-800 active:bg-gray-900 sm:col-span-1 sm:row-span-1">
               <X className="h-3 w-3 fill-current" />
             </button>
           </div>
