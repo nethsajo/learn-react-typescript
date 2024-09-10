@@ -29,7 +29,7 @@ export function CityList() {
             </picture>
             <h3 className="row-span-1 mr-auto font-medium text-gray-200">{city.cityName}</h3>
             <time className="row-start-2 text-gray-400 sm:row-span-1">{formatDate(city.date)}</time>
-            <button className="col-span-2 row-span-full inline-flex h-6 w-6 items-center justify-center rounded-full bg-gray-700 shadow-sm ring-1 ring-gray-700 transition-colors duration-150 hover:bg-gray-800 active:bg-gray-900 sm:col-span-1 sm:row-span-1">
+            <button className="col-span-2 row-span-full inline-flex h-6 w-6 items-center justify-center justify-self-end rounded-full bg-gray-700 shadow-sm ring-1 ring-gray-700 transition-colors duration-150 hover:bg-gray-800 active:bg-gray-900 sm:col-span-1 sm:row-span-1 lg:justify-self-center">
               <X className="h-3 w-3 fill-current" />
             </button>
           </div>
