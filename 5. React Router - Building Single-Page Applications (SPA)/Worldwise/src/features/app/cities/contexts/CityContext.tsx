@@ -1,14 +1,29 @@
 import { type City } from '@/types/city';
-import React, { useContext } from 'react';
+import React, { type Dispatch, type SetStateAction, useContext, useState } from 'react';
 
 type Children = {
   children: React.ReactNode;
 };
 
-const CityContext = React.createContext<City | null>(null);
+type State = {
+  currentCity: City | null;
+  handleSetCurrentCity: Dispatch<SetStateAction<City | null>>;
+};
+
+const CityContext = React.createContext<State>({
+  currentCity: null,
+  handleSetCurrentCity: () => {},
+});
 
 const CityProvider = ({ children }: Children) => {
-  return <CityContext.Provider value={{ id: 1 }}>{children}</CityContext.Provider>;
+  const [currentCity, setCurrentCity] = useState<City | null>(null);
+
+  const values = {
+    currentCity,
+    handleSetCurrentCity: setCurrentCity,
+  };
+
+  return <CityContext.Provider value={values}>{children}</CityContext.Provider>;
 };
 
 const useCurrentCity = () => {
