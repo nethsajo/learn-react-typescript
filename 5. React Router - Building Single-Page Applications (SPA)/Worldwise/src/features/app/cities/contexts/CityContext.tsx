@@ -7,12 +7,12 @@ type Children = {
 
 type State = {
   currentCity: City | null;
-  handleSetCurrentCity: Dispatch<SetStateAction<City | null>>;
+  setCurrentCity: Dispatch<SetStateAction<City | null>>;
 };
 
 const CityContext = React.createContext<State>({
   currentCity: null,
-  handleSetCurrentCity: () => {},
+  setCurrentCity: () => {},
 });
 
 const CityProvider = ({ children }: Children) => {
@@ -20,7 +20,7 @@ const CityProvider = ({ children }: Children) => {
 
   const values = {
     currentCity,
-    handleSetCurrentCity: setCurrentCity,
+    setCurrentCity,
   };
 
   return <CityContext.Provider value={values}>{children}</CityContext.Provider>;
