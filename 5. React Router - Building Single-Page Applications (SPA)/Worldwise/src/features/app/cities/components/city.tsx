@@ -1,12 +1,22 @@
+import { BackButton } from '@/components/elements/back-button';
 import { Button } from '@/components/ui/button';
 import { useCityQuery } from '@/hooks/query/use-city-query';
 import { formatDate } from '@/utils/format-date';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useCurrentCity } from '../contexts/CityContext';
 
 export function City() {
   const { id } = useParams() as { id: string };
+  const context = useCurrentCity();
 
   const { data: city = null, isLoading, isFetching } = useCityQuery({ id });
+
+  useEffect(() => {
+    if (city) {
+      context.setCurrentCity(city);
+    }
+  }, [city, context]);
 
   if (isLoading || isFetching) return <div>Loading...</div>;
 
@@ -49,7 +59,7 @@ export function City() {
         </a>
       </div>
       <div className="flex items-center justify-between">
-        <Button variant="outline">Back</Button>
+        <BackButton />
         <Button>Edit</Button>
       </div>
     </div>
