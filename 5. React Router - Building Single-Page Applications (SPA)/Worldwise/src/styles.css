@@ -9,11 +9,15 @@
 }
 
 .leaflet-popup .leaflet-popup-content-wrapper {
-  @apply rounded-md border-l-4 border-emerald-600 bg-gray-700 text-gray-200;
+  @apply rounded-md border-l-4 border-emerald-600 bg-gray-700 text-gray-200 shadow-lg;
 }
 
 .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
   @apply flex items-center space-x-2 text-sm;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  @apply bg-gray-700;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
