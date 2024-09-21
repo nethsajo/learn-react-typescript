@@ -26,7 +26,7 @@ export function Map() {
         {cities.map(city => {
           return (
             <Marker position={[city.position.lat, city.position.lng]} key={city.id}>
-              <Popup className="bg-gray-600">{city.notes}</Popup>
+              <Popup>{city.notes}</Popup>
             </Marker>
           );
         })}

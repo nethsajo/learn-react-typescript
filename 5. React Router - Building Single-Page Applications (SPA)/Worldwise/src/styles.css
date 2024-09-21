@@ -7,3 +7,15 @@
     @apply bg-gray-100 font-inter text-sm text-slate-200;
   }
 }
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+  @apply rounded-md border-l-4 border-emerald-600 bg-gray-700 text-gray-200;
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
+  @apply flex items-center space-x-2 text-sm;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  @apply text-gray-300 transition-colors duration-300 hover:text-gray-500;
+}
