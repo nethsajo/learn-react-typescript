@@ -1,3 +1,5 @@
+@import 'leaflet/dist/leaflet.css';
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -6,6 +8,10 @@
   body {
     @apply bg-gray-100 font-inter text-sm text-slate-200;
   }
+}
+
+.leaflet-popup-content {
+  @apply mx-7 my-3.5;
 }
 
 .leaflet-popup .leaflet-popup-content-wrapper {
