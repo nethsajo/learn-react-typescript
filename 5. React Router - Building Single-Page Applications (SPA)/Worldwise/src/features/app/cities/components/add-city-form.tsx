@@ -21,7 +21,7 @@ export function AddCityForm() {
     <form onSubmit={handleSubmit} className="w-full space-y-4 rounded-lg bg-gray-600 p-4">
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor="city">City Name</Label>
-        <Input variant="outline" id="city" />
+        <Input variant="outline" id="city" readOnly />
       </div>
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor="date">When did you go to X?</Label>
