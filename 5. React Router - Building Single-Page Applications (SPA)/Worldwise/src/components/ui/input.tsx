@@ -8,7 +8,7 @@ export interface InputProps
 }
 
 const inputVariants = cva(
-  'block w-full rounded-md px-3 py-2 shadow-sm read-only:focus:ring-0 read-only:ring-0 sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-600 disabled:cursor-not-allowed disabled:opacity-50',
+  'block w-full rounded-md px-3 py-2 shadow-sm read-only:focus-visible:ring-0 read-only:focus-visible:ring-transparent sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-600 disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       variant: {
