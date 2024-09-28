@@ -18,7 +18,10 @@ export function AddCityForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full space-y-4 rounded-lg bg-gray-600 p-4">
+    <form
+      onSubmit={handleSubmit}
+      className="grid w-full grid-cols-1 gap-4 rounded-lg bg-gray-600 p-4 sm:grid-cols-2 lg:grid-cols-1"
+    >
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor="city">City Name</Label>
         <Input variant="outline" id="city" readOnly />
@@ -27,11 +30,11 @@ export function AddCityForm() {
         <Label htmlFor="date">When did you go to X?</Label>
         <Input type="date" variant="outline" id="date" />
       </div>
-      <div className="flex flex-col space-y-1.5">
+      <div className="col-span-full flex flex-col space-y-1.5">
         <Label htmlFor="notes">Notes about your trip to X?</Label>
         <Textarea rows={3} variant="outline" id="notes" />
       </div>
-      <div className="flex items-center justify-between">
+      <div className="col-span-full flex items-center justify-between">
         <Button variant="secondary" onClick={handleBack}>
           Back
         </Button>
