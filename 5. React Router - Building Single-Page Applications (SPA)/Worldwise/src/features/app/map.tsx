@@ -1,14 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/constants/routes';
-import { useGeolocation } from '@/hooks/custom/use-geolocation';
+import { useGeolocation } from '@/hooks/map/use-geolocation';
+import { useUrlPosition } from '@/hooks/map/use-url-position';
 import { useCitiesQuery } from '@/hooks/query/use-cities-query';
-import { type LatLngExpression } from 'leaflet';
+import { type Coordinates } from '@/types/coordinates';
 import { MapPinned } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from 'react-leaflet';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function CoordinateMarker({ position }: { position: LatLngExpression }) {
+function CoordinateMarker({ position }: { position: Coordinates }) {
   const map = useMap();
   map.setView(position);
   return null;
@@ -28,22 +29,20 @@ function DetectClick() {
 }
 
 export function Map() {
-  const [coordinates, setCoordinates] = useState<LatLngExpression>([0, 0]);
-  const [searchParams] = useSearchParams();
   const { data: cities = [] } = useCitiesQuery();
+  const { lat, lng } = useUrlPosition();
   const { isLoading, position, handleGetPosition } = useGeolocation();
 
-  const latitude = Number(searchParams.get('lat'));
-  const longitude = Number(searchParams.get('lng'));
+  const [coordinates, setCoordinates] = useState<Coordinates>({ lat: 0, lng: 0 });
 
   // This will only run if the lat and lng search params changes
   useEffect(() => {
-    if (latitude && longitude) setCoordinates([latitude, longitude]);
-  }, [latitude, longitude]);
+    if (lat && lng) setCoordinates({ lat, lng });
+  }, [lat, lng]);
 
   // This will only run if the position changes (geolocation)
   useEffect(() => {
-    if (position) setCoordinates([position.lat, position.lng]);
+    if (position) setCoordinates({ lat: position.lat, lng: position.lng });
   }, [position]);
 
   return (
