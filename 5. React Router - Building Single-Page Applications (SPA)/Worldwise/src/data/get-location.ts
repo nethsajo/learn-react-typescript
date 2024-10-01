@@ -8,5 +8,9 @@ export async function getLocationData(args: GetLocationDataArgs) {
     `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${args.lat}&longitude=${args.lng}`
   );
 
-  return await response.json();
+  const data = await response.json();
+
+  if (!data.countryCode) throw new Error("That doesn't seem to be a city. Click somewhere else 😉");
+
+  return data;
 }
