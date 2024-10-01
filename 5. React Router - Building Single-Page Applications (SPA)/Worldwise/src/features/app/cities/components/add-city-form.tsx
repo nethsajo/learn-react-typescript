@@ -2,12 +2,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useUrlPosition } from '@/hooks/map/use-url-position';
+import { useLocationQuery } from '@/hooks/query/use-location-query';
 import { formatDate } from '@/utils/format-date';
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function AddCityForm() {
   const navigate = useNavigate();
+  const { lat, lng } = useUrlPosition();
+
+  const { data, isLoading, error } = useLocationQuery({ lat, lng });
+
+  console.log(error?.message);
+
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
   const [date, setDate] = useState(formatDate(new Date().toLocaleString(), 'YYYY-MM-DD'));
