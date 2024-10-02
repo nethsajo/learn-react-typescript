@@ -1,3 +1,5 @@
+import { Message } from '@/components/elements/message';
+import { Spinner } from '@/components/elements/spinner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,10 +16,6 @@ export function AddCityForm() {
 
   const { data, isLoading, error } = useLocationQuery({ lat, lng });
 
-  console.log(error?.message);
-
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
   const [date, setDate] = useState(formatDate(new Date().toLocaleString(), 'YYYY-MM-DD'));
   const [notes, setNotes] = useState('');
 
@@ -30,6 +28,10 @@ export function AddCityForm() {
     navigate(-1);
   };
 
+  if (isLoading) return <Spinner />;
+
+  if (error) return <Message message={error.message} />;
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -37,7 +39,7 @@ export function AddCityForm() {
     >
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor="city">City Name</Label>
-        <Input variant="outline" id="city" value={city} readOnly />
+        <Input variant="outline" id="city" value={data.city} readOnly />
       </div>
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor="date">When did you go to X?</Label>
