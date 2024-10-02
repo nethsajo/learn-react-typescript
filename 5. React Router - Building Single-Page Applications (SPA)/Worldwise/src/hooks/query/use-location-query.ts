@@ -7,8 +7,9 @@ export type UseLocationQueryArgs = GetLocationDataArgs & {
 
 export function useLocationQuery(args: UseLocationQueryArgs) {
   return useQuery({
-    queryKey: ['/fetch-location', args],
+    queryKey: ['/fetch-location', args.lat, args.lng],
     queryFn: () => getLocationData(args),
     enabled: args.enabled ?? (!!args.lat && !!args.lng),
+    retry: false,
   });
 }
