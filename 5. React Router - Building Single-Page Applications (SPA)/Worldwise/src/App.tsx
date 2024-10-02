@@ -15,7 +15,13 @@ import LoginPage from './routes/login';
 import NotFoundPage from './routes/not-found';
 import PricingPage from './routes/pricing';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+    },
+  },
+});
 
 export default function App() {
   return (
