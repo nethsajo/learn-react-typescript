@@ -1,3 +1,5 @@
+import { Message } from '@/components/elements/message';
+import { Spinner } from '@/components/elements/spinner';
 import { useCitiesQuery } from '@/hooks/query/use-cities-query';
 import { formatDate } from '@/utils/format-date';
 import { X } from 'lucide-react';
@@ -8,14 +10,9 @@ export function CityList() {
   const { data: cities = [], isLoading, isFetching } = useCitiesQuery();
   const { currentCity } = useCurrentCity();
 
-  if (isLoading || isFetching) return <div>Loading...</div>;
+  if (isLoading || isFetching) return <Spinner />;
 
-  if (!cities.length)
-    return (
-      <p className="max-w-[200px] text-balance text-center">
-        Add your first city by clicking on a city on the map
-      </p>
-    );
+  if (!cities.length) <Message message="Add your first city by clicking on a city on the map" />;
 
   return (
     <div className="flex w-full flex-col space-y-4 sm:w-auto">

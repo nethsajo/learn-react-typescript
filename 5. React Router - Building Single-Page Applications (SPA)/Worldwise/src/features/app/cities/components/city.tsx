@@ -1,4 +1,6 @@
 import { BackButton } from '@/components/elements/back-button';
+import { Message } from '@/components/elements/message';
+import { Spinner } from '@/components/elements/spinner';
 import { Button } from '@/components/ui/button';
 import { useCityQuery } from '@/hooks/query/use-city-query';
 import { formatDate } from '@/utils/format-date';
@@ -18,9 +20,9 @@ export function City() {
     }
   }, [city, context]);
 
-  if (isLoading || isFetching) return <div>Loading...</div>;
+  if (isLoading || isFetching) <Spinner />;
 
-  if (!city) return <p>City not found</p>;
+  if (!city) return <Message message="City not found" />;
 
   return (
     <div className="flex w-full flex-col space-y-4 rounded-md bg-gray-600 px-4 py-6">
