@@ -1,5 +1,5 @@
 export type City = {
-  id: number;
+  id: string;
   cityName: string;
   country: string;
   abbreviation: string;
