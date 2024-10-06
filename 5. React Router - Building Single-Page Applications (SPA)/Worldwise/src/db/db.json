@@ -1,64 +1,16 @@
 {
   "cities": [
     {
-      "cityName": "Lisbon",
-      "country": "Portugal",
-      "abbreviation": "pt",
-      "date": "2027-10-31T15:59:59.138Z",
-      "notes": "My favorite city so far!",
+      "id": "6447116e-adbe-44c3-8a6d-5384ddf0f6a1",
+      "cityName": "Vassako",
+      "country": "Central African Republic (the)",
+      "abbreviation": "CF",
+      "date": "2024-10-06",
+      "notes": "This is a sample notes for Vassako",
       "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 73930385
-    },
-    {
-      "cityName": "Madrid",
-      "country": "Spain",
-      "abbreviation": "es",
-      "date": "2027-07-15T08:22:53.976Z",
-      "notes": "My favorite city so far!",
-      "position": {
-        "lat": 40.46635901755316,
-        "lng": -3.7133789062500004
-      },
-      "id": 17806751
-    },
-    {
-      "cityName": "Berlin",
-      "country": "Germany",
-      "abbreviation": "de",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
-      "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
-      },
-      "id": 98443197
-    },
-    {
-      "cityName": "Faro",
-      "country": "Portugal",
-      "abbreviation": "pt",
-      "date": "2027-10-31T15:59:59.138Z",
-      "notes": "My favorite city so far!",
-      "position": {
-        "lat": 38.727881642324164,
-        "lng": -9.140900099907554
-      },
-      "id": 92150621
-    },
-    {
-      "cityName": "Barcelona",
-      "country": "Spain",
-      "abbreviation": "es",
-      "date": "2027-07-15T08:22:53.976Z",
-      "notes": "My favorite city so far!",
-      "position": {
-        "lat": 40.46635901755316,
-        "lng": -3.7133789062500004
-      },
-      "id": 93384071
+        "lat": 7.1663003819031825,
+        "lng": 20.434570312500004
+      }
     }
   ]
 }

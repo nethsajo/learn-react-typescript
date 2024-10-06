@@ -3,5 +3,5 @@ export interface MessageProps {
 }
 
 export function Message({ message }: MessageProps) {
-  return <p className="max-w-[240px] text-center">{message}</p>;
+  return <p className="max-w-[240px] text-center">👋 {message}</p>;
 }
