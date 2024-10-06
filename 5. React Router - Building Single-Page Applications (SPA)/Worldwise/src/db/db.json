@@ -1,16 +1,3 @@
 {
-  "cities": [
-    {
-      "id": "6447116e-adbe-44c3-8a6d-5384ddf0f6a1",
-      "cityName": "Vassako",
-      "country": "Central African Republic (the)",
-      "abbreviation": "CF",
-      "date": "2024-10-06",
-      "notes": "This is a sample notes for Vassako",
-      "position": {
-        "lat": 7.1663003819031825,
-        "lng": 20.434570312500004
-      }
-    }
-  ]
+  "cities": []
 }

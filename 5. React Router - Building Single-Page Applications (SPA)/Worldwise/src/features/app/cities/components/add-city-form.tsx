@@ -37,7 +37,7 @@ export function AddCityForm() {
       id: crypto.randomUUID(),
       cityName: data.city,
       country: data.countryName,
-      abbreviation: data.countryCode,
+      abbreviation: data.countryCode.toLowerCase(),
       date,
       notes,
       position: {
