@@ -12,7 +12,9 @@ export function CityList() {
 
   if (isLoading || isFetching) return <Spinner />;
 
-  if (!cities.length) <Message message="Add your first city by clicking on a city on the map" />;
+  if (!cities.length) {
+    return <Message message="Add your first city by clicking on a city on the map" />;
+  }
 
   return (
     <div className="flex w-full flex-col space-y-4 sm:w-auto">
