@@ -8,6 +8,10 @@
   body {
     @apply bg-gray-100 font-inter text-sm text-slate-200;
   }
+
+  input {
+    color-scheme: dark;
+  }
 }
 
 .leaflet-popup-content {
