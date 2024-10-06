@@ -7,7 +7,7 @@ export type UseCityQueryArgs = GetCityDataArgs & {
 
 export function useCityQuery(args: UseCityQueryArgs) {
   return useQuery({
-    queryKey: ['/cities', args.id],
+    queryKey: ['cities', args.id],
     queryFn: () => getCityData({ id: args.id }),
     enabled: args.enabled || !!args.id,
   });
