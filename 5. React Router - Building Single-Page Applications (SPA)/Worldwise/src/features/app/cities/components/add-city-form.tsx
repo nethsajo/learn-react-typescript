@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useCreateCityMutation } from '@/hooks/cities';
 import { useUrlPosition } from '@/hooks/map/use-url-position';
-import { useLocationQuery } from '@/hooks/query/use-location-query';
+import { usePositionQuery } from '@/hooks/position';
 import { formatDate } from '@/utils/format-date';
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -18,7 +18,7 @@ export function AddCityForm() {
   const [date, setDate] = useState(formatDate(new Date().toLocaleString(), 'YYYY-MM-DD'));
   const [notes, setNotes] = useState('');
 
-  const { data, isLoading, isFetching, error } = useLocationQuery({ lat, lng });
+  const { data, isLoading, isFetching, error } = usePositionQuery({ lat, lng });
   const { mutateAsync, isPending, isSuccess } = useCreateCityMutation();
 
   if (!lat && !lng) return <Message message="Start by clicking somewhere on the map." />;
