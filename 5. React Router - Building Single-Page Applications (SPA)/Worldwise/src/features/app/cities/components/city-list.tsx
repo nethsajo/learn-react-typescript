@@ -1,6 +1,6 @@
 import { Message } from '@/components/elements/message';
 import { Spinner } from '@/components/elements/spinner';
-import { useCitiesQuery } from '@/hooks/cities';
+import { useCitiesQuery, useDeleteCityMutation } from '@/hooks/cities';
 import { formatDate } from '@/utils/format-date';
 import { X } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { useCurrentCity } from '../contexts/CityContext';
 
 export function CityList() {
   const { data: cities = [], isLoading, isFetching } = useCitiesQuery();
+  const { mutateAsync } = useDeleteCityMutation();
   const { currentCity } = useCurrentCity();
 
   if (isLoading || isFetching) return <Spinner />;
@@ -15,6 +16,11 @@ export function CityList() {
   if (!cities.length) {
     return <Message message="Add your first city by clicking on a city on the map" />;
   }
+
+  const handleDelete = async (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    event.preventDefault();
+    await mutateAsync(id);
+  };
 
   return (
     <div className="flex w-full flex-col space-y-4 sm:w-auto">
@@ -32,7 +38,10 @@ export function CityList() {
             </picture>
             <h3 className="row-span-1 mr-auto font-medium text-gray-200">{city.cityName}</h3>
             <time className="row-start-2 text-gray-400 sm:row-span-1">{formatDate(city.date)}</time>
-            <button className="col-span-2 row-span-full inline-flex h-6 w-6 items-center justify-center justify-self-end rounded-full bg-gray-700 shadow-sm ring-1 ring-gray-700 transition-colors duration-150 hover:bg-gray-800 active:bg-gray-900 sm:col-span-1 sm:row-span-1 lg:justify-self-center">
+            <button
+              onClick={event => handleDelete(event, city.id)}
+              className="col-span-2 row-span-full inline-flex h-6 w-6 items-center justify-center justify-self-end rounded-full bg-gray-700 shadow-sm ring-1 ring-gray-700 transition-colors duration-150 hover:bg-gray-800 active:bg-gray-900 sm:col-span-1 sm:row-span-1 lg:justify-self-center"
+            >
               <X className="h-3 w-3 fill-current" />
             </button>
           </div>

@@ -34,3 +34,11 @@ export async function createCityData(payload: City) {
 
   return await response.json();
 }
+
+export async function deleteCityData(id: string) {
+  const response = await fetch(`${BASE_URL}/cities/${id}`, {
+    method: 'DELETE',
+  });
+
+  return await response.json();
+}
