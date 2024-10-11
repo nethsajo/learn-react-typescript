@@ -1,5 +1,6 @@
-import { getCitiesData, getCityData } from "@/data/cities";
-import { useQuery } from "@tanstack/react-query";
+import { createCityData, getCitiesData, getCityData } from '@/data/cities';
+import { type City } from '@/types/city';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export function useCitiesQuery() {
   return useQuery({
@@ -12,5 +13,14 @@ export function useCityQuery(id: string) {
   return useQuery({
     queryKey: ['GET /cities', id],
     queryFn: () => getCityData(id),
+  });
+}
+
+export function useCreateCityMutation() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (city: City) => createCityData(city),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['GET /cities'] }),
   });
 }
