@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { useCreateCityMutation } from '@/hooks/cities';
 import { useUrlPosition } from '@/hooks/map/use-url-position';
-import { useCreateCityMutation } from '@/hooks/mutation/use-create-city-mutation';
 import { useLocationQuery } from '@/hooks/query/use-location-query';
 import { formatDate } from '@/utils/format-date';
 import { useState, type FormEvent } from 'react';
@@ -19,7 +19,7 @@ export function AddCityForm() {
   const [notes, setNotes] = useState('');
 
   const { data, isLoading, isFetching, error } = useLocationQuery({ lat, lng });
-  const { mutate, isPending, isSuccess } = useCreateCityMutation();
+  const { mutateAsync, isPending, isSuccess } = useCreateCityMutation();
 
   if (!lat && !lng) return <Message message="Start by clicking somewhere on the map." />;
 
@@ -33,7 +33,7 @@ export function AddCityForm() {
 
     if (!data.city || !date) return;
 
-    mutate({
+    await mutateAsync({
       id: crypto.randomUUID(),
       cityName: data.city,
       country: data.countryName,
