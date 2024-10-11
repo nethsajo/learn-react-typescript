@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { ROUTES } from '@/constants/routes';
 import { useCreateCityMutation } from '@/hooks/cities';
 import { useUrlPosition } from '@/hooks/map/use-url-position';
 import { usePositionQuery } from '@/hooks/position';
@@ -14,19 +15,18 @@ import { useNavigate } from 'react-router-dom';
 export function AddCityForm() {
   const navigate = useNavigate();
   const { lat, lng } = useUrlPosition();
+  const { data, isLoading, isFetching, error } = usePositionQuery({ lat, lng });
+  const { mutateAsync, isPending } = useCreateCityMutation();
 
   const [date, setDate] = useState(formatDate(new Date().toLocaleString(), 'YYYY-MM-DD'));
   const [notes, setNotes] = useState('');
 
-  const { data, isLoading, isFetching, error } = usePositionQuery({ lat, lng });
-  const { mutateAsync, isPending, isSuccess } = useCreateCityMutation();
-
   if (!lat && !lng) return <Message message="Start by clicking somewhere on the map." />;
+
+  if (error) return <Message message={error.message} />;
 
   if (!data) return;
   if (isLoading || isFetching || isPending) return <Spinner />;
-  if (isSuccess) return <Message message="Data is submitted" />;
-  if (error) return <Message message={error.message} />;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -45,6 +45,8 @@ export function AddCityForm() {
         lng: data.longitude,
       },
     });
+
+    navigate(`${ROUTES.APP}/${ROUTES.CITIES}`);
   };
 
   const handleBack = (event: React.MouseEvent<HTMLButtonElement>) => {
