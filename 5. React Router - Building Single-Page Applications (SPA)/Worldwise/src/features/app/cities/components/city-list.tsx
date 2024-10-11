@@ -1,6 +1,6 @@
 import { Message } from '@/components/elements/message';
 import { Spinner } from '@/components/elements/spinner';
-import { useCitiesQuery } from '@/hooks/query/use-cities-query';
+import { useCitiesQuery } from '@/hooks/cities';
 import { formatDate } from '@/utils/format-date';
 import { X } from 'lucide-react';
 import { Link } from 'react-router-dom';

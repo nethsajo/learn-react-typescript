@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/constants/routes';
+import { useCitiesQuery } from '@/hooks/cities';
 import { useGeolocation } from '@/hooks/map/use-geolocation';
 import { useUrlPosition } from '@/hooks/map/use-url-position';
-import { useCitiesQuery } from '@/hooks/query/use-cities-query';
 import { type Coordinates } from '@/types/coordinates';
 import { MapPinned } from 'lucide-react';
 import { useEffect, useState } from 'react';

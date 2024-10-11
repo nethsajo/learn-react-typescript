@@ -2,7 +2,7 @@ import { BackButton } from '@/components/elements/back-button';
 import { Message } from '@/components/elements/message';
 import { Spinner } from '@/components/elements/spinner';
 import { Button } from '@/components/ui/button';
-import { useCityQuery } from '@/hooks/query/use-city-query';
+import { useCityQuery } from '@/hooks/cities';
 import { formatDate } from '@/utils/format-date';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ export function City() {
   const { id } = useParams() as { id: string };
   const context = useCurrentCity();
 
-  const { data: city = null, isLoading, isFetching } = useCityQuery({ id });
+  const { data: city = null, isLoading, isFetching } = useCityQuery(id);
 
   useEffect(() => {
     if (city) {

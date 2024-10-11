@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/elements/spinner';
-import { useCitiesQuery } from '@/hooks/query/use-cities-query';
+import { useCitiesQuery } from '@/hooks/cities';
 import { type Country } from '@/types/country';
 
 export function CountryList() {
