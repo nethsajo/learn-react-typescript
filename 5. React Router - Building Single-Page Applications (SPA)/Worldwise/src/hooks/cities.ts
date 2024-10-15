@@ -1,5 +1,4 @@
-import { createCityData, deleteCityData, getCitiesData, getCityData } from '@/data/cities';
-import { type City } from '@/types/city';
+import { type City, createCityData, deleteCityData, getCitiesData, getCityData } from '@/data/cities';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export function useCitiesQuery() {
