@@ -1,0 +1,13 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": ["Worldwise", "tailwindcss", "lucide", "tanstack", "clsx", "latlng"],
+  "ignorePaths": [
+    "./node_modules",
+    "./build",
+    "./dist",
+    "./pnpm-lock.yaml",
+    "./package.json",
+    "./vite.config.ts"
+  ]
+}
