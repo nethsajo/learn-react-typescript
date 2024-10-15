@@ -1,5 +1,13 @@
 import { type Coordinates } from '@/types/coordinates';
-import { type Location } from '@/types/location';
+
+export type Location = {
+  city: string;
+  countryCode: string;
+  countryName: string;
+  locality: string;
+  latitude: number;
+  longitude: number;
+};
 
 export async function getPositionData({ lat, lng }: Coordinates): Promise<Location> {
   const response = await fetch(

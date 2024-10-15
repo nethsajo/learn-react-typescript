@@ -1,6 +1,10 @@
 import { Spinner } from '@/components/elements/spinner';
 import { useCitiesQuery } from '@/hooks/cities';
-import { type Country } from '@/types/country';
+
+export type Country = {
+  name: string;
+  abbreviation: string;
+};
 
 export function CountryList() {
   const { data: cities = [], isLoading, isFetching } = useCitiesQuery();
