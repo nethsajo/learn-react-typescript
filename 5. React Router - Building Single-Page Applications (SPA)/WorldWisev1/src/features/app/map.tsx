@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/constants/routes';
-import { useCitiesQuery } from '@/hooks/cities';
-import { useGeolocation } from '@/hooks/map/use-geolocation';
-import { useUrlPosition } from '@/hooks/map/use-url-position';
+import { useCities } from '@/contexts/cities';
+import { useGeolocation } from '@/hooks/use-geolocation';
+import { useUrlPosition } from '@/hooks/use-url-position';
 import { type Coordinates } from '@/types/coordinates';
 import { MapPinned } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -29,7 +29,7 @@ function DetectClick() {
 }
 
 export function Map() {
-  const { data: cities = [] } = useCitiesQuery();
+  const { cities = [] } = useCities();
   const { lat, lng } = useUrlPosition();
   const { isLoading, position, handleGetPosition } = useGeolocation();
 
