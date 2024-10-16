@@ -1,5 +1,5 @@
 import { Spinner } from '@/components/elements/spinner';
-import { useCitiesQuery } from '@/hooks/cities';
+import { useCities } from '@/contexts/cities';
 
 export type Country = {
   name: string;
@@ -7,9 +7,7 @@ export type Country = {
 };
 
 export function CountryList() {
-  const { data: cities = [], isLoading, isFetching } = useCitiesQuery();
-
-  if (isLoading || isFetching) return <Spinner />;
+  const { cities, isLoading } = useCities();
 
   const countries = cities.reduce<Country[]>((countries, city) => {
     if (!countries.map(country => country.name).includes(city.country)) {
@@ -18,6 +16,8 @@ export function CountryList() {
       return countries;
     }
   }, []);
+
+  if (isLoading) return <Spinner />;
 
   return (
     <div className="grid grid-cols-3 gap-6">
