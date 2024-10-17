@@ -1,11 +1,25 @@
 import { BASE_URL } from '@/constants/common';
-import { type City } from '@/data/cities';
 import type React from 'react';
 import { createContext, useContext, useEffect, useState } from 'react';
+
+export type City = {
+  id: string;
+  cityName: string;
+  country: string;
+  abbreviation: string;
+  date: string;
+  notes: string;
+  position: {
+    lat: number;
+    lng: number;
+  };
+};
 
 type State = {
   cities: City[];
   getCity: (id: string) => void;
+  createCity: (city: City) => Promise<void>;
+  deleteCity: (id: string) => Promise<void>;
   currentCity: City | null;
   isLoading: boolean;
   error: string;
@@ -14,6 +28,8 @@ type State = {
 const CitiesContext = createContext<State>({
   cities: [],
   getCity: () => {},
+  createCity: async () => Promise.resolve(),
+  deleteCity: async () => Promise.resolve(),
   currentCity: null,
   isLoading: false,
   error: '',
@@ -40,7 +56,7 @@ const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     fetchCities();
-  });
+  }, []);
 
   const getCity = async (id: string) => {
     try {
@@ -55,8 +71,42 @@ const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const createCity = async (payload: City): Promise<void> => {
+    try {
+      setIsLoading(true);
+      const response = await fetch(`${BASE_URL}/cities`, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+
+      const data = await response.json();
+      setCities(cities => [...cities, data]);
+    } catch (error) {
+      setError('There was an error creating city...');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteCity = async (id: string) => {
+    try {
+      await fetch(`${BASE_URL}/cities/${id}`, {
+        method: 'DELETE',
+      });
+
+      setCities(cities => cities.filter(city => city.id !== id));
+    } catch {
+      setError('There was an error deleting city...');
+    }
+  };
+
   return (
-    <CitiesContext.Provider value={{ cities, getCity, currentCity, isLoading, error }}>
+    <CitiesContext.Provider
+      value={{ cities, getCity, createCity, deleteCity, currentCity, isLoading, error }}
+    >
       {children}
     </CitiesContext.Provider>
   );
