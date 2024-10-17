@@ -1,17 +1,14 @@
 import { Message } from '@/components/elements/message';
 import { Spinner } from '@/components/elements/spinner';
-import { useCitiesQuery, useDeleteCityMutation } from '@/hooks/cities';
+import { useCities } from '@/contexts/cities';
 import { formatDate } from '@/utils/format-date';
 import { X } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useCurrentCity } from '../contexts/CityContext';
 
 export function CityList() {
-  const { data: cities = [], isLoading, isFetching } = useCitiesQuery();
-  const { mutateAsync } = useDeleteCityMutation();
-  const { currentCity } = useCurrentCity();
+  const { cities, isLoading, currentCity, deleteCity } = useCities();
 
-  if (isLoading || isFetching) return <Spinner />;
+  if (isLoading) return <Spinner />;
 
   if (!cities.length) {
     return <Message message="Add your first city by clicking on a city on the map" />;
@@ -19,7 +16,7 @@ export function CityList() {
 
   const handleDelete = async (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
     event.preventDefault();
-    await mutateAsync(id);
+    await deleteCity(id);
   };
 
   return (
