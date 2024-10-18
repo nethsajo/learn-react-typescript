@@ -2,7 +2,7 @@
   "name": "worldwise-v1",
   "version": "0.0.0",
   "scripts": {
-    "db:start": "json-server --watch ./src/db/db.json --port 8000",
+    "db:start": "json-server --watch ./src/db/db.json --port 4000",
     "dev": "vite --host 0.0.0.0",
     "clean": "rm -rf ./build",
     "build": "pnpm clean && vite build",
