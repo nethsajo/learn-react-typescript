@@ -1,7 +1,5 @@
-// import { CityList } from '@/features/app/cities/components/city-list';
-import { CityListVOne } from '@/features/app/cities/components/city-list-v1';
+import { CityList } from '@/features/app/cities/components/city-list';
 
 export default function CitiesPage() {
-  return <CityListVOne />;
-  // return <CityList />;
+  return <CityList />;
 }
