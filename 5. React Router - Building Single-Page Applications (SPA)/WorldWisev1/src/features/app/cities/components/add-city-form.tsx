@@ -23,13 +23,11 @@ export type Geolocation = {
 export function AddCityForm() {
   const navigate = useNavigate();
   const { lat, lng } = useUrlPosition();
-  const { isLoading } = useCities();
+  const { isLoading, createCity } = useCities();
   const [geolocation, setGeolocation] = useState<Geolocation | null>(null);
   const [isGeolocationLoading, setIsGeolocationLoading] = useState(false);
   const [geoLocationError, setGeolocationError] = useState('');
 
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
   const [date, setDate] = useState(formatDate(new Date().toLocaleString(), 'YYYY-MM-DD'));
   const [notes, setNotes] = useState('');
 
@@ -65,6 +63,21 @@ export function AddCityForm() {
     e.preventDefault();
 
     if (!geolocation.city || !date) return;
+
+    const data = {
+      id: crypto.randomUUID(),
+      cityName: geolocation.city,
+      country: geolocation.countryName,
+      abbreviation: geolocation.countryCode.toLowerCase(),
+      date,
+      notes,
+      position: {
+        lat: geolocation.latitude,
+        lng: geolocation.longitude,
+      },
+    };
+
+    await createCity(data);
 
     navigate(`${ROUTES.APP}/${ROUTES.CITIES}`);
   };
