@@ -5,46 +5,66 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ROUTES } from '@/constants/routes';
-import { useCreateCityMutation } from '@/hooks/cities';
-import { useUrlPosition } from '@/hooks/map/use-url-position';
-import { usePositionQuery } from '@/hooks/position';
+import { useCities } from '@/contexts/cities';
+import { useUrlPosition } from '@/hooks/use-url-position';
 import { formatDate } from '@/utils/format-date';
-import { useState, type FormEvent } from 'react';
+import { type FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+export type Geolocation = {
+  city: string;
+  countryCode: string;
+  countryName: string;
+  locality: string;
+  latitude: number;
+  longitude: number;
+};
 
 export function AddCityForm() {
   const navigate = useNavigate();
   const { lat, lng } = useUrlPosition();
-  const { data, isLoading, isFetching, error } = usePositionQuery({ lat, lng });
-  const { mutateAsync, isPending } = useCreateCityMutation();
+  const { isLoading } = useCities();
+  const [geolocation, setGeolocation] = useState<Geolocation | null>(null);
+  const [isGeolocationLoading, setIsGeolocationLoading] = useState(false);
+  const [geoLocationError, setGeolocationError] = useState('');
 
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
   const [date, setDate] = useState(formatDate(new Date().toLocaleString(), 'YYYY-MM-DD'));
   const [notes, setNotes] = useState('');
 
-  if (!lat && !lng) return <Message message="Start by clicking somewhere on the map." />;
+  useEffect(() => {
+    const fetchGeolocation = async () => {
+      try {
+        setIsGeolocationLoading(true);
+        setGeolocationError('');
 
-  if (error) return <Message message={error.message} />;
+        const response = await fetch(
+          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+        );
 
-  if (!data) return;
-  if (isLoading || isFetching || isPending) return <Spinner />;
+        const data = await response.json();
+
+        if (!data.countryCode) {
+          throw new Error("That doesn't seem to be a city. Click somewhere else 😉");
+        }
+
+        setGeolocation(data);
+      } catch (error) {
+        setGeolocationError((error as Error).message);
+      } finally {
+        setIsGeolocationLoading(false);
+      }
+    };
+    fetchGeolocation();
+  }, [lat, lng]);
+
+  if (!geolocation) return;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!data.city || !date) return;
-
-    await mutateAsync({
-      id: crypto.randomUUID(),
-      cityName: data.city,
-      country: data.countryName,
-      abbreviation: data.countryCode.toLowerCase(),
-      date,
-      notes,
-      position: {
-        lat: data.latitude,
-        lng: data.longitude,
-      },
-    });
+    if (!geolocation.city || !date) return;
 
     navigate(`${ROUTES.APP}/${ROUTES.CITIES}`);
   };
@@ -54,6 +74,12 @@ export function AddCityForm() {
     navigate(-1);
   };
 
+  if (isLoading || isGeolocationLoading) return <Spinner />;
+
+  if (!lat && !lng) return <Message message="Start by clicking somewhere on the map." />;
+
+  if (geoLocationError) return <Message message={geoLocationError} />;
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -62,16 +88,21 @@ export function AddCityForm() {
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor="city">City Name</Label>
         <div className="relative">
-          <Input variant="outline" id="city" value={data.city || data.locality} readOnly />
+          <Input
+            variant="outline"
+            id="city"
+            value={geolocation.city || geolocation.locality}
+            readOnly
+          />
           <img
-            src={`https://flagcdn.com/${data.countryCode.toLowerCase()}.svg`}
-            alt={`Flag of ${data.countryCode}`}
+            src={`https://flagcdn.com/${geolocation.countryCode.toLowerCase()}.svg`}
+            alt={`Flag of ${geolocation.countryCode}`}
             className="absolute right-4 top-2/4 flex h-6 -translate-y-2/4 rounded-sm"
           />
         </div>
       </div>
       <div className="flex flex-col space-y-1.5">
-        <Label htmlFor="date">When did you go to {data.city || data.locality}?</Label>
+        <Label htmlFor="date">When did you go to {geolocation.city || geolocation.locality}?</Label>
         <Input
           type="date"
           variant="outline"
@@ -81,7 +112,9 @@ export function AddCityForm() {
         />
       </div>
       <div className="col-span-full flex flex-col space-y-1.5">
-        <Label htmlFor="notes">Notes about your trip to {data.city || data.locality}?</Label>
+        <Label htmlFor="notes">
+          Notes about your trip to {geolocation.city || geolocation.locality}?
+        </Label>
         <Textarea
           rows={3}
           variant="outline"
