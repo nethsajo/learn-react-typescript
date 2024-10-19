@@ -8,7 +8,7 @@ export function PageLayout({ children }: React.PropsWithChildren) {
   const isIndex = location.pathname === '/';
 
   return (
-    <main className="relative h-screen overflow-hidden px-6 py-6 md:m-6 md:h-[calc(100vh-3rem)] md:rounded-sm md:px-14 md:py-7">
+    <main className="relative h-full overflow-hidden rounded-md lg:p-6">
       <div
         className={`absolute inset-0 ${isIndex ? "bg-[url('./bg.jpg')]" : 'bg-gray-500'} bg-cover bg-center`}
       >
