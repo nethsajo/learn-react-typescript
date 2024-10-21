@@ -101,7 +101,7 @@ export function AddCityForm() {
     >
       {isLoading && (
         <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/75">
-          <Spinner />
+          <Spinner label="Adding city. Please wait..." />
         </div>
       )}
       <div className="flex flex-col space-y-1.5">
