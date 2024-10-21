@@ -88,7 +88,7 @@ export function AddCityForm() {
     navigate(-1);
   };
 
-  if (isLoading || isGeolocationLoading) return <Spinner />;
+  if (isGeolocationLoading) return <Spinner />;
 
   if (!lat && !lng) return <Message message="Start by clicking somewhere on the map." />;
 
@@ -97,8 +97,13 @@ export function AddCityForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="grid w-full grid-cols-1 gap-4 rounded-lg bg-gray-600 p-4 sm:grid-cols-2 lg:grid-cols-1"
+      className="relative grid w-full grid-cols-1 gap-4 overflow-hidden rounded-lg bg-gray-600 p-4 sm:grid-cols-2 lg:grid-cols-1"
     >
+      {isLoading && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/75">
+          <Spinner />
+        </div>
+      )}
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor="city">City Name</Label>
         <div className="relative">
