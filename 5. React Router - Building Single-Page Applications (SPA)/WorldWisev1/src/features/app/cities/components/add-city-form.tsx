@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { API_KEY } from '@/constants/env';
 import { ROUTES } from '@/constants/routes';
 import { useCities } from '@/contexts/cities';
 import { useUrlPosition } from '@/hooks/use-url-position';
@@ -32,13 +33,15 @@ export function AddCityForm() {
   const [notes, setNotes] = useState('');
 
   useEffect(() => {
+    if (!lat && !lng) return;
+
     const fetchGeolocation = async () => {
       try {
         setIsGeolocationLoading(true);
         setGeolocationError('');
 
         const response = await fetch(
-          `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+          `https://api.bigdatacloud.net/data/reverse-geocode?latitude=${lat}&longitude=${lng}&key=${API_KEY}`
         );
 
         const data = await response.json();
@@ -57,12 +60,10 @@ export function AddCityForm() {
     fetchGeolocation();
   }, [lat, lng]);
 
-  if (!geolocation) return;
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!geolocation.city || !date) return;
+    if (!geolocation?.city || !date) return;
 
     const data = {
       id: crypto.randomUUID(),
@@ -104,18 +105,20 @@ export function AddCityForm() {
           <Input
             variant="outline"
             id="city"
-            value={geolocation.city || geolocation.locality}
+            value={geolocation?.city || geolocation?.locality}
             readOnly
           />
           <img
-            src={`https://flagcdn.com/${geolocation.countryCode.toLowerCase()}.svg`}
-            alt={`Flag of ${geolocation.countryCode}`}
+            src={`https://flagcdn.com/${geolocation?.countryCode.toLowerCase()}.svg`}
+            alt={`Flag of ${geolocation?.countryCode}`}
             className="absolute right-4 top-2/4 flex h-6 -translate-y-2/4 rounded-sm"
           />
         </div>
       </div>
       <div className="flex flex-col space-y-1.5">
-        <Label htmlFor="date">When did you go to {geolocation.city || geolocation.locality}?</Label>
+        <Label htmlFor="date">
+          When did you go to {geolocation?.city || geolocation?.locality}?
+        </Label>
         <Input
           type="date"
           variant="outline"
@@ -126,7 +129,7 @@ export function AddCityForm() {
       </div>
       <div className="col-span-full flex flex-col space-y-1.5">
         <Label htmlFor="notes">
-          Notes about your trip to {geolocation.city || geolocation.locality}?
+          Notes about your trip to {geolocation?.city || geolocation?.locality}?
         </Label>
         <Textarea
           rows={3}
