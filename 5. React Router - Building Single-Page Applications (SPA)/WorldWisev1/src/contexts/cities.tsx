@@ -1,6 +1,6 @@
 import { BASE_URL } from '@/constants/common';
 import type React from 'react';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, type Reducer, useContext, useEffect, useReducer, useState } from 'react';
 
 export type City = {
   id: string;
@@ -15,27 +15,58 @@ export type City = {
   };
 };
 
+enum ACTIONS {
+  FETCH_CITIES = 'FETCH_CITIES',
+  FETCH_CITY = 'FETCH_CITY',
+  SET_CURRENT_CITY = 'SET_CURRENT_CITY',
+  CREATE_CITY = 'CREATE_CITY',
+  DELETE_CITY = 'DELETE_CITY',
+  LOADING = 'LOADING',
+}
+
 type State = {
   cities: City[];
-  getCity: (id: string) => void;
-  createCity: (city: City) => Promise<void>;
-  deleteCity: (id: string) => Promise<void>;
   currentCity: City | null;
   isLoading: boolean;
   error: string;
 };
 
-const CitiesContext = createContext<State>({
+const initialState: State = {
   cities: [],
-  getCity: () => {},
-  createCity: async () => Promise.resolve(),
-  deleteCity: async () => Promise.resolve(),
   currentCity: null,
   isLoading: false,
   error: '',
+};
+
+type Action = { type: 'FETCH_CITIES'; payload: City[] };
+
+const CitiesContext = createContext<
+  State & {
+    getCity: (id: string) => void;
+    createCity: (city: City) => Promise<void>;
+    deleteCity: (id: string) => Promise<void>;
+  }
+>({
+  ...initialState,
+  getCity: () => {},
+  createCity: async () => Promise.resolve(),
+  deleteCity: async () => Promise.resolve(),
 });
 
+const reducer: Reducer<State, Action> = (state, action): State => {
+  switch (action.type) {
+    case ACTIONS.FETCH_CITIES:
+      return {
+        ...state,
+        cities: action.payload,
+      };
+    default:
+      throw new Error('Unknown action type');
+  }
+};
+
 const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [cities, setCities] = useState<City[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentCity, setCurrentCity] = useState<City | null>(null);
