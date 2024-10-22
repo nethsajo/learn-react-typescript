@@ -1,3 +1,4 @@
+import { API_KEY } from '@/constants/env';
 import { type Coordinates } from '@/types/coordinates';
 
 export type Location = {
@@ -11,7 +12,7 @@ export type Location = {
 
 export async function getPositionData({ lat, lng }: Coordinates): Promise<Location> {
   const response = await fetch(
-    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+    `https://api.bigdatacloud.net/data/reverse-geocode?latitude=${lat}&longitude=${lng}&key=${API_KEY}`
   );
 
   const data = await response.json();
