@@ -26,7 +26,7 @@ export function AddCityForm() {
   if (error) return <Message message={error.message} />;
 
   if (!data) return;
-  if (isLoading || isFetching || isPending) return <Spinner />;
+  if (isLoading || isFetching) return <Spinner />;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -57,8 +57,13 @@ export function AddCityForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="grid w-full grid-cols-1 gap-4 rounded-lg bg-gray-600 p-4 sm:grid-cols-2 lg:grid-cols-1"
+      className="relative grid w-full grid-cols-1 gap-4 overflow-hidden rounded-lg bg-gray-600 p-4 sm:grid-cols-2 lg:grid-cols-1"
     >
+      {isPending && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-gray-900/75">
+          <Spinner label="Adding city. Please wait..." />
+        </div>
+      )}
       <div className="flex flex-col space-y-1.5">
         <Label htmlFor="city">City Name</Label>
         <div className="relative">

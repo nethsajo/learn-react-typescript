@@ -8,7 +8,7 @@ config();
 
 export default defineConfig({
   server: {
-    port: 4000,
+    port: 8001,
   },
   plugins: [
     react(),
