@@ -1,6 +1,6 @@
 import { BASE_URL } from '@/constants/common';
 import type React from 'react';
-import { createContext, type Reducer, useContext, useEffect, useReducer, useState } from 'react';
+import { createContext, type Reducer, useContext, useEffect, useReducer } from 'react';
 
 export type City = {
   id: string;
@@ -16,12 +16,10 @@ export type City = {
 };
 
 enum ACTIONS {
-  FETCH_CITIES = 'FETCH_CITIES',
-  FETCH_CITY = 'FETCH_CITY',
-  SET_CURRENT_CITY = 'SET_CURRENT_CITY',
-  CREATE_CITY = 'CREATE_CITY',
-  DELETE_CITY = 'DELETE_CITY',
   LOADING = 'LOADING',
+  CITIES_LOADED = 'CITIES_LOADED',
+  CITIES_CREATED = 'CITIES_CREATED',
+  REJECTED = 'REJECTED',
 }
 
 type State = {
@@ -38,7 +36,11 @@ const initialState: State = {
   error: '',
 };
 
-type Action = { type: 'FETCH_CITIES'; payload: City[] };
+type Action =
+  | { type: ACTIONS.CITIES_LOADED; payload: City[] }
+  | { type: ACTIONS.CITIES_CREATED; payload: City }
+  | { type: ACTIONS.LOADING }
+  | { type: ACTIONS.REJECTED; payload: string };
 
 const CitiesContext = createContext<
   State & {
@@ -55,10 +57,22 @@ const CitiesContext = createContext<
 
 const reducer: Reducer<State, Action> = (state, action): State => {
   switch (action.type) {
-    case ACTIONS.FETCH_CITIES:
+    case ACTIONS.LOADING:
       return {
         ...state,
+        isLoading: true,
+      };
+    case ACTIONS.CITIES_LOADED:
+      return {
+        ...state,
+        isLoading: false,
         cities: action.payload,
+      };
+    case ACTIONS.CITIES_CREATED:
+      return {
+        ...state,
+        isLoading: false,
+        cities: [...state.cities, action.payload],
       };
     default:
       throw new Error('Unknown action type');
@@ -74,15 +88,14 @@ const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const fetchCities = async () => {
+      dispatch({ type: ACTIONS.LOADING });
+
       try {
-        setIsLoading(true);
         const response = await fetch(`${BASE_URL}/cities`);
-        const data = await response.json();
-        setCities(data);
+        const data = (await response.json()) as City[];
+        dispatch({ type: ACTIONS.CITIES_LOADED, payload: data });
       } catch {
-        setError('There was an error loading data...');
-      } finally {
-        setIsLoading(false);
+        dispatch({ type: ACTIONS.REJECTED, payload: 'There was an error loading data...' });
       }
     };
 
@@ -103,8 +116,9 @@ const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const createCity = async (payload: City): Promise<void> => {
+    dispatch({ type: ACTIONS.LOADING });
+
     try {
-      setIsLoading(true);
       const response = await fetch(`${BASE_URL}/cities`, {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -113,12 +127,10 @@ const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
         },
       });
 
-      const data = await response.json();
-      setCities(cities => [...cities, data]);
+      const data = (await response.json()) as City;
+      dispatch({ type: ACTIONS.CITIES_CREATED, payload: data });
     } catch (error) {
-      setError('There was an error creating city...');
-    } finally {
-      setIsLoading(false);
+      dispatch({ type: ACTIONS.REJECTED, payload: 'There was an error creating city...' });
     }
   };
 
