@@ -2,14 +2,27 @@ import { PageLayout } from '@/components/layout/page';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { type FormEvent, useState } from 'react';
+import { ROUTES } from '@/constants/routes';
+import { useAuth } from '@/contexts/fake-auth';
+import { type FormEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('jack@example.com');
   const [password, setPassword] = useState('password');
+  const { login, isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (isAuthenticated) navigate(ROUTES.APP);
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+
+    if (email && password) {
+      login({ email, password });
+    }
   };
 
   return (
