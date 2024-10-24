@@ -16,7 +16,7 @@ export default function HomePage() {
             world.
           </h2>
           <Link
-            to={ROUTES.APP}
+            to={ROUTES.LOGIN}
             className="inline-flex rounded-md bg-emerald-500 px-6 py-2 text-base font-medium uppercase text-gray-100 sm:text-lg"
           >
             Start tracking now
