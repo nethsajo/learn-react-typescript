@@ -14,7 +14,12 @@ export default function LoginPage() {
   const { login, isAuthenticated } = useAuth();
 
   useEffect(() => {
-    if (isAuthenticated) navigate(ROUTES.APP);
+    // When replace option is not set, redirecting to previous page doesn't work at all (click back and it goes forward again to the app route)
+    // The reason for that is that it is already logged-in and it keeps redirecting to the app route
+    // The solution to this is to not even go back to the login page
+    // Specify an object with the replace option set to true
+    // Once this navigation happens, it will replace the login page in the history stack with app route
+    if (isAuthenticated) navigate(ROUTES.APP, { replace: true });
   }, [isAuthenticated, navigate]);
 
   const handleSubmit = (event: FormEvent) => {

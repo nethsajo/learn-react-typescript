@@ -6,7 +6,15 @@ import { useUrlPosition } from '@/hooks/use-url-position';
 import { type Coordinates } from '@/types/coordinates';
 import { MapPinned } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from 'react-leaflet';
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  useMapEvents,
+  ZoomControl,
+} from 'react-leaflet';
 import { useNavigate } from 'react-router-dom';
 
 function CoordinateMarker({ position }: { position: Coordinates }) {
@@ -56,11 +64,17 @@ export function Map() {
           <MapPinned size={20} />
         </Button>
       )}
-      <MapContainer center={coordinates} zoom={6} className="h-full overflow-hidden">
+      <MapContainer
+        center={coordinates}
+        zoom={6}
+        zoomControl={false}
+        className="h-full overflow-hidden"
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
+        <ZoomControl position="topright" />
         {cities.map(city => {
           return (
             <Marker position={[city.position.lat, city.position.lng]} key={city.id}>
