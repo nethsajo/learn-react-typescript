@@ -1,56 +1,48 @@
 import { PageLayout } from '@/components/layout/page';
-import { type ChangeEvent, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { type FormEvent, useState } from 'react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('jack@example.com');
   const [password, setPassword] = useState('password');
 
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
   };
 
   return (
     <PageLayout>
       <section className="mx-auto my-24 w-full max-w-lg">
-        <form className="rounded-md bg-gray-600 p-4 shadow-sm sm:p-6">
+        <form onSubmit={handleSubmit} className="rounded-md bg-gray-600 p-4 shadow-sm sm:p-6">
           <div className="space-y-4">
             <div className="flex flex-col space-y-2">
-              <label className="text-sm font-semibold text-gray-200" htmlFor="email">
-                Email address
-              </label>
-              <input
+              <Label htmlFor="date">Email address</Label>
+              <Input
                 type="text"
-                name="email"
+                variant="filled"
                 id="email"
-                className="block w-full rounded-md border-0 bg-transparent px-3.5 py-2 text-slate-200 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
                 value={email}
-                onChange={handleEmailChange}
+                onChange={event => setEmail(event.target.value)}
+                className="text-gray-800"
               />
             </div>
             <div className="flex flex-col space-y-2">
-              <label className="text-sm font-semibold text-gray-200" htmlFor="email">
-                Password
-              </label>
-              <input
+              <Label htmlFor="date">Password</Label>
+              <Input
                 type="password"
-                name="password"
+                variant="filled"
                 id="password"
-                className="block w-full rounded-md border-0 bg-transparent px-3.5 py-2 text-slate-200 shadow-sm ring-1 ring-inset ring-gray-400 placeholder:text-gray-300 focus:ring-2 focus:ring-inset focus:ring-emerald-500 sm:text-sm sm:leading-6"
                 value={password}
-                onChange={handlePasswordChange}
+                onChange={event => setPassword(event.target.value)}
+                className="text-gray-800"
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="mt-6 w-full rounded-md bg-emerald-600 px-3.5 py-2 font-bold uppercase tracking-wide hover:bg-emerald-500"
-          >
+          <Button type="submit" className="mt-6 w-full px-3.5 py-2 font-bold uppercase">
             Login
-          </button>
+          </Button>
         </form>
       </section>
     </PageLayout>
