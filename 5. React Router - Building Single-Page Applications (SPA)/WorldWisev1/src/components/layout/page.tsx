@@ -8,9 +8,9 @@ export function PageLayout({ children }: React.PropsWithChildren) {
   const isIndex = location.pathname === '/';
 
   return (
-    <main className="relative h-full overflow-hidden rounded-md lg:p-6">
+    <main className="relative h-full overflow-hidden p-4 lg:rounded-md lg:p-6">
       <div
-        className={`absolute inset-0 ${isIndex ? "bg-[url('./bg.jpg')]" : 'bg-gray-500'} bg-cover bg-center`}
+        className={`absolute inset-0 ${isIndex ? "bg-[url('/bg.jpg')]" : 'bg-gray-500'} bg-cover bg-center`}
       >
         <div className="h-full w-full bg-[rgba(36,42,46,0.8)]"></div>
       </div>
