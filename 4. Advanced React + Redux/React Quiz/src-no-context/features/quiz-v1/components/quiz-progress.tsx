@@ -1,14 +1,19 @@
-import { Question, useQuiz } from 'shared/contexts/quiz';
+type Props = {
+  count: number;
+  maxPossiblePoints: number;
+  numberOfQuestions: number;
+  points: number;
+  answer?: number | null;
+};
 
-export function QuizProgress() {
-  const { index: count, questions, answer, points } = useQuiz();
-
+export function QuizProgress({
+  count,
+  numberOfQuestions,
+  maxPossiblePoints,
+  points,
+  answer,
+}: Props) {
   const current = count + Number(answer !== null);
-
-  const numberOfQuestions = questions.length;
-  const maxPossiblePoints = questions.reduce((current: number, question: Question) => {
-    return current + question.points;
-  }, 0);
 
   return (
     <div className="flex flex-col space-y-4">

@@ -1,15 +1,28 @@
-import { LEVELS, useQuiz } from 'shared/contexts/quiz';
+import { LEVELS } from 'shared/constants/level';
 
-export function QuizDifficulty() {
-  const {
-    difficulty,
-    totalQuestions,
-    takeQuestions,
-    selectDifficulty,
-    updateCategory,
-    setQuestionCount,
-    generate,
-  } = useQuiz();
+import { useEffect } from 'react';
+
+import { ChangeEvent, Dispatch, useState } from 'react';
+import { Action, Type } from 'src/App';
+
+type Props = {
+  dispatch: Dispatch<Action>;
+  difficulty: string;
+  totalQuestions: number;
+};
+
+export function QuizDifficulty({ dispatch, difficulty, totalQuestions }: Props) {
+  const [numberOfQuestions, setNumberOfQuestions] = useState(totalQuestions);
+
+  const handleSetNumberOfQuestions = (event: ChangeEvent<HTMLInputElement>) => {
+    setNumberOfQuestions(Number(event.target.value));
+    dispatch({ type: Type.SET_NUMBER_OF_QUESTIONS, payload: Number(event.target.value) });
+  };
+
+  // Reset the value of range when totalQuestions change
+  useEffect(() => {
+    setNumberOfQuestions(totalQuestions);
+  }, [totalQuestions]);
 
   return (
     <div className="space-y-8 text-center">
@@ -21,7 +34,7 @@ export function QuizDifficulty() {
           <button
             key={index}
             className={`rounded-md border border-slate-700 px-4 py-1.5 text-sm font-medium capitalize text-slate-50 transition-colors duration-150 hover:bg-blue-400 hover:text-slate-100 ${difficulty === level ? 'bg-blue-400' : null}`}
-            onClick={() => selectDifficulty(level)}
+            onClick={() => dispatch({ type: Type.SELECT_DIFFICULTY, payload: level })}
           >
             {level}
           </button>
@@ -32,24 +45,24 @@ export function QuizDifficulty() {
         <div className="flex items-center justify-center space-x-4">
           <input
             type="range"
-            value={takeQuestions}
+            value={numberOfQuestions}
             min={1}
             max={totalQuestions}
-            onChange={event => setQuestionCount(Number(event.target.value))}
+            onChange={handleSetNumberOfQuestions}
           />
-          <span className="font-bold">{takeQuestions}</span>
+          <span className="font-bold">{numberOfQuestions}</span>
         </div>
       </div>
       <div className="mx-auto flex max-w-md items-center justify-between">
         <button
           className="rounded-sm bg-slate-700 px-3 py-1.5 text-sm transition-colors duration-150 hover:bg-slate-800"
-          onClick={() => updateCategory()}
+          onClick={() => dispatch({ type: Type.CHANGE_CATEGORY })}
         >
           Change language
         </button>
         <button
           className="rounded-sm bg-blue-500 px-3 py-1.5 text-sm transition-colors duration-150 hover:bg-blue-600"
-          onClick={() => generate()}
+          onClick={() => dispatch({ type: Type.GENERATE })}
         >
           Next
         </button>

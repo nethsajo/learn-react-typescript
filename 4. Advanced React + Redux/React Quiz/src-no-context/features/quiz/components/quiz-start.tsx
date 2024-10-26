@@ -1,10 +1,15 @@
+import { Dispatch } from 'react';
 import CSS3Logo from 'shared/assets/css3.svg?react';
 import HTML5Logo from 'shared/assets/html5.svg?react';
 import JavaScriptLogo from 'shared/assets/javascript.svg?react';
 import ReactLogo from 'shared/assets/react.svg?react';
 import TypeScriptLogo from 'shared/assets/typescript.svg?react';
-import { useQuiz } from 'shared/contexts/quiz';
+import { Action, Type } from 'src-no-context/App';
 import { LANGUAGES } from '../constants';
+
+type Props = {
+  dispatch: Dispatch<Action>;
+};
 
 const languages = {
   html5: HTML5Logo,
@@ -14,9 +19,7 @@ const languages = {
   react: ReactLogo,
 };
 
-export function QuizStart() {
-  const { selectCategory } = useQuiz();
-
+export function QuizStart({ dispatch }: Props) {
   return (
     <div className="space-y-8 text-center">
       <h2 className="mb-2 text-balance text-base text-slate-300 sm:text-lg">
@@ -34,7 +37,7 @@ export function QuizStart() {
                 key={index}
                 type="button"
                 className="flex items-center space-x-2 rounded-full bg-slate-600/50 px-4 py-1 text-sm text-slate-300 transition-colors duration-300 hover:bg-blue-500 active:bg-blue-600"
-                onClick={() => selectCategory(language)}
+                onClick={() => dispatch({ type: Type.SELECT_CATEGORY, payload: language })}
               >
                 <span className="font-medium uppercase">{language}</span>
                 <LanguageLogo className="fill-current" />
