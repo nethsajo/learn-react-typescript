@@ -31,7 +31,7 @@ export function CountryList() {
                 className="h-full w-full rounded-sm ring-1 ring-slate-600"
               />
             </picture>
-            <h2 className="text-sm font-medium text-slate-200">{country.name}</h2>
+            <h2 className="text-sm font-medium text-slate-200 text-center">{country.name}</h2>
           </div>
         );
       })}

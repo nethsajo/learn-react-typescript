@@ -13,6 +13,7 @@ import CountriesPage from './routes/countries';
 import LoginPage from './routes/login';
 import NotFoundPage from './routes/not-found';
 import PricingPage from './routes/pricing';
+import ProtectedRoutePage from './routes/protected-route';
 
 export default function App() {
   return (
@@ -25,7 +26,14 @@ export default function App() {
               <Route path={ROUTES.PRODUCT} element={<AboutPage />}></Route>
               <Route path={ROUTES.PRICING} element={<PricingPage />}></Route>
               <Route path={ROUTES.LOGIN} element={<LoginPage />}></Route>
-              <Route path={ROUTES.APP} element={<AppPage />}>
+              <Route
+                path={ROUTES.APP}
+                element={
+                  <ProtectedRoutePage>
+                    <AppPage />
+                  </ProtectedRoutePage>
+                }
+              >
                 {/* Immediately navigate to the /cities using the Navigate component  */}
                 {/* In order to fix the back, we need to add the `replace` keyword  */}
                 {/* Replace - it will replace the current element in the history stack */}

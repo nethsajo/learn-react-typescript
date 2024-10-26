@@ -15,7 +15,7 @@ export function User() {
   if (!isAuthenticated || !user) return;
 
   return (
-    <div className="absolute right-2/4 top-[10px] z-[1000] translate-x-2/4 text-black lg:right-0 lg:top-0 lg:translate-x-0">
+    <div className="absolute right-2/4 top-[10px] z-[1000] translate-x-2/4 text-black shadow-lg lg:right-0 lg:top-0 lg:translate-x-0">
       <div className="rounded-md border-2 border-[rgba(0,0,0,0.2)] bg-white lg:mr-16 lg:mt-[10px]">
         <div className="grid grid-cols-[32px_1fr_auto] items-center gap-2 px-2.5 py-1.5">
           <img
