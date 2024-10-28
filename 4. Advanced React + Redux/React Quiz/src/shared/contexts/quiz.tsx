@@ -1,4 +1,4 @@
-import { createContext, Reducer, useContext, useEffect, useReducer } from 'react';
+import { createContext, Dispatch, Reducer, useContext, useEffect, useReducer } from 'react';
 import {
   MAX_NUMBER_OF_QUESTIONS,
   MAX_NUMBER_OF_TAKE_QUESTIONS,
@@ -18,7 +18,7 @@ export type Questionnaire = {
   questions: Question[];
 };
 
-enum ACTION {
+export enum ACTION {
   QUIZ_LOADED = 'QUIZ_LOADED',
   START = 'START',
   SELECT_CATEGORY = 'SELECT_CATEGORY',
@@ -104,24 +104,11 @@ const initialState: State = {
 };
 
 const QuizContext = createContext<
-  State & {
-    selectCategory: (category: string) => void;
-    updateCategory: () => void;
-    selectDifficulty: (level: DifficultyValues) => void;
-    setQuestionCount: (count: number | null) => void;
-    generate: () => void;
-    start: () => void;
-    onAnswer: (answer: number | null) => void;
-  }
+  State & { maxPossiblePoints: number; dispatch: Dispatch<Actions> }
 >({
   ...initialState,
-  selectCategory: () => {},
-  selectDifficulty: () => {},
-  setQuestionCount: () => {},
-  updateCategory: () => {},
-  generate: () => {},
-  start: () => {},
-  onAnswer: () => {},
+  maxPossiblePoints: 0,
+  dispatch: () => {},
 });
 
 const reducer: Reducer<State, Actions> = (state, action): State => {
@@ -210,6 +197,10 @@ const reducer: Reducer<State, Actions> = (state, action): State => {
 const QuizProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const maxPossiblePoints = state.questions.reduce((current: number, question: Question) => {
+    return current + question.points;
+  }, 0);
+
   useEffect(() => {
     const fetchQuestionnaires = async () => {
       try {
@@ -223,39 +214,8 @@ const QuizProvider = ({ children }: { children: React.ReactNode }) => {
     fetchQuestionnaires();
   }, []);
 
-  const selectCategory = (category: string) => {
-    dispatch({ type: ACTION.SELECT_CATEGORY, payload: category });
-  };
-
-  const updateCategory = () => dispatch({ type: ACTION.UPDATE_CATEGORY });
-
-  const selectDifficulty = (level: DifficultyValues) => {
-    dispatch({ type: ACTION.SELECT_DIFFICULTY, payload: level });
-  };
-
-  const setQuestionCount = (count: number | null = null) => {
-    dispatch({ type: ACTION.SET_QUESTION_COUNT, payload: count });
-  };
-
-  const generate = () => dispatch({ type: ACTION.GENERATE });
-
-  const start = () => dispatch({ type: ACTION.START });
-
-  const onAnswer = (answer: number | null) => dispatch({ type: ACTION.ANSWER, payload: answer });
-
   return (
-    <QuizContext.Provider
-      value={{
-        ...state,
-        selectCategory,
-        updateCategory,
-        selectDifficulty,
-        setQuestionCount,
-        generate,
-        start,
-        onAnswer,
-      }}
-    >
+    <QuizContext.Provider value={{ ...state, maxPossiblePoints, dispatch }}>
       {children}
     </QuizContext.Provider>
   );
