@@ -85,6 +85,10 @@ type Actions =
   | { type: ACTION.GENERATE }
   | { type: ACTION.START }
   | { type: ACTION.ANSWER; payload: number | null }
+  | { type: ACTION.NEXT_QUESTION }
+  | { type: ACTION.FINISH }
+  | { type: ACTION.RESTART }
+  | { type: ACTION.TICK }
   | { type: ACTION.REJECTED; payload: string };
 
 const initialState: State = {
@@ -188,6 +192,22 @@ const reducer: Reducer<State, Actions> = (state, action): State => {
         ...state,
         answer: action.payload,
         points: isCorrect ? state.points + question.points : state.points,
+      };
+    case ACTION.NEXT_QUESTION:
+      return { ...state, index: state.index + 1, answer: null };
+    case ACTION.FINISH:
+      return {
+        ...state,
+        status: 'finished',
+        highscore: state.points > state.highscore ? state.points : state.highscore,
+      };
+    case ACTION.RESTART:
+      return { ...initialState, questions: state.questions, status: 'ready' };
+    case ACTION.TICK:
+      return {
+        ...state,
+        remaining: state.remaining - 1,
+        status: state.remaining === 0 ? 'finished' : state.status,
       };
     default:
       throw new Error('Unknown action type.');
