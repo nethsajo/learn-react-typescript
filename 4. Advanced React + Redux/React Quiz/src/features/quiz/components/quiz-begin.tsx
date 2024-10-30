@@ -1,8 +1,8 @@
-import { useQuiz } from 'shared/contexts/quiz';
+import { ACTION, useQuiz } from 'shared/contexts/quiz';
 import { QuizDetail } from './quiz-detail';
 
 export function QuizBegin() {
-  const { difficulty, category, takeQuestions, start } = useQuiz();
+  const { difficulty, category, takeQuestions, dispatch } = useQuiz();
 
   return (
     <>
@@ -17,7 +17,7 @@ export function QuizBegin() {
       </div>
       <button
         className="self-center rounded-sm bg-blue-500 px-3 py-1.5 text-sm transition-colors duration-150 hover:bg-blue-600"
-        onClick={() => start()}
+        onClick={() => dispatch({ type: ACTION.START })}
       >
         Let's Start
       </button>
