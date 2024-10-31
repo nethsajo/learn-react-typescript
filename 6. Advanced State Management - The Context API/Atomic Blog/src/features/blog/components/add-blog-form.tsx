@@ -18,7 +18,7 @@ export function AddBlogForm() {
   };
 
   return context.isToggle ? (
-    <div className="w-full rounded-md bg-gray-100 p-4">
+    <div className="w-full rounded-md bg-gray-100 p-4 dark:bg-indigo-100">
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
           id="title"
@@ -37,7 +37,7 @@ export function AddBlogForm() {
           onChange={(event: ChangeEvent<HTMLTextAreaElement>) => setBody(event.target.value)}
         />
         <div className="flex justify-end space-x-2">
-          <Button variant="secondary" onClick={context.onToggleForm}>
+          <Button variant="ghost" onClick={context.onToggleForm}>
             Cancel
           </Button>
           <Button type="submit">Submit</Button>
