@@ -9,10 +9,10 @@ export function BlogList() {
         return (
           <div
             key={`post--${index}`}
-            className="rounded-md border border-gray-200 p-4 hover:bg-gray-100"
+            className="rounded-md border border-gray-200 p-4 hover:bg-gray-100 dark:border-0 dark:bg-indigo-200 dark:hover:bg-indigo-100"
           >
             <h2 className="mb-2 font-bold capitalize text-indigo-500">{post.title}</h2>
-            <p className="text-gray-500">{post.body}</p>
+            <p className="text-gray-500 dark:text-gray-600">{post.body}</p>
           </div>
         );
       })}
