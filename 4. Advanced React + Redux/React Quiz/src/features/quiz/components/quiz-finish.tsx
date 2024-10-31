@@ -1,14 +1,8 @@
-import { Dispatch } from 'react';
-import { Action, Type } from 'src/App';
+import { ACTION, useQuiz } from 'shared/contexts/quiz';
 
-type Props = {
-  points: number;
-  maxPossiblePoints: number;
-  highscore: number;
-  dispatch: Dispatch<Action>;
-};
+export function QuizFinish() {
+  const { points, maxPossiblePoints, highscore, dispatch } = useQuiz();
 
-export function QuizFinish({ points, maxPossiblePoints, highscore, dispatch }: Props) {
   const percentage = (points / maxPossiblePoints) * 100;
 
   let emoji;
@@ -27,7 +21,7 @@ export function QuizFinish({ points, maxPossiblePoints, highscore, dispatch }: P
       </p>
       <p className="font-medium">High score: {highscore} points</p>
       <button
-        onClick={() => dispatch({ type: Type.RESTART })}
+        onClick={() => dispatch({ type: ACTION.RESTART })}
         className="mt-4 rounded-sm bg-sky-500 px-6 py-1.5 font-medium text-slate-200 transition-colors duration-300 hover:bg-sky-600"
       >
         Restart

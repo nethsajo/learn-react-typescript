@@ -1,19 +1,15 @@
-import { Dispatch, useEffect } from 'react';
+import { useEffect } from 'react';
+import { ACTION, useQuiz } from 'shared/contexts/quiz';
 import { formatTime } from 'shared/utils/format';
-import { Action, Type } from 'src/App';
 
-type Props = {
-  remaining: number;
-  dispatch: Dispatch<Action>;
-};
-
-export function QuizTimer({ remaining, dispatch }: Props) {
+export function QuizTimer() {
+  const { remaining, dispatch } = useQuiz();
   const minutes = Math.floor(remaining / 60);
   const seconds = remaining % 60;
 
   useEffect(() => {
     const id = setInterval(() => {
-      dispatch({ type: Type.TICK });
+      dispatch({ type: ACTION.TICK });
     }, 1000);
 
     return () => clearInterval(id);
