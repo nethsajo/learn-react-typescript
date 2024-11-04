@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AddBlogForm } from './components/add-blog-form';
+import { Archive } from './components/archive';
 import { BlogList } from './components/blog-list';
 import { Header } from './components/header';
 import { PostProvider } from './contexts/post';
@@ -20,6 +21,7 @@ export default function AtomicBlog() {
         <Header isFakeDark={isFakeDark} onSetFakeDark={setIsFakeDark} />
         <AddBlogForm />
         <BlogList />
+        <Archive show={false} />
       </div>
     </PostProvider>
   );
