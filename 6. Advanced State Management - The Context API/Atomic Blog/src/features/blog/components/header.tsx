@@ -1,15 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Atom } from 'lucide-react';
-import { type ChangeEvent } from 'react';
+import { memo, type ChangeEvent } from 'react';
 import { usePosts } from '../contexts/post';
 
-type HeaderProps = {
-  isFakeDark: boolean;
-  onSetFakeDark: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export function Header({ isFakeDark, onSetFakeDark }: HeaderProps) {
+export const Header = memo(function Header() {
   const { posts, query, isToggle, onSetQuery, onClearBlog, onToggleForm } = usePosts();
 
   return (
@@ -26,7 +21,7 @@ export function Header({ isFakeDark, onSetFakeDark }: HeaderProps) {
           placeholder="Search posts..."
           value={query}
           onChange={(event: ChangeEvent<HTMLInputElement>) => onSetQuery(event.target.value)}
-          className="col-span-6 sm:col-span-3"
+          className="col-span-6 sm:col-span-3 dark:text-gray-200"
         />
         <Button
           size="lg"
@@ -49,15 +44,8 @@ export function Header({ isFakeDark, onSetFakeDark }: HeaderProps) {
           <Button className="ml-auto" onClick={onToggleForm} disabled={isToggle}>
             Create post
           </Button>
-          <Button
-            variant="outline"
-            className="border-2 border-gray-300 hover:bg-gray-100 dark:border-indigo-500 dark:hover:bg-indigo-500"
-            onClick={() => onSetFakeDark(isFakeDark => !isFakeDark)}
-          >
-            {isFakeDark ? '☀️' : '🌙'}
-          </Button>
         </div>
       </div>
     </header>
   );
-}
+});

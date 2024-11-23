@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { usePosts } from '../contexts/post';
 // import { Test } from './test';
 
-export function BlogList() {
+export const BlogList = memo(function BlogList() {
   const { posts } = usePosts();
 
   return (
@@ -22,4 +23,4 @@ export function BlogList() {
       {/* <Test /> */}
     </>
   );
-}
+});

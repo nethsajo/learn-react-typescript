@@ -1,6 +1,6 @@
 import { createRandomPost } from '@/features/blog/utils/create-random-post';
 import { type Blog } from '@/types/blog';
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 
 // 1. CREATE CONTEXT
 
@@ -9,6 +9,7 @@ type Children = {
 };
 
 type State = {
+  blogs: Blog[];
   posts: Blog[];
   query: string;
   isToggle: boolean;
@@ -19,6 +20,7 @@ type State = {
 };
 
 const PostContext = React.createContext<State>({
+  blogs: [],
   posts: [],
   query: '',
   isToggle: false,
@@ -36,9 +38,9 @@ const PostProvider = ({ children }: Children) => {
     Array.from({ length: 30 }, () => createRandomPost())
   );
 
-  const handleSubmitBlog = (blog: Blog) => {
+  const handleSubmitBlog = useCallback((blog: Blog) => {
     setBlogs(blogs => [...blogs, blog]);
-  };
+  }, []);
 
   const handleSetQuery = (q: string) => {
     setQuery(q);
@@ -55,21 +57,20 @@ const PostProvider = ({ children }: Children) => {
 
   const posts = query.length > 0 ? filteredPosts : blogs;
 
-  return (
-    <PostContext.Provider
-      value={{
-        posts,
-        query,
-        isToggle,
-        onToggleForm: handleToggleForm,
-        onSetQuery: handleSetQuery,
-        onClearBlog: handleClearBlog,
-        onSubmitBlog: handleSubmitBlog,
-      }}
-    >
-      {children}
-    </PostContext.Provider>
-  );
+  const value = useMemo(() => {
+    return {
+      blogs,
+      posts,
+      query,
+      isToggle,
+      onToggleForm: handleToggleForm,
+      onSetQuery: handleSetQuery,
+      onClearBlog: handleClearBlog,
+      onSubmitBlog: handleSubmitBlog,
+    };
+  }, [blogs, handleSubmitBlog, isToggle, posts, query]);
+
+  return <PostContext.Provider value={value}>{children}</PostContext.Provider>;
 };
 
 const usePosts = () => {

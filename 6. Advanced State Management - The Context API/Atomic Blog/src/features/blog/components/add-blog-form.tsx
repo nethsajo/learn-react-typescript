@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { memo, useState, type ChangeEvent, type FormEvent } from 'react';
 import { usePosts } from '../contexts/post';
 
-export function AddBlogForm() {
+export const AddBlogForm = memo(function AddBlogForm() {
   const context = usePosts();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -45,4 +45,4 @@ export function AddBlogForm() {
       </form>
     </div>
   ) : null;
-}
+});
