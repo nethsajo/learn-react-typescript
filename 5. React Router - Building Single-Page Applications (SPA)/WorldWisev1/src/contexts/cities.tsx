@@ -1,6 +1,6 @@
 import { BASE_URL } from '@/constants/common';
 import type React from 'react';
-import { createContext, type Reducer, useContext, useEffect, useReducer } from 'react';
+import { createContext, type Reducer, useCallback, useContext, useEffect, useReducer } from 'react';
 
 export type City = {
   id: string;
@@ -120,19 +120,22 @@ const CitiesProvider = ({ children }: { children: React.ReactNode }) => {
     fetchCities();
   }, []);
 
-  const getCity = async (id: string) => {
-    if (id === state.currentCity?.id) return;
+  const getCity = useCallback(
+    async (id: string) => {
+      if (id === state.currentCity?.id) return;
 
-    dispatch({ type: ACTIONS.LOADING });
+      dispatch({ type: ACTIONS.LOADING });
 
-    try {
-      const response = await fetch(`${BASE_URL}/cities/${id}`);
-      const data = (await response.json()) as City;
-      dispatch({ type: ACTIONS.CITY_LOADED, payload: data });
-    } catch {
-      dispatch({ type: ACTIONS.REJECTED, payload: 'There was an error loading data...' });
-    }
-  };
+      try {
+        const response = await fetch(`${BASE_URL}/cities/${id}`);
+        const data = (await response.json()) as City;
+        dispatch({ type: ACTIONS.CITY_LOADED, payload: data });
+      } catch {
+        dispatch({ type: ACTIONS.REJECTED, payload: 'There was an error loading data...' });
+      }
+    },
+    [state.currentCity?.id]
+  );
 
   const createCity = async (payload: City): Promise<void> => {
     dispatch({ type: ACTIONS.LOADING });
