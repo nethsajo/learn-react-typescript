@@ -7,6 +7,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 config();
 
 export default defineConfig({
+  assetsInclude: ['**/*.m4a'],
   server: {
     port: 4000,
   },

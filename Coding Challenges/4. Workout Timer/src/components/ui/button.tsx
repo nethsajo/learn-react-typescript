@@ -20,9 +20,9 @@ const buttonVariants = cva(
         link: 'text-white hover:underline underline-offset-4',
       },
       size: {
-        sm: 'px-2 py-1 h-8',
-        lg: 'px-3 py-2 h-9',
-        xl: 'px-3.5 py-2.5 h-11',
+        sm: 'h-9 px-4',
+        md: 'h-12 px-4',
+        lg: 'h-14 px-6',
       },
     },
     defaultVariants: {
@@ -32,7 +32,7 @@ const buttonVariants = cva(
   }
 );
 
-const Button = ({ className, variant, size, children, type = 'button', ...props }: ButtonProps) => {
+const Button = ({ type = 'button', className, variant, size, children, ...props }: ButtonProps) => {
   return (
     <button type={type} {...props} className={cn(buttonVariants({ variant, size, className }))}>
       {children}
