@@ -22,6 +22,7 @@ const inputVariants = cva(
       },
     },
     defaultVariants: {
+      scale: 'sm',
       variant: 'filled',
     },
   }

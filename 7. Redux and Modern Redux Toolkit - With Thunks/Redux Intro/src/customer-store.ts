@@ -17,9 +17,17 @@ interface CustomerCreate {
   payload: Customer;
 }
 
-type Actions = CustomerCreate;
+interface CustomerUpdate {
+  type: 'customer/update';
+  payload: string;
+}
 
-const reducer = (state: Customer = initialStateCustomer, action: Actions): Customer => {
+type CustomerActions = CustomerCreate | CustomerUpdate;
+
+const customerReducer = (
+  state: Customer = initialStateCustomer,
+  action: CustomerActions
+): Customer => {
   switch (action.type) {
     case 'customer/create':
       return {
@@ -28,12 +36,17 @@ const reducer = (state: Customer = initialStateCustomer, action: Actions): Custo
         national_id: action.payload.national_id,
         created_at: action.payload.created_at,
       };
+    case 'customer/update':
+      return {
+        ...state,
+        full_name: action.payload,
+      };
     default:
       return state;
   }
 };
 
-const store = createStore(reducer);
+const store = createStore(customerReducer);
 
 const createCustomer = (fullName: string, nationalId: string) => {
   return {
@@ -43,5 +56,5 @@ const createCustomer = (fullName: string, nationalId: string) => {
 };
 
 const updateCustomer = (fullName: string) => {
-  return { type: '' };
+  return { type: 'customer/update', payload: fullName };
 };

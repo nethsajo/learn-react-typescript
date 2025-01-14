@@ -5,8 +5,7 @@ import './styles.css';
 
 import App from './App';
 
-import './account-store';
-import './customer-store';
+import './store';
 
 const root = document.getElementById('root') as HTMLElement;
 

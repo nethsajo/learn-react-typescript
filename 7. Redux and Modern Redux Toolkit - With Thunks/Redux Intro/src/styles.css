@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply font-inter text-sm text-zinc-500 dark:bg-gray-800;
+    @apply p-4 font-inter text-sm text-zinc-500 sm:p-6 dark:bg-gray-800;
   }
 }
