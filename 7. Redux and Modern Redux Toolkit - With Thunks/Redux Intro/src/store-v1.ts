@@ -1,5 +1,68 @@
 import { combineReducers, createStore } from 'redux';
 
+// Account
+enum ACTION {
+  DEPOSIT = 'account/deposit',
+  WITHDRAW = 'account/withdraw',
+  REQUEST_LOAN = 'account/request-loan',
+  PAY_LOAN = 'account/pay-loan',
+}
+
+export type Account = {
+  balance: number;
+  loan: number;
+  loanPurpose: string;
+};
+
+const account: Account = {
+  balance: 0,
+  loan: 0,
+  loanPurpose: '',
+};
+
+interface AccountDeposit {
+  type: ACTION.DEPOSIT;
+  payload: number;
+}
+
+interface AccountWithdraw {
+  type: ACTION.WITHDRAW;
+  payload: number;
+}
+
+interface AccountRequestLoan {
+  type: ACTION.REQUEST_LOAN;
+  payload: Pick<Account, 'loan' | 'loanPurpose'>;
+}
+
+interface AccountPayLoan {
+  type: ACTION.PAY_LOAN;
+}
+
+type AccountActions = AccountDeposit | AccountWithdraw | AccountRequestLoan | AccountPayLoan;
+
+const accountReducer = (state = account, action: AccountActions) => {
+  switch (action.type) {
+    case ACTION.DEPOSIT:
+      return { ...state, balance: state.balance + action.payload };
+    case ACTION.WITHDRAW:
+      return { ...state, balance: state.balance - action.payload };
+    case ACTION.REQUEST_LOAN:
+      if (state.loan > 0) return state;
+
+      return {
+        ...state,
+        loan: action.payload.loan,
+        loanPurpose: action.payload.loanPurpose,
+        balance: state.balance + action.payload.loan,
+      };
+    case ACTION.PAY_LOAN:
+      return { ...state, loanPurpose: '', loan: 0, balance: state.balance - state.loan };
+    default:
+      return state;
+  }
+};
+
 // Customer
 export type Customer = {
   full_name: string;
