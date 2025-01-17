@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Balance } from './features/accounts/components/balance';
 import { Deposit } from './features/accounts/components/deposit';
 import { RequestLoan } from './features/accounts/components/request-loan';
 import { Transaction } from './features/accounts/components/transaction';
@@ -14,7 +15,10 @@ export default function App() {
         The React-Redux Bank
       </h1>
       <Transaction transaction={transaction} setTransaction={setTransaction} />
-      <Customer />
+      <div className="flex flex-col items-center space-y-3 sm:flex-row sm:space-y-0">
+        <Customer />
+        <Balance />
+      </div>
       {/* <AddCustomerForm /> */}
       {transaction === 'deposit' && <Deposit />}
       {transaction === 'withdraw' && <Withdraw />}
