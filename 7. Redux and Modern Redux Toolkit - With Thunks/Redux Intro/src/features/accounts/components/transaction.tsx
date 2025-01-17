@@ -1,11 +1,12 @@
 import { Button } from '@/components/ui/button';
+import { memo } from 'react';
 
 type MenuProps = {
   transaction: string;
   setTransaction: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export function Transaction({ transaction, setTransaction }: MenuProps) {
+export const Transaction = memo(function Transaction({ transaction, setTransaction }: MenuProps) {
   const transactions = ['deposit', 'withdraw', 'loan'];
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -22,4 +23,4 @@ export function Transaction({ transaction, setTransaction }: MenuProps) {
       ))}
     </div>
   );
-}
+});

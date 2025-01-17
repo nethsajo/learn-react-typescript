@@ -38,7 +38,11 @@ export function AddCustomerForm() {
               onChange={event => setNationalId(event.target.value)}
             />
           </div>
-          <Button type="submit">Create new customer</Button>
+          <div className="flex">
+            <Button className="ml-auto" type="submit">
+              Create new customer
+            </Button>
+          </div>
         </form>
       </div>
     </div>
