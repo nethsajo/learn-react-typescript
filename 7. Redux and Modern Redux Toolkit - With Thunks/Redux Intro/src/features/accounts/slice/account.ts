@@ -1,4 +1,4 @@
-enum ACTION {
+export enum AccountAction {
   DEPOSIT = 'account/deposit',
   WITHDRAW = 'account/withdraw',
   REQUEST_LOAN = 'account/request-loan',
@@ -18,33 +18,33 @@ const initialState: Account = {
 };
 
 interface Deposit {
-  type: ACTION.DEPOSIT;
+  type: AccountAction.DEPOSIT;
   payload: number;
 }
 
 interface Withdraw {
-  type: ACTION.WITHDRAW;
+  type: AccountAction.WITHDRAW;
   payload: number;
 }
 
 interface RequestLoan {
-  type: ACTION.REQUEST_LOAN;
+  type: AccountAction.REQUEST_LOAN;
   payload: Pick<Account, 'loan' | 'loanPurpose'>;
 }
 
 interface PayLoan {
-  type: ACTION.PAY_LOAN;
+  type: AccountAction.PAY_LOAN;
 }
 
 type AccountActions = Deposit | Withdraw | RequestLoan | PayLoan;
 
 export const accountReducer = (state = initialState, action: AccountActions): Account => {
   switch (action.type) {
-    case ACTION.DEPOSIT:
+    case AccountAction.DEPOSIT:
       return { ...state, balance: state.balance + action.payload };
-    case ACTION.WITHDRAW:
+    case AccountAction.WITHDRAW:
       return { ...state, balance: state.balance - action.payload };
-    case ACTION.REQUEST_LOAN:
+    case AccountAction.REQUEST_LOAN:
       if (state.loan > 0) return state;
 
       return {
@@ -53,7 +53,7 @@ export const accountReducer = (state = initialState, action: AccountActions): Ac
         loanPurpose: action.payload.loanPurpose,
         balance: state.balance + action.payload.loan,
       };
-    case ACTION.PAY_LOAN:
+    case AccountAction.PAY_LOAN:
       return { ...state, loanPurpose: '', loan: 0, balance: state.balance - state.loan };
     default:
       return state;
@@ -61,17 +61,17 @@ export const accountReducer = (state = initialState, action: AccountActions): Ac
 };
 
 export const deposit = (amount: number): Deposit => {
-  return { type: ACTION.DEPOSIT, payload: amount };
+  return { type: AccountAction.DEPOSIT, payload: amount };
 };
 
 export const withdraw = (amount: number): Withdraw => {
-  return { type: ACTION.WITHDRAW, payload: amount };
+  return { type: AccountAction.WITHDRAW, payload: amount };
 };
 
 export const requestLoan = (amount: number, purpose: string): RequestLoan => {
-  return { type: ACTION.REQUEST_LOAN, payload: { loan: amount, loanPurpose: purpose } };
+  return { type: AccountAction.REQUEST_LOAN, payload: { loan: amount, loanPurpose: purpose } };
 };
 
 export const payLoan = (): PayLoan => {
-  return { type: ACTION.PAY_LOAN };
+  return { type: AccountAction.PAY_LOAN };
 };

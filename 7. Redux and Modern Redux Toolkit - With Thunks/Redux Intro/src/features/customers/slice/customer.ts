@@ -1,4 +1,4 @@
-enum ACTION {
+export enum CustomerAction {
   CREATE = 'customer/create',
   UPDATE = 'customer/update',
 }
@@ -16,12 +16,12 @@ const initialState: Customer = {
 };
 
 interface Create {
-  type: 'customer/create';
+  type: CustomerAction.CREATE;
   payload: Customer;
 }
 
 interface Update {
-  type: 'customer/update';
+  type: CustomerAction.UPDATE;
   payload: string;
 }
 
@@ -29,14 +29,14 @@ type CustomerActions = Create | Update;
 
 export const customerReducer = (state = initialState, action: CustomerActions): Customer => {
   switch (action.type) {
-    case ACTION.CREATE:
+    case CustomerAction.CREATE:
       return {
         ...state,
         full_name: action.payload.full_name,
         national_id: action.payload.national_id,
         created_at: action.payload.created_at,
       };
-    case ACTION.UPDATE:
+    case CustomerAction.UPDATE:
       return {
         ...state,
         full_name: action.payload,
@@ -48,11 +48,11 @@ export const customerReducer = (state = initialState, action: CustomerActions): 
 
 export const createCustomer = (fullName: string, nationalId: string): Create => {
   return {
-    type: 'customer/create',
+    type: CustomerAction.CREATE,
     payload: { full_name: fullName, national_id: nationalId, created_at: new Date().toISOString() },
   };
 };
 
 export const updateCustomer = (fullName: string): Update => {
-  return { type: 'customer/update', payload: fullName };
+  return { type: CustomerAction.UPDATE, payload: fullName };
 };
