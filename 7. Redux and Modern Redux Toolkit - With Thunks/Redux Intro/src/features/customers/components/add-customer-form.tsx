@@ -1,14 +1,21 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { type FormEvent, useState } from 'react';
+import { useAppDispatch } from '@/store';
+import { useState, type FormEvent } from 'react';
+import { createCustomer } from '../slice/customer';
 
 export function AddCustomerForm() {
   const [fullName, setFullName] = useState('');
   const [nationalId, setNationalId] = useState('');
 
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+
+    if (!fullName || !nationalId) return;
+    dispatch(createCustomer(fullName, nationalId));
   };
 
   return (

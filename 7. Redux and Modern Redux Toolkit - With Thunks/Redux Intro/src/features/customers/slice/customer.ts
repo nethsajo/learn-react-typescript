@@ -10,7 +10,7 @@ type Customer = {
 };
 
 const initialState: Customer = {
-  full_name: 'Jan Kenneth Sajo',
+  full_name: '',
   national_id: '',
   created_at: '',
 };

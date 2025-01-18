@@ -1,8 +1,7 @@
-import { type RootState } from '@/store';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@/store';
 
 export function Customer() {
-  const customer = useSelector((store: RootState) => store.customer);
+  const customer = useAppSelector(store => store.customer);
 
   return (
     <h2 className="text-lg font-semibold text-zinc-800">
