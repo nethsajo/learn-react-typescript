@@ -1,16 +1,20 @@
 import { useState } from 'react';
-import { Balance } from './features/accounts/components/balance';
+import { Button } from './components/ui/button';
+import Balance from './features/accounts/components/balance';
 import { Deposit } from './features/accounts/components/deposit';
-import { RequestLoan } from './features/accounts/components/request-loan';
+import { Loan } from './features/accounts/components/loan';
 import { Transaction } from './features/accounts/components/transaction';
 import { Withdraw } from './features/accounts/components/withdraw';
+import { payLoan } from './features/accounts/slice/account';
 import { AddCustomerForm } from './features/customers/components/add-customer-form';
 import { Customer } from './features/customers/components/customer';
-import { useAppSelector } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 
 export default function App() {
   const [transaction, setTransaction] = useState('deposit');
   const customer = useAppSelector(state => state.customer.full_name);
+  const dispatch = useAppDispatch();
+  const { loan, loanPurpose } = useAppSelector(state => state.account);
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col space-y-6">
@@ -27,12 +31,22 @@ export default function App() {
             <Customer />
             <Balance />
           </div>
-          {/* <AddCustomerForm /> */}
           <div className="space-y-2">
-            <h2 className="text-lg font-semibold capitalize text-zinc-800">{transaction}</h2>
+            <div className="flex items-center">
+              <h2 className="text-lg font-semibold capitalize text-zinc-800">{transaction}</h2>
+              {transaction === 'loan' && loan > 0 && (
+                <Button
+                  variant="destructive"
+                  className="ml-auto"
+                  onClick={() => dispatch(payLoan())}
+                >
+                  Pay back ${loan} ({loanPurpose})
+                </Button>
+              )}
+            </div>
             {transaction === 'deposit' && <Deposit />}
             {transaction === 'withdraw' && <Withdraw />}
-            {transaction === 'loan' && <RequestLoan />}
+            {transaction === 'loan' && <Loan />}
           </div>
         </>
       )}

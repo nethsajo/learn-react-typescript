@@ -1,13 +1,21 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useAppDispatch } from '@/store';
 import { useState } from 'react';
+import { requestLoan } from '../slice/account';
 
-export function RequestLoan() {
+export function Loan() {
   const [amount, setAmount] = useState(0);
   const [purpose, setPurpose] = useState('');
+  const dispatch = useAppDispatch();
 
-  const handleRequestLoan = () => {};
+  const handleRequestLoan = () => {
+    if (!amount) return;
+    dispatch(requestLoan(amount, purpose));
+    setAmount(0);
+    setPurpose('');
+  };
 
   return (
     <div className="flex flex-col space-y-4 rounded-md bg-gray-100 p-4">

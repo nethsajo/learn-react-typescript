@@ -1,12 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useAppDispatch } from '@/store';
 import { useState } from 'react';
+import { withdraw } from '../slice/account';
 
 export function Withdraw() {
-  const [withdraw, setWithdraw] = useState(0);
+  const [amount, setAmount] = useState(0);
+  const dispatch = useAppDispatch();
 
-  const handleWithdraw = () => {};
+  const handleWithdraw = () => {
+    if (!amount) return;
+    dispatch(withdraw(amount));
+    setAmount(0);
+  };
 
   return (
     <div className="flex flex-col space-y-4 rounded-md bg-gray-100 p-4">
@@ -18,11 +25,11 @@ export function Withdraw() {
           type="number"
           id="withdraw"
           variant="outline"
-          value={withdraw}
-          onChange={event => setWithdraw(Number(event.target.value))}
+          value={amount}
+          onChange={event => setAmount(Number(event.target.value))}
         />
       </div>
-      <Button onClick={handleWithdraw}>Withdraw</Button>
+      <Button onClick={handleWithdraw}>Withdraw {amount > 0 ? amount : null}</Button>
     </div>
   );
 }

@@ -9,8 +9,8 @@ const rootReducer = combineReducers({
   customer: customerReducer,
 });
 
-type RootState = ReturnType<typeof rootReducer>;
-type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch: () => AppDispatch = useDispatch;

@@ -2,13 +2,21 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
+import { useAppDispatch } from '@/store';
 import { useState } from 'react';
+import { deposit } from '../slice/account';
 
 export function Deposit() {
-  const [deposit, setDeposit] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [currency, setCurrency] = useState('USD');
 
-  const handleDeposit = () => {};
+  const dispatch = useAppDispatch();
+
+  const handleDeposit = () => {
+    if (!deposit) return;
+    dispatch(deposit(amount));
+    setAmount(0);
+  };
 
   return (
     <div className="flex flex-col space-y-4 rounded-md bg-gray-100 p-4">
@@ -19,9 +27,10 @@ export function Deposit() {
         <Input
           type="number"
           id="deposit"
+          min={1}
           variant="outline"
-          value={deposit}
-          onChange={event => setDeposit(Number(event.target.value))}
+          value={amount}
+          onChange={event => setAmount(Number(event.target.value))}
         />
       </div>
       <div className="grid grid-cols-[70px_1fr] items-center gap-2">
@@ -39,7 +48,7 @@ export function Deposit() {
           <option value="GBP">British Pound</option>
         </Select>
       </div>
-      <Button onClick={handleDeposit}>Deposit</Button>
+      <Button onClick={handleDeposit}>Deposit {amount > 0 ? amount : null}</Button>
     </div>
   );
 }
