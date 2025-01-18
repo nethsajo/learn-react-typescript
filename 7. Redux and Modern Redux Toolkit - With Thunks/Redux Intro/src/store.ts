@@ -1,5 +1,6 @@
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { thunk } from 'redux-thunk';
 import { accountReducer } from './features/accounts/slice/account';
 import { customerReducer } from './features/customers/slice/customer';
 
@@ -9,12 +10,12 @@ const rootReducer = combineReducers({
   customer: customerReducer,
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
+export type AppState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
 
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
 export const useAppDispatch: () => AppDispatch = useDispatch;
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;

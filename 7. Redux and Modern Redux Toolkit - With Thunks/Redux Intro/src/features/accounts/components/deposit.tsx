@@ -2,20 +2,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
-import { useAppDispatch } from '@/store';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { useState } from 'react';
 import { deposit } from '../slice/account';
 
 export function Deposit() {
   const [amount, setAmount] = useState(0);
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState('');
+  const isLoading = useAppSelector(state => state.account.isLoading);
 
   const dispatch = useAppDispatch();
 
   const handleDeposit = () => {
     if (!deposit) return;
-    dispatch(deposit(amount));
+    dispatch(deposit(amount, currency));
     setAmount(0);
+    setCurrency('');
   };
 
   return (
@@ -43,12 +45,17 @@ export function Deposit() {
           value={currency}
           onChange={e => setCurrency(e.target.value)}
         >
+          <option value="" disabled selected>
+            Select currency
+          </option>
           <option value="USD">US Dollar</option>
           <option value="EUR">Euro</option>
           <option value="GBP">British Pound</option>
         </Select>
       </div>
-      <Button onClick={handleDeposit}>Deposit {amount > 0 ? amount : null}</Button>
+      <Button onClick={handleDeposit} disabled={isLoading}>
+        {isLoading ? 'Converting...' : `Deposit ${amount > 0 ? amount : ''}`}
+      </Button>
     </div>
   );
 }

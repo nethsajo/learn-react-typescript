@@ -1,20 +1,25 @@
+import { type AppDispatch } from '@/store';
+
 export enum AccountAction {
   DEPOSIT = 'account/deposit',
   WITHDRAW = 'account/withdraw',
   REQUEST_LOAN = 'account/request-loan',
   PAY_LOAN = 'account/pay-loan',
+  CONVERTING = 'account/converting',
 }
 
-type Account = {
+export interface Account {
   balance: number;
   loan: number;
   loanPurpose: string;
-};
+  isLoading: boolean;
+}
 
 const initialState: Account = {
   balance: 0,
   loan: 0,
   loanPurpose: '',
+  isLoading: false,
 };
 
 interface Deposit {
@@ -36,12 +41,16 @@ interface PayLoan {
   type: AccountAction.PAY_LOAN;
 }
 
-type AccountActions = Deposit | Withdraw | RequestLoan | PayLoan;
+interface Converting {
+  type: AccountAction.CONVERTING;
+}
+
+type AccountActions = Deposit | Withdraw | RequestLoan | PayLoan | Converting;
 
 export const accountReducer = (state = initialState, action: AccountActions): Account => {
   switch (action.type) {
     case AccountAction.DEPOSIT:
-      return { ...state, balance: state.balance + action.payload };
+      return { ...state, balance: state.balance + action.payload, isLoading: false };
     case AccountAction.WITHDRAW:
       return { ...state, balance: state.balance - action.payload };
     case AccountAction.REQUEST_LOAN:
@@ -55,23 +64,39 @@ export const accountReducer = (state = initialState, action: AccountActions): Ac
       };
     case AccountAction.PAY_LOAN:
       return { ...state, loanPurpose: '', loan: 0, balance: state.balance - state.loan };
+    case AccountAction.CONVERTING:
+      return { ...state, isLoading: true };
     default:
       return state;
   }
 };
 
-export const deposit = (amount: number): Deposit => {
-  return { type: AccountAction.DEPOSIT, payload: amount };
+// Action Creators
+export const deposit = (amount: number, currency: string) => {
+  if (currency === 'USD') return { type: AccountAction.DEPOSIT, payload: amount };
+
+  return async function (dispatch: AppDispatch) {
+    dispatch({ type: AccountAction.CONVERTING });
+    const response = await fetch(
+      // API call
+      `https://api.frankfurter.dev/v1/latest?amount=${amount}&from=${currency}&to=USD`
+    );
+
+    const data = await response.json();
+    const converted = data.rates.USD;
+
+    dispatch({ type: AccountAction.DEPOSIT, payload: converted });
+  };
 };
 
-export const withdraw = (amount: number): Withdraw => {
+export const withdraw = (amount: number) => {
   return { type: AccountAction.WITHDRAW, payload: amount };
 };
 
-export const requestLoan = (amount: number, purpose: string): RequestLoan => {
+export const requestLoan = (amount: number, purpose: string) => {
   return { type: AccountAction.REQUEST_LOAN, payload: { loan: amount, loanPurpose: purpose } };
 };
 
-export const payLoan = (): PayLoan => {
+export const payLoan = () => {
   return { type: AccountAction.PAY_LOAN };
 };

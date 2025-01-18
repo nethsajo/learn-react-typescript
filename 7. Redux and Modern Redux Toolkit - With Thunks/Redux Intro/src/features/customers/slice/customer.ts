@@ -3,11 +3,11 @@ export enum CustomerAction {
   UPDATE = 'customer/update',
 }
 
-type Customer = {
+export interface Customer {
   full_name: string;
   national_id: string;
   created_at: string;
-};
+}
 
 const initialState: Customer = {
   full_name: '',

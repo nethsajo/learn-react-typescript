@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from './components/ui/button';
-import Balance from './features/accounts/components/balance';
+import { Balance } from './features/accounts/components/balance';
 import { Deposit } from './features/accounts/components/deposit';
 import { Loan } from './features/accounts/components/loan';
 import { Transaction } from './features/accounts/components/transaction';
