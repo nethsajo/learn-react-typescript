@@ -12,7 +12,7 @@ export function Loan() {
 
   const handleRequestLoan = () => {
     if (!amount) return;
-    dispatch(requestLoan(amount, purpose));
+    dispatch(requestLoan({ amount, purpose }));
     setAmount(0);
     setPurpose('');
   };

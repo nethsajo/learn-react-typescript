@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAppDispatch } from '@/store';
 import { useState, type FormEvent } from 'react';
-import { createCustomer } from '../slice/customer';
+import { createCustomer } from '../slice/customer.redux';
 
 export function AddCustomerForm() {
   const [fullName, setFullName] = useState('');

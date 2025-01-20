@@ -1,21 +1,20 @@
-import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import { thunk } from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
+import { type TypedUseSelectorHook, useDispatch, useSelector, useStore } from 'react-redux';
 import { accountReducer } from './features/accounts/slice/account';
 import { customerReducer } from './features/customers/slice/customer';
 
 // Combining Reducer
-const rootReducer = combineReducers({
-  account: accountReducer,
-  customer: customerReducer,
+export const store = configureStore({
+  reducer: {
+    account: accountReducer,
+    customer: customerReducer,
+  },
 });
 
-export type AppState = ReturnType<typeof rootReducer>;
-export type AppDispatch = typeof store.dispatch;
+export type AppStore = typeof store;
+export type AppState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch'];
 
+export const useAppStore: () => AppStore = useStore;
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
 export const useAppDispatch: () => AppDispatch = useDispatch;
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
-
-export default store;

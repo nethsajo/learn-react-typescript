@@ -11,6 +11,7 @@
     "lint:fix": "eslint ./src --fix --ext .js,.ts,.jsx,.tsx"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -21,6 +22,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.26.1",
     "redux": "^5.0.1",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^3.1.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"

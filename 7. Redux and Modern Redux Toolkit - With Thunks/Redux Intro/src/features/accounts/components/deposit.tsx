@@ -15,7 +15,7 @@ export function Deposit() {
 
   const handleDeposit = () => {
     if (!deposit) return;
-    dispatch(deposit(amount, currency));
+    dispatch(deposit({ amount, currency }));
     setAmount(0);
     setCurrency('');
   };
