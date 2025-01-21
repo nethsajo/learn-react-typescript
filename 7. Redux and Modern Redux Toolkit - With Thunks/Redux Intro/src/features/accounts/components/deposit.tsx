@@ -45,7 +45,7 @@ export function Deposit() {
           value={currency}
           onChange={e => setCurrency(e.target.value)}
         >
-          <option value="" disabled selected>
+          <option value="" disabled>
             Select currency
           </option>
           <option value="USD">US Dollar</option>

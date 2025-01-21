@@ -24,13 +24,29 @@ export const accountSlice = createSlice({
     withdraw(state: Account, action: PayloadAction<number>) {
       state.balance = state.balance - action.payload;
     },
-    requestLoan(state: Account, action: PayloadAction<{ amount: number; purpose: string }>) {
-      if (state.loan > 0) return;
+    // By default, these action creators only accept one single argument
+    requestLoan: {
+      prepare(amount: number, purpose: string) {
+        return {
+          payload: { amount, purpose },
+        };
+      },
+      reducer(state: Account, action: PayloadAction<{ amount: number; purpose: string }>) {
+        if (state.loan > 0) return;
 
-      state.loan = action.payload.amount;
-      state.loanPurpose = action.payload.purpose;
-      state.balance = state.balance + action.payload.amount;
+        state.loan = action.payload.amount;
+        state.loanPurpose = action.payload.purpose;
+        state.balance = state.balance + action.payload.amount;
+      },
     },
+    // If we pass an object, use this
+    // requestLoan(state: Account, action: PayloadAction<{ amount: number; purpose: string }>) {
+    //   if (state.loan > 0) return;
+
+    //   state.loan = action.payload.amount;
+    //   state.loanPurpose = action.payload.purpose;
+    //   state.balance = state.balance + action.payload.amount;
+    // },
     payLoan(state: Account) {
       state.loan = 0;
       state.loanPurpose = '';
