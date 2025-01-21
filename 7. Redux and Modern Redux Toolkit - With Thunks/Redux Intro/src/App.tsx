@@ -5,7 +5,7 @@ import { Deposit } from './features/accounts/components/deposit';
 import { Loan } from './features/accounts/components/loan';
 import { Transaction } from './features/accounts/components/transaction';
 import { Withdraw } from './features/accounts/components/withdraw';
-import { payLoan } from './features/accounts/slice/account.redux';
+import { payLoan } from './features/accounts/slice/account';
 import { AddCustomerForm } from './features/customers/components/add-customer-form';
 import { Customer } from './features/customers/components/customer';
 import { useAppDispatch, useAppSelector } from './store';

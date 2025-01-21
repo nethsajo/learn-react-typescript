@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Select } from '@/components/ui/select';
 import { useAppDispatch, useAppSelector } from '@/store';
 import { useState } from 'react';
-import { deposit } from '../slice/account';
+import { depositAmount } from '../slice/account';
 
 export function Deposit() {
   const [amount, setAmount] = useState(0);
@@ -14,8 +14,8 @@ export function Deposit() {
   const dispatch = useAppDispatch();
 
   const handleDeposit = () => {
-    if (!deposit) return;
-    dispatch(deposit({ amount, currency }));
+    if (!amount) return;
+    dispatch(depositAmount({ amount, currency }));
     setAmount(0);
     setCurrency('');
   };
