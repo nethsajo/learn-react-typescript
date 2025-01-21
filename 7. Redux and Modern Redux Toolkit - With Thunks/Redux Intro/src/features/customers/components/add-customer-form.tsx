@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAppDispatch } from '@/store';
 import { useState, type FormEvent } from 'react';
-import { createCustomer } from '../slice/customer.redux';
+import { create } from '../slice/customer';
 
 export function AddCustomerForm() {
   const [fullName, setFullName] = useState('');
@@ -15,7 +15,7 @@ export function AddCustomerForm() {
     event.preventDefault();
 
     if (!fullName || !nationalId) return;
-    dispatch(createCustomer(fullName, nationalId));
+    dispatch(create({ fullName, nationalId }));
   };
 
   return (
