@@ -62,9 +62,17 @@ export const accountSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(depositAmount.pending, (state: Account) => {
-      state.isLoading = true;
-    });
+    builder
+      .addCase(depositAmount.pending, (state: Account) => {
+        state.isLoading = true;
+      })
+      .addCase(depositAmount.fulfilled, (state: Account, action: PayloadAction<number>) => {
+        state.balance = state.balance + action.payload;
+        state.isLoading = false;
+      })
+      .addCase(depositAmount.rejected, (state: Account) => {
+        state.isLoading = false;
+      });
   },
 });
 

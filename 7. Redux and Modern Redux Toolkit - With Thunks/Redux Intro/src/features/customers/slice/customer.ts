@@ -16,10 +16,17 @@ export const customerSlice = createSlice({
   name: 'customer',
   initialState,
   reducers: {
-    create(state: Customer, action: PayloadAction<{ fullName: string; nationalId: string }>) {
-      state.full_name = action.payload.fullName;
-      state.national_id = action.payload.nationalId;
-      state.created_at = new Date().toISOString();
+    create: {
+      prepare(fullName: string, nationalId: string) {
+        return {
+          payload: { fullName, nationalId },
+        };
+      },
+      reducer(state: Customer, action: PayloadAction<{ fullName: string; nationalId: string }>) {
+        state.full_name = action.payload.fullName;
+        state.national_id = action.payload.nationalId;
+        state.created_at = new Date().toISOString();
+      },
     },
     update(state: Customer, action: PayloadAction<Omit<Customer, 'created_at'>>) {
       state.full_name = action.payload.full_name;

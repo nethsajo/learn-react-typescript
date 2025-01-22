@@ -15,7 +15,7 @@ export function AddCustomerForm() {
     event.preventDefault();
 
     if (!fullName || !nationalId) return;
-    dispatch(create({ fullName, nationalId }));
+    dispatch(create(fullName, nationalId));
   };
 
   return (
