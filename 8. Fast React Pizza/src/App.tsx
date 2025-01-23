@@ -1,3 +1,9 @@
+import { Navbar } from './components/partials/navbar';
+
 export default function App() {
-  return <div>Fast React Pizza</div>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 }
