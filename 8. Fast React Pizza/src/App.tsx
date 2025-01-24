@@ -3,7 +3,7 @@ import { RootLayout } from './components/layout/root';
 import { ROUTES } from './constants/routes';
 import IndexPage from './routes';
 import CartPage from './routes/cart';
-import MenuPage from './routes/menu';
+import MenuPage, { getMenusDataLoader } from './routes/menu';
 import OrderPage from './routes/order';
 
 export default function App() {
@@ -13,7 +13,7 @@ export default function App() {
       element: <RootLayout />,
       children: [
         { index: true, element: <IndexPage /> },
-        { path: ROUTES.MENU, element: <MenuPage /> },
+        { path: ROUTES.MENU, element: <MenuPage />, loader: getMenusDataLoader },
         { path: ROUTES.CART, element: <CartPage /> },
         { path: ROUTES.ORDER, element: <OrderPage /> },
       ],
