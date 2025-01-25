@@ -6,7 +6,7 @@ type MenuListProp = {
 };
 export const MenuList = ({ menus }: MenuListProp) => {
   return (
-    <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
+    <div className="grid grid-cols-2 justify-center gap-6 md:grid-cols-3">
       {menus.map(menu => (
         <MenuItem key={menu.id} menu={menu} />
       ))}
