@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { RootLayout } from './components/layout/root';
-import { Error } from './components/ui/error';
+import { ErrorPage } from './components/ui/error';
 import { ROUTES } from './constants/routes';
 import IndexPage from './routes';
 import CartPage from './routes/cart';
@@ -12,7 +12,7 @@ export default function App() {
     {
       path: ROUTES.HOME,
       element: <RootLayout />,
-      errorElement: <Error />,
+      errorElement: <ErrorPage />,
       children: [
         { index: true, element: <IndexPage /> },
         { path: ROUTES.MENU, element: <MenuPage />, loader: getMenusDataLoader },
