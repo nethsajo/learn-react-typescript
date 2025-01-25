@@ -1,3 +1,4 @@
+import { MenuList } from '@/features/menu/components/menu-list';
 import { getMenusData } from '@/features/menu/data/get-menus';
 import { type Menu } from '@/features/menu/types/menu';
 import { useLoaderData } from 'react-router-dom';
@@ -5,13 +6,7 @@ import { useLoaderData } from 'react-router-dom';
 const MenuPage = () => {
   const menus = useLoaderData() as Array<Menu>;
 
-  return (
-    <ul>
-      {menus.map(menu => (
-        <div key={menu.id}>{menu.name}</div>
-      ))}
-    </ul>
-  );
+  return <MenuList menus={menus} />;
 };
 
 export const getMenusDataLoader = async () => {
