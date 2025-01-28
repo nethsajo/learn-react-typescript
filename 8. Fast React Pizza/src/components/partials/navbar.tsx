@@ -1,14 +1,12 @@
 import { ROUTES } from '@/constants/routes';
+import { SearchOrder } from '@/features/order/components/search-order';
 import { Link } from 'react-router-dom';
 
 export function Navbar() {
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link to={ROUTES.HOME}>Fast React Pizza Co.</Link>
-        </li>
-      </ul>
-    </nav>
+    <header>
+      <Link to={ROUTES.HOME}>Fast React Pizza Co.</Link>
+      <SearchOrder />
+    </header>
   );
 }

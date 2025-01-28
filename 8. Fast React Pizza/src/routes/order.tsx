@@ -1,3 +1,5 @@
+import { Outlet } from 'react-router-dom';
+
 export default function OrderPage() {
-  return <div>order</div>;
+  return <Outlet />;
 }
