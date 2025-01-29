@@ -13,3 +13,8 @@ export type Order = {
   priorityPrice: number;
   status: string;
 };
+
+export type CreateOrderDataArgs = Pick<
+  Order,
+  'customer' | 'phone' | 'address' | 'cart' | 'priority'
+>;

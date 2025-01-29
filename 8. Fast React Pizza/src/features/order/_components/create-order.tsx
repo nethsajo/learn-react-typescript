@@ -1,11 +1,14 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { ROUTES } from '@/constants/routes';
 import { type Cart } from '@/features/cart/_types/cart';
-import { Form } from 'react-router-dom';
+import { type User } from '@/features/user/_types/user';
+import { Form, redirect } from 'react-router-dom';
+import { createOrderData } from '../_data/create-order';
 
 export default function CreateOrder() {
-  const fakeCart: Cart = [
+  const fakeCart: Cart[] = [
     {
       pizzaId: 12,
       name: 'Mediterranean',
@@ -32,11 +35,11 @@ export default function CreateOrder() {
   return (
     <div className="flex flex-col space-y-8">
       <h2 className="font-bold">Ready to order? Let&apos;s go!</h2>
-      <Form method="POST" action="/order?index">
+      <Form method="POST">
         <div className="grid grid-cols-4 gap-x-4 gap-y-3">
           <div className="col-span-full flex flex-col space-y-1.5 sm:col-span-2">
-            <Label htmlFor="name">Full Name</Label>
-            <Input name="name" id="name" variant="outline" required />
+            <Label htmlFor="customer">Full Name</Label>
+            <Input name="customer" id="customer" variant="outline" required />
           </div>
 
           <div className="col-span-full flex flex-col space-y-1.5 sm:col-span-2">
@@ -59,15 +62,31 @@ export default function CreateOrder() {
             <label htmlFor="priority">Want to yo give your order priority?</label>
           </div>
         </div>
-        <Button className="mt-6">Order now</Button>
+        <input type="hidden" name="cart" value={JSON.stringify(fakeCart)} />
+        <Button type="submit" className="mt-6">
+          Order now
+        </Button>
       </Form>
     </div>
   );
 }
 
+type OrderDetails = User & {
+  cart: string;
+  priority: string;
+};
+
 export const orderDataAction = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
-  const data = Object.fromEntries(formData);
-  console.log(data);
-  return null;
+  const data = Object.fromEntries(formData) as OrderDetails;
+
+  const order = {
+    ...data,
+    cart: JSON.parse(data.cart) as Cart[],
+    priority: data.priority === 'on',
+  };
+
+  const createdOrder = await createOrderData(order);
+
+  return redirect(`${ROUTES.ORDER}/${createdOrder.id}`);
 };
