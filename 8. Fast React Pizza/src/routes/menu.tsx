@@ -9,7 +9,7 @@ const MenuPage = () => {
   return <MenuList menus={menus} />;
 };
 
-export const getMenusDataLoader = async () => {
+export const menusDataLoader = async () => {
   const menus = await getMenusData();
   return menus;
 };
