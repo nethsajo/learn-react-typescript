@@ -1,4 +1,4 @@
-import { type Cart } from '@/features/cart/types/cart';
+import { type Cart } from '@/features/cart/_types/cart';
 
 export type Order = {
   id: string;
@@ -11,4 +11,5 @@ export type Order = {
   position: string;
   orderPrice: number;
   priorityPrice: number;
+  status: string;
 };

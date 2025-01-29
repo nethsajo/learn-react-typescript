@@ -1,5 +1,5 @@
 import { API_URL } from '@/constants/common';
-import { type Menu } from '../types/menu';
+import { type Menu } from '../_types/menu';
 
 export async function getMenusData(): Promise<Array<Menu>> {
   const response = await fetch(`${API_URL}/menu`);

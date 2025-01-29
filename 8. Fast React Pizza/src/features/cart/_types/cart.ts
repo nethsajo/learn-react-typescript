@@ -4,6 +4,6 @@ export type Cart = {
   quantity: number;
   unitPrice: number;
   totalPrice: number;
-  addIngredients: string[];
-  removeIngredients: string[];
+  addIngredients?: string[];
+  removeIngredients?: string[];
 };

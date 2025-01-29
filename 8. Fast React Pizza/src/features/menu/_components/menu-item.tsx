@@ -1,5 +1,5 @@
 import { formatCurrency } from '@/utils/format-currency';
-import { type Menu } from '../types/menu';
+import { type Menu } from '../_types/menu';
 
 type MenuItemProp = {
   menu: Menu;

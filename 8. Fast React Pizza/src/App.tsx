@@ -2,12 +2,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { RootLayout } from './components/layout/root';
 import { ErrorPage } from './components/ui/error';
 import { ROUTES } from './constants/routes';
-import { CreateOrder } from './features/order/components/create-order';
-import { orderDataLoader, ShowOrder } from './features/order/components/show-order';
-import IndexPage from './routes';
-import CartPage from './routes/cart';
-import MenuPage, { menusDataLoader } from './routes/menu';
-import OrderPage from './routes/order';
+import Cart from './features/cart/_components/cart';
+import Home from './features/home/_components';
+import Menu, { menusDataLoader } from './features/menu/_components/menu';
+import CreateOrder, { orderDataAction } from './features/order/_components/create-order';
+import ShowOrder, { orderDataLoader } from './features/order/_components/show-order';
 
 export default function App() {
   const router = createBrowserRouter([
@@ -16,21 +15,19 @@ export default function App() {
       element: <RootLayout />,
       errorElement: <ErrorPage />,
       children: [
-        { index: true, element: <IndexPage /> },
-        { path: ROUTES.MENU, element: <MenuPage />, loader: menusDataLoader },
-        { path: ROUTES.CART, element: <CartPage /> },
+        { index: true, element: <Home /> },
+        { path: ROUTES.MENU, element: <Menu />, loader: menusDataLoader },
+        { path: ROUTES.CART, element: <Cart /> },
         {
-          path: ROUTES.ORDER,
-          element: <OrderPage />,
-          children: [
-            { index: true, element: <CreateOrder /> },
-            {
-              path: ':id',
-              element: <ShowOrder />,
-              loader: orderDataLoader,
-              errorElement: <ErrorPage />,
-            },
-          ],
+          path: `${ROUTES.ORDER}`,
+          element: <CreateOrder />,
+          action: orderDataAction,
+        },
+        {
+          path: `${ROUTES.ORDER}/:id`,
+          element: <ShowOrder />,
+          loader: orderDataLoader,
+          errorElement: <ErrorPage />,
         },
       ],
     },

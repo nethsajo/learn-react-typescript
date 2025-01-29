@@ -1,5 +1,5 @@
 import { API_URL } from '@/constants/common';
-import { type Order } from '../types/order';
+import { type Order } from '../_types/order';
 
 export async function getOrderData(id: Order['id']): Promise<Order> {
   const response = await fetch(`${API_URL}/order/${id}`);

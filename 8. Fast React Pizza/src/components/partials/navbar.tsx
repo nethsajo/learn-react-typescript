@@ -1,5 +1,5 @@
 import { ROUTES } from '@/constants/routes';
-import { SearchOrder } from '@/features/order/components/search-order';
+import { SearchOrder } from '@/features/order/_components/search-order';
 import { Link } from 'react-router-dom';
 
 export function Navbar() {

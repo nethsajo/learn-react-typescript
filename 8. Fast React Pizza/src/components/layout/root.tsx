@@ -1,4 +1,4 @@
-import { CartOverview } from '@/features/cart/components/cart-overview';
+import { CartOverview } from '@/features/cart/_components/cart-overview';
 import { Outlet, useNavigation } from 'react-router-dom';
 import { Navbar } from '../partials/navbar';
 
@@ -11,7 +11,6 @@ export function RootLayout() {
       {isLoading && <div>Loading...</div>}
       <Navbar />
       <main className="mx-auto max-w-5xl px-4 sm:px-6">
-        <h1>Content</h1>
         {/*To render the content of a nested route inside another route */}
         <Outlet />
       </main>
