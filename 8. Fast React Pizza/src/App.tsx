@@ -3,10 +3,10 @@ import { RootLayout } from './components/layout/root';
 import { ErrorPage } from './components/ui/error';
 import { ROUTES } from './constants/routes';
 import { CreateOrder } from './features/order/components/create-order';
-import { Order } from './features/order/components/order';
+import { orderDataLoader, ShowOrder } from './features/order/components/show-order';
 import IndexPage from './routes';
 import CartPage from './routes/cart';
-import MenuPage, { getMenusDataLoader } from './routes/menu';
+import MenuPage, { menusDataLoader } from './routes/menu';
 import OrderPage from './routes/order';
 
 export default function App() {
@@ -17,14 +17,19 @@ export default function App() {
       errorElement: <ErrorPage />,
       children: [
         { index: true, element: <IndexPage /> },
-        { path: ROUTES.MENU, element: <MenuPage />, loader: getMenusDataLoader },
+        { path: ROUTES.MENU, element: <MenuPage />, loader: menusDataLoader },
         { path: ROUTES.CART, element: <CartPage /> },
         {
           path: ROUTES.ORDER,
           element: <OrderPage />,
           children: [
             { index: true, element: <CreateOrder /> },
-            { path: ':id', element: <Order /> },
+            {
+              path: ':id',
+              element: <ShowOrder />,
+              loader: orderDataLoader,
+              errorElement: <ErrorPage />,
+            },
           ],
         },
       ],
