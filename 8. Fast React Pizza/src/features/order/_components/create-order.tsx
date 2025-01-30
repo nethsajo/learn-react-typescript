@@ -13,11 +13,15 @@ const isValidPhone = (number: string) => {
   );
 };
 
+type FormErrors = {
+  phone?: string;
+};
+
 export default function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
 
-  const formErrors = useActionData();
+  const formErrors = useActionData() as FormErrors;
 
   const fakeCart: Cart[] = [
     {
@@ -98,7 +102,7 @@ export const orderDataAction = async ({ request }: { request: Request }) => {
     priority: data.priority === 'on',
   };
 
-  const errors = {} as Record<string, string>;
+  const errors = {} as FormErrors;
 
   if (!isValidPhone(order.phone)) {
     errors.phone = ' Please give us your correct phone number. We might need it to contact you.';
