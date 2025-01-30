@@ -4,10 +4,13 @@ import { Label } from '@/components/ui/label';
 import { ROUTES } from '@/constants/routes';
 import { type Cart } from '@/features/cart/_types/cart';
 import { type User } from '@/features/user/_types/user';
-import { Form, redirect } from 'react-router-dom';
+import { Form, redirect, useNavigation } from 'react-router-dom';
 import { createOrderData } from '../_data/create-order';
 
 export default function CreateOrder() {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting';
+
   const fakeCart: Cart[] = [
     {
       pizzaId: 12,
@@ -63,8 +66,8 @@ export default function CreateOrder() {
           </div>
         </div>
         <input type="hidden" name="cart" value={JSON.stringify(fakeCart)} />
-        <Button type="submit" className="mt-6">
-          Order now
+        <Button type="submit" className="mt-6" disabled={isSubmitting}>
+          {isSubmitting ? 'Placing your order...' : 'Order now'}
         </Button>
       </Form>
     </div>
