@@ -4,12 +4,20 @@ import { Label } from '@/components/ui/label';
 import { ROUTES } from '@/constants/routes';
 import { type Cart } from '@/features/cart/_types/cart';
 import { type User } from '@/features/user/_types/user';
-import { Form, redirect, useNavigation } from 'react-router-dom';
+import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { createOrderData } from '../_data/create-order';
+
+const isValidPhone = (number: string) => {
+  return /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+    number
+  );
+};
 
 export default function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting';
+
+  const formErrors = useActionData();
 
   const fakeCart: Cart[] = [
     {
@@ -48,6 +56,7 @@ export default function CreateOrder() {
           <div className="col-span-full flex flex-col space-y-1.5 sm:col-span-2">
             <Label htmlFor="phone">Phone Number</Label>
             <Input name="phone" id="phone" variant="outline" required />
+            {formErrors?.phone && <p className="text-xs text-red-500">{formErrors.phone}</p>}
           </div>
 
           <div className="col-span-full flex flex-col space-y-1.5">
@@ -89,6 +98,15 @@ export const orderDataAction = async ({ request }: { request: Request }) => {
     priority: data.priority === 'on',
   };
 
+  const errors = {} as Record<string, string>;
+
+  if (!isValidPhone(order.phone)) {
+    errors.phone = ' Please give us your correct phone number. We might need it to contact you.';
+  }
+
+  if (Object.keys(errors).length > 0) return errors;
+
+  // If everything is okay, create new order and redirect
   const createdOrder = await createOrderData(order);
 
   return redirect(`${ROUTES.ORDER}/${createdOrder.id}`);
