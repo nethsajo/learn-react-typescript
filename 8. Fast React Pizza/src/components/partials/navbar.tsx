@@ -16,7 +16,7 @@ export function Navbar() {
             <SearchOrder />
             <Link
               to={ROUTES.CART}
-              className="relative inline-flex h-full items-center px-2 text-red-50"
+              className="relative inline-flex h-full items-center px-2 text-red-50 transition-colors duration-150 hover:bg-red-500/30"
             >
               <ShoppingCart className="h-5 w-5" />
               <span className="absolute right-0.5 top-3 flex h-4 w-4 items-center justify-center rounded-full bg-red-200 text-xs font-bold text-red-600">

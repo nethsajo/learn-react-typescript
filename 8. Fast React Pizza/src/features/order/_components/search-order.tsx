@@ -17,7 +17,7 @@ export const SearchOrder = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Input
-        variant="outline"
+        variant="filled"
         name="search-order"
         placeholder="Search order number"
         value={query}

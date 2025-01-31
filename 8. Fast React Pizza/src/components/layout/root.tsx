@@ -10,7 +10,7 @@ export function RootLayout() {
     <div className="relative h-full">
       {isLoading && <div className="absolute inset-0 z-20 bg-black/50">Loading...</div>}
       <Navbar />
-      <main className="mx-auto min-h-dvh max-w-6xl px-4 pt-20 sm:px-6">
+      <main className="container mx-auto min-h-dvh px-4 pt-20 sm:px-6">
         {/*To render the content of a nested route inside another route */}
         <Outlet />
       </main>
