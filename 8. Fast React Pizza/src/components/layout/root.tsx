@@ -1,4 +1,3 @@
-import { CartOverview } from '@/features/cart/_components/cart-overview';
 import { Outlet, useNavigation } from 'react-router-dom';
 import { Navbar } from '../partials/navbar';
 
@@ -14,7 +13,7 @@ export function RootLayout() {
         {/*To render the content of a nested route inside another route */}
         <Outlet />
       </main>
-      <CartOverview />
+      {/* <CartOverview /> */}
     </div>
   );
 }
