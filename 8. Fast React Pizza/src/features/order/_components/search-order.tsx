@@ -17,11 +17,12 @@ export const SearchOrder = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Input
-        variant="filled"
+        variant="outline"
         name="search-order"
         placeholder="Search order number"
         value={query}
         onChange={e => setQuery(e.target.value)}
+        className="border-red-50 text-red-100 placeholder:text-red-200 focus-visible:ring-red-50 focus-visible:ring-offset-red-700"
       />
     </form>
   );
