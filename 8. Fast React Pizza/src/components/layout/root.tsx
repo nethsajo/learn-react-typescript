@@ -7,7 +7,11 @@ export function RootLayout() {
 
   return (
     <div className="relative h-full">
-      {isLoading && <div className="absolute inset-0 z-20 bg-black/50">Loading...</div>}
+      {isLoading && (
+        <div className="absolute inset-0 z-20 flex h-screen items-center justify-center bg-black/40 text-lg text-white">
+          Loading...
+        </div>
+      )}
       <Navbar />
       <main className="mx-auto min-h-dvh px-4 py-20 sm:container sm:px-6">
         {/*To render the content of a nested route inside another route */}

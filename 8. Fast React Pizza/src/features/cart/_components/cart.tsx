@@ -44,7 +44,7 @@ export default function Cart() {
                 </tr>
                 <tr className="border-b border-b-zinc-200 transition-colors hover:bg-zinc-100/50">
                   <td className="p-4 align-middle">x2</td>
-                  <td className="p-4 align-middle">Romana</td>
+                  <td className="p-4 align-middle">Hawaiian</td>
                   <td className="p-4 text-right align-middle">$15.00</td>
                   <td className="p-4 text-right align-middle">$30.00</td>
                 </tr>
@@ -59,7 +59,7 @@ export default function Cart() {
           </div>
         </div>
         <div className="space-y-6">
-          <div className="rounded-lg border border-l-4 border-l-red-500 p-6">
+          <div className="rounded-lg border border-l-4 border-l-red-500 p-6 shadow-sm">
             <div className="text-xl font-semibold">Order Summary</div>
           </div>
           <div className="">
