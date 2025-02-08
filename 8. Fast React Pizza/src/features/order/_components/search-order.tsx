@@ -22,7 +22,7 @@ export const SearchOrder = () => {
         placeholder="Search order number"
         value={query}
         onChange={e => setQuery(e.target.value)}
-        className="border-red-50 text-red-100 placeholder:text-red-200 focus-visible:ring-red-50 focus-visible:ring-offset-red-700"
+        className="border-zinc-200 text-white placeholder:text-zinc-300 focus-visible:ring-white focus-visible:ring-offset-red-700"
       />
     </form>
   );

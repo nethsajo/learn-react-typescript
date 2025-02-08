@@ -26,10 +26,7 @@ export const MenuItem = ({ menu }: MenuItemProp) => {
           </div>
           <p className="capitalize text-zinc-500">{menu.ingredients.join(', ')}</p>
         </div>
-        <Button
-          className="w-min border-red-500 text-zinc-800 hover:bg-red-500 active:bg-red-600"
-          variant="outline"
-        >
+        <Button className="w-min" variant="destructive">
           Add to cart
         </Button>
       </div>
