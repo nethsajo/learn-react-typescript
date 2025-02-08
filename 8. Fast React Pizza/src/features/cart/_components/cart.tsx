@@ -11,13 +11,13 @@ export default function Cart() {
         <ChevronLeft className="stroke-current" />
         Back to menu
       </Button>
-      <div className="grid w-full gap-12 lg:grid-cols-[5fr_2.5fr] lg:gap-36">
-        <div className="w-full space-y-6">
+      <div className="grid gap-12 lg:grid-cols-[5fr_2.5fr] lg:gap-36">
+        <div className="min-w-0 space-y-6">
           <div className="flex items-center justify-between space-x-4">
             <h2 className="text-xl font-semibold text-zinc-800">Your cart, %NAME%</h2>
             <Button variant="ghost">Clear</Button>
           </div>
-          <div className="relative w-full overflow-auto">
+          <div className="relative w-full overflow-x-auto">
             <table className="w-full caption-top text-sm">
               <thead className="border-b-zinc-200 [&_tr]:border-b">
                 <tr className="border-b border-b-zinc-200 transition-colors hover:bg-zinc-100/50">
@@ -31,7 +31,7 @@ export default function Cart() {
                     Price
                   </th>
                   <th className="h-12 px-4 text-right align-middle font-medium text-zinc-500">
-                    Total
+                    Subtotal
                   </th>
                 </tr>
               </thead>
@@ -51,8 +51,8 @@ export default function Cart() {
                 <tr className="border-b border-b-zinc-200 transition-colors hover:bg-zinc-100/50">
                   <td className="p-4 align-middle"></td>
                   <td className="p-4 align-middle"></td>
-                  <td className="p-4 text-right align-middle">Total</td>
-                  <td className="p-4 text-right align-middle">$42.00</td>
+                  <td className="p-4 text-right align-middle font-bold">Total</td>
+                  <td className="p-4 text-right align-middle font-bold">$42.00</td>
                 </tr>
               </tbody>
             </table>
