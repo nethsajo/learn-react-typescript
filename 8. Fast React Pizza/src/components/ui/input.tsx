@@ -8,17 +8,17 @@ export interface InputProps
 }
 
 const inputVariants = cva(
-  'block w-full rounded-md px-3 py-2 shadow-sm read-only:focus:ring-0 read-only:ring-0 sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50',
+  'block w-full rounded-md px-3 py-2 shadow-sm sm:text-sm sm:leading-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 text-zinc-900 placeholder:text-zinc-500 read-only:focus-visible:ring-0',
   {
     variants: {
       variant: {
-        filled: 'bg-white read-only:bg-gray-300',
-        outline: 'border border-zinc-400/60 bg-transparent text-gray-800 placeholder:text-gray-500',
+        filled: 'bg-zinc-100 read-only:!bg-zinc-200',
+        outline: 'border border-zinc-200 bg-transparent',
       },
       scale: {
-        sm: 'h-8',
-        lg: 'h-9',
-        xl: 'h-11',
+        sm: 'h-9',
+        md: 'h-12',
+        lg: 'h-14',
       },
     },
     defaultVariants: {
