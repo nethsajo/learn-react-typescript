@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label';
 import { ROUTES } from '@/constants/routes';
 import { type Cart } from '@/features/cart/_types/cart';
 import { type User } from '@/features/user/_types/user';
+import { Locate } from 'lucide-react';
 import { Form, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { createOrderData } from '../_data/create-order';
 
@@ -48,41 +49,70 @@ export default function CreateOrder() {
   ];
 
   return (
-    <div className="flex flex-col space-y-8">
-      <h2 className="font-bold">Ready to order? Let&apos;s go!</h2>
-      <Form method="POST">
-        <div className="grid grid-cols-4 gap-x-4 gap-y-3">
-          <div className="col-span-full flex flex-col space-y-1.5 sm:col-span-2">
-            <Label htmlFor="customer">Full Name</Label>
-            <Input name="customer" id="customer" variant="outline" required />
-          </div>
-
-          <div className="col-span-full flex flex-col space-y-1.5 sm:col-span-2">
-            <Label htmlFor="phone">Phone Number</Label>
-            <Input name="phone" id="phone" variant="outline" required />
-            {formErrors?.phone && <p className="text-xs text-red-500">{formErrors.phone}</p>}
-          </div>
-
-          <div className="col-span-full flex flex-col space-y-1.5">
-            <Label htmlFor="address">Address</Label>
-            <Input name="address" id="address" variant="outline" required />
-          </div>
-          <div className="col-span-full flex space-y-1.5">
-            <input
-              type="checkbox"
-              name="priority"
-              id="priority"
-              // value={withPriority}
-              // onChange={(e) => setWithPriority(e.target.checked)}
-            />
-            <label htmlFor="priority">Want to yo give your order priority?</label>
-          </div>
+    <div className="mx-auto w-full max-w-2xl">
+      <div className="flex flex-col space-y-6">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-semibold text-zinc-900">Ready to order? Let&apos;s go!</h2>
+          <p className="text-zinc-500">Fill in your details below to place your order.</p>
         </div>
-        <input type="hidden" name="cart" value={JSON.stringify(fakeCart)} />
-        <Button type="submit" className="mt-6" disabled={isSubmitting}>
-          {isSubmitting ? 'Placing your order...' : 'Order now'}
-        </Button>
-      </Form>
+        <Form method="POST">
+          <div className="grid grid-cols-4 gap-6">
+            <div className="col-span-full flex flex-col space-y-2 sm:col-span-2">
+              <Label htmlFor="customer">Full Name</Label>
+              <Input
+                name="customer"
+                id="customer"
+                variant="outline"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+            <div className="col-span-full flex flex-col space-y-2 sm:col-span-2">
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                name="phone"
+                id="phone"
+                variant="outline"
+                placeholder="(555) 555-5555"
+                required
+              />
+              {formErrors?.phone && <p className="text-xs text-red-500">{formErrors.phone}</p>}
+            </div>
+            <div className="col-span-full flex flex-col space-y-2">
+              <Label htmlFor="address">Address</Label>
+              <div className="flex space-x-2">
+                <Input
+                  name="address"
+                  id="address"
+                  variant="outline"
+                  placeholder="123 Main St, New York City, United States"
+                  required
+                />
+                <Button variant="outline">
+                  <Locate />
+                </Button>
+              </div>
+            </div>
+            <div className="col-span-full flex items-start space-x-2">
+              <input
+                type="checkbox"
+                name="priority"
+                id="priority"
+                // value={withPriority}
+                // onChange={(e) => setWithPriority(e.target.checked)}
+              />
+              <div className="flex flex-col">
+                <label htmlFor="priority text-zinc-900 font-semibold">Priority Order</label>
+                <p className="text-zinc-500">Get your order prioritized for faster processing</p>
+              </div>
+            </div>
+          </div>
+          <input type="hidden" name="cart" value={JSON.stringify(fakeCart)} />
+          <Button type="submit" variant="destructive" className="mt-6" disabled={isSubmitting}>
+            {isSubmitting ? 'Placing your order...' : 'Place Order'}
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 }
