@@ -13,7 +13,7 @@ export function RootLayout() {
         </div>
       )}
       <Navbar />
-      <main className="mx-auto min-h-dvh px-4 py-20 sm:container sm:px-6">
+      <main className="mx-auto min-h-dvh px-4 py-24 sm:max-w-6xl sm:px-6">
         {/*To render the content of a nested route inside another route */}
         <Outlet />
       </main>
