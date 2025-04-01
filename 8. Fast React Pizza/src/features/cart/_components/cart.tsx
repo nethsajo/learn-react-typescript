@@ -11,7 +11,7 @@ export default function Cart() {
         <ChevronLeft className="stroke-current" />
         Back to menu
       </Button>
-      <div className="grid gap-12 lg:grid-cols-[5fr_2.5fr] lg:gap-36">
+      <div className="grid gap-16">
         <div className="min-w-0 space-y-6">
           <div className="flex items-center justify-between space-x-4">
             <h2 className="text-xl font-semibold text-zinc-800">Your cart, %NAME%</h2>
@@ -91,30 +91,36 @@ export default function Cart() {
             </table>
           </div>
         </div>
-        <div className="space-y-6">
-          <div className="rounded-lg border border-l-4 border-l-red-500 p-6 shadow-sm">
-            <div className="text-xl font-semibold">Order Summary</div>
+        <div className="space-y-12">
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold text-zinc-800">Order Summary</h2>
             <div className="relative w-full overflow-x-auto">
-              <table className="w-full caption-top text-base">
+              <table className="w-full caption-top text-sm">
                 <tbody className="[&_tr:last-child]:border-0">
                   <tr className="border-b border-b-zinc-200">
-                    <td className="p-4 pl-0 text-left align-middle font-medium text-zinc-500">
+                    <td className="p-4 text-left align-middle font-medium text-zinc-500">
                       Subtotal
                     </td>
-                    <td className="p-4 pr-0 text-right align-middle font-bold">$42.00</td>
+                    <td className="p-4 text-right align-middle font-bold">$42.00</td>
                   </tr>
                   <tr className="border-b border-b-zinc-200">
-                    <td className="p-4 pl-0 text-left align-middle font-medium text-zinc-500">
+                    <td className="p-4 text-left align-middle font-medium text-zinc-500">VAT</td>
+                    <td className="p-4 text-right align-middle font-bold">$47.04</td>
+                  </tr>
+                  <tr className="border-b border-b-zinc-200">
+                    <td className="p-4 text-left align-middle font-medium text-zinc-500">
                       Delivery
                     </td>
-                    <td className="p-4 pr-0 text-right align-middle font-bold">FREE</td>
+                    <td className="p-4 text-right align-middle font-bold">FREE</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          <div className="">
-            <Button variant="destructive">Proceed to Checkout</Button>
+          <div className="flex justify-end">
+            <Button size="md" variant="destructive">
+              Proceed to Checkout
+            </Button>
           </div>
         </div>
       </div>

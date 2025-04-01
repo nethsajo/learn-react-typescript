@@ -8,26 +8,22 @@ type MenuItemProp = {
 
 export const MenuItem = ({ menu }: MenuItemProp) => {
   return (
-    <div className="grid grid-cols-[8rem_1fr] gap-6 lg:grid-cols-[10rem_1fr]">
+    <div className="overflow-hidden rounded-md bg-white shadow-md ring-1 ring-zinc-200">
       <img
         src={menu.imageUrl}
         alt={`${menu.name} photo`}
-        className={`aspect-square w-full self-start rounded-md ${menu.soldOut && 'opacity-80 grayscale'}`}
+        className={`aspect-square h-52 w-full object-cover object-center ${menu.soldOut && 'opacity-80 grayscale'}`}
       />
-      <div className="flex flex-col justify-between">
-        <div
-          className={`flex flex-col space-y-2 ${!menu.soldOut ? 'text-zinc-800' : 'text-zinc-500'}`}
-        >
-          <div className="flex items-center">
-            <p className="flex-1 text-lg font-semibold sm:text-xl">{menu.name}</p>
-            <p className="font-medium uppercase sm:text-base">
-              {!menu.soldOut ? formatCurrency(menu.unitPrice) : 'Sold out'}
-            </p>
-          </div>
-          <p className="capitalize text-zinc-500">{menu.ingredients.join(', ')}</p>
+      <div className="px-6 py-4">
+        <div className="flex flex-col space-y-2">
+          <p className="flex-1 text-lg font-semibold sm:text-xl">{menu.name}</p>
+          <p className="min-h-20 capitalize text-zinc-500">{menu.ingredients.join(', ')}</p>
         </div>
-        <Button className="w-min" variant="destructive">
-          Add to cart
+        <Button
+          className={`w-full ${!menu.soldOut ? 'bg-red-500 hover:opacity-90' : 'bg-zinc-500'}`}
+          disabled={menu.soldOut}
+        >
+          {!menu.soldOut ? `Add to Cart - ${formatCurrency(menu.unitPrice)}` : 'Sold out'}
         </Button>
       </div>
     </div>

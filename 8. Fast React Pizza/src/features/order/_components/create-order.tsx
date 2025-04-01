@@ -53,7 +53,7 @@ export default function CreateOrder() {
       <div className="flex flex-col space-y-6">
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold text-zinc-900">Ready to order? Let&apos;s go!</h2>
-          <p className="text-zinc-500">Fill in your details below to place your order.</p>
+          <p className="text-zinc-500">Please provide your details to complete your order</p>
         </div>
         <Form method="POST">
           <div className="grid grid-cols-4 gap-6">
@@ -102,7 +102,9 @@ export default function CreateOrder() {
                 // onChange={(e) => setWithPriority(e.target.checked)}
               />
               <div className="flex flex-col">
-                <label htmlFor="priority text-zinc-900 font-semibold">Priority Order</label>
+                <label htmlFor="priority" className="font-medium text-zinc-900">
+                  Priority Order
+                </label>
                 <p className="text-zinc-500">Get your order prioritized for faster processing</p>
               </div>
             </div>
