@@ -32,7 +32,7 @@ export function Navbar() {
               className="relative inline-flex h-full w-12 items-center text-red-50 transition-colors duration-150 hover:bg-zinc-200/10"
             >
               <ShoppingCart className="size-5 flex-1" />
-              <span className="absolute right-1.5 top-4 flex size-4 items-center justify-center rounded-full bg-red-200 text-xs font-bold text-red-600">
+              <span className="absolute right-1.5 top-6 flex size-4 items-center justify-center rounded-full bg-red-200 text-xs font-bold text-red-600">
                 0
               </span>
             </Link>
