@@ -2,18 +2,29 @@ import { CreateUserForm } from '@/features/user/_components/create-user-form';
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center space-y-8">
-      <div className="space-y-4">
-        <h1 className="mb-6 text-center text-3xl font-bold tracking-tighter text-zinc-800 sm:text-4xl md:text-5xl">
-          Always <span className="font-extrabold text-red-500">Delicious</span> – <br /> Taste the
-          <span className="font-extrabold text-red-500 underline"> Difference.</span>
-        </h1>
-        <p className="max-w-lg text-center text-zinc-500 sm:text-lg">
-          Every bite is hot and delicious! Savor the perfect blend of crispy crust, gooey cheese,
-          and mouthwatering toppings.
-        </p>
+    <div className="container mx-auto w-full">
+      <div className="relative overflow-hidden">
+        <div className="relative z-20 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
+          <div className="text-center">
+            <div className="mb-8 text-center font-bold tracking-tighter text-zinc-950">
+              <h1 className="mb-4 text-5xl lg:text-7xl">
+                Always <span className="font-extrabold text-red-500">Delicious</span> –
+              </h1>
+              <h2 className="text-4xl lg:text-6xl">
+                Taste the{' '}
+                <span className="font-extrabold text-red-500 underline"> Difference.</span>
+              </h2>
+            </div>
+            <p className="mx-auto mb-12 max-w-3xl text-center text-xl text-zinc-600 lg:text-2xl">
+              Every bite is hot and delicious! Savor the perfect blend of{' '}
+              <span className="font-semibold text-orange-600">crispy crust</span>,{' '}
+              <span className="font-semibold text-yellow-600">gooey cheese</span>, and{' '}
+              <span className="font-semibold text-red-600">mouthwatering toppings</span>.
+            </p>
+          </div>
+          <CreateUserForm />
+        </div>
       </div>
-      <CreateUserForm />
     </div>
   );
 }

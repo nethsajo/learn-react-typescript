@@ -6,8 +6,8 @@ import Cart from './features/cart/_components/cart';
 import Home from './features/home/_components';
 import Menu, { menusDataLoader } from './features/menu/_components/menu';
 import CreateOrder, { orderDataAction } from './features/order/_components/create-order';
-import { OrderTrack } from './features/order/_components/order-track';
-import ShowOrder, { orderDataLoader } from './features/order/_components/show-order';
+import { orderDataLoader, OrderTrack } from './features/order/_components/order-track';
+// import ShowOrder, { orderDataLoader } from './features/order/_components/show-order';
 
 export default function App() {
   const router = createBrowserRouter([
@@ -27,13 +27,15 @@ export default function App() {
         {
           path: `${ROUTES.ORDER}/track`,
           element: <OrderTrack />,
-        },
-        {
-          path: `${ROUTES.ORDER}/track/:id`,
-          element: <ShowOrder />,
           loader: orderDataLoader,
           errorElement: <ErrorPage />,
         },
+        // {
+        //   path: `${ROUTES.ORDER}/track/:id`,
+        //   element: <ShowOrder />,
+        //   loader: orderDataLoader,
+        //   errorElement: <ErrorPage />,
+        // },
       ],
     },
   ]);

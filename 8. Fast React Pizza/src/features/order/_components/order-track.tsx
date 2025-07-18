@@ -1,28 +1,44 @@
 import { Input } from '@/components/ui/input';
-import { ROUTES } from '@/constants/routes';
-import { type FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useLoaderData, useNavigate, type LoaderFunctionArgs } from 'react-router-dom';
+import { getOrderData } from '../_data/get-order';
+import { type Order } from '../_types/order';
+import OrderStatus from './order-status';
 
 export const OrderTrack = () => {
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
+  const { order } = useLoaderData() as { order: Order | null };
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!query) return;
-    navigate(`${ROUTES.ORDER}/track/${query}`);
+    navigate(`/order/track?id=${query}`);
     setQuery('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input
-        variant="outline"
-        name="search-order"
-        placeholder="Search order number"
-        value={query}
-        onChange={e => setQuery(e.target.value)}
-      />
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <Input
+          name="search-order"
+          placeholder="Search order number"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+        />
+      </form>
+
+      {order && <OrderStatus order={order} />}
+    </>
   );
+};
+
+export const orderDataLoader = async ({ request }: LoaderFunctionArgs) => {
+  const url = new URL(request.url);
+  const id = url.searchParams.get('id');
+
+  if (!id) return { order: null };
+
+  const order = await getOrderData(id);
+  return { order };
 };

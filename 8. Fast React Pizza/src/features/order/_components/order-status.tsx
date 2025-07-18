@@ -1,13 +1,9 @@
 import { calculateMinutesLeft } from '@/utils/calculate-minutes-left';
 import { formatCurrency } from '@/utils/format-currency';
 import { formatDate } from '@/utils/format-date';
-import { useLoaderData, type Params } from 'react-router-dom';
-import { getOrderData } from '../_data/get-order';
 import { type Order } from '../_types/order';
 
-export default function ShowOrder() {
-  const order = useLoaderData() as Order;
-
+export default function OrderStatus({ order }: { order: Order }) {
   const targetDeliveryTime = calculateMinutesLeft(order.estimatedDelivery);
 
   return (
@@ -29,7 +25,3 @@ export default function ShowOrder() {
     </div>
   );
 }
-
-export const orderDataLoader = async ({ params }: { params: Params<'id'> }) => {
-  return await getOrderData(params.id ?? '');
-};

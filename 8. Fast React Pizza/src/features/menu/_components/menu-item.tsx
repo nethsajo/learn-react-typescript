@@ -8,7 +8,7 @@ type MenuItemProp = {
 
 export const MenuItem = ({ menu }: MenuItemProp) => {
   return (
-    <div className="overflow-hidden rounded-md bg-white shadow-md ring-1 ring-zinc-200">
+    <div className="shadow-xs overflow-hidden rounded-md bg-white ring-1 ring-zinc-200 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
       <img
         src={menu.imageUrl}
         alt={`${menu.name} photo`}
