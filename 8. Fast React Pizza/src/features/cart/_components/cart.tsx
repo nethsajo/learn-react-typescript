@@ -1,10 +1,40 @@
 import { Button } from '@/components/ui/button';
 import { ROUTES } from '@/constants/routes';
+import { formatCurrency } from '@/utils/format-currency';
 import { ChevronLeft, Minus, Plus, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
+const fakeCart = [
+  {
+    pizzaId: 12,
+    name: 'Mediterranean',
+    quantity: 2,
+    unitPrice: 16,
+    totalPrice: 32,
+  },
+  {
+    pizzaId: 6,
+    name: 'Vegetale',
+    quantity: 1,
+    unitPrice: 13,
+    totalPrice: 13,
+  },
+  {
+    pizzaId: 11,
+    name: 'Spinach and Mushroom',
+    quantity: 1,
+    unitPrice: 15,
+    totalPrice: 15,
+  },
+];
+
 export default function Cart() {
   const navigate = useNavigate();
+
+  const cart = fakeCart;
+
+  const total = cart.reduce((accumulator, item) => accumulator + item.totalPrice, 0);
+
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="space-y-6">
@@ -12,7 +42,7 @@ export default function Cart() {
           <ChevronLeft className="stroke-current" />
           Back to menu
         </Button>
-        <div className="grid gap-16">
+        <div className="grid gap-10">
           <div className="min-w-0 space-y-6">
             <div className="flex items-center justify-between space-x-4">
               <h2 className="text-xl font-semibold text-zinc-800">Your cart, %NAME%</h2>
@@ -39,54 +69,41 @@ export default function Cart() {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="[&_tr:last-child]:border-0">
-                  <tr className="border-b border-b-zinc-200">
-                    <td className="p-4 align-middle">Margherita</td>
-                    <td className="p-4 text-center align-middle">
-                      <div className="grid grid-cols-[24px_auto_24px] items-center gap-4">
-                        <Button variant="outline" size="icon" className="h-6 w-6">
-                          <Minus></Minus>
+                <tbody className="divide-y">
+                  {cart.map((item, index) => (
+                    <tr key={index}>
+                      <td className="p-4 align-middle">{item.name}</td>
+                      <td className="p-4 text-center align-middle">
+                        <div className="grid grid-cols-[24px_auto_24px] items-center gap-4">
+                          <Button variant="outline" size="icon" className="h-6 w-6">
+                            <Minus></Minus>
+                          </Button>
+                          <div className="font-semibold">{item.quantity}</div>
+                          <Button variant="outline" size="icon" className="h-6 w-6">
+                            <Plus />
+                          </Button>
+                        </div>
+                      </td>
+                      <td className="p-4 text-right align-middle font-medium">
+                        {formatCurrency(item.unitPrice)}
+                      </td>
+                      <td className="p-4 text-right align-middle font-semibold">
+                        {formatCurrency(item.totalPrice)}
+                      </td>
+                      <td className="p-4 text-right align-middle">
+                        <Button variant="ghost" size="icon" className="h-6 w-6">
+                          <X />
                         </Button>
-                        <div className="font-semibold">1</div>
-                        <Button variant="outline" size="icon" className="h-6 w-6">
-                          <Plus />
-                        </Button>
-                      </div>
-                    </td>
-                    <td className="p-4 text-right align-middle">$12.00</td>
-                    <td className="p-4 text-right align-middle">$12.00</td>
-                    <td className="p-4 text-right align-middle">
-                      <Button variant="ghost" size="icon" className="h-6 w-6">
-                        <X />
-                      </Button>
-                    </td>
-                  </tr>
-                  <tr className="border-b border-b-zinc-200">
-                    <td className="p-4 align-middle">Hawaiian</td>
-                    <td className="p-4 text-center align-middle">
-                      <div className="grid grid-cols-[24px_auto_24px] items-center gap-4">
-                        <Button variant="outline" size="icon" className="h-6 w-6">
-                          <Minus></Minus>
-                        </Button>
-                        <div className="font-semibold">2</div>
-                        <Button variant="outline" size="icon" className="h-6 w-6">
-                          <Plus />
-                        </Button>
-                      </div>
-                    </td>
-                    <td className="p-4 text-right align-middle">$15.00</td>
-                    <td className="p-4 text-right align-middle">$30.00</td>
-                    <td className="p-4 text-right align-middle">
-                      <Button variant="ghost" size="icon" className="h-6 w-6">
-                        <X />
-                      </Button>
-                    </td>
-                  </tr>
+                      </td>
+                    </tr>
+                  ))}
                   <tr className="border-b border-b-zinc-200">
                     <td className="p-4 align-middle"></td>
                     <td className="p-4 align-middle"></td>
                     <td className="p-4 text-right align-middle font-bold">Total</td>
-                    <td className="p-4 text-right align-middle font-bold">$42.00</td>
+                    <td className="p-4 text-right align-middle font-bold">
+                      {formatCurrency(total)}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -97,21 +114,19 @@ export default function Cart() {
               <h2 className="text-xl font-semibold text-zinc-800">Order Summary</h2>
               <div className="relative w-full overflow-x-auto">
                 <table className="w-full caption-top text-sm">
-                  <tbody className="[&_tr:last-child]:border-0">
-                    <tr className="border-b border-b-zinc-200">
-                      <td className="p-4 text-left align-middle font-medium text-zinc-500">
-                        Subtotal
+                  <tbody className="divide-y">
+                    <tr>
+                      <td className="p-4 text-left align-middle font-medium">Subtotal</td>
+                      <td className="p-4 text-right align-middle font-bold">
+                        {formatCurrency(total)}
                       </td>
-                      <td className="p-4 text-right align-middle font-bold">$42.00</td>
                     </tr>
-                    <tr className="border-b border-b-zinc-200">
-                      <td className="p-4 text-left align-middle font-medium text-zinc-500">VAT</td>
+                    <tr>
+                      <td className="p-4 text-left align-middle font-medium">VAT</td>
                       <td className="p-4 text-right align-middle font-bold">$47.04</td>
                     </tr>
-                    <tr className="border-b border-b-zinc-200">
-                      <td className="p-4 text-left align-middle font-medium text-zinc-500">
-                        Delivery
-                      </td>
+                    <tr>
+                      <td className="p-4 text-left align-middle font-medium">Delivery</td>
                       <td className="p-4 text-right align-middle font-bold">FREE</td>
                     </tr>
                   </tbody>

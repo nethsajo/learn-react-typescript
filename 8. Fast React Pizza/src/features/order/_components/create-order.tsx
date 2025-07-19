@@ -148,5 +148,5 @@ export const orderDataAction = async ({ request }: { request: Request }) => {
   // If everything is okay, create new order and redirect
   const createdOrder = await createOrderData(order);
 
-  return redirect(`${ROUTES.ORDER}/${createdOrder.id}`);
+  return redirect(`${ROUTES.ORDER}/track?id=${createdOrder.id}`);
 };
