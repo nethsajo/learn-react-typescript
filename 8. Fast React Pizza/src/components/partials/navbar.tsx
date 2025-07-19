@@ -23,9 +23,9 @@ export function Navbar() {
             </Link>
             <Link
               to={`${ROUTES.ORDER}/track`}
-              className="relative inline-flex h-full items-center px-2 text-red-50 transition-colors duration-150 hover:bg-zinc-200/10 sm:hidden"
+              className="relative inline-flex h-full w-12 items-center text-red-50 transition-colors duration-150 hover:bg-zinc-200/10 sm:hidden"
             >
-              <Search className="h-5 w-5" />
+              <Search className="size-5 flex-1" />
             </Link>
             <Link
               to={ROUTES.CART}

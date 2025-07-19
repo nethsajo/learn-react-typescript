@@ -30,12 +30,6 @@ export default function App() {
           loader: orderDataLoader,
           errorElement: <ErrorPage />,
         },
-        // {
-        //   path: `${ROUTES.ORDER}/track/:id`,
-        //   element: <ShowOrder />,
-        //   loader: orderDataLoader,
-        //   errorElement: <ErrorPage />,
-        // },
       ],
     },
   ]);

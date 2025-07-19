@@ -49,7 +49,7 @@ export default function CreateOrder() {
   ];
 
   return (
-    <div className="mx-auto w-full max-w-2xl">
+    <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="flex flex-col space-y-6">
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold text-zinc-900">Ready to order? Let&apos;s go!</h2>
@@ -60,6 +60,7 @@ export default function CreateOrder() {
             <div className="col-span-full flex flex-col space-y-2 sm:col-span-2">
               <Label htmlFor="customer">Full Name</Label>
               <Input
+                className="bg-white"
                 name="customer"
                 id="customer"
                 variant="outline"
@@ -70,6 +71,7 @@ export default function CreateOrder() {
             <div className="col-span-full flex flex-col space-y-2 sm:col-span-2">
               <Label htmlFor="phone">Phone Number</Label>
               <Input
+                className="bg-white"
                 name="phone"
                 id="phone"
                 variant="outline"
@@ -82,6 +84,7 @@ export default function CreateOrder() {
               <Label htmlFor="address">Address</Label>
               <div className="flex space-x-2">
                 <Input
+                  className="bg-white"
                   name="address"
                   id="address"
                   variant="outline"
