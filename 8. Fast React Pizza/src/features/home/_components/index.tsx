@@ -1,6 +1,13 @@
+import { Button } from '@/components/ui/button';
+import { ROUTES } from '@/constants/routes';
 import { CreateUserForm } from '@/features/user/_components/create-user-form';
+import { useSessionStore } from '@/stores/use-session-store';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+  const username = useSessionStore(s => s.username);
+  const navigate = useNavigate();
+
   return (
     <div className="container mx-auto w-full">
       <div className="relative overflow-hidden">
@@ -22,7 +29,13 @@ export default function Home() {
               <span className="font-semibold text-red-600">mouthwatering toppings</span>.
             </p>
           </div>
-          <CreateUserForm />
+          {!username ? (
+            <CreateUserForm />
+          ) : (
+            <Button className="mx-auto flex" onClick={() => navigate(ROUTES.MENU)}>
+              Continue ordering, {username}
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -1,8 +1,11 @@
 import { ROUTES } from '@/constants/routes';
+import { useSessionStore } from '@/stores/use-session-store';
 import { Search, ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function Navbar() {
+  const username = useSessionStore(s => s.username);
+
   return (
     <div className="sticky inset-x-0 top-0 z-50 bg-gradient-to-r from-red-600 to-red-700 shadow-lg">
       <div className="bg-red-700">
