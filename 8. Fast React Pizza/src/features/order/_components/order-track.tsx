@@ -6,6 +6,7 @@ import { useLoaderData, useNavigate, type LoaderFunctionArgs } from 'react-route
 import { getOrderData } from '../_data/get-order';
 import { type Order } from '../_types/order';
 import OrderStatus from './order-status';
+import { OrderSummary } from './order-summary';
 
 export const OrderTrack = () => {
   const [query, setQuery] = useState('');
@@ -20,7 +21,7 @@ export const OrderTrack = () => {
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mb-12 rounded-2xl border border-zinc-300 bg-white/90 p-8 shadow-lg">
+      <div className="mb-8 rounded-2xl border border-zinc-300 bg-white/90 p-8 shadow-lg">
         <div className="mb-4 flex items-center space-x-2">
           <Search className="stroke-red-600" />
           <h2 className="text-2xl font-semibold text-zinc-800">Track your order</h2>
@@ -41,7 +42,12 @@ export const OrderTrack = () => {
           </Button>
         </form>
       </div>
-      {order && <OrderStatus order={order} />}
+      {order && (
+        <div className="flex flex-col items-start gap-8 lg:flex-row">
+          <OrderStatus order={order} />
+          <OrderSummary order={order} />
+        </div>
+      )}
     </div>
   );
 };
